@@ -1,0 +1,33 @@
+manifest_version: 0.1.0
+mc_version: "1.20.1"
+loader: forge
+loader_version: "47.4.x  # UNVERIFIED - pin exact build in M1"
+java: 17
+mods:
+  - {id: jei, name: Just Enough Items, category: qol, status: CANDIDATE, side: both, perf_cost: low, purpose: recipe viewer}
+  - {id: jade, name: Jade, category: qol, status: CANDIDATE, side: both, perf_cost: low}
+  - {id: ftb-quests-forge, name: FTB Quests, category: quests, status: CANDIDATE, side: both, deps: [ftb-library-forge, ftb-teams-forge]}
+  - {id: kubejs, name: KubeJS, category: library, status: CANDIDATE, side: both, deps: [rhino, architectury-api]}
+  - {id: better-combat, name: Better Combat, category: combat, status: CANDIDATE, side: both, deps: [playeranimator, cloth-config]}
+  - {id: combat-roll, name: Combat Roll, category: combat, status: CANDIDATE, side: both}
+  - {id: embeddium, name: Embeddium, category: perf, status: CANDIDATE, side: client}
+  - {id: modernfix, name: ModernFix, category: perf, status: CANDIDATE, side: both}
+  - {id: ferrite-core, name: FerriteCore, category: perf, status: CANDIDATE, side: both}
+  - {id: entityculling, name: EntityCulling, category: perf, status: CANDIDATE, side: client}
+  - {id: spark, name: Spark, category: perf, status: CANDIDATE, side: both, purpose: profiling}
+  - {id: create, name: Create, category: tech, status: CANDIDATE, side: both}
+  - {id: ae2, name: Applied Energistics 2, category: tech, status: CANDIDATE, side: both}
+  - {id: irons-spells-n-spellbooks, name: "Iron's Spells 'n Spellbooks", category: magic, status: CANDIDATE, side: both}
+  - {id: ars-nouveau, name: Ars Nouveau, category: magic, status: CANDIDATE, side: both}
+  - {id: palladium, name: Palladium, category: combat, status: CANDIDATE, side: both, notes: superhero framework; addon packs TBD}
+  - {id: rats, name: Rats, category: tech, status: CANDIDATE, side: both, notes: "1.20.1 Forge build UNVERIFIED"}
+  - {id: curios, name: Curios API, category: library, status: CANDIDATE, side: both}
+  - {id: elytra-slot, name: Elytra Slot, category: qol, status: CANDIDATE, side: both}
+  - {id: elytra-trims, name: Elytra Trims, category: cosmetic, status: CANDIDATE, side: client, notes: Forge availability UNVERIFIED}
+  - {id: more-armor-trims, name: More Armor Trims, category: cosmetic, status: CANDIDATE, side: both}
+  - {id: ct-overhaul-village, name: ChoiceTheorem's Overhauled Village, category: worldgen, status: CANDIDATE, side: both}
+  - {id: enhanced-boss-bars, name: Enhanced Boss Bars, category: ui, status: CANDIDATE, side: client, notes: resource pack}
+  - {id: wakes, name: Wakes, category: cosmetic, status: CANDIDATE, side: client, notes: "likely Fabric-only -> probable REJECT"}
+  - {id: epic-fight, name: Epic Fight, category: combat, status: REJECTED, notes: conflicts with Better Combat design}
+  - {id: refined-storage, name: Refined Storage, category: tech, status: REJECTED, notes: redundant with AE2}
+  - {id: aetherfall-core, name: Aetherfall Core, category: foundation, status: CUSTOM, source: custom, side: both}

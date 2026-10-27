@@ -66,6 +66,11 @@ public class ModSync {
             queue.add(new String[]{mr, str(m.get("name")), str(m.get("version")), str(m.get("curseforge")), str(m.get("match"))});
         }
 
+        // Dependencies we must never pull in (e.g. a Fabric-via-Connector duplicate of a mod we already use).
+        Set<String> skipDeps = new HashSet<>();
+        Object sd = cfg.get("skip_dependencies");
+        if (sd instanceof Map) for (Object k : ((Map<?, ?>) sd).keySet()) skipDeps.add(String.valueOf(k));
+
         Set<String> seenKeys = new HashSet<>();
         while (!queue.isEmpty()) {
             String[] q = queue.poll();
@@ -85,6 +90,7 @@ public class ModSync {
                 Map<String, Object> dep = obj(d);
                 if (!"required".equals(dep.get("dependency_type"))) continue;
                 String dpid = str(dep.get("project_id"));
+                if (dpid != null && skipDeps.contains(dpid)) { report.add("Skipped dependency " + dpid + " of " + q[1] + " (skip_dependencies)"); continue; }
                 if (dpid != null && !resolved.containsKey(dpid)) queue.add(new String[]{dpid, "dependency of " + q[1], null, null, null});
             }
         }

@@ -56,7 +56,7 @@ Dependencies the app will add (expect roughly these): Architectury API, Rhino, G
 |---|---|---|
 | 15 | **Epic Fight - Impactful** | Hit-stop and screen shake |
 | 16 | **NEpicloob NeonSword** | Glowing swing trails (compatibility unknown on Epic Fight 20.14; **remove it first if Stage C crashes**) |
-| 17 | **Afterswing** | **Only if** its Files tab has a 1.20.1 Forge file; otherwise skip it and tell me |
+| 17 | ~~Afterswing~~ | Skip: no 1.20.1 Forge build exists (checked 2026-10-27) |
 | 18 | **Embeddium** | Rendering speed |
 | 19 | **ModernFix** | Startup and memory |
 | 20 | **FerriteCore** | Memory |

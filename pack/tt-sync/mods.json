@@ -1,5 +1,5 @@
 {
-  "_comment": "Terrestrial Tribulations mod list. modrinth may be a slug or a project ID (IDs taken from the mods' own build files: JEI u6dRKJwZ, Jade nvQzSEkH, Epic Fight vu3NZ5Ma). stage A/B/C = Test Build 1 stages (see docs/05). 'modrinth' = Modrinth slug (auto-download incl. required deps); 'curseforge' = fallback for manual download. Set \"disabled\": true to skip a mod.",
+  "_comment": "Terrestrial Tribulations mod list. modrinth may be a slug or a project ID (IDs taken from the mods' own build files: JEI u6dRKJwZ, Jade nvQzSEkH, Epic Fight vu3NZ5Ma). stage A/B/C = Test Build 1 stages (see docs/05). 'modrinth' = Modrinth slug (auto-download incl. required deps); 'curseforge' = fallback for manual download. Set \"disabled\": true to skip a mod. Entries with \"modrinth\": \"\" are CurseForge-only on 1.20.1 Forge (checked 2026-10-27, docs/research/2026-10-27-mod-availability.md) and go to the manual-download list. Top-level skip_dependencies lists Modrinth project IDs that ModSync must never pull in as a dependency.",
   "minecraft": "1.20.1",
   "loader": "forge",
   "mods": [
@@ -34,9 +34,10 @@
     {
       "name": "Passive Skill Tree",
       "match": "passive_skill_tree|passiveskilltree-|passive-skill-tree",
-      "modrinth": "passive-skill-tree",
+      "modrinth": "",
       "curseforge": "passive-skill-tree",
-      "stage": "A"
+      "stage": "A",
+      "_source": "curseforge-only"
     },
     {
       "name": "KubeJS",
@@ -48,9 +49,10 @@
     {
       "name": "PassiveSTJS",
       "match": "passivestjs|passiveskilltreejs",
-      "modrinth": "passiveskilltreejs",
+      "modrinth": "",
       "curseforge": "passiveskilltreejs",
-      "stage": "A"
+      "stage": "A",
+      "_source": "curseforge-only"
     },
     {
       "name": "Just Enough Items",
@@ -69,9 +71,10 @@
     {
       "name": "FTB Quests",
       "match": "ftb-quests",
-      "modrinth": "ftb-quests",
+      "modrinth": "",
       "curseforge": "ftb-quests-forge",
-      "stage": "B"
+      "stage": "B",
+      "_source": "curseforge-only"
     },
     {
       "name": "Easy NPC",
@@ -83,9 +86,10 @@
     {
       "name": "MineColonies",
       "match": "minecolonies",
-      "modrinth": "minecolonies",
+      "modrinth": "",
       "curseforge": "minecolonies",
-      "stage": "B"
+      "stage": "B",
+      "_source": "curseforge-only"
     },
     {
       "name": "Champions Unofficial",
@@ -97,44 +101,50 @@
     {
       "name": "FTB Library",
       "match": "ftb-library",
-      "modrinth": "ftb-library",
+      "modrinth": "",
       "curseforge": "ftb-library-forge",
-      "stage": "B"
+      "stage": "B",
+      "_source": "curseforge-only"
     },
     {
       "name": "FTB Teams",
       "match": "ftb-teams",
-      "modrinth": "ftb-teams",
+      "modrinth": "",
       "curseforge": "ftb-teams-forge",
-      "stage": "B"
+      "stage": "B",
+      "_source": "curseforge-only"
     },
     {
       "name": "Structurize (MineColonies)",
       "match": "structurize",
-      "modrinth": "structurize",
+      "modrinth": "",
       "curseforge": "structurize",
-      "stage": "B"
+      "stage": "B",
+      "_source": "curseforge-only"
     },
     {
       "name": "MultiPiston (MineColonies)",
       "match": "multipiston",
-      "modrinth": "multi-piston",
+      "modrinth": "",
       "curseforge": "multi-piston",
-      "stage": "B"
+      "stage": "B",
+      "_source": "curseforge-only"
     },
     {
       "name": "BlockUI (MineColonies)",
       "match": "blockui",
-      "modrinth": "blockui",
+      "modrinth": "",
       "curseforge": "blockui",
-      "stage": "B"
+      "stage": "B",
+      "_source": "curseforge-only"
     },
     {
       "name": "Domum Ornamentum (MineColonies)",
       "match": "domum",
-      "modrinth": "domum-ornamentum",
+      "modrinth": "",
       "curseforge": "domum-ornamentum",
-      "stage": "B"
+      "stage": "B",
+      "_source": "curseforge-only"
     },
     {
       "name": "Jade",
@@ -146,16 +156,19 @@
     {
       "name": "Epic Fight - Impactful",
       "match": "impactful",
-      "modrinth": "epic-fight-impactful",
+      "modrinth": "",
       "curseforge": "epic-fight-impactful",
-      "stage": "C"
+      "stage": "C",
+      "_source": "curseforge-only",
+      "_note": "Modrinth copy stops at 20.6.4 (2023), too old for Epic Fight 20.14. Use impactful-20.14.2.jar from CurseForge; after 20.11 it also needs its resource pack + datapack (see its page)."
     },
     {
       "name": "NEpicloob NeonSword",
       "match": "neonsword",
       "modrinth": "nepicloob-neonsword",
       "curseforge": "nepicloob-neonsword",
-      "stage": "C"
+      "stage": "C",
+      "_note": "Author lists Epic Fight <=20.9.7 and >=20.11.2 as compatible (not 20.10), so 20.14 is in range."
     },
     {
       "name": "Embeddium",
@@ -185,7 +198,7 @@
       "curseforge": "after-swing",
       "stage": "C",
       "disabled": true,
-      "_note": "no Forge 1.20.1 file found; enable if one exists"
+      "_note": "Not on Modrinth or CurseForge for 1.20.1 Forge (checked 2026-10-27). Epic Fight - Impactful + NeonSword cover it."
     },
     {
       "name": "Create",
@@ -196,8 +209,8 @@
     },
     {
       "name": "Create: Steam 'n' Rails",
-      "match": "railways",
-      "modrinth": "railways",
+      "match": "steam_rails|railways",
+      "modrinth": "create-steam-n-rails",
       "curseforge": "create-steam-n-rails",
       "stage": "D"
     },
@@ -225,7 +238,7 @@
     {
       "name": "ExtendedAE",
       "match": "extendedae",
-      "modrinth": "extendedae",
+      "modrinth": "extended-ae",
       "curseforge": "extendedae",
       "stage": "D"
     },
@@ -274,7 +287,7 @@
     {
       "name": "Bosses of Mass Destruction",
       "match": "bomd",
-      "modrinth": "bosses-of-mass-destruction",
+      "modrinth": "bosses-of-mass-destruction-forge",
       "curseforge": "bosses-of-mass-destruction-forge",
       "stage": "D"
     },
@@ -288,9 +301,10 @@
     {
       "name": "The Twilight Forest",
       "match": "twilightforest",
-      "modrinth": "the-twilight-forest",
+      "modrinth": "",
       "curseforge": "the-twilight-forest",
-      "stage": "D"
+      "stage": "D",
+      "_source": "curseforge-only"
     },
     {
       "name": "The Aether",
@@ -351,9 +365,10 @@
     {
       "name": "Botz Mob Leveling",
       "match": "botz",
-      "modrinth": "botz-mob-leveling",
+      "modrinth": "",
       "curseforge": "botz-mob-leveling",
-      "stage": "D"
+      "stage": "D",
+      "_source": "curseforge-only"
     },
     {
       "name": "Curios API",
@@ -393,16 +408,19 @@
     {
       "name": "Goner's Armor Trims",
       "match": "goner",
-      "modrinth": "goners-armor-trims",
+      "modrinth": "",
       "curseforge": "goners-armor-trims",
-      "stage": "D"
+      "stage": "D",
+      "_source": "curseforge-only",
+      "_note": "Only beta files on 1.20.1 Forge (1.0.7)."
     },
     {
       "name": "Cosmetic Armor Reworked",
       "match": "cosmeticarmor",
-      "modrinth": "cosmetic-armor-reworked",
+      "modrinth": "",
       "curseforge": "cosmetic-armor-reworked",
-      "stage": "D"
+      "stage": "D",
+      "_source": "curseforge-only"
     },
     {
       "name": "Terralith",
@@ -505,9 +523,10 @@
     {
       "name": "FTB Ultimine",
       "match": "ftb-ultimine",
-      "modrinth": "ftb-ultimine",
+      "modrinth": "",
       "curseforge": "ftb-ultimine-forge",
-      "stage": "D"
+      "stage": "D",
+      "_source": "curseforge-only"
     },
     {
       "name": "Sophisticated Backpacks",
@@ -526,9 +545,10 @@
     {
       "name": "Building Gadgets 2",
       "match": "buildinggadgets2",
-      "modrinth": "building-gadgets-2",
-      "curseforge": "building-gadgets-2",
-      "stage": "D"
+      "modrinth": "",
+      "curseforge": "building-gadgets",
+      "stage": "D",
+      "_source": "curseforge-only"
     },
     {
       "name": "Handcrafted",
@@ -547,16 +567,18 @@
     {
       "name": "Catalogue",
       "match": "catalogue",
-      "modrinth": "catalogue",
+      "modrinth": "",
       "curseforge": "catalogue",
-      "stage": "D"
+      "stage": "D",
+      "_source": "curseforge-only"
     },
     {
       "name": "Configured",
       "match": "configured",
-      "modrinth": "configured",
+      "modrinth": "",
       "curseforge": "configured",
-      "stage": "D"
+      "stage": "D",
+      "_source": "curseforge-only"
     },
     {
       "name": "FancyMenu",
@@ -646,11 +668,29 @@
     },
     {
       "name": "Gods and Heroes",
-      "match": "gods",
-      "modrinth": "gods-and-heroes",
-      "curseforge": "gods-and-heroes",
+      "match": "gods-and-heroes",
+      "modrinth": "gods-and-heroes-palladium",
+      "curseforge": "gods-and-heroes-palladium",
       "stage": "C",
-      "_note": "Palladium hero pack; see design/story/heroes-integration.md"
+      "_note": "Palladium edition by GC-Morak (HzcBKN2C). The slug gods-and-heroes is a different, Origins-only addon. Needs Origins: see skip_dependencies."
+    },
+    {
+      "name": "Leaves Be Gone",
+      "match": "leavesbegone",
+      "modrinth": "leaves-be-gone",
+      "curseforge": "leaves-be-gone",
+      "stage": "D"
+    },
+    {
+      "name": "Nullscape",
+      "match": "nullscape",
+      "modrinth": "nullscape",
+      "curseforge": "nullscape",
+      "stage": "D",
+      "_note": "End overhaul (decided 2026-10-27): Stardust Labs, same team as Terralith and Incendium; pairs with YUNG's Better End Island."
     }
-  ]
+  ],
+  "skip_dependencies": {
+    "3BeIrqZR": "Origins (Fabric, runs via Sinytra Connector). Gods and Heroes lists it as required, but we use Origins (Forge) jl3m2lR9; loading both crashes."
+  }
 }

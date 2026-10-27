@@ -8,7 +8,7 @@
 ## Decisions already made (don't re-litigate)
 - **Minecraft 1.20.1, Forge 47.4.x (never 47.2.0), Java 17.** Chosen for Palladium.
 - **Use existing mods and adapt them to the story.** Don't create custom mobs, bosses, NPCs, suits or heroes. Exception: the owner asked for **custom weapons as new items** (`design/weapons/`, implemented with KubeJS + Epic Fight data + Blockbench models).
-- **Superheroes: existing Palladium packs only** (FSang18's Heropack, Satsu Iron Man Addon, Gods and Heroes), wired into the story with gates and lore (`design/story/heroes-integration.md`).
+- **Superheroes: existing Palladium packs only** (FSang18's Heropack, Satsu Iron Man Addon, Gods and Heroes (Palladium edition)), wired into the story with gates and lore (`design/story/heroes-integration.md`).
 - Combat: Epic Fight (+ Impactful, NeonSword). Talents: **Passive Skill Tree** (not Pufferfish). Origins (Forge) with Heritage + Fate layers.
 - Capital city: MineColonies (Town Hall level = city stage) + Easy NPC for story characters.
 - Quarry, power and pipes: Mekanism (Digital Miner). Every weapon has a unique colour scheme and a unique ability.
@@ -20,11 +20,8 @@
 - `pack/` is the instance's `minecraft/` folder. `pack/tt-sync/ModSync` downloads mods from Modrinth at launch, based on `pack/tt-sync/mods.json`. Stages: A/B/C = Test Build 1, D = Test Build 2.
 - Formats were checked against each mod's source on GitHub (see the docstrings in the tools). Keep doing that, or verify on the official pages from the laptop.
 
-## Current status (2026-10-27)
+## Current status (2026-10-27, after the availability check)
 - Test Build 1 is built but **not yet tested in-game**.
-- Next research tasks (good for the laptop browser):
-  1. Confirm Modrinth slugs / CurseForge availability for every `mods.json` entry; mark which are CurseForge-only.
-  2. Check that FSang18's Heropack, Satsu Iron Man Addon and Gods and Heroes have 1.20.1 Forge files compatible with Palladium 4.5.9.
-  3. Check whether Afterswing, Leaves Be Gone, BetterEnd (Forge port) and NeonSword (with Epic Fight 20.14) work on 1.20.1 Forge.
-  4. Decide the End overhaul.
-- After the owner's first launch: fill `pack/kubejs/config/tt_story_gates.json` from `kubejs/exported/tt_item_namespaces.json`.
+- Done: every `mods.json` entry checked on Modrinth and CurseForge (`docs/research/2026-10-27-mod-availability.md`). 74 auto-download; 19 are CurseForge-only (11 in Test Build 1). Slugs fixed; Gods and Heroes now points at the **Palladium edition**; ModSync gained `skip_dependencies` to block the Fabric Origins it would otherwise pull in. End overhaul decided: **Nullscape + YUNG's Better End Island**. Afterswing dropped (no 1.20.1 Forge build).
+- The cloud container can't reach Modrinth or CurseForge with curl; research goes through web fetches. The laptop's sandbox has no network either, so its browser (computer use) is the only on-laptop route. Nothing pack-related is stored on the laptop.
+- After the owner's first launch: fill `pack/kubejs/config/tt_story_gates.json` from `kubejs/exported/tt_item_namespaces.json`, and read the Gods and Heroes origin layer IDs.

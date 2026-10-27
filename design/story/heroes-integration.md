@@ -5,9 +5,9 @@
 ## Packs (1.20.1 Forge, Palladium 4.5.9)
 | Pack | Why | Status |
 |---|---|---|
-| **FSang18's Heropack** | Largest 1.20.1 roster (174k downloads), many heroes and weapons | 🔎 |
+| **FSang18's Heropack** | Largest 1.20.1 roster (174k downloads), many heroes and weapons | 🔎 12.5.7 (Oct 2026, after Palladium 4.5.9); needs PantheonSent, KubeJS, Pehkui, Packet Fixer (auto-downloaded) |
 | **Satsu Iron Man Addon** | Real progression built in: arc reactor → blueprint holder (unlock suits with XP) → Mark suits with charging and upgrades | 🔎 3.x (tested with Palladium 4.5.9) |
-| **Gods and Heroes** | Speedster, Kryptonian and Jumper power sets | 🔎 |
+| **Gods and Heroes (Palladium edition)**, by GC-Morak | Speedster, Kryptonian and Jumper power sets (also Engineer, Mage, Builder, Size Shifter, Iron Mage) | 🔎 1.4 (Apr 2025), needs a launch test. ⚠️ It gives its powers as **origins** (it needs Origins Forge), not suits. Note: the Modrinth slug `gods-and-heroes` is a different, Origins-only addon |
 | Vector HUD + Satsu compat | Optional: suit HUD | 🔎 |
 
 Their exact item IDs and namespaces get filled in after the first launch, from `kubejs/exported/tt_item_namespaces.json` (written by `tt_story_gates.js`).
@@ -27,7 +27,7 @@ Their exact item IDs and namespaces get filled in after the first launch, from `
 | `tt_ch8_heroes` | Ch8 opening quest: "The Engine Heart" (bring Pell an Old Engine core) | Wearing or using any gated hero item (`tt_story_gates.json`) |
 | `tt_ch9_marks` | Ch9: defeat the first Iron Choir Herald | Higher Satsu Marks. The pack's own XP blueprint costs stay as an extra gate |
 | `tt_ch10_echoes` | Ch10 Mythic Crucible tier I | FSang18 top-tier heroes |
-| Gods and Heroes awakenings | One per Crown Shard collected (Ch7+) | Speedster → Jumper → Kryptonian, in that order |
+| Gods and Heroes awakenings | One per Crown Shard collected (Ch7+) | Speedster → Jumper → Kryptonian, in that order. Because they're origins, hide the pack's layer at character creation and grant each one by command (`/origin set`) from the Crown Shard quest. Layer and origin IDs come from the first launch |
 
 Recipes: the pack recipes for top-tier items get **story materials** added by KubeJS (boss drops: Harbinger core, Leviathan scale, Crown Shard Fragment), so the strongest suits can't be built early. They're also gated by the stage.
 

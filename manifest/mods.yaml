@@ -45,13 +45,20 @@ mods:
   - {id: simply-swords, name: Simply Swords, category: combat, status: CANDIDATE, side: both, version: "1.61.3"}
   - {id: sophisticated-backpacks, name: Sophisticated Backpacks, category: qol, status: CANDIDATE, side: both}
   - {id: create-quarry, name: "Create: Quarry", category: tech, status: CANDIDATE, side: both, notes: "1.20.1 build unverified; alt Mekanism Digital Miner / RFTools Builder"}
-  - {id: puffish-skills, name: "Pufferfish's Skills", category: rpg, status: CANDIDATE, side: both, purpose: talent trees via datapack}
-  - {id: puffish-attributes, name: "Pufferfish's Attributes", category: rpg, status: CANDIDATE, side: both}
+  - {id: puffish-skills, name: "Pufferfish's Skills", category: rpg, status: REJECTED, notes: "owner: GUI too plain; replaced by Passive Skill Tree"}
+  - {id: passive-skill-tree, name: Passive Skill Tree, category: rpg, status: CANDIDATE, side: both, purpose: XP-based PoE-style talent tree}
+  - {id: passiveskilltreejs, name: PassiveSTJS, category: rpg, status: CANDIDATE, side: both, version: "1.20.1-0.2.2", deps: [passive-skill-tree, kubejs], purpose: scripted custom skills}
   - {id: champions-unofficial, name: Champions Unofficial, category: rpg, status: CANDIDATE, side: both, version: "2.1.12.x", purpose: elite mobs + affixes}
   - {id: botz-mob-leveling, name: Botz Mob Leveling, category: rpg, status: CANDIDATE, side: both, purpose: region scaling}
   - {id: apotheosis, name: Apotheosis, category: rpg, status: CANDIDATE, side: both, purpose: loot rarity, affixes, gems}
   - {id: mariums-soulslike-weaponry, name: "Marium's Soulslike Weaponry", category: combat, status: CANDIDATE, side: both, version: "1.4.8"}
   - {id: armor-set-bonuses, name: Armor Set Bonuses, category: rpg, status: CANDIDATE, side: both, version: "20.14.0"}
   - {id: minecolonies, name: MineColonies, category: npc, status: CANDIDATE, side: both, version: "1.1.1231-snapshot", deps: [structurize, multipiston, blockui, domum-ornamentum], purpose: capital city stages}
-  - {id: origins-forge, name: Origins (Forge), category: rpg, status: REJECTED, notes: archived project}
+  - {id: origins-forge, name: Origins (Forge), category: rpg, status: CANDIDATE, side: both, version: "1.10.0.9", notes: "archived; avoid Forge 47.2.0; layers: Origin + Fate"}
   - {id: tt-bridge, name: Terrestrial Tribulations Bridge, category: foundation, status: CUSTOM, source: custom, side: both, purpose: story flags + cross-mod triggers (MCreator)}
+  - {id: nepicloob-neonsword, name: NEpicloob NeonSword, category: combat, status: CANDIDATE, side: client, notes: "verify vs Epic Fight 20.14"}
+  - {id: after-swing, name: Afterswing, category: combat, status: CANDIDATE, side: client, notes: "Fabric/NeoForge listed; NO Forge 1.20.1 file found - verify"}
+  - {id: epic-fight-impactful, name: Epic Fight - Impactful, category: combat, status: CANDIDATE, side: client}
+  - {id: compatlink-epic-fight-weapons-compat, name: CompatLink - Epic Fight Weapons Compat, category: combat, status: CANDIDATE, side: both}
+  - {id: epic-fight-edp, name: Epic Fight EDP, category: combat, status: CANDIDATE, side: both, purpose: data-driven innate skills}
+  - {id: karambit-vault-x-punchy, name: Karambit Vault x Punchy, category: cosmetic, status: CANDIDATE, side: client, notes: "resource pack; Punchy + CIT Resewn are Fabric; model reuse needs author permission"}

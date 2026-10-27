@@ -20,8 +20,8 @@ Rules: **never redistribute modified jars.** All changes live in our own scripts
 | Design system (from the kickoff) | Existing mod(s) | Re-theme and bridge work |
 |---|---|---|
 | **Animated combat, dodge, parry, lock-on** | **Epic Fight** 20.14.x (Jan 2026; full player and mob animations, lock-on, skills, many addons such as Nightfall and a Twilight Forest compat addon) | Assign Epic Fight movesets to Simply Swords, Soulslike and Cataclysm weapons with datapacks. *Replaces Better Combat* because Epic Fight has deeper animation. Fallback: Better Combat + Combat Roll if it conflicts with Palladium |
-| **Character levels, talents, ~100 nodes, 16 passives** | **Pufferfish's Skills** + **Pufferfish's Attributes** (skill trees defined entirely in datapacks) | We write our own trees as datapacks (Vanguard, Arcanist and so on) with no coding |
-| **Ten Fates** | Pufferfish skill-tree categories (one per Fate) + Iron's Spells schools + a starting kit chosen in an FTB Quests choice quest | Origins (Forge) is **archived**, so we skip it |
+| **Character levels, talents, ~100 nodes, 16 passives** | **Passive Skill Tree** + PassiveSTJS (see docs/04) | Custom story and QoL skills scripted in KubeJS |
+| **Ten Fates** | **Origins (Forge)**, with a "Fate" layer next to the "Origin" layer (see docs/04) | Origins datapacks |
 | **Five active abilities** | Epic Fight skills (dodge, guard, weapon innates) + Iron's Spells spells unlocked per Fate | Bridge mod binds unlocks to quest flags |
 | **Enemy scaling + elites** | **Champions Unofficial** (elite ranks and affixes, KubeJS-extensible) + **Botz Mob Leveling** (scaling by distance, structure and dimension) | Configure region tiers to match story regions |
 | **Loot rarity, affixes, gems, mythic gear** | **Apotheosis** (Adventure module: affix loot, rarities, gems, bosses) | Rarity names and colours re-themed through lang overrides and config |

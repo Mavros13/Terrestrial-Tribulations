@@ -13,8 +13,10 @@ Owner decisions on 2026-10-27: keep Epic Fight; add sword trails and Afterswing;
 | Epic Fight EDP (Extended Datapacks) | Data-driven innate skills and weapon types | CANDIDATE. The 1.20.1 backport may lag behind NeoForge |
 | **Karambit Vault x Punchy** | 3D karambit models, inspect animations, sounds | ⚠️ It is a **resource pack that replaces sword visuals**, not a weapon mod. Its "Punchy" animations target the **Punchy mod, which is Fabric-only**, and renamable variants need **CIT Resewn (Fabric)**. On Forge we keep its 3D models but lose Punchy's first-person animations unless a Forge equivalent is found. Reusing its models on *our own* new karambit items needs the author's permission. See §2 |
 
-## 2. New weapons (not retextures), built from existing mods
-Every story weapon is a **new registered item** with its own ID, stats, moveset and ability:
+## 2. Weapons
+**Clarified by the owner (2026-10-27): only karambits are new weapons.** Every other weapon comes from existing mods (Simply Swords, Soulslike Weaponry, boss drops, Iron's Spells and so on). Those are re-themed with KubeJS (names, lore, stat tweaks, recipe and story gates) and Epic Fight movesets, not re-registered.
+
+The karambit family is the exception: each karambit is a **new registered item** with its own ID, stats, moveset and ability:
 
 | Layer | Provided by |
 |---|---|
@@ -24,7 +26,7 @@ Every story weapon is a **new registered item** with its own ID, stats, moveset 
 | Innate or active ability | Epic Fight EDP innate skills (JSON) + KubeJS events for effects that EDP can't express |
 | Story hook | FTB Quests reward or unlock + KubeJS recipe gate + lore tooltip |
 
-**Karambits:** add a "Karambit" weapon family (dagger moveset: fast combos, short reach, high crits) as new items. Visuals: either license or recreate the Karambit Vault look in Blockbench. Spec format: `design/weapons/_TEMPLATE.md`, first example: `design/weapons/ashfang_karambit.md`.
+**Karambits:** add a "Karambit" weapon family (dagger moveset: fast combos, short reach, high crits) as new items. Visuals: either license or recreate the Karambit Vault look in Blockbench. Spec format (karambits only): `design/weapons/_TEMPLATE.md`, first example: `design/weapons/ashfang_karambit.md`.
 
 ## 3. Origins (+ Fates)
 - **Origins (Forge) 1.10.0.9** for 1.20.1: works but is **archived** (no more updates). Known issue: **do not use Forge 47.2.0**. Accept the risk and pin a working Forge build in M1.

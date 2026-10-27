@@ -1,4 +1,5 @@
-# <Weapon name>
+# <Karambit name>
+> Used only for the new karambit family. Weapons from other mods are re-themed through `pack/kubejs/server_scripts/` instead.
 - **ID:** `tt:<snake_case>`
 - **Family / Epic Fight category:**
 - **Tier (1–8) / rarity:**

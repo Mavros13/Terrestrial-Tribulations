@@ -1,0 +1,23 @@
+{
+  "order": 10,
+  "origins": [
+    "tt:vanguard",
+    "tt:duelist",
+    "tt:warden",
+    "tt:ranger",
+    "tt:arcanist",
+    "tt:spellweaver",
+    "tt:reaper",
+    "tt:summoner",
+    "tt:artificer"
+  ],
+  "enabled": true,
+  "name": "Fate",
+  "gui_title": {
+    "choose_origin": "Choose your Fate",
+    "view_origin": "Your Fate"
+  },
+  "allow_random": false,
+  "missing_name": "Unbound",
+  "missing_description": "No Fate chosen."
+}

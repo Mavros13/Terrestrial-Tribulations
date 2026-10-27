@@ -1,0 +1,19 @@
+{
+  "name": "Bulwark Plate",
+  "description": "+4 armor, +1 attack damage.",
+  "type": "origins:attribute",
+  "modifiers": [
+    {
+      "attribute": "minecraft:generic.armor",
+      "operation": "addition",
+      "value": 4.0,
+      "name": "tt"
+    },
+    {
+      "attribute": "minecraft:generic.attack_damage",
+      "operation": "addition",
+      "value": 1.0,
+      "name": "tt"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Tinker's Reach",
+  "description": "+1 block reach.",
+  "type": "origins:attribute",
+  "modifiers": [
+    {
+      "attribute": "forge:block_reach",
+      "operation": "addition",
+      "value": 1.0,
+      "name": "tt"
+    }
+  ]
+}

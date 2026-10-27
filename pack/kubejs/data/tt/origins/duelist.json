@@ -1,0 +1,12 @@
+{
+  "name": "Duelist",
+  "description": "Precision, combos and critical strikes. (Your Fate deepens as you invest in the Passive Skill Tree.)",
+  "icon": {
+    "item": "tt:rustbite_karambit"
+  },
+  "order": 1,
+  "impact": 1,
+  "powers": [
+    "tt:duelist_tempo"
+  ]
+}

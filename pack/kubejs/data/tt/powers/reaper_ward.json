@@ -1,0 +1,6 @@
+{
+  "name": "Deathless",
+  "description": "Immune to Wither.",
+  "type": "origins:effect_immunity",
+  "effect": "minecraft:wither"
+}

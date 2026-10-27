@@ -1,0 +1,19 @@
+{
+  "name": "Pathfinder",
+  "description": "+10% movement speed, +1 luck.",
+  "type": "origins:attribute",
+  "modifiers": [
+    {
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "multiply_base",
+      "value": 0.1,
+      "name": "tt"
+    },
+    {
+      "attribute": "minecraft:generic.luck",
+      "operation": "addition",
+      "value": 1.0,
+      "name": "tt"
+    }
+  ]
+}

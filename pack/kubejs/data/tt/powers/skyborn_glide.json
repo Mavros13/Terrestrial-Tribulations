@@ -1,0 +1,7 @@
+{
+  "name": "Feather-Fall",
+  "description": "You fall slowly and take no fall damage.",
+  "type": "origins:modify_falling",
+  "velocity": 0.05,
+  "take_fall_damage": false
+}

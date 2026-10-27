@@ -1,0 +1,25 @@
+{
+  "name": "Arcane Focus",
+  "description": "+15% spell power, +100 max mana, -4 max health.",
+  "type": "origins:attribute",
+  "modifiers": [
+    {
+      "attribute": "irons_spellbooks:spell_power",
+      "operation": "multiply_base",
+      "value": 0.15,
+      "name": "tt"
+    },
+    {
+      "attribute": "irons_spellbooks:max_mana",
+      "operation": "addition",
+      "value": 100.0,
+      "name": "tt"
+    },
+    {
+      "attribute": "minecraft:generic.max_health",
+      "operation": "addition",
+      "value": -4.0,
+      "name": "tt"
+    }
+  ]
+}

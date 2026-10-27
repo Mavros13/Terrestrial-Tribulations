@@ -1,0 +1,13 @@
+{
+  "name": "Hollow Bones",
+  "description": "-2 max health.",
+  "type": "origins:attribute",
+  "modifiers": [
+    {
+      "attribute": "minecraft:generic.max_health",
+      "operation": "addition",
+      "value": -2.0,
+      "name": "tt"
+    }
+  ]
+}

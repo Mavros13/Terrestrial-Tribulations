@@ -1,0 +1,19 @@
+{
+  "name": "Ley Flow",
+  "description": "+25% mana regeneration, +10% cooldown reduction.",
+  "type": "origins:attribute",
+  "modifiers": [
+    {
+      "attribute": "irons_spellbooks:mana_regen",
+      "operation": "multiply_base",
+      "value": 0.25,
+      "name": "tt"
+    },
+    {
+      "attribute": "irons_spellbooks:cooldown_reduction",
+      "operation": "addition",
+      "value": 0.1,
+      "name": "tt"
+    }
+  ]
+}

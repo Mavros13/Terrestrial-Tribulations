@@ -1,0 +1,19 @@
+{
+  "name": "Bond of Many",
+  "description": "+20% summon damage, +50 max mana.",
+  "type": "origins:attribute",
+  "modifiers": [
+    {
+      "attribute": "irons_spellbooks:summon_damage",
+      "operation": "multiply_base",
+      "value": 0.2,
+      "name": "tt"
+    },
+    {
+      "attribute": "irons_spellbooks:max_mana",
+      "operation": "addition",
+      "value": 50.0,
+      "name": "tt"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Sap-Blooded",
+  "description": "Immune to Poison.",
+  "type": "origins:effect_immunity",
+  "effect": "minecraft:poison"
+}

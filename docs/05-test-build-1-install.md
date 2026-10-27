@@ -1,5 +1,7 @@
 # Test Build 1: install list (compatibility baseline)
 
+> **Superseded for installation by docs/06-testing-guide.md (Prism import).** The stage list and checklist below still apply.
+
 **Goal:** prove that the pack's core systems load **together** on your PC before we add content. Everything here is still CANDIDATE. This build is how mods become CONFIRMED.
 
 **Target:** Minecraft **1.20.1** · **Forge 47.4.x** (latest 47.4 build; **never 47.2.0**, it breaks Origins) · **Java 17** (the launcher provides it).

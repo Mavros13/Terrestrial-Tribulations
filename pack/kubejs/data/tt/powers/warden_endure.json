@@ -1,0 +1,25 @@
+{
+  "name": "Endure",
+  "description": "+6 max health, +25% knockback resistance, +2 armor toughness.",
+  "type": "origins:attribute",
+  "modifiers": [
+    {
+      "attribute": "minecraft:generic.max_health",
+      "operation": "addition",
+      "value": 6.0,
+      "name": "tt"
+    },
+    {
+      "attribute": "minecraft:generic.knockback_resistance",
+      "operation": "addition",
+      "value": 0.25,
+      "name": "tt"
+    },
+    {
+      "attribute": "minecraft:generic.armor_toughness",
+      "operation": "addition",
+      "value": 2.0,
+      "name": "tt"
+    }
+  ]
+}

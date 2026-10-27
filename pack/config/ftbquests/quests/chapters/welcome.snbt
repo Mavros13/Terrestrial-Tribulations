@@ -1,0 +1,79 @@
+{
+	id: "1A53CDF11155C724"
+	group: ""
+	order_index: 0
+	filename: "welcome"
+	title: "Welcome to Velmora"
+	icon: "minecraft:book"
+	default_quest_shape: ""
+	default_hide_dependency_lines: false
+	quest_links: [ ]
+	images: [ ]
+	quests: [
+		{
+			id: "6D74F5A8B48B697A"
+			title: "Welcome, Shard-Born"
+			subtitle: "Start here"
+			description: ["&6Velmora is broken.&r Seven hundred years ago Queen Ysolde shattered the Aether Crown, and the realms drifted apart.", "", "You woke in the ash fields with no memory and a warmth in your chest that won't go away.", "", "This book guides you. &eGold-framed quests&r are the main story; the rest are optional side paths and tutorials.", "", "&7Tick the box to begin."]
+			x: 0.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: []
+			tasks: [
+				{ id: "F32986BB3CFFD890", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "D630D09F2ED72A1D", type: "item", item: { Count: 4b, id: "minecraft:bread" } }
+			]
+		},
+		{
+			id: "CD2FE48E971825B9"
+			title: "Heritage and Fate"
+			subtitle: "Who were you?"
+			description: ["When you first joined, you chose a &eHeritage&r (your bloodline) and a &eFate&r (your calling).", "", "&6Fates:&r Vanguard, Duelist, Warden, Ranger, Arcanist, Spellweaver, Reaper, Summoner, Artificer.", "A tenth Fate, &dAscendant&r, is said to awaken only in those who have walked far down two paths...", "", "&7Missed the screen? It appears on first join. Tick the box once you've chosen."]
+			x: 2.0d
+			y: -1.0d
+			shape: "circle"
+			dependencies: ["6D74F5A8B48B697A"]
+			tasks: [
+				{ id: "329726434912B3E8", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "928F4202A9CFF05E", type: "xp", xp: 25 }
+			]
+		},
+		{
+			id: "0E85D07B89A39FDB"
+			title: "The Skill Tree"
+			subtitle: "Experience becomes power"
+			description: ["Experience you earn becomes &eskill points&r in the &6Passive Skill Tree&r.", "", "Open it from your inventory (or its keybind in Controls) and spend your first point.", "Every Fate starts on a different edge of the tree. Story keystones unlock as the campaign advances."]
+			x: 2.0d
+			y: 1.0d
+			shape: "circle"
+			dependencies: ["6D74F5A8B48B697A"]
+			tasks: [
+				{ id: "5D141AB176A7A926", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "46D0B81E1030B60C", type: "xp", xp: 50 }
+			]
+		},
+		{
+			id: "AD6D35C8E3C01ADA"
+			title: "Battle Stance"
+			subtitle: "Epic Fight basics"
+			description: ["Press &eR&r to switch between &6Battle Mode&r and Mining Mode.", "", "In Battle Mode: &eleft click&r chains your weapon's combo, &esprint + attack&r dashes in, and your dodge key rolls you through danger.", "Every weapon type has its own moveset. Karambits are fast and cruel; greatswords are slow and devastating."]
+			x: 4.0d
+			y: 0.0d
+			shape: "circle"
+			dependencies: ["CD2FE48E971825B9", "0E85D07B89A39FDB"]
+			tasks: [
+				{ id: "4D462BDEFD760F67", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "738E621ED75706F2", type: "item", item: { Count: 4b, id: "minecraft:cooked_beef" } }
+			]
+		}
+	]
+}

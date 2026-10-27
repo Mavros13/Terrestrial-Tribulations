@@ -1,0 +1,25 @@
+{
+  "name": "Toolkit",
+  "description": "+1.5 block reach, +2 armor, +5% attack speed.",
+  "type": "origins:attribute",
+  "modifiers": [
+    {
+      "attribute": "forge:block_reach",
+      "operation": "addition",
+      "value": 1.5,
+      "name": "tt"
+    },
+    {
+      "attribute": "minecraft:generic.armor",
+      "operation": "addition",
+      "value": 2.0,
+      "name": "tt"
+    },
+    {
+      "attribute": "minecraft:generic.attack_speed",
+      "operation": "multiply_base",
+      "value": 0.05,
+      "name": "tt"
+    }
+  ]
+}

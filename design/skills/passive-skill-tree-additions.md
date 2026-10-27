@@ -1,0 +1,33 @@
+# Passive Skill Tree: custom skills (to be scripted with PassiveSTJS)
+
+**Status:** design. PassiveSTJS's scripting API (`PassiveSTJSEvents.skillTreeContent`) has to be checked against the installed version before writing code. The stock tree is kept, and our nodes are added around it.
+
+## Story keystones (unlocked by campaign progress, then cost a skill point)
+| Keystone | Unlock | Effect |
+|---|---|---|
+| Shardsense | Ch4 complete | Nearby chests and spawners glow briefly when you sneak (8-block radius, 30s cooldown) |
+| Hollow Ward | Ch4 complete | -30% damage from Hollowed enemies |
+| Ember Heart | Ch2 complete | Regenerate 1 HP every 4s while standing near a campfire or inside your colony |
+| Crownbearer's Will | Ch7 (3 Shards) | +1 to all Fate attribute bonuses per Crown Shard collected (max +7) |
+| Convergent | Ch10 complete | +5% to all stats for each Fate cluster with 5+ points |
+| Ascendant Spark | Ch10 + two Fate clusters with 8+ points | Unlocks the Ascendant Fate (tt_bridge swaps your Fate origin) |
+
+## Fate clusters (one starting cluster per Fate, about 10 nodes each)
+Vanguard (armour, attack damage) · Duelist (attack speed, crits) · Warden (health, knockback resistance) · Ranger (projectile damage, speed) · Arcanist (spell power, mana) · Spellweaver (mana regen, cooldown reduction) · Reaper (lifesteal, wither) · Summoner (summon damage, summon count) · Artificer (reach, Create and machine efficiency).
+
+## Quality-of-life nodes (cheap, off the combat path)
+| Node | Effect |
+|---|---|
+| Magnet Palm | Pick up items from 4 blocks away |
+| Long Arms | +1 block reach |
+| Hearty Appetite | -20% hunger drain |
+| Green Thumb | Crops near you grow 10% faster |
+| Night Eyes | Night vision while underground (below Y=40) |
+| Packrat | +1 Sophisticated Backpacks upgrade slot (if supported) |
+| Thrifty Smith | -20% anvil repair cost |
+| Trailblazer | +10% movement speed on paths and roads |
+| Deep Lungs | +50% breath underwater |
+| Soft Landing | -25% fall damage |
+
+## The ~100 stat nodes (from the kickoff)
+10 branches × 10 nodes (Strength, Vitality, Precision, Defence, Arcana, Mobility, Critical, Regeneration, Dominion, Machinery), +1.5–3% each, with a "notable" node every 5th. Points come from experience, so a full build fills roughly 4 branches.

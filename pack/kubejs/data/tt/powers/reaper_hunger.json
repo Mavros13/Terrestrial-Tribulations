@@ -1,0 +1,19 @@
+{
+  "name": "Grave Hunger",
+  "description": "+2 attack damage, -2 max health.",
+  "type": "origins:attribute",
+  "modifiers": [
+    {
+      "attribute": "minecraft:generic.attack_damage",
+      "operation": "addition",
+      "value": 2.0,
+      "name": "tt"
+    },
+    {
+      "attribute": "minecraft:generic.max_health",
+      "operation": "addition",
+      "value": -2.0,
+      "name": "tt"
+    }
+  ]
+}

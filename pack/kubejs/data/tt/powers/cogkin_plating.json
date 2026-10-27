@@ -1,0 +1,13 @@
+{
+  "name": "Riveted",
+  "description": "+1 armor toughness.",
+  "type": "origins:attribute",
+  "modifiers": [
+    {
+      "attribute": "minecraft:generic.armor_toughness",
+      "operation": "addition",
+      "value": 1.0,
+      "name": "tt"
+    }
+  ]
+}

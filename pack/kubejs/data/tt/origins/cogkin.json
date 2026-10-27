@@ -1,0 +1,13 @@
+{
+  "name": "Cogkin",
+  "description": "Descendants of the Tinker-Kings' engineers. Long reach, steady hands.",
+  "icon": {
+    "item": "minecraft:clock"
+  },
+  "order": 102,
+  "impact": 1,
+  "powers": [
+    "tt:cogkin_reach",
+    "tt:cogkin_plating"
+  ]
+}

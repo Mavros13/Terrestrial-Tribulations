@@ -1,0 +1,6 @@
+{
+  "name": "Lean Living",
+  "description": "Immune to Hunger.",
+  "type": "origins:effect_immunity",
+  "effect": "minecraft:hunger"
+}

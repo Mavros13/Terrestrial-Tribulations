@@ -1,0 +1,13 @@
+{
+  "name": "Skyborn",
+  "description": "Blood of the old Aether envoys. Light as air, frail as glass.",
+  "icon": {
+    "item": "minecraft:feather"
+  },
+  "order": 103,
+  "impact": 2,
+  "powers": [
+    "tt:skyborn_glide",
+    "tt:skyborn_frail"
+  ]
+}

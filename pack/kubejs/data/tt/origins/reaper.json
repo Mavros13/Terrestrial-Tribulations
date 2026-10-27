@@ -1,0 +1,13 @@
+{
+  "name": "Reaper",
+  "description": "Curses, lifesteal and dark powers. (Your Fate deepens as you invest in the Passive Skill Tree.)",
+  "icon": {
+    "item": "minecraft:wither_rose"
+  },
+  "order": 6,
+  "impact": 1,
+  "powers": [
+    "tt:reaper_hunger",
+    "tt:reaper_ward"
+  ]
+}

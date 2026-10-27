@@ -1,0 +1,12 @@
+{
+  "name": "Summoner",
+  "description": "Companions and minions. (Your Fate deepens as you invest in the Passive Skill Tree.)",
+  "icon": {
+    "item": "minecraft:bone"
+  },
+  "order": 7,
+  "impact": 1,
+  "powers": [
+    "tt:summoner_bond"
+  ]
+}

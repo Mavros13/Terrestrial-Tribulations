@@ -44,7 +44,7 @@ Every `pack/tt-sync/mods.json` entry was checked against the Modrinth API (`/v2/
 | Configured | configured | Configured 2.2.3 (Mar 2024) |
 | Epic Fight - Impactful | epic-fight-impactful | impactful-20.14.2.jar (Mar 2026) |
 
-That's 19 jars to drop in by hand (Test Build 1 needs the first 11; the rest are stage D).
+That's 19 mods to add by hand (Test Build 1 needs the first 11; the rest are stage D). Prism Launcher can add them straight from its own CurseForge browser (Edit instance → Mods → Download mods → CurseForge), so no website visits are needed.
 
 ## Superhero packs vs Palladium 4.5.9
 Palladium 4.5.9 (Aug 23, 2026) is the newest 1.20.1 Forge build.

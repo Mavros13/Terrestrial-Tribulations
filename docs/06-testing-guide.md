@@ -7,7 +7,7 @@ See the README: Prism → Add Instance → Import → paste the zip URL. Memory 
 
 ## First launch
 1. Press **Launch**. Prism shows the pre-launch log: `[TT ModSync] Downloading …` for each mod.
-2. If a **"manual downloads"** window appears: choose *Open download pages + stop launch*, download each listed mod's newest **1.20.1 Forge** file into the `mods` folder that opens, then press Launch again.
+2. If a **"manual downloads"** window appears, choose *Stop launch*. These mods are CurseForge-only, so add them from inside Prism: right-click the instance → **Edit** → **Mods** → **Download mods** → **CurseForge** tab. Search each listed name, pick the newest **1.20.1 Forge** file, then **Review and confirm**. If Prism offers extra dependencies, skip any already in the mods folder (ModSync installed them from Modrinth; a second copy can crash the game). Then press Launch again. If Prism says a mod blocks third-party downloads, use the website link in `tt-sync/MANUAL_DOWNLOADS.html` instead.
 3. Java: Prism needs **Java 17** for 1.20.1. If it asks, let it auto-download Java 17, or select it in Settings → Java.
 
 ## Stages (only if something crashes)

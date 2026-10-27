@@ -3,7 +3,7 @@
 ## Where things live
 - **GitHub is the single source of truth:** `Mavros13/Terrestrial-Tribulations` (branch `main`). Every pack file, doc and tool lives here. Commit and push all work.
 - **The owner's laptop is for research only.** Use its browser (CurseForge, Modrinth, mod wikis) to verify mods, versions, file names, item and entity IDs. **Don't store pack files on the laptop** beyond a temporary clone you delete when done. Write findings into the repo (usually `docs/07-full-mod-list.md`, `pack/tt-sync/mods.json`, or `docs/research/`).
-- The owner plays and tests on a **home desktop with Prism Launcher**, importing `dist/Terrestrial-Tribulations-TestBuild1.zip` by its raw GitHub URL.
+- The owner plays and tests on a **home desktop with Prism Launcher**, importing `dist/Terrestrial-Tribulations-TestBuild1.zip` by its raw GitHub URL. Prism has **both Modrinth and CurseForge built in** (Edit instance → Mods → Download mods), so CurseForge-only mods are added from inside Prism, not by visiting the website.
 
 ## Decisions already made (don't re-litigate)
 - **Minecraft 1.20.1, Forge 47.4.x (never 47.2.0), Java 17.** Chosen for Palladium.

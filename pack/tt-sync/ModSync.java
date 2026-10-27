@@ -146,15 +146,17 @@ public class ModSync {
     // Shows a dialog listing mods that need a manual download. "Stop launch" exits with code 1 so Prism cancels the launch.
     static void askManual(List<Map<String, Object>> missing) throws Exception {
         StringBuilder html = new StringBuilder("<html><body style='font-family:sans-serif'><h2>Terrestrial Tribulations: manual downloads</h2>"
-                + "<p>Download the newest <b>" + mcVersion + " Forge</b> file of each mod and drop it into:<br><code>" + modsDir + "</code></p><ul>");
+                + "<p><b>Easiest, in Prism:</b> Edit the instance &rarr; Mods &rarr; Download mods &rarr; <b>CurseForge</b> tab. Search each name below, pick the newest <b>"
+                + mcVersion + " Forge</b> file, then Review and confirm. If Prism offers extra dependencies, skip any that are already in the mods folder.</p>"
+                + "<p>Or download from the website (links below) and drop the jar into:<br><code>" + modsDir + "</code></p><ul>");
         for (Map<String, Object> m : missing) html.append("<li><a href='").append(cfUrl(m)).append("'>").append(m.get("name")).append("</a></li>");
         Path page = syncDir.resolve("MANUAL_DOWNLOADS.html");
         Files.writeString(page, html.append("</ul></body></html>").toString());
         log("Some mods need a manual download, see " + page);
         if (java.awt.GraphicsEnvironment.isHeadless()) return;
-        StringBuilder msg = new StringBuilder("These mods are not on Modrinth and must be downloaded by hand\n(newest " + mcVersion + " Forge file, into the instance's mods folder):\n\n");
+        StringBuilder msg = new StringBuilder("These mods are CurseForge-only. Add them in Prism: Edit instance > Mods > Download mods >\nCurseForge tab, search each name, pick the newest " + mcVersion + " Forge file:\n\n");
         for (Map<String, Object> m : missing) msg.append("  - ").append(m.get("name")).append('\n');
-        Object[] opts = {"Open download pages + stop launch", "Launch anyway"};
+        Object[] opts = {"Stop launch (open the list)", "Launch anyway"};
         int c = javax.swing.JOptionPane.showOptionDialog(null, msg.toString(), "Terrestrial Tribulations - ModSync",
                 javax.swing.JOptionPane.DEFAULT_OPTION, javax.swing.JOptionPane.WARNING_MESSAGE, null, opts, opts[0]);
         if (c == 0) {

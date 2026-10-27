@@ -20,14 +20,14 @@ mods:
   - {id: irons-spells-n-spellbooks, name: "Iron's Spells 'n Spellbooks", category: magic, status: CANDIDATE, side: both}
   - {id: ars-nouveau, name: Ars Nouveau, category: magic, status: CANDIDATE, side: both}
   - {id: palladium, name: Palladium, category: combat, status: CANDIDATE, side: both, notes: superhero framework; addon packs TBD}
-  - {id: rats, name: Rats, category: tech, status: CANDIDATE, side: both, notes: "1.20.1 Forge build UNVERIFIED"}
+  - {id: rats, name: Rats, category: tech, status: CANDIDATE, side: both, version: "8.1.3 (Rats-1.20.1-8.1.3.jar, CF file 5904296)", notes: "web-search evidence only; confirm in M1"}
   - {id: curios, name: Curios API, category: library, status: CANDIDATE, side: both}
   - {id: elytra-slot, name: Elytra Slot, category: qol, status: CANDIDATE, side: both}
-  - {id: elytra-trims, name: Elytra Trims, category: cosmetic, status: CANDIDATE, side: client, notes: Forge availability UNVERIFIED}
+  - {id: elytra-trims, name: Elytra Trims, category: cosmetic, status: CANDIDATE, side: client, deps: [kotlin-for-forge], notes: "Forge 3.x builds exist for 1.20.1 (e.g. 3.5.9); pick newest 3.x"}
   - {id: more-armor-trims, name: More Armor Trims, category: cosmetic, status: CANDIDATE, side: both}
   - {id: ct-overhaul-village, name: ChoiceTheorem's Overhauled Village, category: worldgen, status: CANDIDATE, side: both}
   - {id: enhanced-boss-bars, name: Enhanced Boss Bars, category: ui, status: CANDIDATE, side: client, notes: resource pack}
-  - {id: wakes, name: Wakes, category: cosmetic, status: CANDIDATE, side: client, notes: "likely Fabric-only -> probable REJECT"}
+  - {id: wakes, name: Wakes, category: cosmetic, status: CANDIDATE, side: client, notes: "Forge port exists: wakes-1.20.1-Forge-1.0.5.jar (Modrinth E0SdeAoH); confirm"}
   - {id: epic-fight, name: Epic Fight, category: combat, status: REJECTED, notes: conflicts with Better Combat design}
   - {id: refined-storage, name: Refined Storage, category: tech, status: REJECTED, notes: redundant with AE2}
   - {id: aetherfall-core, name: Aetherfall Core, category: foundation, status: CUSTOM, source: custom, side: both}

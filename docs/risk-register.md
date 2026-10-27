@@ -7,4 +7,4 @@
 | R4 | Superhero power creep | Med | Med | KubeJS + core flags gating | Design | Open |
 | R5 | Entity load | Med | High | Caps, culling, Spark profiling | Dev | Open |
 | R6 | Redistribution licences | Med | High | Manifest-only distribution | Release | Open |
-| R7 | Rats / Elytra Trims / Wakes unavailable on Forge 1.20.1 | High | Low | Alternatives or CUSTOM | Arch | Open |
+| R7 | Rats / Elytra Trims / Wakes unavailable on Forge 1.20.1 | Low (builds found) | Low | Alternatives or CUSTOM | Arch | Open |

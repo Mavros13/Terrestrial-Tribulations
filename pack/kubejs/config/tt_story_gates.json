@@ -1,0 +1,11 @@
+{
+  "_comment": "Story gates: items from these namespaces/IDs can't be worn or used until the player has the KubeJS stage (granted by FTB Quests command rewards: /kubejs stages add @p <stage>). Namespaces of the hero packs are filled in after the first launch from kubejs/exported/tt_item_namespaces.json.",
+  "gates": [
+    {
+      "stage": "tt_ch8_heroes",
+      "message": "The suit's systems stay dark. Its makers' secrets are revealed in Chapter 8: The Rise of Heroes.",
+      "namespaces": [],
+      "items": []
+    }
+  ]
+}

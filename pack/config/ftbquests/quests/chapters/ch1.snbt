@@ -186,7 +186,8 @@
 			]
 			rewards: [
 				{ id: "0C5B743C3B142ABC", type: "item", item: { Count: 1b, id: "tt:emberhold_charter" } },
-				{ id: "5A7D12537055668F", type: "xp", xp: 200 }
+				{ id: "5A7D12537055668F", type: "xp", xp: 200 },
+				{ id: "A6CC39D71E0CC03A", type: "command", command: "/kubejs stages add @p tt_ch1_done", elevate_perms: true, silent: true }
 			]
 		}
 	]

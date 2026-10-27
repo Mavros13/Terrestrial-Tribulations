@@ -43,6 +43,9 @@ def r_item(i, count=1):
     return f'type: "item", item: {item(i, min(count, 64))}'
 def r_xp(n):
     return f'type: "xp", xp: {n}'
+def r_stage(stage):
+    """Grants a KubeJS stage (used by story gates). The command needs operator rights, hence elevate_perms."""
+    return f'type: "command", command: "/kubejs stages add @p {stage}", elevate_perms: true, silent: true'
 
 
 # --------------------------------------------------------------------------------------------------
@@ -124,7 +127,7 @@ CHAPTERS = [
                        "", "&6Elder Maera&r presses a sealed document into your hands: the &eEmberhold Charter&r.",
                        "&o\"Find good ground. Plant this. We'll follow.\"",
                        "", "&eChapter 2: The First Settlement&r begins: found Emberhold with MineColonies' Town Hall."],
-                 tasks=[t_check()], rewards=[r_item("tt:emberhold_charter"), r_xp(200)]),
+                 tasks=[t_check()], rewards=[r_item("tt:emberhold_charter"), r_xp(200), r_stage("tt_ch1_done")]),
         ],
     },
     {

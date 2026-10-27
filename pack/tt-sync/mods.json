@@ -627,6 +627,30 @@
       "modrinth": "chunky",
       "curseforge": "chunky-pregenerator-forge",
       "stage": "D"
+    },
+    {
+      "name": "FSang18's Heropack",
+      "match": "fsang",
+      "modrinth": "fsang18s-heropack",
+      "curseforge": "fsang18s-heropack",
+      "stage": "C",
+      "_note": "Palladium hero pack; see design/story/heroes-integration.md"
+    },
+    {
+      "name": "Satsu Iron Man Addon",
+      "match": "satsu",
+      "modrinth": "satsu-iron-man-addon",
+      "curseforge": "satsu-iron-man-addon",
+      "stage": "C",
+      "_note": "Palladium hero pack; see design/story/heroes-integration.md"
+    },
+    {
+      "name": "Gods and Heroes",
+      "match": "gods",
+      "modrinth": "gods-and-heroes",
+      "curseforge": "gods-and-heroes",
+      "stage": "C",
+      "_note": "Palladium hero pack; see design/story/heroes-integration.md"
     }
   ]
 }

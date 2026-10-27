@@ -18,7 +18,7 @@ Stages in `pack/tt-sync/mods.json`: **A/B/C = Test Build 1**, **D = Test Build 2
 | MineColonies (+ Structurize, MultiPiston, BlockUI, Domum Ornamentum) | Emberhold: Town Hall levels 1–5 = city stages | 🔎 | Snapshot builds only since 2024; cap the colony size for performance |
 | Origins (Forge) | Heritage + Fate layers | ✅ format · 🔎 1.10.0.9 | Archived; avoid Forge 47.2.0 |
 | Passive Skill Tree (+ PassiveSTJS) | Talent tree, points from XP | ✅ format · 🔎 | `tt:shardborn` tree generated |
-| Palladium | Superheroes and the Iron Choir villains | 🔎 4.5.9 | We write **our own addon pack** (original heroes that fit the lore); third-party packs are optional |
+| Palladium + FSang18's Heropack + Satsu Iron Man Addon + Gods and Heroes | Superheroes and the Iron Choir villains | 🔎 4.5.9 | **Existing packs only** (no custom heroes). Story fit: `design/story/heroes-integration.md` |
 | L_Ender's Cataclysm | Ignis, Harbinger, Leviathan, Netherite Monstrosity, Ender Guardian… | 🔎 | Chapter 6–9 bosses |
 | Mowzie's Mobs | Frostmaw, Ferrous Wroughtnaut, Umvuthi | 🔎 | Chapter 5–6 bosses |
 | Bosses of Mass Destruction | Night Lich, Obsidilith, Gauntlet, Void Blossom | 🔎 1.1.2 | Needs CerbonsAPI |
@@ -116,4 +116,4 @@ Embeddium, Oculus (optional shaders), ModernFix, FerriteCore, EntityCulling, Imm
 ## Still open
 1. End overhaul: BetterEnd Forge port, or YUNG's Better End Island only.
 2. Apotheosis + Champions overlap: decide after Test Build 2.
-3. Palladium: write our own addon pack. The format can be checked against Palladium's source (`ThreeTAG/Palladium` branch `1.20/main`), as was done for the other mods.
+3. Palladium hero packs: fill in the story-gate namespaces after the first launch (`kubejs/exported/tt_item_namespaces.json`).

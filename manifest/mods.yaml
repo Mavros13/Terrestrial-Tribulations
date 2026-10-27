@@ -9,8 +9,9 @@ mods:
   - {id: jade, name: Jade, category: qol, status: CANDIDATE, side: both, perf_cost: low}
   - {id: ftb-quests-forge, name: FTB Quests, category: quests, status: CANDIDATE, side: both, deps: [ftb-library-forge, ftb-teams-forge]}
   - {id: kubejs, name: KubeJS, category: library, status: CANDIDATE, side: both, deps: [rhino, architectury-api]}
-  - {id: better-combat, name: Better Combat, category: combat, status: CANDIDATE, side: both, deps: [playeranimator, cloth-config]}
-  - {id: combat-roll, name: Combat Roll, category: combat, status: CANDIDATE, side: both}
+  - {id: epic-fight-mod, name: Epic Fight, category: combat, status: CANDIDATE, side: both, version: "20.14.6", purpose: primary animated combat}
+  - {id: better-combat, name: Better Combat, category: combat, status: CANDIDATE, side: both, deps: [playeranimator, cloth-config], notes: "FALLBACK only if Epic Fight conflicts"}
+  - {id: combat-roll, name: Combat Roll, category: combat, status: CANDIDATE, side: both, notes: fallback with Better Combat}
   - {id: embeddium, name: Embeddium, category: perf, status: CANDIDATE, side: client}
   - {id: modernfix, name: ModernFix, category: perf, status: CANDIDATE, side: both}
   - {id: ferrite-core, name: FerriteCore, category: perf, status: CANDIDATE, side: both}
@@ -29,9 +30,7 @@ mods:
   - {id: ct-overhaul-village, name: ChoiceTheorem's Overhauled Village, category: worldgen, status: CANDIDATE, side: both}
   - {id: enhanced-boss-bars, name: Enhanced Boss Bars, category: ui, status: CANDIDATE, side: client, notes: resource pack}
   - {id: wakes, name: Wakes, category: cosmetic, status: CANDIDATE, side: client, notes: "Forge port wakes-1.20.1-Forge-1.0.5"}
-  - {id: epic-fight, name: Epic Fight, category: combat, status: REJECTED, notes: conflicts with Better Combat design}
   - {id: refined-storage, name: Refined Storage, category: tech, status: REJECTED, notes: redundant with AE2}
-  - {id: aetherfall-core, name: Aetherfall Core, category: foundation, status: CUSTOM, source: custom, side: both}
   - {id: easy-npc, name: Easy NPC, category: npc, status: CANDIDATE, side: both, version: "6.25.0", purpose: capital NPCs and dialogue}
   - {id: brntalk, name: BRNTalk, category: npc, status: CANDIDATE, side: both, purpose: branching dialogue, notes: "1.20.1 build unverified"}
   - {id: lendercataclysm, name: "L_Ender's Cataclysm", category: boss, status: CANDIDATE, side: both}
@@ -46,3 +45,13 @@ mods:
   - {id: simply-swords, name: Simply Swords, category: combat, status: CANDIDATE, side: both, version: "1.61.3"}
   - {id: sophisticated-backpacks, name: Sophisticated Backpacks, category: qol, status: CANDIDATE, side: both}
   - {id: create-quarry, name: "Create: Quarry", category: tech, status: CANDIDATE, side: both, notes: "1.20.1 build unverified; alt Mekanism Digital Miner / RFTools Builder"}
+  - {id: puffish-skills, name: "Pufferfish's Skills", category: rpg, status: CANDIDATE, side: both, purpose: talent trees via datapack}
+  - {id: puffish-attributes, name: "Pufferfish's Attributes", category: rpg, status: CANDIDATE, side: both}
+  - {id: champions-unofficial, name: Champions Unofficial, category: rpg, status: CANDIDATE, side: both, version: "2.1.12.x", purpose: elite mobs + affixes}
+  - {id: botz-mob-leveling, name: Botz Mob Leveling, category: rpg, status: CANDIDATE, side: both, purpose: region scaling}
+  - {id: apotheosis, name: Apotheosis, category: rpg, status: CANDIDATE, side: both, purpose: loot rarity, affixes, gems}
+  - {id: mariums-soulslike-weaponry, name: "Marium's Soulslike Weaponry", category: combat, status: CANDIDATE, side: both, version: "1.4.8"}
+  - {id: armor-set-bonuses, name: Armor Set Bonuses, category: rpg, status: CANDIDATE, side: both, version: "20.14.0"}
+  - {id: minecolonies, name: MineColonies, category: npc, status: CANDIDATE, side: both, version: "1.1.1231-snapshot", deps: [structurize, multipiston, blockui, domum-ornamentum], purpose: capital city stages}
+  - {id: origins-forge, name: Origins (Forge), category: rpg, status: REJECTED, notes: archived project}
+  - {id: tt-bridge, name: Terrestrial Tribulations Bridge, category: foundation, status: CUSTOM, source: custom, side: both, purpose: story flags + cross-mod triggers (MCreator)}

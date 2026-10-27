@@ -1,5 +1,7 @@
 # Toolchain: MCreator + Blockbench (v0.3, 2026-10-27)
 
+> **Scope narrowed by docs/03-integration-strategy.md:** content comes from existing mods. MCreator builds only the `tt_bridge` mod, and Blockbench is used for retextures and re-skins. The workflow below still applies, at smaller scale.
+
 ## Decision
 | Tool | Version | Role |
 |---|---|---|

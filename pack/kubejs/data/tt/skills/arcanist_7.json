@@ -1,0 +1,30 @@
+{
+  "id": "tt:arcanist_7",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "irons_spellbooks:spell_power",
+      "id": "12881395-70e9-5fac-824b-b6a726dc62d2",
+      "name": "Skill",
+      "amount": 0.03,
+      "operation": 1,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:arcanist_8"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/lesser.png",
+  "iconTexture": "skilltree:textures/icons/potion_blue_small.png",
+  "borderTexture": "skilltree:textures/tooltip/lesser.png",
+  "positionX": 82.769,
+  "positionY": 227.406,
+  "buttonSize": 16,
+  "isStartingPoint": false
+}

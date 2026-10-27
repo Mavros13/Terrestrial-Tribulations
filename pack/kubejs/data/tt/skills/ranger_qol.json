@@ -1,0 +1,23 @@
+{
+  "id": "tt:ranger_qol",
+  "bonuses": [
+    {
+      "type": "skilltree:loot_duplication",
+      "chance": 0.05,
+      "multiplier": 1.0,
+      "loot_type": "chests"
+    }
+  ],
+  "requirements": [],
+  "directConnections": [],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/notable.png",
+  "iconTexture": "skilltree:textures/icons/treasure_chest.png",
+  "borderTexture": "skilltree:textures/tooltip/notable.png",
+  "positionX": 86.834,
+  "positionY": 70.738,
+  "buttonSize": 20,
+  "isStartingPoint": false
+}

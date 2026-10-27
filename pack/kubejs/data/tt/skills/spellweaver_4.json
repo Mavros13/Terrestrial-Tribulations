@@ -1,0 +1,30 @@
+{
+  "id": "tt:spellweaver_4",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "irons_spellbooks:cooldown_reduction",
+      "id": "daa55fbd-d982-58a7-99c6-2293dd6fdb6c",
+      "name": "Skill",
+      "amount": 0.02,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:spellweaver_5"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/lesser.png",
+  "iconTexture": "skilltree:textures/icons/potion_cyan.png",
+  "borderTexture": "skilltree:textures/tooltip/lesser.png",
+  "positionX": -56.091,
+  "positionY": 154.11,
+  "buttonSize": 16,
+  "isStartingPoint": false
+}

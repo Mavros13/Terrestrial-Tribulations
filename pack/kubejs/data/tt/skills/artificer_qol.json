@@ -1,0 +1,28 @@
+{
+  "id": "tt:artificer_qol",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "forge:step_height_addition",
+      "id": "df85ab05-fb8a-5c40-a607-0790587b61d6",
+      "name": "Skill",
+      "amount": 0.5,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/notable.png",
+  "iconTexture": "skilltree:textures/icons/boots_gold.png",
+  "borderTexture": "skilltree:textures/tooltip/notable.png",
+  "positionX": -57.404,
+  "positionY": -96.171,
+  "buttonSize": 20,
+  "isStartingPoint": false
+}

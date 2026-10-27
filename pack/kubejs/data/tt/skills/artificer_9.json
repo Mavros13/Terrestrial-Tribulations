@@ -1,0 +1,30 @@
+{
+  "id": "tt:artificer_9",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "forge:block_reach",
+      "id": "5a9b7936-5f2b-5e4d-8490-335130b63e93",
+      "name": "Skill",
+      "amount": 0.25,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:artificer_10"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/lesser.png",
+  "iconTexture": "skilltree:textures/icons/glove_steel.png",
+  "borderTexture": "skilltree:textures/tooltip/lesser.png",
+  "positionX": -188.98,
+  "positionY": -225.217,
+  "buttonSize": 16,
+  "isStartingPoint": false
+}

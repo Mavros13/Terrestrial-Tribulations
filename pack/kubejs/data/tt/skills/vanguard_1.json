@@ -1,0 +1,30 @@
+{
+  "id": "tt:vanguard_1",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.armor",
+      "id": "4365fb31-7fdb-5b95-9d7d-48246bc8c313",
+      "name": "Skill",
+      "amount": 1.0,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:vanguard_2"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/lesser.png",
+  "iconTexture": "skilltree:textures/icons/sword_iron.png",
+  "borderTexture": "skilltree:textures/tooltip/lesser.png",
+  "positionX": 0.0,
+  "positionY": -86.0,
+  "buttonSize": 16,
+  "isStartingPoint": false
+}

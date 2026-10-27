@@ -1,0 +1,41 @@
+{
+  "id": "tt:spellweaver_10",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "irons_spellbooks:cooldown_reduction",
+      "id": "b3252df4-829d-5aba-86d8-efa660cb86dd",
+      "name": "Skill",
+      "amount": 0.05,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    },
+    {
+      "type": "skilltree:attribute",
+      "attribute": "irons_spellbooks:mana_regen",
+      "id": "ccafdac7-dd29-50b2-bde2-d7bf6098d17c",
+      "name": "Skill",
+      "amount": 0.1,
+      "operation": 1,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:spellweaver_keystone"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/notable.png",
+  "iconTexture": "skilltree:textures/icons/potion_cyan.png",
+  "borderTexture": "skilltree:textures/tooltip/notable.png",
+  "positionX": -109.446,
+  "positionY": 300.702,
+  "buttonSize": 20,
+  "isStartingPoint": false
+}

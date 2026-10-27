@@ -3,11 +3,12 @@
 
 Writes pack/config/ftbquests/quests/{data.snbt, chapter_groups.snbt, chapters/*.snbt, lang/en_us.snbt}.
 Quest and task IDs are stable 16-hex strings derived from their keys, so re-generating keeps player progress.
-Titles and descriptions are written both inline and to lang/en_us.snbt, because newer 2001.x builds read the lang file.
-DRAFT: the schema follows FTB Quests 2001.x as I know it. Validate in game (open the book, check the log).
+Schema checked against FTBTeam/FTB-Quests@1.20.1/main (Quest/ItemTask/KillTask/AdvancementTask/ItemReward/XPReward
+readData, BaseQuestFile.VERSION = 13). On 1.20.1 titles and descriptions are stored inline, so no lang file is used.
 """
 import hashlib
 import os
+import shutil
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "pack", "config", "ftbquests", "quests")
@@ -159,9 +160,9 @@ def quest_snbt(q):
 
 def main():
     os.makedirs(os.path.join(OUT, "chapters"), exist_ok=True)
-    os.makedirs(os.path.join(OUT, "lang"), exist_ok=True)
+    shutil.rmtree(os.path.join(OUT, "lang"), ignore_errors=True)
     with open(os.path.join(OUT, "data.snbt"), "w") as f:
-        f.write('{\n\tversion: 13\n\ttitle: "Terrestrial Tribulations"\n\ticon: "minecraft:book"\n\tgrid_scale: 0.5d\n'
+        f.write('{\n\tversion: 13\n\ttitle: "Terrestrial Tribulations"\n\ticon: { Count: 1b, id: "minecraft:book" }\n\tgrid_scale: 0.5d\n'
                 '\tdefault_reward_team: false\n\tdefault_consume_items: false\n\tdefault_quest_shape: "circle"\n'
                 '\tdrop_book_on_death: false\n\tpause_game: false\n\tprogression_mode: "linear"\n\tdetection_delay: 20\n}\n')
     with open(os.path.join(OUT, "chapter_groups.snbt"), "w") as f:
@@ -179,10 +180,8 @@ def main():
         body = ",\n".join(quest_snbt(q) for q in c["quests"])
         with open(os.path.join(OUT, "chapters", c["key"] + ".snbt"), "w") as f:
             f.write(f'{{\n\tid: "{qid("chapter:" + c["key"])}"\n\tgroup: ""\n\torder_index: {i}\n\tfilename: "{c["key"]}"\n'
-                    f'\ttitle: {s(c["title"])}\n\ticon: "{c["icon"]}"\n\tdefault_quest_shape: ""\n\tdefault_hide_dependency_lines: false\n'
+                    f'\ttitle: {s(c["title"])}\n\ticon: {item(c["icon"])}\n\tdefault_quest_shape: ""\n\tdefault_hide_dependency_lines: false\n'
                     f'\tquest_links: [ ]\n\timages: [ ]\n\tquests: [\n{body}\n\t]\n}}\n')
-    with open(os.path.join(OUT, "lang", "en_us.snbt"), "w") as f:
-        f.write("{\n" + "\n".join(lang) + "\n}\n")
     # circular dependency check
     deps = {q["key"]: q.get("deps", []) for c in CHAPTERS for q in c["quests"]}
     def visit(k, stack):

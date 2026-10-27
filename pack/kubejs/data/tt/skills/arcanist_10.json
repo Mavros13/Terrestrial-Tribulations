@@ -1,0 +1,50 @@
+{
+  "id": "tt:arcanist_10",
+  "bonuses": [
+    {
+      "type": "skilltree:damage",
+      "amount": 0.08,
+      "operation": 1,
+      "player_multiplier": {
+        "type": "skilltree:none"
+      },
+      "enemy_multiplier": {
+        "type": "skilltree:none"
+      },
+      "player_condition": {
+        "type": "skilltree:none"
+      },
+      "damage_condition": {
+        "type": "skilltree:magic"
+      },
+      "target_condition": {
+        "type": "skilltree:none"
+      }
+    },
+    {
+      "type": "skilltree:attribute",
+      "attribute": "irons_spellbooks:max_mana",
+      "id": "80681585-ce32-58a1-a992-407d4bab3539",
+      "name": "Skill",
+      "amount": 40.0,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:arcanist_keystone"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/notable.png",
+  "iconTexture": "skilltree:textures/icons/potion_blue_small.png",
+  "borderTexture": "skilltree:textures/tooltip/notable.png",
+  "positionX": 109.446,
+  "positionY": 300.702,
+  "buttonSize": 20,
+  "isStartingPoint": false
+}

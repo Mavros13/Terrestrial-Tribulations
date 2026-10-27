@@ -1,0 +1,47 @@
+{
+  "id": "tt:warden_keystone",
+  "bonuses": [
+    {
+      "type": "skilltree:healing",
+      "chance": 1.0,
+      "amount": 0.02,
+      "event_listener": {
+        "cooldown": 80,
+        "type": "skilltree:ticking"
+      },
+      "percentage_healing": true
+    },
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.max_health",
+      "id": "168e0b2e-9977-5512-bfa8-2dd04b80af6e",
+      "name": "Skill",
+      "amount": 4.0,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skilltree:stat_value",
+      "statTypeId": "minecraft:custom",
+      "statId": "minecraft:sleep_in_bed",
+      "minValue": 10
+    }
+  ],
+  "directConnections": [],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [
+    "keystone"
+  ],
+  "backgroundTexture": "skilltree:textures/icons/background/keystone.png",
+  "iconTexture": "skilltree:textures/icons/chestplate_bronze_fur.png",
+  "borderTexture": "skilltree:textures/tooltip/keystone.png",
+  "positionX": 358.47,
+  "positionY": -63.208,
+  "buttonSize": 24,
+  "isStartingPoint": false
+}

@@ -1,0 +1,30 @@
+{
+  "id": "tt:warden_3",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.max_health",
+      "id": "fdf3909f-8a4b-589c-b407-2ad1fcf58f40",
+      "name": "Skill",
+      "amount": 1.0,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:warden_4"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/lesser.png",
+  "iconTexture": "skilltree:textures/icons/chestplate_bronze_fur.png",
+  "borderTexture": "skilltree:textures/tooltip/lesser.png",
+  "positionX": 135.903,
+  "positionY": -23.963,
+  "buttonSize": 16,
+  "isStartingPoint": false
+}

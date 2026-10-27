@@ -1,0 +1,50 @@
+{
+  "id": "tt:duelist_5",
+  "bonuses": [
+    {
+      "type": "skilltree:crit_damage",
+      "amount": 0.15,
+      "player_multiplier": {
+        "type": "skilltree:none"
+      },
+      "enemy_multiplier": {
+        "type": "skilltree:none"
+      },
+      "player_condition": {
+        "type": "skilltree:none"
+      },
+      "damage_condition": {
+        "type": "skilltree:none"
+      },
+      "target_condition": {
+        "type": "skilltree:none"
+      }
+    },
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.movement_speed",
+      "id": "8a82221e-c30a-5061-95bf-000302805526",
+      "name": "Skill",
+      "amount": 0.03,
+      "operation": 1,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:duelist_6",
+    "tt:warden_5"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/notable.png",
+  "iconTexture": "skilltree:textures/icons/sword_gold.png",
+  "borderTexture": "skilltree:textures/tooltip/notable.png",
+  "positionX": 122.13,
+  "positionY": -145.548,
+  "buttonSize": 20,
+  "isStartingPoint": false
+}

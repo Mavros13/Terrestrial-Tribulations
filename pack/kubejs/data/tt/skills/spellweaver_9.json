@@ -1,0 +1,30 @@
+{
+  "id": "tt:spellweaver_9",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "irons_spellbooks:mana_regen",
+      "id": "6b4e0436-4664-56eb-a7fb-5b8597861e27",
+      "name": "Skill",
+      "amount": 0.05,
+      "operation": 1,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:spellweaver_10"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/lesser.png",
+  "iconTexture": "skilltree:textures/icons/potion_cyan.png",
+  "borderTexture": "skilltree:textures/tooltip/lesser.png",
+  "positionX": -100.554,
+  "positionY": 276.27,
+  "buttonSize": 16,
+  "isStartingPoint": false
+}

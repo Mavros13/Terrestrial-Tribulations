@@ -1,0 +1,28 @@
+{
+  "id": "tt:duelist_qol",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.movement_speed",
+      "id": "6b086743-7b06-5b37-875d-4d96c49a02e4",
+      "name": "Skill",
+      "amount": 0.05,
+      "operation": 1,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/notable.png",
+  "iconTexture": "skilltree:textures/icons/boots_leather.png",
+  "borderTexture": "skilltree:textures/tooltip/notable.png",
+  "positionX": 84.742,
+  "positionY": -73.231,
+  "buttonSize": 20,
+  "isStartingPoint": false
+}

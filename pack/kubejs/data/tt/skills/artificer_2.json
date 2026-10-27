@@ -1,0 +1,31 @@
+{
+  "id": "tt:artificer_2",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.armor_toughness",
+      "id": "2981e3da-bfcf-5bc3-a02d-57510d2ea30c",
+      "name": "Skill",
+      "amount": 0.5,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:artificer_3",
+    "tt:artificer_qol"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/lesser.png",
+  "iconTexture": "skilltree:textures/icons/glove_steel.png",
+  "borderTexture": "skilltree:textures/tooltip/lesser.png",
+  "positionX": -71.992,
+  "positionY": -85.797,
+  "buttonSize": 16,
+  "isStartingPoint": false
+}

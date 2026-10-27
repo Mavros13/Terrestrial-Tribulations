@@ -1,0 +1,28 @@
+{
+  "id": "tt:vanguard_qol",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "forge:block_reach",
+      "id": "f73d1a39-f3c6-5aa0-b624-34cbd51d4f73",
+      "name": "Skill",
+      "amount": 1.0,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/notable.png",
+  "iconTexture": "skilltree:textures/icons/glove_iron.png",
+  "borderTexture": "skilltree:textures/tooltip/notable.png",
+  "positionX": 17.844,
+  "positionY": -110.569,
+  "buttonSize": 20,
+  "isStartingPoint": false
+}

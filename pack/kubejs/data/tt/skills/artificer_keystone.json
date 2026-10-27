@@ -1,0 +1,59 @@
+{
+  "id": "tt:artificer_keystone",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.attack_speed",
+      "id": "eb28938b-fed3-5a93-8d72-c82fe3fd3587",
+      "name": "Skill",
+      "amount": 0.1,
+      "operation": 1,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    },
+    {
+      "type": "skilltree:attribute",
+      "attribute": "forge:entity_reach",
+      "id": "d05058f2-edea-5679-a295-be8ab1ed8d37",
+      "name": "Skill",
+      "amount": 1.0,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    },
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.armor_toughness",
+      "id": "e1c7c8dc-48a3-5f64-9c69-eea9e2b781e1",
+      "name": "Skill",
+      "amount": 3.0,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skilltree:stat_value",
+      "statTypeId": "minecraft:custom",
+      "statId": "minecraft:interact_with_crafting_table",
+      "minValue": 200
+    }
+  ],
+  "directConnections": [],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [
+    "keystone"
+  ],
+  "backgroundTexture": "skilltree:textures/icons/background/keystone.png",
+  "iconTexture": "skilltree:textures/icons/glove_steel.png",
+  "borderTexture": "skilltree:textures/tooltip/keystone.png",
+  "positionX": -233.975,
+  "positionY": -278.84,
+  "buttonSize": 24,
+  "isStartingPoint": false
+}

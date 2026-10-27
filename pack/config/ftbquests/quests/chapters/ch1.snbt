@@ -4,7 +4,7 @@
 	order_index: 1
 	filename: "ch1"
 	title: "Chapter 1: The Broken Frontier"
-	icon: "minecraft:campfire"
+	icon: { Count: 1b, id: "minecraft:campfire" }
 	default_quest_shape: ""
 	default_hide_dependency_lines: false
 	quest_links: [ ]

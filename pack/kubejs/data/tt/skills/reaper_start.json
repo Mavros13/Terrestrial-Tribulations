@@ -1,0 +1,30 @@
+{
+  "id": "tt:reaper_start",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.attack_damage",
+      "id": "a40a61c0-3d3b-5189-b6b0-cab8dab57184",
+      "name": "Skill",
+      "amount": 0.5,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:reaper_1"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/class.png",
+  "iconTexture": "skilltree:textures/icons/skull.png",
+  "borderTexture": "skilltree:textures/tooltip/gateway.png",
+  "positionX": -51.962,
+  "positionY": 30.0,
+  "buttonSize": 24,
+  "isStartingPoint": true
+}

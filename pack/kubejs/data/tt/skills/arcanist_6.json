@@ -1,0 +1,30 @@
+{
+  "id": "tt:arcanist_6",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "irons_spellbooks:max_mana",
+      "id": "f700c5b5-caee-58f4-9f01-2eddd0be8d6e",
+      "name": "Skill",
+      "amount": 15.0,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:arcanist_7"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/lesser.png",
+  "iconTexture": "skilltree:textures/icons/potion_blue_small.png",
+  "borderTexture": "skilltree:textures/tooltip/lesser.png",
+  "positionX": 73.876,
+  "positionY": 202.974,
+  "buttonSize": 16,
+  "isStartingPoint": false
+}

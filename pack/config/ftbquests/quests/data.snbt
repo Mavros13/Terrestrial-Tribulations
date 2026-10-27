@@ -1,7 +1,7 @@
 {
 	version: 13
 	title: "Terrestrial Tribulations"
-	icon: "minecraft:book"
+	icon: { Count: 1b, id: "minecraft:book" }
 	grid_scale: 0.5d
 	default_reward_team: false
 	default_consume_items: false

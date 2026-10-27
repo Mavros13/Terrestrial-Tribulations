@@ -1,0 +1,42 @@
+{
+  "id": "tt:summoner_5",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "irons_spellbooks:summon_damage",
+      "id": "2f688cdb-8caa-5975-9b84-11cf40140b90",
+      "name": "Skill",
+      "amount": 0.1,
+      "operation": 1,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    },
+    {
+      "type": "skilltree:attribute",
+      "attribute": "irons_spellbooks:max_mana",
+      "id": "e3eb9f3b-730d-5061-a4a8-7f585e1917a1",
+      "name": "Skill",
+      "amount": 30.0,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:summoner_6",
+    "tt:artificer_5"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/notable.png",
+  "iconTexture": "skilltree:textures/icons/potion_indigo.png",
+  "borderTexture": "skilltree:textures/tooltip/notable.png",
+  "positionX": -187.113,
+  "positionY": -32.993,
+  "buttonSize": 20,
+  "isStartingPoint": false
+}

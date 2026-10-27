@@ -1,0 +1,55 @@
+{
+  "id": "tt:reaper_5",
+  "bonuses": [
+    {
+      "type": "skilltree:inflict_effect",
+      "chance": 0.15,
+      "max_stacks": 0,
+      "effect": "minecraft:weakness",
+      "duration": 80,
+      "amplifier": 0,
+      "event_listener": {
+        "damage_condition": {
+          "type": "skilltree:none"
+        },
+        "target": "enemy",
+        "type": "skilltree:attack"
+      }
+    },
+    {
+      "type": "skilltree:damage",
+      "amount": 0.06,
+      "operation": 1,
+      "player_multiplier": {
+        "type": "skilltree:none"
+      },
+      "enemy_multiplier": {
+        "type": "skilltree:none"
+      },
+      "player_condition": {
+        "type": "skilltree:none"
+      },
+      "damage_condition": {
+        "type": "skilltree:none"
+      },
+      "target_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:reaper_6",
+    "tt:summoner_5"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/notable.png",
+  "iconTexture": "skilltree:textures/icons/skull.png",
+  "borderTexture": "skilltree:textures/tooltip/notable.png",
+  "positionX": -164.545,
+  "positionY": 95.0,
+  "buttonSize": 20,
+  "isStartingPoint": false
+}

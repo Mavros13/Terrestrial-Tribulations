@@ -1,0 +1,48 @@
+{
+  "id": "tt:spellweaver_keystone",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "irons_spellbooks:cooldown_reduction",
+      "id": "fc3129ca-d3d3-54ad-8f7e-cb1c41f8e910",
+      "name": "Skill",
+      "amount": 0.12,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    },
+    {
+      "type": "skilltree:attribute",
+      "attribute": "irons_spellbooks:mana_regen",
+      "id": "3136cf82-ac15-5e71-bd84-7863322db782",
+      "name": "Skill",
+      "amount": 0.25,
+      "operation": 1,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skilltree:stat_value",
+      "statTypeId": "minecraft:used",
+      "statId": "minecraft:potion",
+      "minValue": 50
+    }
+  ],
+  "directConnections": [],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [
+    "keystone"
+  ],
+  "backgroundTexture": "skilltree:textures/icons/background/keystone.png",
+  "iconTexture": "skilltree:textures/icons/potion_cyan.png",
+  "borderTexture": "skilltree:textures/tooltip/keystone.png",
+  "positionX": -124.495,
+  "positionY": 342.048,
+  "buttonSize": 24,
+  "isStartingPoint": false
+}

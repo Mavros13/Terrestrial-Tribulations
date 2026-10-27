@@ -1,0 +1,57 @@
+{
+  "id": "tt:arcanist_keystone",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "irons_spellbooks:spell_power",
+      "id": "0d29cb81-0d0a-509f-85b7-306d9502525b",
+      "name": "Skill",
+      "amount": 0.15,
+      "operation": 1,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    },
+    {
+      "type": "skilltree:damage",
+      "amount": 0.1,
+      "operation": 1,
+      "player_multiplier": {
+        "type": "skilltree:none"
+      },
+      "enemy_multiplier": {
+        "type": "skilltree:none"
+      },
+      "player_condition": {
+        "type": "skilltree:none"
+      },
+      "damage_condition": {
+        "type": "skilltree:magic"
+      },
+      "target_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skilltree:stat_value",
+      "statTypeId": "minecraft:killed",
+      "statId": "minecraft:wither",
+      "minValue": 1
+    }
+  ],
+  "directConnections": [],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [
+    "keystone"
+  ],
+  "backgroundTexture": "skilltree:textures/icons/background/keystone.png",
+  "iconTexture": "skilltree:textures/icons/potion_blue_small.png",
+  "borderTexture": "skilltree:textures/tooltip/keystone.png",
+  "positionX": 124.495,
+  "positionY": 342.048,
+  "buttonSize": 24,
+  "isStartingPoint": false
+}

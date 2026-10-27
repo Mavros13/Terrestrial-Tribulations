@@ -1,0 +1,35 @@
+{
+  "id": "tt:reaper_2",
+  "bonuses": [
+    {
+      "type": "skilltree:inflict_effect",
+      "chance": 0.05,
+      "max_stacks": 0,
+      "effect": "minecraft:wither",
+      "duration": 60,
+      "amplifier": 0,
+      "event_listener": {
+        "damage_condition": {
+          "type": "skilltree:none"
+        },
+        "target": "enemy",
+        "type": "skilltree:attack"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:reaper_3",
+    "tt:reaper_qol"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/lesser.png",
+  "iconTexture": "skilltree:textures/icons/skull.png",
+  "borderTexture": "skilltree:textures/tooltip/lesser.png",
+  "positionX": -96.995,
+  "positionY": 56.0,
+  "buttonSize": 16,
+  "isStartingPoint": false
+}

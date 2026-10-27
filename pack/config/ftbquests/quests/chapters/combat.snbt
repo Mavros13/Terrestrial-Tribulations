@@ -4,7 +4,7 @@
 	order_index: 2
 	filename: "combat"
 	title: "Combat Fundamentals"
-	icon: "tt:rustbite_karambit"
+	icon: { Count: 1b, id: "tt:rustbite_karambit" }
 	default_quest_shape: ""
 	default_hide_dependency_lines: false
 	quest_links: [ ]

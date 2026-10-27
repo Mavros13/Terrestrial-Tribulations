@@ -1,0 +1,30 @@
+{
+  "id": "tt:summoner_4",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "irons_spellbooks:max_mana",
+      "id": "3ec9bddf-53ec-53d4-bcf3-f7a2228c8e01",
+      "name": "Skill",
+      "amount": 10.0,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:summoner_5"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/lesser.png",
+  "iconTexture": "skilltree:textures/icons/potion_indigo.png",
+  "borderTexture": "skilltree:textures/tooltip/lesser.png",
+  "positionX": -161.508,
+  "positionY": -28.478,
+  "buttonSize": 16,
+  "isStartingPoint": false
+}

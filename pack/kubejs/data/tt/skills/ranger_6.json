@@ -1,0 +1,30 @@
+{
+  "id": "tt:ranger_6",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.movement_speed",
+      "id": "9f444c1b-e3e0-5621-ac26-2470b475fd8c",
+      "name": "Skill",
+      "amount": 0.02,
+      "operation": 1,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:ranger_7"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/lesser.png",
+  "iconTexture": "skilltree:textures/icons/bow_gold.png",
+  "borderTexture": "skilltree:textures/tooltip/lesser.png",
+  "positionX": 187.061,
+  "positionY": 108.0,
+  "buttonSize": 16,
+  "isStartingPoint": false
+}

@@ -1,0 +1,48 @@
+{
+  "id": "tt:vanguard_keystone",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.armor",
+      "id": "6bee37cf-d753-5f4a-88e2-df1d974fe2bb",
+      "name": "Skill",
+      "amount": 6.0,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    },
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.knockback_resistance",
+      "id": "62a6b512-ff5d-5cad-8a62-a6a8bba76145",
+      "name": "Skill",
+      "amount": 0.3,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skilltree:stat_value",
+      "statTypeId": "minecraft:killed",
+      "statId": "minecraft:elder_guardian",
+      "minValue": 1
+    }
+  ],
+  "directConnections": [],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [
+    "keystone"
+  ],
+  "backgroundTexture": "skilltree:textures/icons/background/keystone.png",
+  "iconTexture": "skilltree:textures/icons/sword_iron.png",
+  "borderTexture": "skilltree:textures/tooltip/keystone.png",
+  "positionX": 0.0,
+  "positionY": -364.0,
+  "buttonSize": 24,
+  "isStartingPoint": false
+}

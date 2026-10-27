@@ -4,7 +4,7 @@
 	order_index: 0
 	filename: "welcome"
 	title: "Welcome to Velmora"
-	icon: "minecraft:book"
+	icon: { Count: 1b, id: "minecraft:book" }
 	default_quest_shape: ""
 	default_hide_dependency_lines: false
 	quest_links: [ ]

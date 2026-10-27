@@ -13,11 +13,11 @@
   ],
   "enabled": true,
   "name": "Fate",
-  "gui_title": {
-    "choose_origin": "Choose your Fate",
-    "view_origin": "Your Fate"
-  },
-  "allow_random": false,
   "missing_name": "Unbound",
-  "missing_description": "No Fate chosen."
+  "missing_description": "No Fate chosen.",
+  "allow_random": false,
+  "allow_random_unchoosable": false,
+  "random_exclusions": [],
+  "auto_choose": false,
+  "hidden": false
 }

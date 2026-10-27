@@ -1,0 +1,30 @@
+{
+  "id": "tt:duelist_start",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.attack_speed",
+      "id": "de587e29-6370-50b7-8691-6a258d9db4b1",
+      "name": "Skill",
+      "amount": 0.03,
+      "operation": 1,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:duelist_1"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/class.png",
+  "iconTexture": "skilltree:textures/icons/sword_gold.png",
+  "borderTexture": "skilltree:textures/tooltip/gateway.png",
+  "positionX": 38.567,
+  "positionY": -45.963,
+  "buttonSize": 24,
+  "isStartingPoint": true
+}

@@ -1,0 +1,30 @@
+{
+  "id": "tt:warden_4",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.knockback_resistance",
+      "id": "fca9b82b-8925-54d5-ad98-4dd0314c5c0c",
+      "name": "Skill",
+      "amount": 0.05,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [
+    "tt:warden_5"
+  ],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/lesser.png",
+  "iconTexture": "skilltree:textures/icons/chestplate_bronze_fur.png",
+  "borderTexture": "skilltree:textures/tooltip/lesser.png",
+  "positionX": 161.508,
+  "positionY": -28.478,
+  "buttonSize": 16,
+  "isStartingPoint": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": "tt:spellweaver_qol",
+  "bonuses": [
+    {
+      "type": "skilltree:gained_experience",
+      "multiplier": 0.15,
+      "experience_source": "ore",
+      "player_multiplier": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [],
+  "directConnections": [],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/notable.png",
+  "iconTexture": "skilltree:textures/icons/potion_yellow_big.png",
+  "borderTexture": "skilltree:textures/tooltip/notable.png",
+  "positionX": -54.585,
+  "positionY": 97.798,
+  "buttonSize": 20,
+  "isStartingPoint": false
+}

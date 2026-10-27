@@ -1,0 +1,23 @@
+{
+  "id": "tt:reaper_qol",
+  "bonuses": [
+    {
+      "type": "skilltree:loot_duplication",
+      "chance": 0.05,
+      "multiplier": 1.0,
+      "loot_type": "mobs"
+    }
+  ],
+  "requirements": [],
+  "directConnections": [],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [],
+  "backgroundTexture": "skilltree:textures/icons/background/notable.png",
+  "iconTexture": "skilltree:textures/icons/bone.png",
+  "borderTexture": "skilltree:textures/tooltip/notable.png",
+  "positionX": -104.678,
+  "positionY": 39.832,
+  "buttonSize": 20,
+  "isStartingPoint": false
+}

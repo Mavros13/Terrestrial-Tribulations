@@ -1,0 +1,37 @@
+{
+  "id": "tt:summoner_keystone",
+  "bonuses": [
+    {
+      "type": "skilltree:attribute",
+      "attribute": "irons_spellbooks:summon_damage",
+      "id": "c797f2c0-d908-5d61-a9e7-61a7413b43e8",
+      "name": "Skill",
+      "amount": 0.25,
+      "operation": 1,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skilltree:stat_value",
+      "statTypeId": "minecraft:killed",
+      "statId": "minecraft:ender_dragon",
+      "minValue": 1
+    }
+  ],
+  "directConnections": [],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [
+    "keystone"
+  ],
+  "backgroundTexture": "skilltree:textures/icons/background/keystone.png",
+  "iconTexture": "skilltree:textures/icons/potion_indigo.png",
+  "borderTexture": "skilltree:textures/tooltip/keystone.png",
+  "positionX": -358.47,
+  "positionY": -63.208,
+  "buttonSize": 24,
+  "isStartingPoint": false
+}

@@ -1,0 +1,57 @@
+{
+  "id": "tt:ranger_keystone",
+  "bonuses": [
+    {
+      "type": "skilltree:damage",
+      "amount": 0.2,
+      "operation": 1,
+      "player_multiplier": {
+        "type": "skilltree:none"
+      },
+      "enemy_multiplier": {
+        "type": "skilltree:none"
+      },
+      "player_condition": {
+        "type": "skilltree:none"
+      },
+      "damage_condition": {
+        "type": "skilltree:projectile"
+      },
+      "target_condition": {
+        "type": "skilltree:none"
+      }
+    },
+    {
+      "type": "skilltree:attribute",
+      "attribute": "minecraft:generic.luck",
+      "id": "c2be490e-8216-5351-9d23-366eaaca7fa5",
+      "name": "Skill",
+      "amount": 2.0,
+      "operation": 0,
+      "player_condition": {
+        "type": "skilltree:none"
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skilltree:stat_value",
+      "statTypeId": "minecraft:killed",
+      "statId": "minecraft:warden",
+      "minValue": 1
+    }
+  ],
+  "directConnections": [],
+  "longConnections": [],
+  "oneWayConnections": [],
+  "tags": [
+    "keystone"
+  ],
+  "backgroundTexture": "skilltree:textures/icons/background/keystone.png",
+  "iconTexture": "skilltree:textures/icons/bow_gold.png",
+  "borderTexture": "skilltree:textures/tooltip/keystone.png",
+  "positionX": 315.233,
+  "positionY": 182.0,
+  "buttonSize": 24,
+  "isStartingPoint": false
+}

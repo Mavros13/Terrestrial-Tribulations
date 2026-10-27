@@ -75,7 +75,7 @@ Duplicate check: primary/secondary pairs are all distinct. Trails are distinct h
 - **Acquisition:** crafted: 2 iron ingots + 1 leather + 1 stick (recipe unlocks after Q1.8).
 - **Fate synergy:** Duelist, Ranger (as a sidearm).
 
-### 3. Frontier tier filler
+### Tier 2 filler
 Vanilla iron and copper gear fills the rest of Tier 2 (re-themed with lore tooltips only).
 
 ## Tier 3 · Adventurer

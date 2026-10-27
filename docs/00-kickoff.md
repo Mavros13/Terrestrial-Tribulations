@@ -23,7 +23,9 @@
 | Java | 17 | 21 | 17 |
 | Risk | Older and frozen, but stable | Newer, some gaps | Missing two key magic mods |
 
-**Recommendation: Minecraft 1.20.1, Forge 47.4.x, Java 17.** This is the only target where *every* pillar (Rats, two magic systems, Palladium superheroes, Create 6, AE2, Better Combat, CTOV, FTB Quests) is likely available at once. Forge 1.20.1 is a dead end for new Minecraft features, so the migration target is **1.21.1 NeoForge**. That port should be reconsidered once Rats and the Palladium addons are confirmed there.
+> **SUPERSEDED by docs/01-mod-research.md: target is now 1.21.1 NeoForge, Java 21.**
+
+~~Recommendation: Minecraft 1.20.1, Forge 47.4.x, Java 17.~~ This is the only target where *every* pillar (Rats, two magic systems, Palladium superheroes, Create 6, AE2, Better Combat, CTOV, FTB Quests) is likely available at once. Forge 1.20.1 is a dead end for new Minecraft features, so the migration target is **1.21.1 NeoForge**. That port should be reconsidered once Rats and the Palladium addons are confirmed there.
 
 Limitations: there are no vanilla 1.21 features (trial chambers, mace). Some mods have stopped updating on 1.20.1. Custom Java mods will need a real port later, not just a recompile.
 

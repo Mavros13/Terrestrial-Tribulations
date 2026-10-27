@@ -1,8 +1,9 @@
-manifest_version: 0.1.0
-mc_version: "1.20.1"
-loader: forge
-loader_version: "47.4.x  # UNVERIFIED - pin exact build in M1"
-java: 17
+manifest_version: 0.2.0
+mc_version: "1.21.1"
+loader: neoforge
+loader_version: "21.1.x  # pin exact build in M1"
+java: 21
+# see docs/01-mod-research.md for evidence; all entries CANDIDATE until a launch test
 mods:
   - {id: jei, name: Just Enough Items, category: qol, status: CANDIDATE, side: both, perf_cost: low, purpose: recipe viewer}
   - {id: jade, name: Jade, category: qol, status: CANDIDATE, side: both, perf_cost: low}
@@ -10,7 +11,7 @@ mods:
   - {id: kubejs, name: KubeJS, category: library, status: CANDIDATE, side: both, deps: [rhino, architectury-api]}
   - {id: better-combat, name: Better Combat, category: combat, status: CANDIDATE, side: both, deps: [playeranimator, cloth-config]}
   - {id: combat-roll, name: Combat Roll, category: combat, status: CANDIDATE, side: both}
-  - {id: embeddium, name: Embeddium, category: perf, status: CANDIDATE, side: client}
+  - {id: sodium, name: Sodium (NeoForge), category: perf, status: CANDIDATE, side: client}
   - {id: modernfix, name: ModernFix, category: perf, status: CANDIDATE, side: both}
   - {id: ferrite-core, name: FerriteCore, category: perf, status: CANDIDATE, side: both}
   - {id: entityculling, name: EntityCulling, category: perf, status: CANDIDATE, side: client}
@@ -19,15 +20,29 @@ mods:
   - {id: ae2, name: Applied Energistics 2, category: tech, status: CANDIDATE, side: both}
   - {id: irons-spells-n-spellbooks, name: "Iron's Spells 'n Spellbooks", category: magic, status: CANDIDATE, side: both}
   - {id: ars-nouveau, name: Ars Nouveau, category: magic, status: CANDIDATE, side: both}
-  - {id: palladium, name: Palladium, category: combat, status: CANDIDATE, side: both, notes: superhero framework; addon packs TBD}
-  - {id: rats, name: Rats, category: tech, status: CANDIDATE, side: both, version: "8.1.3 (Rats-1.20.1-8.1.3.jar, CF file 5904296)", notes: "web-search evidence only; confirm in M1"}
+  - {id: palladium, name: Palladium, category: combat, status: REJECTED, notes: "no confirmed 1.21.1 build; superheroes via aetherfall-core (CUSTOM)"}
+  - {id: rats-reborn, name: "Rats: Reborn", category: tech, status: CANDIDATE, side: both, version: "9.0.0", notes: "community 1.21.1 port, first release; fallback CUSTOM Rat Guild"}
   - {id: curios, name: Curios API, category: library, status: CANDIDATE, side: both}
   - {id: elytra-slot, name: Elytra Slot, category: qol, status: CANDIDATE, side: both}
-  - {id: elytra-trims, name: Elytra Trims, category: cosmetic, status: CANDIDATE, side: client, deps: [kotlin-for-forge], notes: "Forge 3.x builds exist for 1.20.1 (e.g. 3.5.9); pick newest 3.x"}
+  - {id: elytra-trims, name: Elytra Trims, category: cosmetic, status: CANDIDATE, side: client, deps: [kotlin-for-forge], notes: "1.21.1 NeoForge availability not yet checked"}
   - {id: more-armor-trims, name: More Armor Trims, category: cosmetic, status: CANDIDATE, side: both}
   - {id: ct-overhaul-village, name: ChoiceTheorem's Overhauled Village, category: worldgen, status: CANDIDATE, side: both}
   - {id: enhanced-boss-bars, name: Enhanced Boss Bars, category: ui, status: CANDIDATE, side: client, notes: resource pack}
-  - {id: wakes, name: Wakes, category: cosmetic, status: CANDIDATE, side: client, notes: "Forge port exists: wakes-1.20.1-Forge-1.0.5.jar (Modrinth E0SdeAoH); confirm"}
+  - {id: wakes, name: Wakes, category: cosmetic, status: CANDIDATE, side: client, notes: "use Wakes Reforged on NeoForge"}
   - {id: epic-fight, name: Epic Fight, category: combat, status: REJECTED, notes: conflicts with Better Combat design}
   - {id: refined-storage, name: Refined Storage, category: tech, status: REJECTED, notes: redundant with AE2}
   - {id: aetherfall-core, name: Aetherfall Core, category: foundation, status: CUSTOM, source: custom, side: both}
+  - {id: easy-npc, name: Easy NPC, category: npc, status: CANDIDATE, side: both, version: "6.25.0", purpose: capital NPCs and dialogue}
+  - {id: brntalk, name: BRNTalk, category: npc, status: CANDIDATE, side: both, purpose: branching dialogue (evaluate vs Easy NPC)}
+  - {id: lendercataclysm, name: "L_Ender's Cataclysm", category: boss, status: CANDIDATE, side: both}
+  - {id: bosses-of-mass-destruction, name: Bosses of Mass Destruction, category: boss, status: CANDIDATE, side: both, version: "1.3.3"}
+  - {id: mowzies-mobs, name: "Mowzie's Mobs", category: boss, status: CANDIDATE, side: both, version: "1.8.2"}
+  - {id: the-twilight-forest, name: The Twilight Forest, category: dimension, status: CANDIDATE, side: both, version: "4.8.3344"}
+  - {id: aether, name: The Aether, category: dimension, status: CANDIDATE, side: both}
+  - {id: the-undergarden, name: The Undergarden, category: dimension, status: CANDIDATE, side: both, version: "0.9.4"}
+  - {id: deeperdarker, name: Deeper and Darker, category: dimension, status: CANDIDATE, side: both, version: "1.4.1"}
+  - {id: when-dungeons-arise, name: When Dungeons Arise, category: worldgen, status: CANDIDATE, side: both, version: "2.1.68"}
+  - {id: yungs-better-dungeons, name: "YUNG's Better Dungeons", category: worldgen, status: CANDIDATE, side: both}
+  - {id: simply-swords, name: Simply Swords, category: combat, status: CANDIDATE, side: both, version: "1.61.3"}
+  - {id: sophisticated-backpacks, name: Sophisticated Backpacks, category: qol, status: CANDIDATE, side: both}
+  - {id: create-quarry, name: "Create: Quarry", category: tech, status: CANDIDATE, side: both, notes: "quarry option A; alt Industrial Foregoing / Mekanism Digital Miner"}

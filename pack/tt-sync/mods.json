@@ -3,33 +3,630 @@
   "minecraft": "1.20.1",
   "loader": "forge",
   "mods": [
-    {"name": "Epic Fight",                  "match": "epicfight", "modrinth": "vu3NZ5Ma",                "curseforge": "epic-fight-mod",          "stage": "A"},
-    {"name": "Palladium",                   "match": "palladium", "modrinth": "threetag-palladium",        "curseforge": "threetag-palladium",      "stage": "A"},
-    {"name": "Iron's Spells 'n Spellbooks", "match": "irons_spellbooks|ironsspells|irons-spells", "modrinth": "irons-spells-n-spellbooks", "curseforge": "irons-spells-n-spellbooks","stage": "A"},
-    {"name": "Origins (Forge)",             "match": "origins", "modrinth": "origins-forge",             "curseforge": "origins-forge",           "stage": "A"},
-    {"name": "Passive Skill Tree",          "match": "passive_skill_tree|passiveskilltree-|passive-skill-tree", "modrinth": "passive-skill-tree",        "curseforge": "passive-skill-tree",      "stage": "A"},
-    {"name": "KubeJS",                      "match": "kubejs-forge", "modrinth": "kubejs",                    "curseforge": "kubejs",                  "stage": "A"},
-    {"name": "PassiveSTJS",                 "match": "passivestjs|passiveskilltreejs", "modrinth": "passiveskilltreejs",        "curseforge": "passiveskilltreejs",      "stage": "A"},
-    {"name": "Just Enough Items",           "match": "jei-", "modrinth": "u6dRKJwZ",                       "curseforge": "jei",                     "stage": "A"},
-    {"name": "Spark",                       "match": "spark-", "modrinth": "spark",                     "curseforge": "spark",                   "stage": "A"},
-
-    {"name": "FTB Quests",                  "match": "ftb-quests", "modrinth": "ftb-quests",                "curseforge": "ftb-quests-forge",        "stage": "B"},
-    {"name": "Easy NPC",                    "match": "easy_npc", "modrinth": "easy-npc",                  "curseforge": "easy-npc",                "stage": "B"},
-    {"name": "MineColonies",                "match": "minecolonies", "modrinth": "minecolonies",              "curseforge": "minecolonies",            "stage": "B"},
-    {"name": "Champions Unofficial",        "match": "champions", "modrinth": "champions-unofficial",      "curseforge": "champions-unofficial",    "stage": "B"},
-    {"name": "FTB Library",                 "match": "ftb-library",   "modrinth": "ftb-library",               "curseforge": "ftb-library-forge",       "stage": "B"},
-    {"name": "FTB Teams",                   "match": "ftb-teams",     "modrinth": "ftb-teams",                 "curseforge": "ftb-teams-forge",         "stage": "B"},
-    {"name": "Structurize (MineColonies)",  "match": "structurize",   "modrinth": "structurize",               "curseforge": "structurize",             "stage": "B"},
-    {"name": "MultiPiston (MineColonies)",  "match": "multipiston",   "modrinth": "multi-piston",              "curseforge": "multi-piston",            "stage": "B"},
-    {"name": "BlockUI (MineColonies)",      "match": "blockui",       "modrinth": "blockui",                   "curseforge": "blockui",                 "stage": "B"},
-    {"name": "Domum Ornamentum (MineColonies)", "match": "domum",     "modrinth": "domum-ornamentum",          "curseforge": "domum-ornamentum",        "stage": "B"},
-    {"name": "Jade",                        "match": "jade-", "modrinth": "nvQzSEkH",                      "curseforge": "jade",                    "stage": "B"},
-
-    {"name": "Epic Fight - Impactful",      "match": "impactful", "modrinth": "epic-fight-impactful",      "curseforge": "epic-fight-impactful",    "stage": "C"},
-    {"name": "NEpicloob NeonSword",         "match": "neonsword", "modrinth": "nepicloob-neonsword",       "curseforge": "nepicloob-neonsword",     "stage": "C"},
-    {"name": "Embeddium",                   "match": "embeddium", "modrinth": "embeddium",                 "curseforge": "embeddium",               "stage": "C"},
-    {"name": "ModernFix",                   "match": "modernfix", "modrinth": "modernfix",                 "curseforge": "modernfix",               "stage": "C"},
-    {"name": "FerriteCore",                 "match": "ferritecore", "modrinth": "ferrite-core",              "curseforge": "ferritecore",             "stage": "C"},
-    {"name": "Afterswing",                  "match": "afterswing|after-swing", "modrinth": "after-swing",               "curseforge": "after-swing",             "stage": "C", "disabled": true, "_note": "no Forge 1.20.1 file found; enable if one exists"}
+    {
+      "name": "Epic Fight",
+      "match": "epicfight",
+      "modrinth": "vu3NZ5Ma",
+      "curseforge": "epic-fight-mod",
+      "stage": "A"
+    },
+    {
+      "name": "Palladium",
+      "match": "palladium",
+      "modrinth": "threetag-palladium",
+      "curseforge": "threetag-palladium",
+      "stage": "A"
+    },
+    {
+      "name": "Iron's Spells 'n Spellbooks",
+      "match": "irons_spellbooks|ironsspells|irons-spells",
+      "modrinth": "irons-spells-n-spellbooks",
+      "curseforge": "irons-spells-n-spellbooks",
+      "stage": "A"
+    },
+    {
+      "name": "Origins (Forge)",
+      "match": "origins",
+      "modrinth": "origins-forge",
+      "curseforge": "origins-forge",
+      "stage": "A"
+    },
+    {
+      "name": "Passive Skill Tree",
+      "match": "passive_skill_tree|passiveskilltree-|passive-skill-tree",
+      "modrinth": "passive-skill-tree",
+      "curseforge": "passive-skill-tree",
+      "stage": "A"
+    },
+    {
+      "name": "KubeJS",
+      "match": "kubejs-forge",
+      "modrinth": "kubejs",
+      "curseforge": "kubejs",
+      "stage": "A"
+    },
+    {
+      "name": "PassiveSTJS",
+      "match": "passivestjs|passiveskilltreejs",
+      "modrinth": "passiveskilltreejs",
+      "curseforge": "passiveskilltreejs",
+      "stage": "A"
+    },
+    {
+      "name": "Just Enough Items",
+      "match": "jei-",
+      "modrinth": "u6dRKJwZ",
+      "curseforge": "jei",
+      "stage": "A"
+    },
+    {
+      "name": "Spark",
+      "match": "spark-",
+      "modrinth": "spark",
+      "curseforge": "spark",
+      "stage": "A"
+    },
+    {
+      "name": "FTB Quests",
+      "match": "ftb-quests",
+      "modrinth": "ftb-quests",
+      "curseforge": "ftb-quests-forge",
+      "stage": "B"
+    },
+    {
+      "name": "Easy NPC",
+      "match": "easy_npc",
+      "modrinth": "easy-npc",
+      "curseforge": "easy-npc",
+      "stage": "B"
+    },
+    {
+      "name": "MineColonies",
+      "match": "minecolonies",
+      "modrinth": "minecolonies",
+      "curseforge": "minecolonies",
+      "stage": "B"
+    },
+    {
+      "name": "Champions Unofficial",
+      "match": "champions",
+      "modrinth": "champions-unofficial",
+      "curseforge": "champions-unofficial",
+      "stage": "B"
+    },
+    {
+      "name": "FTB Library",
+      "match": "ftb-library",
+      "modrinth": "ftb-library",
+      "curseforge": "ftb-library-forge",
+      "stage": "B"
+    },
+    {
+      "name": "FTB Teams",
+      "match": "ftb-teams",
+      "modrinth": "ftb-teams",
+      "curseforge": "ftb-teams-forge",
+      "stage": "B"
+    },
+    {
+      "name": "Structurize (MineColonies)",
+      "match": "structurize",
+      "modrinth": "structurize",
+      "curseforge": "structurize",
+      "stage": "B"
+    },
+    {
+      "name": "MultiPiston (MineColonies)",
+      "match": "multipiston",
+      "modrinth": "multi-piston",
+      "curseforge": "multi-piston",
+      "stage": "B"
+    },
+    {
+      "name": "BlockUI (MineColonies)",
+      "match": "blockui",
+      "modrinth": "blockui",
+      "curseforge": "blockui",
+      "stage": "B"
+    },
+    {
+      "name": "Domum Ornamentum (MineColonies)",
+      "match": "domum",
+      "modrinth": "domum-ornamentum",
+      "curseforge": "domum-ornamentum",
+      "stage": "B"
+    },
+    {
+      "name": "Jade",
+      "match": "jade-",
+      "modrinth": "nvQzSEkH",
+      "curseforge": "jade",
+      "stage": "B"
+    },
+    {
+      "name": "Epic Fight - Impactful",
+      "match": "impactful",
+      "modrinth": "epic-fight-impactful",
+      "curseforge": "epic-fight-impactful",
+      "stage": "C"
+    },
+    {
+      "name": "NEpicloob NeonSword",
+      "match": "neonsword",
+      "modrinth": "nepicloob-neonsword",
+      "curseforge": "nepicloob-neonsword",
+      "stage": "C"
+    },
+    {
+      "name": "Embeddium",
+      "match": "embeddium",
+      "modrinth": "embeddium",
+      "curseforge": "embeddium",
+      "stage": "C"
+    },
+    {
+      "name": "ModernFix",
+      "match": "modernfix",
+      "modrinth": "modernfix",
+      "curseforge": "modernfix",
+      "stage": "C"
+    },
+    {
+      "name": "FerriteCore",
+      "match": "ferritecore",
+      "modrinth": "ferrite-core",
+      "curseforge": "ferritecore",
+      "stage": "C"
+    },
+    {
+      "name": "Afterswing",
+      "match": "afterswing|after-swing",
+      "modrinth": "after-swing",
+      "curseforge": "after-swing",
+      "stage": "C",
+      "disabled": true,
+      "_note": "no Forge 1.20.1 file found; enable if one exists"
+    },
+    {
+      "name": "Create",
+      "match": "create",
+      "modrinth": "create",
+      "curseforge": "create",
+      "stage": "D"
+    },
+    {
+      "name": "Create: Steam 'n' Rails",
+      "match": "railways",
+      "modrinth": "railways",
+      "curseforge": "create-steam-n-rails",
+      "stage": "D"
+    },
+    {
+      "name": "Create Crafts & Additions",
+      "match": "createaddition",
+      "modrinth": "createaddition",
+      "curseforge": "createaddition",
+      "stage": "D"
+    },
+    {
+      "name": "Create Enchantment Industry",
+      "match": "enchantment_industry",
+      "modrinth": "create-enchantment-industry",
+      "curseforge": "create-enchantment-industry",
+      "stage": "D"
+    },
+    {
+      "name": "Applied Energistics 2",
+      "match": "appliedenergistics2",
+      "modrinth": "ae2",
+      "curseforge": "applied-energistics-2",
+      "stage": "D"
+    },
+    {
+      "name": "ExtendedAE",
+      "match": "extendedae",
+      "modrinth": "extendedae",
+      "curseforge": "extendedae",
+      "stage": "D"
+    },
+    {
+      "name": "Mekanism",
+      "match": "mekanism-1",
+      "modrinth": "mekanism",
+      "curseforge": "mekanism",
+      "stage": "D"
+    },
+    {
+      "name": "Mekanism Generators",
+      "match": "mekanismgenerators",
+      "modrinth": "mekanism-generators",
+      "curseforge": "mekanism-generators",
+      "stage": "D"
+    },
+    {
+      "name": "Rats",
+      "match": "rats-",
+      "modrinth": "rats",
+      "curseforge": "rats",
+      "stage": "D"
+    },
+    {
+      "name": "Ars Nouveau",
+      "match": "ars_nouveau",
+      "modrinth": "ars-nouveau",
+      "curseforge": "ars-nouveau",
+      "stage": "D"
+    },
+    {
+      "name": "L_Ender's Cataclysm",
+      "match": "cataclysm",
+      "modrinth": "l_enders-cataclysm",
+      "curseforge": "lendercataclysm",
+      "stage": "D"
+    },
+    {
+      "name": "Mowzie's Mobs",
+      "match": "mowziesmobs",
+      "modrinth": "mowzies-mobs",
+      "curseforge": "mowzies-mobs",
+      "stage": "D"
+    },
+    {
+      "name": "Bosses of Mass Destruction",
+      "match": "bomd",
+      "modrinth": "bosses-of-mass-destruction",
+      "curseforge": "bosses-of-mass-destruction-forge",
+      "stage": "D"
+    },
+    {
+      "name": "Alex's Caves",
+      "match": "alexscaves",
+      "modrinth": "alexs-caves",
+      "curseforge": "alexs-caves",
+      "stage": "D"
+    },
+    {
+      "name": "The Twilight Forest",
+      "match": "twilightforest",
+      "modrinth": "the-twilight-forest",
+      "curseforge": "the-twilight-forest",
+      "stage": "D"
+    },
+    {
+      "name": "The Aether",
+      "match": "aether-",
+      "modrinth": "aether",
+      "curseforge": "aether",
+      "stage": "D"
+    },
+    {
+      "name": "The Undergarden",
+      "match": "undergarden",
+      "modrinth": "the-undergarden",
+      "curseforge": "the-undergarden",
+      "stage": "D"
+    },
+    {
+      "name": "Deeper and Darker",
+      "match": "deeperdarker",
+      "modrinth": "deeperdarker",
+      "curseforge": "deeperdarker",
+      "stage": "D"
+    },
+    {
+      "name": "Blue Skies",
+      "match": "blue_skies",
+      "modrinth": "blue-skies",
+      "curseforge": "blue-skies",
+      "stage": "D"
+    },
+    {
+      "name": "Simply Swords",
+      "match": "simplyswords",
+      "modrinth": "simply-swords",
+      "curseforge": "simply-swords",
+      "stage": "D"
+    },
+    {
+      "name": "Marium's Soulslike Weaponry",
+      "match": "soulsweapons",
+      "modrinth": "mariums-soulslike-weaponry",
+      "curseforge": "mariums-soulslike-weaponry",
+      "stage": "D"
+    },
+    {
+      "name": "Apotheosis",
+      "match": "apotheosis",
+      "modrinth": "apotheosis",
+      "curseforge": "apotheosis",
+      "stage": "D"
+    },
+    {
+      "name": "Armor Set Bonuses",
+      "match": "armorsetbonuses",
+      "modrinth": "armor-set-bonuses",
+      "curseforge": "armor-set-bonuses",
+      "stage": "D"
+    },
+    {
+      "name": "Botz Mob Leveling",
+      "match": "botz",
+      "modrinth": "botz-mob-leveling",
+      "curseforge": "botz-mob-leveling",
+      "stage": "D"
+    },
+    {
+      "name": "Curios API",
+      "match": "curios",
+      "modrinth": "curios",
+      "curseforge": "curios",
+      "stage": "D"
+    },
+    {
+      "name": "Artifacts",
+      "match": "artifacts",
+      "modrinth": "artifacts",
+      "curseforge": "artifacts",
+      "stage": "D"
+    },
+    {
+      "name": "Relicera",
+      "match": "relicera",
+      "modrinth": "relicera",
+      "curseforge": "relicera-accessories-and-relics",
+      "stage": "D"
+    },
+    {
+      "name": "Elytra Slot",
+      "match": "elytraslot",
+      "modrinth": "elytra-slot",
+      "curseforge": "elytra-slot",
+      "stage": "D"
+    },
+    {
+      "name": "Elytra Trims",
+      "match": "elytratrims",
+      "modrinth": "elytra-trims",
+      "curseforge": "elytra-trims",
+      "stage": "D"
+    },
+    {
+      "name": "Goner's Armor Trims",
+      "match": "goner",
+      "modrinth": "goners-armor-trims",
+      "curseforge": "goners-armor-trims",
+      "stage": "D"
+    },
+    {
+      "name": "Cosmetic Armor Reworked",
+      "match": "cosmeticarmor",
+      "modrinth": "cosmetic-armor-reworked",
+      "curseforge": "cosmetic-armor-reworked",
+      "stage": "D"
+    },
+    {
+      "name": "Terralith",
+      "match": "terralith",
+      "modrinth": "terralith",
+      "curseforge": "terralith",
+      "stage": "D"
+    },
+    {
+      "name": "YUNG's Better Dungeons",
+      "match": "betterdungeons",
+      "modrinth": "yungs-better-dungeons",
+      "curseforge": "yungs-better-dungeons",
+      "stage": "D"
+    },
+    {
+      "name": "YUNG's Better Mineshafts",
+      "match": "bettermineshafts",
+      "modrinth": "yungs-better-mineshafts",
+      "curseforge": "yungs-better-mineshafts",
+      "stage": "D"
+    },
+    {
+      "name": "YUNG's Better Strongholds",
+      "match": "betterstrongholds",
+      "modrinth": "yungs-better-strongholds",
+      "curseforge": "yungs-better-strongholds",
+      "stage": "D"
+    },
+    {
+      "name": "YUNG's Better End Island",
+      "match": "betterendisland",
+      "modrinth": "yungs-better-end-island",
+      "curseforge": "yungs-better-end-island",
+      "stage": "D"
+    },
+    {
+      "name": "ChoiceTheorem's Overhauled Village",
+      "match": "ctov",
+      "modrinth": "ct-overhaul-village",
+      "curseforge": "choicetheorems-overhauled-village",
+      "stage": "D"
+    },
+    {
+      "name": "Dungeons and Taverns",
+      "match": "dungeons-and-taverns",
+      "modrinth": "dungeons-and-taverns",
+      "curseforge": "dungeon-and-taverns",
+      "stage": "D"
+    },
+    {
+      "name": "When Dungeons Arise",
+      "match": "dungeons_arise",
+      "modrinth": "when-dungeons-arise",
+      "curseforge": "when-dungeons-arise",
+      "stage": "D"
+    },
+    {
+      "name": "Incendium",
+      "match": "incendium",
+      "modrinth": "incendium",
+      "curseforge": "incendium",
+      "stage": "D"
+    },
+    {
+      "name": "Xaero's Minimap",
+      "match": "xaerominimap",
+      "modrinth": "xaeros-minimap",
+      "curseforge": "xaeros-minimap",
+      "stage": "D"
+    },
+    {
+      "name": "Xaero's World Map",
+      "match": "xaeroworldmap",
+      "modrinth": "xaeros-world-map",
+      "curseforge": "xaeros-world-map",
+      "stage": "D"
+    },
+    {
+      "name": "Mouse Tweaks",
+      "match": "mousetweaks",
+      "modrinth": "mouse-tweaks",
+      "curseforge": "mouse-tweaks",
+      "stage": "D"
+    },
+    {
+      "name": "Quark",
+      "match": "quark-",
+      "modrinth": "quark",
+      "curseforge": "quark",
+      "stage": "D"
+    },
+    {
+      "name": "AppleSkin",
+      "match": "appleskin",
+      "modrinth": "appleskin",
+      "curseforge": "appleskin",
+      "stage": "D"
+    },
+    {
+      "name": "FTB Ultimine",
+      "match": "ftb-ultimine",
+      "modrinth": "ftb-ultimine",
+      "curseforge": "ftb-ultimine-forge",
+      "stage": "D"
+    },
+    {
+      "name": "Sophisticated Backpacks",
+      "match": "sophisticatedbackpacks",
+      "modrinth": "sophisticated-backpacks",
+      "curseforge": "sophisticated-backpacks",
+      "stage": "D"
+    },
+    {
+      "name": "Construction Wand",
+      "match": "constructionwand",
+      "modrinth": "construction-wand",
+      "curseforge": "construction-wand",
+      "stage": "D"
+    },
+    {
+      "name": "Building Gadgets 2",
+      "match": "buildinggadgets2",
+      "modrinth": "building-gadgets-2",
+      "curseforge": "building-gadgets-2",
+      "stage": "D"
+    },
+    {
+      "name": "Handcrafted",
+      "match": "handcrafted",
+      "modrinth": "handcrafted",
+      "curseforge": "handcrafted",
+      "stage": "D"
+    },
+    {
+      "name": "Supplementaries",
+      "match": "supplementaries",
+      "modrinth": "supplementaries",
+      "curseforge": "supplementaries",
+      "stage": "D"
+    },
+    {
+      "name": "Catalogue",
+      "match": "catalogue",
+      "modrinth": "catalogue",
+      "curseforge": "catalogue",
+      "stage": "D"
+    },
+    {
+      "name": "Configured",
+      "match": "configured",
+      "modrinth": "configured",
+      "curseforge": "configured",
+      "stage": "D"
+    },
+    {
+      "name": "FancyMenu",
+      "match": "fancymenu",
+      "modrinth": "fancymenu",
+      "curseforge": "fancymenu",
+      "stage": "D"
+    },
+    {
+      "name": "Legendary Tooltips",
+      "match": "legendarytooltips",
+      "modrinth": "legendary-tooltips",
+      "curseforge": "legendary-tooltips",
+      "stage": "D"
+    },
+    {
+      "name": "AmbientSounds",
+      "match": "ambientsounds",
+      "modrinth": "ambientsounds",
+      "curseforge": "ambientsounds",
+      "stage": "D"
+    },
+    {
+      "name": "Sound Physics Remastered",
+      "match": "sound-physics",
+      "modrinth": "sound-physics-remastered",
+      "curseforge": "sound-physics-remastered",
+      "stage": "D"
+    },
+    {
+      "name": "Wakes (Forge port)",
+      "match": "wakes",
+      "modrinth": "E0SdeAoH",
+      "curseforge": "wakes-reforged",
+      "stage": "D"
+    },
+    {
+      "name": "Oculus",
+      "match": "oculus",
+      "modrinth": "oculus",
+      "curseforge": "oculus",
+      "stage": "D"
+    },
+    {
+      "name": "EntityCulling",
+      "match": "entityculling",
+      "modrinth": "entityculling",
+      "curseforge": "entityculling",
+      "stage": "D"
+    },
+    {
+      "name": "ImmediatelyFast",
+      "match": "immediatelyfast",
+      "modrinth": "immediatelyfast",
+      "curseforge": "immediatelyfast",
+      "stage": "D"
+    },
+    {
+      "name": "Canary",
+      "match": "canary",
+      "modrinth": "canary",
+      "curseforge": "canary",
+      "stage": "D"
+    },
+    {
+      "name": "Chunky",
+      "match": "chunky",
+      "modrinth": "chunky",
+      "curseforge": "chunky-pregenerator-forge",
+      "stage": "D"
+    }
   ]
 }

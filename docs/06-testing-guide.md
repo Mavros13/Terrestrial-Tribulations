@@ -11,7 +11,7 @@ See the README: Prism → Add Instance → Import → paste the zip URL. Memory 
 3. Java: Prism needs **Java 17** for 1.20.1. If it asks, let it auto-download Java 17, or select it in Settings → Java.
 
 ## Stages (only if something crashes)
-`minecraft/tt-sync/stage.txt` controls which mods load: `A` = core only, `B` = + story and city, `C` = everything (the default). Change it to `A`, launch, then `B`, then `C` to find which group breaks. ModSync removes the jars it installed for higher stages automatically.
+`minecraft/tt-sync/stage.txt` controls which mods load: `A` = core only, `B` = + story and city, `C` = all of Test Build 1 (the default), `D` = Test Build 2 (adds world generation, dimensions, bosses, Create/AE2/Mekanism, magic, accessories, quality of life; see docs/07). Change it to `A`, launch, then `B`, then `C` to find which group breaks. ModSync removes the jars it installed for higher stages automatically.
 
 ## What our own content should show
 | Check | Expected |

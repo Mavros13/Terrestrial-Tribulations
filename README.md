@@ -3,17 +3,16 @@
 A story-driven fantasy action-RPG modpack for **Minecraft 1.20.1 (Forge 47.4.18)**: Epic Fight combat, Palladium superheroes, Iron's Spells, Origins and Fates, Passive Skill Tree, MineColonies capital, FTB Quests campaign.
 
 ## Play Test Build 1 (Prism Launcher)
-**Option A: import by URL (easiest)**
+**Import by URL (fully automatic)**
 1. Prism → **Add Instance** → **Import**.
-2. Paste: `https://github.com/Mavros13/Terrestrial-Tribulations/raw/main/dist/Terrestrial-Tribulations-TestBuild1.zip`
-3. OK, then **Launch**.
+2. Paste: `https://github.com/Mavros13/Terrestrial-Tribulations/raw/main/dist/Terrestrial-Tribulations-TestBuild1-CurseForge.zip`
+3. OK. Prism downloads every mod from CurseForge itself (no manual downloads). Set memory to 8 GB (Edit → Settings → Java), then **Launch**.
 
-**Option B: drag and drop.** Download the zip above and drag it onto the Prism window.
+This is a CurseForge-format modpack zip (`manifest.json` + `overrides/`), built by `tools/build_curseforge.py` from `modpack/curseforge-mods.json`. The CurseForge app can import the same file. Gods and Heroes (Palladium) is Modrinth-only, so add it from Prism's Modrinth tab if wanted.
 
-On the first launch, **TT ModSync** runs before the game starts. It downloads every mod (and its dependencies) from Modrinth into the instance's `mods/` folder. This takes a few minutes the first time.
-If any mod is only on CurseForge, a window pops up and offers to open the download pages. Drop those files into the `mods/` folder (Prism: right-click the instance → **Folder**), then launch again.
+**Fallback: ModSync instance.** `…/dist/Terrestrial-Tribulations-TestBuild1.zip` downloads mods from Modrinth at launch (**TT ModSync**); CurseForge-only mods are then added by hand through Prism's CurseForge tab. Its log is `minecraft/tt-sync/sync-report.txt`.
 
-After launching, read `minecraft/tt-sync/sync-report.txt` in the instance folder. What to test: [docs/06-testing-guide.md](docs/06-testing-guide.md).
+What to test: [docs/06-testing-guide.md](docs/06-testing-guide.md).
 
 ## Repository map
 | Path | What |
@@ -23,7 +22,7 @@ After launching, read `minecraft/tt-sync/sync-report.txt` in the instance folder
 | `design/npcs/`, `design/skills/`, `design/bridge/` | NPC dialogue scripts, custom skill-tree design, tt_bridge mod spec |
 | `pack/` | The instance's `minecraft/` folder: KubeJS scripts and assets, Origins/Fates datapack, FTB Quests, ModSync |
 | `prism/` | Prism instance files |
-| `tools/` | Generators: `build_content.py`, `gen_quests.py`, `build_prism.py` (rebuilds the zip) |
+| `tools/` | Generators: `build_content.py`, `gen_quests.py`, `build_prism.py` (rebuilds the zips), `build_curseforge.py` |
 | `manifest/` | Mod manifest and research status |
 
 Rebuild after changes: `python3 tools/build_prism.py`

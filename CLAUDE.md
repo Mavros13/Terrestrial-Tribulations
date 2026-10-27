@@ -3,7 +3,7 @@
 ## Where things live
 - **GitHub is the single source of truth:** `Mavros13/Terrestrial-Tribulations` (branch `main`). Every pack file, doc and tool lives here. Commit and push all work.
 - **The owner's laptop is for research only.** Use its browser (CurseForge, Modrinth, mod wikis) to verify mods, versions, file names, item and entity IDs. **Don't store pack files on the laptop** beyond a temporary clone you delete when done. Write findings into the repo (usually `docs/07-full-mod-list.md`, `pack/tt-sync/mods.json`, or `docs/research/`).
-- The owner plays and tests on a **home desktop with Prism Launcher**, importing `dist/Terrestrial-Tribulations-TestBuild1.zip` by its raw GitHub URL. Prism has **both Modrinth and CurseForge built in** (Edit instance → Mods → Download mods), so CurseForge-only mods are added from inside Prism, not by visiting the website.
+- The owner plays and tests on a **home desktop with Prism Launcher**, importing `dist/Terrestrial-Tribulations-TestBuild1-CurseForge.zip` by its raw GitHub URL (CurseForge-format pack: Prism downloads every mod itself). Prism has **both Modrinth and CurseForge built in** (Edit instance → Mods → Download mods), so CurseForge-only mods are added from inside Prism, not by visiting the website.
 
 ## Decisions already made (don't re-litigate)
 - **Minecraft 1.20.1, Forge 47.4.x (never 47.2.0), Java 17.** Chosen for Palladium.
@@ -17,6 +17,7 @@
 
 ## How the repo works
 - `tools/build_prism.py` regenerates everything and builds `dist/…TestBuild1.zip`. It runs `build_content.py` (weapons from `design/weapons/weapons.json`), `gen_quests.py`, `gen_origins.py` and `gen_skilltree.py`. **Edit the generators or their data, never the generated files.**
+- **Two mod lists, keep them in step:** `modpack/curseforge-mods.json` (CurseForge project + file IDs, every library listed explicitly, used by `tools/build_curseforge.py` for the main CurseForge-format zips) and `pack/tt-sync/mods.json` (Modrinth, for the fallback ModSync instance). When a mod is added or changed, update both.
 - `pack/` is the instance's `minecraft/` folder. `pack/tt-sync/ModSync` downloads mods from Modrinth at launch, based on `pack/tt-sync/mods.json`. Stages: A/B/C = Test Build 1, D = Test Build 2.
 - Formats were checked against each mod's source on GitHub (see the docstrings in the tools). Keep doing that, or verify on the official pages from the laptop.
 

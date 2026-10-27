@@ -4,6 +4,7 @@
 1. Regenerates content (build_content.py, gen_quests.py).
 2. Compiles pack/tt-sync/ModSync.java into ModSync.jar (Java 17 bytecode).
 3. Zips prism/instance.cfg + prism/mmc-pack.json + pack/ (as the instance's minecraft/ folder).
+4. Builds the CurseForge-format zips (build_curseforge.py).
 """
 import os, shutil, subprocess, sys, tempfile, zipfile
 
@@ -41,6 +42,7 @@ def main():
                 full = os.path.join(dp, f)
                 z.write(full, f"{NAME}/minecraft/" + os.path.relpath(full, base).replace(os.sep, "/"))
     print("Built", out, os.path.getsize(out), "bytes")
+    run(sys.executable, os.path.join(ROOT, "tools", "build_curseforge.py"))  # CurseForge-format zips (Prism imports these too)
 
 
 if __name__ == "__main__":

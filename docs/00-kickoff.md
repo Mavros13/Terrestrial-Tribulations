@@ -230,7 +230,7 @@ Branching: each main chapter has one critical path (marked with a gold frame) an
 | M0 | This kickoff | Docs, repo layout, manifest format ✅ |
 | M1 | Verify the manifest | Every core mod checked against its CurseForge or Modrinth file for 1.20.1 Forge |
 | M2 | **Baseline instance** | Forge, performance mods, JEI, Jade, FTB Quests, KubeJS, Better Combat and Combat Roll. Launch and create a world |
-| M3 | `aetherfall-core` skeleton | Gradle (ForgeGradle 6, Java 17), levels, XP, command, capability, sync packet |
+| M3 | MCreator workspace + Blockbench pipeline (see docs/02-toolchain.md) | Workspace `terrestrial_tribulations`, GeckoLib Reborn, one animated test mob end to end |
 | M4 | **Vertical slice** | Ch1–2 quests (about 15), first boss, level 1→10, Riftstep ability, city stage 1→2 |
 | M5 | Worldgen pass | Terrain, structures, pre-generation, performance capture |
 | M6 | Fates and talents UI | |

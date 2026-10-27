@@ -13,7 +13,7 @@
 - Capital city: MineColonies (Town Hall level = city stage) + Easy NPC for story characters.
 - Quarry, power and pipes: Mekanism (Digital Miner). Every weapon has a unique colour scheme and a unique ability.
 - **Quest book: don't expand it until the mod list is final** (owner's instruction). It has 17 quests now.
-- Tools: MCreator only for the small `tt_bridge` mod (`design/bridge/`); Blockbench for weapon models.
+- Tools: MCreator only for the small `tt_bridge` mod (`design/bridge/`); Blockbench for weapon models (briefs and pipeline: `blockbench/specs/weapons.md`; drop exports in `blockbench/exports/weapons/` and the build installs them).
 
 ## How the repo works
 - `tools/build_prism.py` regenerates everything and builds `dist/…TestBuild1.zip`. It runs `build_content.py` (weapons from `design/weapons/weapons.json`), `gen_quests.py`, `gen_origins.py` and `gen_skilltree.py`. **Edit the generators or their data, never the generated files.**

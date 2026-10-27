@@ -7,15 +7,24 @@ Outputs (all under pack/kubejs/):
   assets/tt/lang/en_us.json                 names coloured by rarity
   assets/tt/textures/item/<id>.png          16x16 placeholder textures in each weapon's palette
   data/tt/capabilities/weapons/<id>.json    Epic Fight weapon capabilities (moveset + trail colour)
+  assets/tt/models/item/<id>.json, <id>_3d.json, textures/item/<id>_3d.png
+                                            only once a Blockbench model exists (see install_models below)
+
+Hand-made art (briefs in blockbench/specs/weapons.md) is picked up automatically:
+  blockbench/textures/weapons/<id>_icon.png   replaces the 16x16 placeholder inventory icon
+  blockbench/exports/weapons/<id>.json        Blockbench "Java Block/Item" export (the 3D held model)
+  blockbench/textures/weapons/<id>.png        its single texture (+ optional .png.mcmeta for animation)
 
 Usage: python3 tools/build_content.py
 """
 import json
 import os
+import shutil
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KJS = os.path.join(ROOT, "pack", "kubejs")
+BB = os.path.join(ROOT, "blockbench")
 RARITY_COLOR = {"common": "§f", "uncommon": "§e", "rare": "§b", "epic": "§d", "legendary": "§6", "mythic": "§c"}
 VANILLA_RARITY = {"common": "common", "uncommon": "uncommon", "rare": "rare", "epic": "epic", "legendary": "epic", "mythic": "epic"}
 TIER_NAMES = ["", "Primitive", "Reinforced", "Adventurer", "Veteran", "Elite", "Relic", "Legendary", "Mythic"]
@@ -123,6 +132,10 @@ def shape(family):
 
 
 def make_texture(w):
+    icon = os.path.join(BB, "textures", "weapons", w["id"] + "_icon.png")
+    if os.path.exists(icon):
+        shutil.copyfile(icon, os.path.join(KJS, "assets", "tt", "textures", "item", w["id"] + ".png"))
+        return
     p, s, a = hexrgb(w["primary"]), hexrgb(w["secondary"]), hexrgb(w["accent"])
     colors = {"P": p, "L": shade(p, 1.35) if sum(p) < 600 else shade(p, 0.85), "S": s, "A": a}
     px = shape(w["family"])
@@ -163,6 +176,43 @@ def make_materials():
                 img.putpixel((x, 6), (163, 22, 43, 255)); img.putpixel((x, 9), (120, 100, 80, 255))
         path = os.path.join(KJS, "assets", "tt", "textures", "item", name + ".png")
         img.save(path)
+
+
+# ---------- 3D held models ----------
+def install_models(weapons):
+    """Wrap each finished Blockbench export in Forge's separate_transforms loader: 3D model in hand and on the
+    ground, the flat icon in inventories and item frames. Elements named glow* get full brightness through
+    Forge's per-element forge_data (verify in the first test). Removes stale outputs when a source is deleted."""
+    models = os.path.join(KJS, "assets", "tt", "models", "item")
+    textures = os.path.join(KJS, "assets", "tt", "textures", "item")
+    count = 0
+    for w in weapons:
+        i = w["id"]
+        src = os.path.join(BB, "exports", "weapons", i + ".json")
+        tex = os.path.join(BB, "textures", "weapons", i + ".png")
+        outs = [os.path.join(models, i + ".json"), os.path.join(models, i + "_3d.json"),
+                os.path.join(textures, i + "_3d.png"), os.path.join(textures, i + "_3d.png.mcmeta")]
+        if not (os.path.exists(src) and os.path.exists(tex)):
+            for o in outs:
+                if os.path.exists(o):
+                    os.remove(o)
+            continue
+        m = json.load(open(src, encoding="utf-8"))
+        m.pop("credit", None)
+        m["textures"] = {k: "tt:item/" + i + "_3d" for k in (m.get("textures") or {"0": None})}
+        m["textures"]["particle"] = "tt:item/" + i + "_3d"
+        for e in m.get("elements", []):
+            if str(e.get("name", "")).lower().startswith("glow"):
+                e["forge_data"] = {"block_light": 15, "sky_light": 15}
+        write(outs[1], json.dumps(m, indent=1) + "\n")
+        shutil.copyfile(tex, outs[2])
+        if os.path.exists(tex + ".mcmeta"):
+            shutil.copyfile(tex + ".mcmeta", outs[3])
+        flat = {"parent": "minecraft:item/handheld", "textures": {"layer0": "tt:item/" + i}}
+        write(outs[0], json.dumps({"loader": "forge:separate_transforms", "base": {"parent": "tt:item/" + i + "_3d"},
+                                   "perspectives": {"gui": flat, "fixed": flat}}, indent=2) + "\n")
+        count += 1
+    return count
 
 
 # ---------- scripts ----------
@@ -214,7 +264,8 @@ def main():
                "_tt_trail_color": w["trail"]}
         write(os.path.join(KJS, "data", "tt", "capabilities", "weapons", w["id"] + ".json"), json.dumps(cap, indent=2) + "\n")
     make_materials()
-    print(f"Generated content for {len(weapons)} weapons.")
+    n = install_models(weapons)
+    print(f"Generated content for {len(weapons)} weapons ({n} with 3D models).")
 
 
 if __name__ == "__main__":

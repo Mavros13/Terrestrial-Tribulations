@@ -1,0 +1,29 @@
+{
+  "_comment": "Terrestrial Tribulations mod list. stage A/B/C = Test Build 1 stages (see docs/05). 'modrinth' = Modrinth slug (auto-download incl. required deps); 'curseforge' = fallback for manual download. Set \"disabled\": true to skip a mod.",
+  "minecraft": "1.20.1",
+  "loader": "forge",
+  "mods": [
+    {"name": "Epic Fight",                  "match": "epicfight", "modrinth": "epic-fight",                "curseforge": "epic-fight-mod",          "stage": "A"},
+    {"name": "Palladium",                   "match": "palladium", "modrinth": "threetag-palladium",        "curseforge": "threetag-palladium",      "stage": "A"},
+    {"name": "Iron's Spells 'n Spellbooks", "match": "irons_spellbooks|ironsspells|irons-spells", "modrinth": "irons-spells-n-spellbooks", "curseforge": "irons-spells-n-spellbooks","stage": "A"},
+    {"name": "Origins (Forge)",             "match": "origins", "modrinth": "origins-forge",             "curseforge": "origins-forge",           "stage": "A"},
+    {"name": "Passive Skill Tree",          "match": "passive_skill_tree|passiveskilltree-|passive-skill-tree", "modrinth": "passive-skill-tree",        "curseforge": "passive-skill-tree",      "stage": "A"},
+    {"name": "KubeJS",                      "match": "kubejs-forge", "modrinth": "kubejs",                    "curseforge": "kubejs",                  "stage": "A"},
+    {"name": "PassiveSTJS",                 "match": "passivestjs|passiveskilltreejs", "modrinth": "passiveskilltreejs",        "curseforge": "passiveskilltreejs",      "stage": "A"},
+    {"name": "Just Enough Items",           "match": "jei-", "modrinth": "jei",                       "curseforge": "jei",                     "stage": "A"},
+    {"name": "Spark",                       "match": "spark-", "modrinth": "spark",                     "curseforge": "spark",                   "stage": "A"},
+
+    {"name": "FTB Quests",                  "match": "ftb-quests", "modrinth": "ftb-quests",                "curseforge": "ftb-quests-forge",        "stage": "B"},
+    {"name": "Easy NPC",                    "match": "easy_npc", "modrinth": "easy-npc",                  "curseforge": "easy-npc",                "stage": "B"},
+    {"name": "MineColonies",                "match": "minecolonies", "modrinth": "minecolonies",              "curseforge": "minecolonies",            "stage": "B"},
+    {"name": "Champions Unofficial",        "match": "champions", "modrinth": "champions-unofficial",      "curseforge": "champions-unofficial",    "stage": "B"},
+    {"name": "Jade",                        "match": "jade-", "modrinth": "jade",                      "curseforge": "jade",                    "stage": "B"},
+
+    {"name": "Epic Fight - Impactful",      "match": "impactful", "modrinth": "epic-fight-impactful",      "curseforge": "epic-fight-impactful",    "stage": "C"},
+    {"name": "NEpicloob NeonSword",         "match": "neonsword", "modrinth": "nepicloob-neonsword",       "curseforge": "nepicloob-neonsword",     "stage": "C"},
+    {"name": "Embeddium",                   "match": "embeddium", "modrinth": "embeddium",                 "curseforge": "embeddium",               "stage": "C"},
+    {"name": "ModernFix",                   "match": "modernfix", "modrinth": "modernfix",                 "curseforge": "modernfix",               "stage": "C"},
+    {"name": "FerriteCore",                 "match": "ferritecore", "modrinth": "ferrite-core",              "curseforge": "ferritecore",             "stage": "C"},
+    {"name": "Afterswing",                  "match": "afterswing|after-swing", "modrinth": "after-swing",               "curseforge": "after-swing",             "stage": "C", "disabled": true, "_note": "no Forge 1.20.1 file found; enable if one exists"}
+  ]
+}

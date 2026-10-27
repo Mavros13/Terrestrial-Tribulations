@@ -1,0 +1,11 @@
+{
+  "type": "epicfight:longsword",
+  "attributes": {
+    "common": {
+      "armor_negation": 17.5,
+      "impact": 1.45,
+      "max_strikes": 1
+    }
+  },
+  "_tt_trail_color": "#4DFF4D"
+}

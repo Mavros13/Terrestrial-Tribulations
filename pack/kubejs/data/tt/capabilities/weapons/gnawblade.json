@@ -1,0 +1,11 @@
+{
+  "type": "epicfight:dagger",
+  "attributes": {
+    "common": {
+      "armor_negation": 7.5,
+      "impact": 0.85,
+      "max_strikes": 1
+    }
+  },
+  "_tt_trail_color": "#FFD94A"
+}

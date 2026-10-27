@@ -1,0 +1,11 @@
+{
+  "type": "epicfight:spear",
+  "attributes": {
+    "common": {
+      "armor_negation": 10.0,
+      "impact": 1.0,
+      "max_strikes": 1
+    }
+  },
+  "_tt_trail_color": "#2E8B57"
+}

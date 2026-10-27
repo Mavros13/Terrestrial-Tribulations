@@ -1,0 +1,11 @@
+{
+  "type": "epicfight:sword",
+  "attributes": {
+    "common": {
+      "armor_negation": 20.0,
+      "impact": 1.6,
+      "max_strikes": 1
+    }
+  },
+  "_tt_trail_color": "#FFF8EA"
+}

@@ -11,3 +11,5 @@
 - **Fate synergy:**
 - **Blockbench model:** file, polygon budget, texture size
 - **Test notes:**
+- **Colour scheme (must be unique, see ROSTER registry):** primary / secondary / accent / trail hex
+- **Implementation path:** EDP / KJS / BRIDGE

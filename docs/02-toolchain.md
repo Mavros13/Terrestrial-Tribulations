@@ -3,10 +3,10 @@
 ## Decision
 | Tool | Version | Role |
 |---|---|---|
-| **MCreator** | 2026.2 (or newer), NeoForge 1.21.1 generator | Primary mod-development environment for content: items, weapons, armour, blocks, mobs and bosses, recipes, structures, procedures, GUIs, dimensions |
-| **GeckoLib Reborn** (MCreator plugin) | v7.4.2+, supports NeoForge 1.21.1 in MCreator 2026.2 | Animated entities, armour and items inside MCreator |
+| **MCreator** | 2026.2 (or newer), **Forge 1.20.1** generator | Primary mod-development environment for content: items, weapons, armour, blocks, mobs and bosses, recipes, structures, procedures, GUIs, dimensions |
+| **GeckoLib Reborn** (MCreator plugin) | v7.4.2+, supports Forge 1.20.1 in MCreator 2026.2 | Animated entities, armour and items inside MCreator |
 | **Blockbench** | latest + **GeckoLib Models & Animations** plugin | Every 3D model and animation (keyframed bones) for mobs, bosses, suits, weapons and NPCs |
-| Hand-written Java (custom code inside MCreator, or a small companion mod) | NeoForge 21.1.x, Java 21 | Systems MCreator's visual editor can't express cleanly: talent-tree UI, server-synced progression, enemy scaling formulas, mythic affixes |
+| Hand-written Java (custom code inside MCreator, or a small companion mod) | Forge 47.4.x, Java 17 | Systems MCreator's visual editor can't express cleanly: talent-tree UI, server-synced progression, enemy scaling formulas, mythic affixes |
 
 All of these are CANDIDATE until they are installed and a test build launches.
 
@@ -30,5 +30,5 @@ All of these are CANDIDATE until they are installed and a test build launches.
 
 ## Impact on the plan
 - The custom mod `aetherfall-core` becomes the MCreator workspace `terrestrial_tribulations`.
-- Custom superhero suits: GeckoLib armour built in Blockbench and imported through MCreator. Flight and energy-blast abilities are MCreator procedures, plus custom code where needed.
+- Superheroes come from **Palladium** and its addons, with no custom hero system. MCreator handles only progression gating around them (recipes, quest unlocks).
 - M3 changes from "scaffold the Gradle project" to **"set up the MCreator workspace + Blockbench pipeline, then build one test element end to end."**

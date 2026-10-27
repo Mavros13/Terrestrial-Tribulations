@@ -55,23 +55,25 @@
 | Origins-style | ✅ | ✅ Neo Origins 1.3.0 | Custom Fates planned anyway |
 | Sodium-family rendering | Embeddium | ✅ Sodium 0.8.12 + Iris for NeoForge | 1.21.1 renders better |
 
-## 3. Decision: **Minecraft 1.21.1 + NeoForge (21.1.x), Java 21**
+## 3. Decision: **Minecraft 1.20.1 + Forge (47.4.x), Java 17** (owner's call, 2026-10-27)
 
-Why it beats 1.20.1:
-1. It is the **newest version where Create exists**, and you said newer is better when it works.
-2. Every story-critical mod has a 1.21.1 build, and the dialogue tooling is **better** there (Easy NPC conditional dialogs, BRNTalk).
-3. It has more quarry options, a better renderer (real Sodium and Iris), and active maintenance. Many 1.20.1 mods are winding down.
-4. Iron's Spells addons are now mostly on 1.21.1.
+The project owner chose 1.20.1 so the pack can use **Palladium** for superheroes, with **no custom hero system**. Palladium 4.5.9 (Aug 2026) is actively maintained on 1.20.1 and has about 60 addons (Modrinth collection "Palladium 1.20.1 Addons").
 
-**What we give up, and how we cover it:**
-| Gap | Plan |
+What 1.20.1 changes compared with the 1.21.1 analysis:
+| Area | Result on 1.20.1 Forge |
 |---|---|
-| **Palladium superheroes** | Build our own **suit-and-powers system in `aetherfall-core`** (GeckoLib suits, flight, energy blasts, gated by story). This was already a custom-development candidate for gating. Evaluate *Marvel Superheroes* as a supplementary source of suits; it is pre-release and uses Marvel IP, so it would be optional. |
-| Original Rats | Use **Rats: Reborn** and test it carefully. If it is unstable, fall back to a custom "Rat Guild" worker system. |
-| Alex's Caves | Use the unofficial port, or drop it. It is not story-critical. |
-| Blue Skies | Unknown. We still have five or more dimensions without it (Twilight, Aether, Undergarden, Deeper & Darker, plus a custom Convergence dimension). |
+| Superheroes | ✅ Palladium + addons (choose packs with flight, suits and animations; test each one) |
+| Rats | ✅ Official Rats 8.1.3 (better than the 1.21.1 community port) |
+| Alex's Caves | ✅ Official |
+| Create 6, AE2, Iron's Spells 3.15.6, Ars Nouveau, Better Combat, FTB Quests, Easy NPC 6.25.0 | ✅ |
+| Rendering | Embeddium + Oculus instead of Sodium + Iris |
+| Dialogue | Easy NPC (6.25.0, Jun 2026). BRNTalk availability on 1.20.1 not yet checked |
+| Quarry | Mekanism Digital Miner / RFTools Builder / Industrial Foregoing (1.20.1 builds to verify) |
+| MCreator | GeckoLib Reborn supports **Forge 1.20.1** in MCreator 2026.2 ✅ |
 
-**When to reverse this decision:** if a confirmed Palladium 1.21.1 build with addons appears before M4, nothing changes except dropping the custom suits. If Rats: Reborn *and* the custom suits both prove infeasible, revisit 1.20.1.
+Accepted downsides: no 1.21 vanilla features, and some mods are winding down on 1.20.1. A later port to 1.21.1 is possible only if Palladium ships there (its "Palladium 5 / 1.21+" is planned, not released).
+
+Addon selection rule: prefer addons that fit the story (Iron Choir tech suits, Shard-Born powers) and are themed generically. Licensed-IP hero packs (Marvel/DC) are optional and kept off the main progression path.
 
 ## 4. Still to verify (not searched yet)
 Artifacts, Relics, More Armor Trims, Elytra Trims (1.21.1), Building Gadgets 2, Construction Wand, Powah, Pipez, Create addons (Steam 'n' Rails, Crafts & Additions, Enchantment Industry), ExtendedAE, Incendium, Nullscape, Terralith or Tectonic, Towns & Towers, Dungeons & Taverns, Blue Skies, AmbientSounds, Sound Physics Remastered, FancyMenu, Legendary Tooltips, Enhanced Boss Bars, Cosmetic Armor, Xaero's, JEI, Jade, Quark, FTB Ultimine, Mouse Tweaks, Leaves Be Gone, ModernFix, FerriteCore, EntityCulling, ImmediatelyFast, Spark, Chunky, GeckoLib, the CreeperMax123 projects.

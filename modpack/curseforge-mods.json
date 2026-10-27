@@ -116,6 +116,37 @@
       "stage": "C"
     },
     {
+      "name": "Epic Fight - EDP (Extended Datapacks)",
+      "projectID": 1309609,
+      "fileID": 9121028,
+      "file": "EF-ExtendedDatapacks-2.5.5-1.20.1+[Forge].jar",
+      "stage": "D"
+    },
+    {
+      "name": "SL Library",
+      "projectID": 1497274,
+      "fileID": 9121010,
+      "file": "SL-Library-1.7-1.20.1+[Forge].jar",
+      "stage": "D",
+      "dependency": true
+    },
+    {
+      "name": "SLM: Epic Fight",
+      "projectID": 1499933,
+      "fileID": 9120966,
+      "file": "SLM-EpicFight-1.4-1.20.1+[Forge].jar",
+      "stage": "D",
+      "dependency": true
+    },
+    {
+      "name": "SLM: Shader",
+      "projectID": 1497920,
+      "fileID": 9202391,
+      "file": "SLM-Shaders-3.0.1-1.20.1+[Forge].jar",
+      "stage": "D",
+      "dependency": true
+    },
+    {
       "name": "NEpicloob NeonSword",
       "projectID": 1397222,
       "fileID": 7367457,

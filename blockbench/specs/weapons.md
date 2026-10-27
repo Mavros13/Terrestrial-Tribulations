@@ -27,6 +27,7 @@ Source of truth for names, colours and abilities: `design/weapons/ROSTER.md` and
 - In the Display tab, start every slot from Blockbench's *handheld* preset. Then adjust only `thirdperson_righthand` (Epic Fight uses it), `firstperson_righthand` and `ground`.
 - **Left hand:** leave it on mirror, except for karambits (see §2).
 - Record the final Display values in each brief's *Display* line once tested, so the next weapon in that family can start from them.
+- **Swing trail:** Epic Fight draws it from the hand joint using the family's preset length (`TRAIL_POS` in `tools/build_content.py`). If a finished model is much longer or shorter than its family, note the new blade length in its brief so the trail's `end_pos` can be changed to match.
 
 ### Budgets
 | Tier | Elements (cubes) | Texture | Glow elements |

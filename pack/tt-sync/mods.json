@@ -163,6 +163,42 @@
       "_note": "Modrinth copy stops at 20.6.4 (2023), too old for Epic Fight 20.14. Use impactful-20.14.2.jar from CurseForge; after 20.11 it also needs its resource pack + datapack (see its page)."
     },
     {
+      "name": "Epic Fight - EDP (Extended Datapacks)",
+      "match": "extendeddatapacks",
+      "modrinth": "",
+      "curseforge": "epic-fight-edp",
+      "stage": "D",
+      "_source": "curseforge-only",
+      "_note": "CurseForge-only (not on Modrinth). Custom Epic Fight innate skills, animation events (teleport, laser, command, invulnerability) and weapon categories from JSON; see docs/research/2026-10-27-epic-fight-data-formats.md."
+    },
+    {
+      "name": "SL Library",
+      "match": "sl-library",
+      "modrinth": "",
+      "curseforge": "sl-library",
+      "stage": "D",
+      "_source": "curseforge-only",
+      "_note": "Required by EDP."
+    },
+    {
+      "name": "SLM: Epic Fight",
+      "match": "slm-epicfight",
+      "modrinth": "",
+      "curseforge": "slm-epic-fight",
+      "stage": "D",
+      "_source": "curseforge-only",
+      "_note": "Required by EDP."
+    },
+    {
+      "name": "SLM: Shader",
+      "match": "slm-shaders",
+      "modrinth": "",
+      "curseforge": "slm-shader",
+      "stage": "D",
+      "_source": "curseforge-only",
+      "_note": "Required by EDP. Works with or without Oculus."
+    },
+    {
       "name": "NEpicloob NeonSword",
       "match": "neonsword",
       "modrinth": "nepicloob-neonsword",

@@ -37,7 +37,7 @@ Stages in `pack/tt-sync/mods.json`: **A/B/C = Test Build 1**, **D = Test Build 2
 | Epic Fight | ✅ format · 🔎 20.14.x | Our 22 melee weapons have capability files |
 | Epic Fight - Impactful | 🔎 CurseForge-only | Hit-stop and screen shake. Modrinth copy is 2023 (too old); use impactful-20.14.2 from CurseForge, plus its resource pack and datapack |
 | NEpicloob NeonSword | 🔎 | Author's range: Epic Fight ≤20.9.7 or ≥20.11.2, so 20.14 is supported |
-| Epic Fight EDP (Extended Datapacks) | 🔎 ⚠️ | 1.20.1 backport may lag; needed for data-driven weapon skills |
+| Epic Fight EDP (Extended Datapacks) | ✅ CurseForge-only, stage D | 2.5.5 for 1.20.1 Forge (Oct 2026). Needs SL Library, SLM: Epic Fight and SLM: Shader (all added). Custom innate skills from JSON; see docs/research/2026-10-27-epic-fight-data-formats.md |
 | CompatLink - Epic Fight Weapons Compat | 🔎 | Needs Epic Fight 20.14.17+ |
 | Simply Swords | ❔ | Loot weapons |
 | Marium's Soulslike Weaponry | 🔎 1.4.8 | Legendary loot weapons |

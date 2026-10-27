@@ -1,9 +1,21 @@
 // Terrestrial Tribulations: weapon abilities that KubeJS can do on its own (impl = KJS in weapons.json).
-// Abilities marked EDP (Epic Fight skill data) or BRIDGE (tt_bridge mod) are NOT here.
+// Abilities marked BRIDGE (tt_bridge mod) are NOT here.
+// EDP weapons: Epic Fight data can only assign its built-in innate skills (no new skills), so each EDP weapon keeps
+// its family's built-in innate skill and the custom effect is added here as a "rider" on hits that skill deals.
+// Epic Fight tags those hits with the runtime damage tag epicfight:weapon_innate (EpicFightDamageSource.is, 1.20.1
+// source). See docs/research/2026-10-27-epic-fight-data-formats.md.
 // DRAFT: untested in-game. Every handler is wrapped so that one failure can't break the others.
 
 const TT_FOOD = { 'minecraft:cow': 'minecraft:beef', 'minecraft:pig': 'minecraft:porkchop', 'minecraft:sheep': 'minecraft:mutton',
   'minecraft:chicken': 'minecraft:chicken', 'minecraft:rabbit': 'minecraft:rabbit' }
+
+const $TagKey = Java.loadClass('net.minecraft.tags.TagKey')
+const $Registries = Java.loadClass('net.minecraft.core.registries.Registries')
+const $ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
+const $MobEffects = Java.loadClass('net.minecraft.world.effect.MobEffects')
+const TT_INNATE = $TagKey.create($Registries.DAMAGE_TYPE, new $ResourceLocation('epicfight', 'weapon_innate'))
+// Entity IDs that count as "Hollowed" for Soul Severance. Empty until the boss and mob roles are final.
+const TT_HOLLOWED = []
 
 function ttSafe(name, fn) {
   try { fn() } catch (e) { console.error(`[TT] ability ${name} failed: ${e}`) }
@@ -65,6 +77,47 @@ EntityEvents.hurt(event => {
     if (count == 3 && now >= pd.getLong('tt_gloom_cd')) { p.heal(6); pd.putLong('tt_gloom_cd', now + 40); pd.putBoolean('tt_gloom_on', true) }
     else if (count > 3 && pd.getBoolean('tt_gloom_on') && pd.getLong('tt_gloom_cd') == now + 40) p.heal(2)
   })
+
+  // ----- EDP riders: only on hits dealt by the weapon's Epic Fight innate skill -----
+  const innate = event.source.is(TT_INNATE)
+
+  // Ember Hook (Ashfang Karambit, innate = Eviscerate): fire 3s; the next normal hit within 2s deals +50% (the "crit")
+  if (held == 'tt:ashfang_karambit') ttSafe('ember_hook', () => {
+    const pd = p.persistentData
+    if (innate) { t.setSecondsOnFire(3); pd.putLong('tt_ember_until', now + 40) }
+    else if (now <= pd.getLong('tt_ember_until')) { pd.putLong('tt_ember_until', 0); t.attack(event.damage * 0.5) }
+  })
+
+  // Rallying Strike (Accord Longsword, innate = Sharp Stab / Liechtenauer): Strength I + Resistance I 6s to you, players
+  // and tamed animals within 8 blocks. Once per second so multi-hit skills don't stack. MineColonies guards: tt_bridge.
+  if (held == 'tt:accord_longsword' && innate) ttSafe('rallying_strike', () => {
+    const pd = p.persistentData
+    if (now < pd.getLong('tt_rally_cd')) return
+    pd.putLong('tt_rally_cd', now + 20)
+    p.level.getEntitiesWithin(p.boundingBox.inflate(8)).forEach(a => {
+      if (a.isLiving() && (a == p || a.isPlayer() || (a.owner && a.owner == p))) {
+        a.potionEffects.add('minecraft:strength', 120, 0)
+        a.potionEffects.add('minecraft:resistance', 120, 0)
+      }
+    })
+  })
+
+  // Briar Line (Thornwatch Halberd, innate = Heartpiercer / Grasping Spire): Slowness II 5s + 2 damage per second for 5s.
+  // The persistent 6-block thorn line on the ground needs tt_bridge.
+  if (held == 'tt:thornwatch_halberd' && innate) ttSafe('briar_line', () => {
+    t.potionEffects.add('minecraft:slowness', 100, 1)
+    for (let i = 1; i <= 5; i++) event.server.scheduleInTicks(20 * i, () => { if (t.isAlive()) t.attack(2) })
+  })
+
+  // Soul Severance (Hollowbane Tachi, innate = Rushing Tempo): strip invisibility; +100% vs entities in TT_HOLLOWED.
+  if (held == 'tt:hollowbane_tachi' && innate) ttSafe('soul_severance', () => {
+    t.removeEffect($MobEffects.INVISIBILITY)
+    if (TT_HOLLOWED.includes(String(t.type))) t.attack(event.damage)
+  })
+
+  // Flame Wake (Cinder Crown, innate = Steel Whirlwind): every enemy the skill hits burns 5s. The 10-block flame line
+  // on the ground needs tt_bridge.
+  if (held == 'tt:cinder_crown' && innate) ttSafe('flame_wake', () => t.setSecondsOnFire(5))
 
   // Pack Mark (Gnawblade): mark target 8s (glowing). Rat focus-fire is added by tt_bridge once Rats is in the pack.
   if (held == 'tt:gnawblade') ttSafe('pack_mark', () => {

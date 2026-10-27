@@ -6,7 +6,8 @@ Outputs (all under pack/kubejs/):
   client_scripts/tt_tooltips.generated.js   ability, lore and stat tooltips
   assets/tt/lang/en_us.json                 names coloured by rarity
   assets/tt/textures/item/<id>.png          16x16 placeholder textures in each weapon's palette
-  data/tt/capabilities/weapons/<id>.json    Epic Fight weapon capabilities (moveset + trail colour)
+  data/tt/capabilities/weapons/<id>.json    Epic Fight weapon capabilities (moveset preset + attributes)
+  assets/tt/item_skins/<id>.json            Epic Fight swing trail (colour, length along the blade)
   assets/tt/models/item/<id>.json, <id>_3d.json, textures/item/<id>_3d.png
                                             only once a Blockbench model exists (see install_models below)
 
@@ -27,6 +28,10 @@ KJS = os.path.join(ROOT, "pack", "kubejs")
 BB = os.path.join(ROOT, "blockbench")
 RARITY_COLOR = {"common": "§f", "uncommon": "§e", "rare": "§b", "epic": "§d", "legendary": "§6", "mythic": "§c"}
 VANILLA_RARITY = {"common": "common", "uncommon": "uncommon", "rare": "rare", "epic": "epic", "legendary": "epic", "mythic": "epic"}
+# Epic Fight's built-in innate skill for each preset (WeaponCapabilityPresets, 1.20.1): one-hand / two-hand style.
+INNATE = {"sword": "Sweeping Edge", "dagger": "Eviscerate", "longsword": "Sharp Stab", "tachi": "Rushing Tempo",
+          "greatsword": "Steel Whirlwind", "spear": "Heartpiercer", "axe": "The Guillotine", "fist": "Relentless Combo",
+          "staff": "Heartpiercer"}
 TIER_NAMES = ["", "Primitive", "Reinforced", "Adventurer", "Veteran", "Elite", "Relic", "Legendary", "Mythic"]
 # Epic Fight weapon categories. Staff uses the spear moveset until Iron's Spells integration is done.
 EF_TYPE = {"sword": "sword", "dagger": "dagger", "longsword": "longsword", "tachi": "tachi", "greatsword": "greatsword",
@@ -178,6 +183,26 @@ def make_materials():
         img.save(path)
 
 
+# Epic Fight trail positions in the Tool_R joint (blocks; -Z runs along the blade), copied from Epic Fight's own
+# item_skins for each preset (assets/epicfight/item_skins/iron_*.json and minecraft/item_skins/iron_sword|iron_axe.json,
+# 1.20.1 branch, 20.14.15.1-20.15.1). "fist" has no Epic Fight reference and is a guess.
+TRAIL_POS = {"sword": ([0.0, 0.1, -0.1], [0.0, -0.05, -0.95]), "dagger": ([0.0, 0.0, -0.2], [0.0, 0.1, -0.7]),
+             "longsword": ([0.0, 0.0, -0.2], [0.0, 0.2, -1.5]), "tachi": ([0.0, 0.0, -0.2], [0.0, 0.4, -1.75]),
+             "greatsword": ([0.0, 0.0, -0.2], [0.0, -0.24, -1.8]), "spear": ([0.0, 0.2, -0.9], [0.0, 0.25, -2.0]),
+             "axe": ([0.0, -0.15, -0.35], [0.0, -0.15, -0.7]), "fist": ([0.0, 0.0, 0.0], [0.0, 0.0, -0.3])}
+
+
+def item_skin(w):
+    """Epic Fight item skin (client resource, read by ItemSkinsReloadListener from assets/<ns>/item_skins/<item>.json).
+    Trails of Elite (tier 5) and up are drawn at full brightness."""
+    begin, end = TRAIL_POS[w["ef"] if w["ef"] in TRAIL_POS else EF_TYPE[w["ef"]]]
+    trail = {"color": list(hexrgb(w["trail"])), "begin_pos": begin, "end_pos": end, "lifetime": 4, "interpolations": 5,
+             "texture_path": "epicfight:textures/particle/swing_trail.png", "particle_type": "epicfight:swing_trail"}
+    if w["tier"] >= 5:
+        trail.update({"block_light": 15, "sky_light": 15})
+    return {"trail": trail}
+
+
 # ---------- 3D held models ----------
 def install_models(weapons):
     """Wrap each finished Blockbench export in Forge's separate_transforms loader: 3D model in hand and on the
@@ -247,7 +272,7 @@ def main():
         if w["impl"] == "BRIDGE":
             lines.append("§c[Prototype] Ability arrives with the tt_bridge mod")
         elif w["impl"] == "EDP":
-            lines.append("§c[Prototype] Epic Fight skill data pending")
+            lines.append("§c[Prototype] Ability rides on the " + INNATE[w["ef"]] + " innate skill until its own EDP skill exists")
         tips.append(f"  event.add('tt:{w['id']}', {json.dumps(lines, ensure_ascii=False)})")
     lang.update({"item.tt.bone_shard": "Bone Shard", "item.tt.hollow_fang": "Hollow Fang",
                  "item.tt.crown_shard_fragment": "§6Crown Shard Fragment", "item.tt.emberhold_charter": "§eEmberhold Charter"})
@@ -260,9 +285,9 @@ def main():
             continue
         cap = {"type": "epicfight:" + EF_TYPE[w["ef"]],
                "attributes": {"common": {"armor_negation": round(w["tier"] * 2.5, 1), "impact": round(0.4 + w["tier"] * 0.15, 2),
-                                         "max_strikes": 3 if w["ef"] in ("greatsword",) else 1}},
-               "_tt_trail_color": w["trail"]}
+                                         "max_strikes": 3 if w["ef"] in ("greatsword",) else 1}}}
         write(os.path.join(KJS, "data", "tt", "capabilities", "weapons", w["id"] + ".json"), json.dumps(cap, indent=2) + "\n")
+        write(os.path.join(KJS, "assets", "tt", "item_skins", w["id"] + ".json"), json.dumps(item_skin(w), indent=2) + "\n")
     make_materials()
     n = install_models(weapons)
     print(f"Generated content for {len(weapons)} weapons ({n} with 3D models).")

@@ -10,7 +10,7 @@ Owner decisions on 2026-10-27: keep Epic Fight; add sword trails and Afterswing;
 | **Afterswing** (paperdev_) | Swing trails, hit and critical sparks, draw-weapon flourish; works with Epic Fight | ⚠️ **Listed for Fabric and NeoForge only (latest file 1.21.1 NeoForge, Oct 2026). I could not find a Forge 1.20.1 file.** Check its Files tab at home. If there is none: use Epic Fight - Impactful + NeonSword instead, or ask the author about a 1.20.1 Forge build |
 | Epic Fight - Impactful | Hit stop and screen shake | CANDIDATE |
 | CompatLink - Epic Fight Weapons Compat | Gives modded weapons Epic Fight movesets and trails | CANDIDATE (needs Epic Fight 20.14.17+) |
-| Epic Fight EDP (Extended Datapacks) | Data-driven innate skills and weapon types | CANDIDATE. The 1.20.1 backport may lag behind NeoForge |
+| Epic Fight EDP (Extended Datapacks) | Data-driven innate skills, animation events and weapon categories | ✅ 2.5.5 for 1.20.1 Forge, added at stage D (docs/research/2026-10-27-epic-fight-data-formats.md) |
 | **Karambit Vault x Punchy** | 3D karambit models, inspect animations, sounds | ⚠️ It is a **resource pack that replaces sword visuals**, not a weapon mod. Its "Punchy" animations target the **Punchy mod, which is Fabric-only**, and renamable variants need **CIT Resewn (Fabric)**. On Forge we keep its 3D models but lose Punchy's first-person animations unless a Forge equivalent is found. Reusing its models on *our own* new karambit items needs the author's permission. See §2 |
 
 ## 2. Weapons

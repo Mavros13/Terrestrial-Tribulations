@@ -10,6 +10,8 @@ A small MCreator workspace (`mcreator/terrestrial_tribulations`, mod ID `tt_brid
 ## 2. Weapon abilities marked BRIDGE in weapons.json
 | Weapon | Ability | MCreator approach |
 |---|---|---|
+| Rustbite Karambit | Reversal Cut | Subscribe to `PlayerEventListener.EventType.DODGE_SUCCESS_EVENT` on the ServerPlayerPatch; store a 1 s window; next hit +2 damage and a short stun |
+| Wroughtnaut Bulwark | Iron Recoil | Listen for a successful parry with this item held; reflect the blocked damage to the attacker and stun it 1 s |
 | Cogwright Breaker | Pressure Release | Item NBT counter, sneak-attack procedure, AoE knock-up |
 | Rootstring Bow | Seedshot | Custom ranged item; arrow-hit procedure places temporary briar blocks |
 | Prism Ward Staff | Prism Ward | On spell cast (Iron's Spells event) → reflect-shield effect |

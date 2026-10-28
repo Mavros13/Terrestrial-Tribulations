@@ -9,7 +9,7 @@ ItemEvents.toolTierRegistry(event => {
   event.add('tt_thornwatch_halberd', t => { t.uses = 1100; t.speed = 6.0; t.attackDamageBonus = 0.0; t.level = 2; t.enchantmentValue = 14; t.repairIngredient = 'minecraft:iron_ingot' })
   event.add('tt_cogwright_breaker', t => { t.uses = 1400; t.speed = 6.0; t.attackDamageBonus = 0.0; t.level = 2; t.enchantmentValue = 14; t.repairIngredient = 'minecraft:iron_ingot' })
   event.add('tt_prism_ward_staff', t => { t.uses = 1000; t.speed = 6.0; t.attackDamageBonus = 0.0; t.level = 2; t.enchantmentValue = 14; t.repairIngredient = 'minecraft:iron_ingot' })
-  event.add('tt_hollowbane_tachi', t => { t.uses = 1800; t.speed = 6.0; t.attackDamageBonus = 0.0; t.level = 2; t.enchantmentValue = 15; t.repairIngredient = 'minecraft:iron_ingot' })
+  event.add('tt_hollowbane_tachi', t => { t.uses = 1800; t.speed = 6.0; t.attackDamageBonus = 0.0; t.level = 2; t.enchantmentValue = 14; t.repairIngredient = 'minecraft:iron_ingot' })
   event.add('tt_cinder_crown', t => { t.uses = 2000; t.speed = 6.0; t.attackDamageBonus = 0.0; t.level = 2; t.enchantmentValue = 15; t.repairIngredient = 'minecraft:iron_ingot' })
   event.add('tt_frostmaw_fang', t => { t.uses = 1600; t.speed = 6.0; t.attackDamageBonus = 0.0; t.level = 2; t.enchantmentValue = 15; t.repairIngredient = 'minecraft:iron_ingot' })
   event.add('tt_wroughtnaut_bulwark', t => { t.uses = 2600; t.speed = 6.0; t.attackDamageBonus = 0.0; t.level = 2; t.enchantmentValue = 15; t.repairIngredient = 'minecraft:iron_ingot' })
@@ -35,7 +35,7 @@ StartupEvents.registry('item', event => {
   event.create('tt:thornwatch_halberd', 'sword').tier('tt_thornwatch_halberd').attackDamageBaseline(8.5).speedBaseline(-2.8).rarity('rare')  // 9.5 dmg, 1.2 speed
   event.create('tt:cogwright_breaker', 'sword').tier('tt_cogwright_breaker').attackDamageBaseline(10.5).speedBaseline(-3.0).rarity('rare')  // 11.5 dmg, 1.0 speed
   event.create('tt:prism_ward_staff', 'sword').tier('tt_prism_ward_staff').attackDamageBaseline(4.0).speedBaseline(-2.8).rarity('rare')  // 5 dmg, 1.2 speed
-  event.create('tt:hollowbane_tachi', 'sword').tier('tt_hollowbane_tachi').attackDamageBaseline(10.0).speedBaseline(-2.6).rarity('epic')  // 11 dmg, 1.4 speed
+  event.create('tt:hollowbane_tachi', 'sword').tier('tt_hollowbane_tachi').attackDamageBaseline(8.5).speedBaseline(-2.6).rarity('epic')  // 9.5 dmg, 1.4 speed
   event.create('tt:cinder_crown', 'sword').tier('tt_cinder_crown').attackDamageBaseline(14.0).speedBaseline(-3.1).rarity('epic')  // 15 dmg, 0.9 speed
   event.create('tt:frostmaw_fang', 'sword').tier('tt_frostmaw_fang').attackDamageBaseline(9.0).speedBaseline(-2.0).rarity('epic')  // 10 dmg, 2.0 speed
   event.create('tt:wroughtnaut_bulwark', 'sword').tier('tt_wroughtnaut_bulwark').attackDamageBaseline(11.0).speedBaseline(-3.0).rarity('epic')  // 12 dmg, 1.0 speed

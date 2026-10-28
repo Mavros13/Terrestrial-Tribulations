@@ -142,7 +142,7 @@ Vanilla iron and copper gear fills the rest of Tier 2 (re-themed with lore toolt
 
 ### 10. Hollowbane Tachi: `tt:hollowbane_tachi`
 - **Family:** Tachi (black lacquered single-edge blade with a violet glowing hamon line) · **Rarity:** Epic
-- **Stats:** 11 damage · 1.4 speed · 1800 durability
+- **Stats:** 9.5 damage · 1.4 speed · 1800 durability (Veteran tier; lowered from 11 on 2026-10-28 so a Ch4 weapon doesn't outclass the Ch5 Thornwatch Halberd; see docs/research/2026-10-28-weapon-balance.md)
 - **Ability: Soul Severance** (EDP innate, 18 s cooldown): an iaijutsu draw-cut through a line. It deals +100% damage to Hollowed enemies, and strips invisibility and Hollow shields from everything hit.
 - **Story:** Ch4 *The Awakening*. It drops from your Hollow self after the mirror duel. *"It was always yours. You just hadn't faced the one holding it."*
 - **Acquisition:** Ch4 boss drop (guaranteed).

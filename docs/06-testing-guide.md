@@ -37,4 +37,4 @@ Not included: **Gods and Heroes (Palladium)**. It's only on Modrinth and its lic
 ## Send back
 `logs/latest.log` (or the crash report), `tt-sync/sync-report.txt` and `tt-sync/lock.json` (the exact mod versions that were downloaded). Upload them to https://mclo.gs or paste them in chat. Note anything that looks wrong.
 
-Known placeholders: textures are 16×16 stand-ins until the Blockbench models exist. Abilities marked "[Prototype]" in tooltips are not active yet.
+Weapons now have generated 3D models (held in hand) with 32×32 icons; see `docs/08-test-session-2.md` for the session that checks them. Abilities marked "[Prototype]" in tooltips are not active yet.

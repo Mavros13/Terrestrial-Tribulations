@@ -1,0 +1,102 @@
+{
+	id: "9BB9873539B8BEF1"
+	group: ""
+	order_index: 5
+	filename: "ch5"
+	title: "Chapter 5: Kingdoms in Conflict"
+	icon: { Count: 1b, id: "tt:thornwatch_halberd" }
+	default_quest_shape: ""
+	default_hide_dependency_lines: false
+	quest_links: [ ]
+	images: [ ]
+	quests: [
+		{
+			id: "43B3238951AD6468"
+			title: "Two Offers"
+			subtitle: "Conclave and Guild"
+			description: ["Word of the Shard-Born has spread. Two factions want Emberhold on their side.", "", "&6Ilsabet&r of the Lumen Conclave offers spells. &6Pell&r's Cogwright Guild offers engines.", "", "Help &eeither one&r (or both): the story needs one of them."]
+			x: 0.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["647B0590E8BC022E"]
+			tasks: [
+				{ id: "40EE9E0F456040AD", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "A82C7A335C738823", type: "xp", xp: 150 }
+			]
+		},
+		{
+			id: "296BCE4E05D09E0C"
+			title: "Bent Light"
+			subtitle: "Lumen Conclave"
+			description: ["&6Ilsabet&r: &o\"Spells. Real ones. And a tower in your city that keeps the Hollowed at a distance.\"", "", "Craft an &eInscription Table&r (Iron's Spells) and learn a spell."]
+			x: 2.0d
+			y: -2.0d
+			shape: "circle"
+			dependencies: ["43B3238951AD6468"]
+			tasks: [
+				{ id: "F34C602DC0A03450", type: "item", item: { Count: 1b, id: "irons_spellbooks:inscription_table" } }
+			]
+			rewards: [
+				{ id: "D2B0B1C1D722DC44", type: "item", item: { Count: 1b, id: "tt:prism_ward_staff" } },
+				{ id: "987E03DFCD9BE3BA", type: "xp", xp: 400 }
+			]
+		},
+		{
+			id: "06156D166D38EA64"
+			title: "The Guild Wants You"
+			subtitle: "Cogwright Guild"
+			description: ["&6Pell&r: &o\"Build us a workshop and power it, and the Guild's yours. Mostly.\"", "", "Build a &eMechanical Crafter&r (Create)."]
+			x: 2.0d
+			y: 2.0d
+			shape: "circle"
+			dependencies: ["43B3238951AD6468"]
+			tasks: [
+				{ id: "C4636C847FB51C31", type: "item", item: { Count: 1b, id: "create:mechanical_crafter" } }
+			]
+			rewards: [
+				{ id: "B433321BA28193F2", type: "item", item: { Count: 2b, id: "create:precision_mechanism" } },
+				{ id: "CF525633A8CEE1A5", type: "xp", xp: 400 }
+			]
+		},
+		{
+			id: "DB0040EBED7F4378"
+			title: "Old Walls"
+			subtitle: "The Thorn Gate"
+			description: ["&6Captain Rhosk&r: &o\"Our fortress at the Thorn Gate is under siege. Something leads them. Something that remembers how to command.\"", "", "Break the siege: defeat the &cNight Lich&r (Bosses of Mass Destruction), the first Hollow general."]
+			x: 4.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependency_requirement: "one_completed"
+			dependencies: ["296BCE4E05D09E0C", "06156D166D38EA64"]
+			tasks: [
+				{ id: "5817B2018F2754F0", type: "kill", entity: "bosses_of_mass_destruction:lich", value: 1L }
+			]
+			rewards: [
+				{ id: "97152CB17EE86880", type: "item", item: { Count: 1b, id: "tt:thornwatch_halberd" } },
+				{ id: "354630F4093D6B55", type: "xp", xp: 800 }
+			]
+		},
+		{
+			id: "DE3F8A37795E0699"
+			title: "A Town"
+			subtitle: "City stage 3"
+			description: ["&6Maera&r: &o\"A Town. We had forty mouths when you found us.\"", "", "Upgrade the &eTown Hall to level 3&r. The Conclave tower, Cogwright workshop and market move in.", "", "&7Tick once the Town Hall shows level 3."]
+			x: 6.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["DB0040EBED7F4378"]
+			tasks: [
+				{ id: "8A417D451FB8FED1", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "1FA64A7ADE005F87", type: "xp", xp: 500 },
+				{ id: "6C38BFCB398DC028", type: "command", command: "/kubejs stages add @p tt_ch5_done", elevate_perms: true, silent: true }
+			]
+		}
+	]
+}

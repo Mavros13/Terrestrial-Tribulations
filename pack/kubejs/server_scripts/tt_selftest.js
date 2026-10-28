@@ -89,6 +89,18 @@ function ttSelfTest(server) {
     return server.getLevel(id) != null
   })
 
+  // Quest book references: a missing mod is a skip (Test Build 1 lacks the stage D mods); a missing ID in an
+  // installed mod is a real error (the quest task can't be completed)
+  let ttNsCheck = (id, test) => {
+    let ns = id.split(':')[0]
+    if (ns != 'minecraft' && !Platform.isLoaded(ns)) return `mod ${ns} not installed`
+    return test()
+  }
+  section('quest_items', cfg.quest_items, id => ttNsCheck(id, () => !Item.of(id).isEmpty()))
+  let BRegs = Java.loadClass('net.minecraft.core.registries.BuiltInRegistries')
+  section('quest_entities', cfg.quest_entities, id => ttNsCheck(id, () => BRegs.ENTITY_TYPE.containsKey(new RL(id))))
+  section('quest_dimensions', cfg.quest_dimensions, id => ttNsCheck(id, () => server.getLevel(id) != null))
+
   console.info(`[TT] selftest done: ${total.pass} passed, ${total.fail} failed`)
   try {
     JsonIO.write('kubejs/exported/tt_selftest.json', { passed: total.pass, failed: total.fail, results: results })

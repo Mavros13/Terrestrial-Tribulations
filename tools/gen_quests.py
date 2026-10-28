@@ -150,6 +150,11 @@ CHAPTERS = [
 ]
 
 
+from quest_story import chapters as story_chapters  # Chapters 2-12 (main story)
+
+CHAPTERS = CHAPTERS[:2] + story_chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage) + CHAPTERS[2:]
+
+
 def quest_snbt(q):
     tasks = ",\n".join(f'\t\t\t\t{{ id: "{qid(q["key"] + ":task:" + str(i))}", {t} }}' for i, t in enumerate(q["tasks"]))
     rewards = ",\n".join(f'\t\t\t\t{{ id: "{qid(q["key"] + ":reward:" + str(i))}", {r} }}' for i, r in enumerate(q["rewards"]))
@@ -158,6 +163,7 @@ def quest_snbt(q):
     return (f'\t\t{{\n\t\t\tid: "{qid(q["key"])}"\n\t\t\ttitle: {s(q["title"])}\n\t\t\tsubtitle: {s(q["sub"])}\n'
             f'\t\t\tdescription: [{desc}]\n\t\t\tx: {float(q["x"])}d\n\t\t\ty: {float(q["y"])}d\n'
             f'\t\t\tshape: "{"gear" if q.get("main") else "circle"}"\n' + (f'\t\t\tsize: 1.5d\n' if q.get("main") else "")
+            + ('\t\t\tdependency_requirement: "one_completed"\n' if q.get("dep_any") else "")
             + f'\t\t\tdependencies: [{deps}]\n\t\t\ttasks: [\n{tasks}\n\t\t\t]\n\t\t\trewards: [\n{rewards}\n\t\t\t]\n\t\t}}')
 
 

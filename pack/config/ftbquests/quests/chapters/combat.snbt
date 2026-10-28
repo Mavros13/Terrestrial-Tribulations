@@ -1,7 +1,7 @@
 {
 	id: "23F2677A0412E8F2"
 	group: ""
-	order_index: 2
+	order_index: 13
 	filename: "combat"
 	title: "Combat Fundamentals"
 	icon: { Count: 1b, id: "tt:rustbite_karambit" }

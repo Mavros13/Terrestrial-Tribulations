@@ -1,0 +1,86 @@
+{
+	id: "C8ABB89BB83ED53E"
+	group: ""
+	order_index: 8
+	filename: "ch8"
+	title: "Chapter 8: The Rise of Heroes"
+	icon: { Count: 1b, id: "tt:choirbreaker_gauntlets" }
+	default_quest_shape: ""
+	default_hide_dependency_lines: false
+	quest_links: [ ]
+	images: [ ]
+	quests: [
+		{
+			id: "E96D29CD842AF5C9"
+			title: "A Better Offer"
+			subtitle: "The Iron Choir"
+			description: ["&6The Stranger&r: &o\"My employers are so impressed. The Iron Choir. We build suits that make a person into a weapon.\"", "", "&o\"Our engine is already walking toward your city. Do try to survive it.\""]
+			x: 0.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["9C666274425B780E"]
+			tasks: [
+				{ id: "CFCBED11AF8D0020", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "91972198728D5479", type: "xp", xp: 200 }
+			]
+		},
+		{
+			id: "905DD8B9F622A362"
+			title: "The War-Engine"
+			subtitle: "Netherite Monstrosity"
+			description: ["The Choir's prototype war-engine strides out of the Nether.", "", "Defeat the &cNetherite Monstrosity&r (L_Ender's Cataclysm)."]
+			x: 2.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["E96D29CD842AF5C9"]
+			tasks: [
+				{ id: "3E9FA14CDCCA3895", type: "kill", entity: "cataclysm:netherite_monstrosity", value: 1L }
+			]
+			rewards: [
+				{ id: "2419958ADED19E98", type: "item", item: { Count: 1b, id: "tt:old_engine_core" } },
+				{ id: "D4FEEB6A11E8D536", type: "xp", xp: 2500 }
+			]
+		},
+		{
+			id: "2F4CEAA611C5CA72"
+			title: "The Engine Heart"
+			subtitle: "Suit research"
+			description: ["&6Pell&r: &o\"Its engine heart is still in there. Bring it to me and I'll get a suit working. Not just one.\"", "", "Hand Pell the &eOld Engine Core&r.", "", "&dHero suits and powers unlock&r (FSang18's Heroes, Satsu Iron Man)."]
+			x: 4.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["905DD8B9F622A362"]
+			tasks: [
+				{ id: "1625C40B5234BB27", type: "item", item: { Count: 1b, id: "tt:old_engine_core" } }
+			]
+			rewards: [
+				{ id: "AFE65CBA05C2E299", type: "xp", xp: 1000 },
+				{ id: "F4977638B1E8999B", type: "command", command: "/kubejs stages add @p tt_ch8_heroes", elevate_perms: true, silent: true }
+			]
+		},
+		{
+			id: "A4257C97C3EAF1E3"
+			title: "Choirbreaker"
+			subtitle: "Overload circuits"
+			description: ["&6Pell&r: &o\"Their gauntlets run on an overload circuit. I rewired them for your hands. Please don't punch me.\""]
+			x: 6.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["2F4CEAA611C5CA72"]
+			tasks: [
+				{ id: "DC6FEC9703156AE0", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "374D05B1B12446E5", type: "item", item: { Count: 1b, id: "tt:choirbreaker_gauntlets" } },
+				{ id: "FE8584A67E1456A5", type: "xp", xp: 600 },
+				{ id: "193E967ABF24F88A", type: "command", command: "/kubejs stages add @p tt_ch8_done", elevate_perms: true, silent: true }
+			]
+		}
+	]
+}

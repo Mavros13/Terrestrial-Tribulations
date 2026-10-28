@@ -1,0 +1,176 @@
+{
+	id: "C662795DCE349F89"
+	group: ""
+	order_index: 7
+	filename: "ch7"
+	title: "Chapter 7: The Shattered Realms"
+	icon: { Count: 1b, id: "tt:skyreach_spear" }
+	default_quest_shape: ""
+	default_hide_dependency_lines: false
+	quest_links: [ ]
+	images: [ ]
+	quests: [
+		{
+			id: "25C354D7DAF7A603"
+			title: "Seven Pieces"
+			subtitle: "Archivist Sol"
+			description: ["&6Archivist Sol&r: &o\"Each realm closed around its Shard like a fist. Each has a keeper, and none of them will hand it over politely.\"", "", "Collect &e4 Crown Shards&r from the realms. Start wherever you like."]
+			x: 0.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["F961E754228073CC"]
+			tasks: [
+				{ id: "D4D3A9FBC39E24AB", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "06070F57A6DD5570", type: "xp", xp: 200 }
+			]
+		},
+		{
+			id: "D3BBD88AC8565E37"
+			title: "The Long Dusk"
+			subtitle: "Twilight Forest"
+			description: ["&6Tamsin&r: &o\"Kill the serpent first. Everything after is worse.\"", "", "Enter the &eTwilight Forest&r."]
+			x: 2.0d
+			y: -3.0d
+			shape: "circle"
+			dependencies: ["25C354D7DAF7A603"]
+			tasks: [
+				{ id: "9D30909D59E25144", type: "dimension", dimension: "twilightforest:twilight_forest" }
+			]
+			rewards: [
+				{ id: "88F804297B90826A", type: "xp", xp: 300 }
+			]
+		},
+		{
+			id: "E4C97E03373AE9DF"
+			title: "Serpent, Lich, Hydra"
+			subtitle: "The warden chain"
+			description: ["The dusk-forest's keepers guard each other. Defeat the &cNaga&r, the &cTwilight Lich&r and the &cHydra&r."]
+			x: 4.0d
+			y: -3.0d
+			shape: "circle"
+			dependencies: ["D3BBD88AC8565E37"]
+			tasks: [
+				{ id: "C1AFD3B8A8E1FFA8", type: "kill", entity: "twilightforest:naga", value: 1L },
+				{ id: "C00A34DFA1685E3B", type: "kill", entity: "twilightforest:lich", value: 1L },
+				{ id: "8A89D4C23CE8FBA3", type: "kill", entity: "twilightforest:hydra", value: 1L }
+			]
+			rewards: [
+				{ id: "37DC1C5616C0F9AE", type: "item", item: { Count: 1b, id: "tt:hydras_tri_edge" } },
+				{ id: "DA9C82F73794641A", type: "xp", xp: 1500 }
+			]
+		},
+		{
+			id: "F6F85624D50613A2"
+			title: "Something Weeping in a Tower"
+			subtitle: "Twilight Shard"
+			description: ["At the top of the dark tower, the &cUr-Ghast&r weeps over the first realm Shard."]
+			x: 6.0d
+			y: -3.0d
+			shape: "circle"
+			dependencies: ["E4C97E03373AE9DF"]
+			tasks: [
+				{ id: "E9C8F26EC4E8D49C", type: "kill", entity: "twilightforest:ur_ghast", value: 1L }
+			]
+			rewards: [
+				{ id: "12FA455250D5D81C", type: "item", item: { Count: 1b, id: "tt:crown_shard" } },
+				{ id: "D5D8740B3C5D4C72", type: "xp", xp: 1500 }
+			]
+		},
+		{
+			id: "AFC7E61130029E78"
+			title: "Above the Clouds"
+			subtitle: "The Aether"
+			description: ["&6Sol&r: &o\"The Valkyries hold trials. They respect courage, and they enjoy watching people fall.\"", "", "Enter &eThe Aether&r."]
+			x: 2.0d
+			y: -1.0d
+			shape: "circle"
+			dependencies: ["25C354D7DAF7A603"]
+			tasks: [
+				{ id: "3A4044104FD649B3", type: "dimension", dimension: "aether:the_aether" }
+			]
+			rewards: [
+				{ id: "879C626633057CD8", type: "item", item: { Count: 16b, id: "minecraft:feather" } },
+				{ id: "E116EB64FAC256BD", type: "xp", xp: 300 }
+			]
+		},
+		{
+			id: "2EC0D0CC1F95F087"
+			title: "The Valkyrie Trial"
+			subtitle: "Aether Shard"
+			description: ["Defeat the &cSlider&r, the &cValkyrie Queen&r and the &cSun Spirit&r."]
+			x: 4.0d
+			y: -1.0d
+			shape: "circle"
+			dependencies: ["AFC7E61130029E78"]
+			tasks: [
+				{ id: "2ED4F6CA19FF31B2", type: "kill", entity: "aether:slider", value: 1L },
+				{ id: "2164C5A5CA43F818", type: "kill", entity: "aether:valkyrie_queen", value: 1L },
+				{ id: "FD2228263AD05D78", type: "kill", entity: "aether:sun_spirit", value: 1L }
+			]
+			rewards: [
+				{ id: "2A850770EFC1FDB4", type: "item", item: { Count: 1b, id: "tt:skyreach_spear" } },
+				{ id: "FCBBDFAD991AE11D", type: "item", item: { Count: 1b, id: "tt:crown_shard" } },
+				{ id: "4463BDFC1AD2AEBC", type: "xp", xp: 2500 }
+			]
+		},
+		{
+			id: "D989F794EDC2E8EF"
+			title: "Below the Roots"
+			subtitle: "Undergarden Shard"
+			description: ["&6Sol&r: &o\"A guardian that has forgotten everything except the vault.\"", "", "Enter the &eUndergarden&r and defeat the &cForgotten Guardian&r."]
+			x: 2.0d
+			y: 1.0d
+			shape: "circle"
+			dependencies: ["25C354D7DAF7A603"]
+			tasks: [
+				{ id: "EFA88D4ABBC15FC3", type: "dimension", dimension: "undergarden:undergarden" },
+				{ id: "90A72DC4FDF22E2D", type: "kill", entity: "undergarden:forgotten_guardian", value: 1L }
+			]
+			rewards: [
+				{ id: "C522FB12C5E5AF68", type: "item", item: { Count: 1b, id: "tt:undergloom_scythe" } },
+				{ id: "1371AEAF4928FA70", type: "item", item: { Count: 1b, id: "tt:crown_shard" } },
+				{ id: "9DE55C0B880DF924", type: "xp", xp: 2000 }
+			]
+		},
+		{
+			id: "6AC21D2910863A64"
+			title: "It Hears Heartbeats"
+			subtitle: "Otherside Shard"
+			description: ["&6Sol&r: &o\"Whatever you do down there, do it quietly.\"", "", "Enter &eThe Otherside&r (Deeper and Darker) and defeat a &cWarden&r."]
+			x: 2.0d
+			y: 3.0d
+			shape: "circle"
+			dependencies: ["25C354D7DAF7A603"]
+			tasks: [
+				{ id: "99A492D61429872A", type: "dimension", dimension: "deeperdarker:otherside" },
+				{ id: "E9FCC76D4BB50F6E", type: "kill", entity: "minecraft:warden", value: 1L }
+			]
+			rewards: [
+				{ id: "B2D2B0881F5D7DD2", type: "item", item: { Count: 1b, id: "tt:sculkheart_dagger" } },
+				{ id: "434FE7F1A9C8D91A", type: "item", item: { Count: 1b, id: "tt:crown_shard" } },
+				{ id: "8CFF11AE1D97C6F5", type: "xp", xp: 2000 }
+			]
+		},
+		{
+			id: "9C666274425B780E"
+			title: "The Voice Grows Louder"
+			subtitle: "Maera"
+			description: ["&6Maera&r: &o\"He wants you to think you're the same. But he took the Crown. You were made from it.\"", "", "Hold &e5 Crown Shards&r (the one from Chapter 4 and the four realm Shards)."]
+			x: 8.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["F6F85624D50613A2", "2EC0D0CC1F95F087", "D989F794EDC2E8EF", "6AC21D2910863A64"]
+			tasks: [
+				{ id: "E13DA21A211D9B48", type: "item", item: { Count: 1b, id: "tt:crown_shard" }, count: 5L }
+			]
+			rewards: [
+				{ id: "C877427874BFA92F", type: "xp", xp: 1500 },
+				{ id: "47D67029D768B9BF", type: "command", command: "/kubejs stages add @p tt_ch7_done", elevate_perms: true, silent: true }
+			]
+		}
+	]
+}

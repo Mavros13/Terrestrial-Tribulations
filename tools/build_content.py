@@ -168,6 +168,8 @@ def make_materials():
         "hollow_fang": ("#4E4A55", [(7, 4), (7, 5), (8, 5), (7, 6), (8, 6), (8, 7), (9, 7), (8, 8), (9, 8), (9, 9), (9, 10), (10, 11)]),
         "crown_shard_fragment": ("#FFD700", [(8, 3), (7, 4), (8, 4), (9, 4), (6, 5), (7, 5), (8, 5), (9, 5), (10, 5), (7, 6), (8, 6), (9, 6), (7, 7), (8, 7), (9, 7), (8, 8), (8, 9), (8, 10)]),
         "emberhold_charter": ("#F2E8D0", [(x, y) for x in range(4, 12) for y in range(4, 12)]),
+        "crown_shard": ("#B98CFF", [(8, 2), (7, 3), (8, 3), (9, 3), (6, 4), (7, 4), (8, 4), (9, 4), (10, 4), (5, 5), (6, 5), (7, 5), (8, 5), (9, 5), (10, 5), (11, 5), (6, 6), (7, 6), (8, 6), (9, 6), (10, 6), (7, 7), (8, 7), (9, 7), (7, 8), (8, 8), (9, 8), (8, 9), (8, 10), (8, 11), (8, 12)]),
+        "old_engine_core": ("#B5732E", [(x, y) for x in range(5, 11) for y in range(5, 11) if (x - 7.5) ** 2 + (y - 7.5) ** 2 <= 9]),
     }
     for name, (col, pts) in mats.items():
         img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
@@ -309,7 +311,8 @@ def main():
             lines.append("§c[Prototype] Ability rides on the " + INNATE[w["ef"]] + " innate skill until its own EDP skill exists")
         tips.append(f"  event.add('tt:{w['id']}', {json.dumps(lines, ensure_ascii=False)})")
     lang.update({"item.tt.bone_shard": "Bone Shard", "item.tt.hollow_fang": "Hollow Fang",
-                 "item.tt.crown_shard_fragment": "§6Crown Shard Fragment", "item.tt.emberhold_charter": "§eEmberhold Charter"})
+                 "item.tt.crown_shard_fragment": "§6Crown Shard Fragment", "item.tt.emberhold_charter": "§eEmberhold Charter",
+                 "item.tt.crown_shard": "§dCrown Shard", "item.tt.old_engine_core": "§6Old Engine Core"})
     write(os.path.join(KJS, "assets", "tt", "lang", "en_us.json"), json.dumps(lang, indent=2, ensure_ascii=False) + "\n")
     write(os.path.join(KJS, "client_scripts", "tt_tooltips.generated.js"), hdr +
           "ItemEvents.tooltip(event => {\n" + "\n".join(tips) + "\n})\n")

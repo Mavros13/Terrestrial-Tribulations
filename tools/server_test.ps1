@@ -94,9 +94,10 @@ try {
     }
   }
   if ($done) {
-    Say 'Server finished loading. Running kubejs errors, reload, stop...'
+    Say 'Server finished loading. Running kubejs errors, reload, tt_selftest, stop...'
     $p.StandardInput.WriteLine('kubejs errors server'); Start-Sleep 5
     $p.StandardInput.WriteLine('reload'); Start-Sleep 30
+    $p.StandardInput.WriteLine('kubejs custom_command tt_selftest'); Start-Sleep 10
     $p.StandardInput.WriteLine('stop')
     if (-not $p.WaitForExit(120000)) { $p.Kill() }
   } elseif ($p.HasExited) {

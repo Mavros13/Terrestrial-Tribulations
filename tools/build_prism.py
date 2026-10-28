@@ -28,6 +28,7 @@ def main():
     run(sys.executable, os.path.join(ROOT, "tools", "gen_origins.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "gen_skilltree.py"))  # after build_content: merges into lang
     run(sys.executable, os.path.join(ROOT, "tools", "gen_animations.py"))
+    run(sys.executable, os.path.join(ROOT, "tools", "gen_selftest.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "check_pack.py"))  # stops the build on broken pack files
     sync = os.path.join(ROOT, "pack", "tt-sync")
     with tempfile.TemporaryDirectory() as tmp:

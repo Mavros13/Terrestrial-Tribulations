@@ -52,7 +52,7 @@ ItemEvents.rightClicked(event => {
   // landing from a plunge slams everything within 4 blocks. No fall damage until you land.
   if (held == 'tt:skyreach_spear') ttSafe('gale_vault', () => {
     if (!ttReady(event, 280)) return
-    p.addMotion(0, 1.6, 0)
+    p.push(0, 1.6, 0)
     p.hurtMarked = true
     p.persistentData.putBoolean('tt_vault', true)
     p.persistentData.putLong('tt_vault_at', level.gameTime)
@@ -173,7 +173,7 @@ EntityEvents.hurt(event => {
     // Undertow Arrow: each enemy hit is dragged on along the arrow's path, about 4 blocks
     if (bow == 'tt:abyssal_longbow') {
       const v = arrow.deltaMovement, len = Math.max(0.01, v.length())
-      t.addMotion(v.x() / len * 1.1, 0.25, v.z() / len * 1.1)
+      t.push(v.x() / len * 1.1, 0.25, v.z() / len * 1.1)
       t.hurtMarked = true
       ttParticle(t.level, 'minecraft:bubble_column_up', t.x, t.y + 1, t.z, 0.3, 15)
     }
@@ -202,7 +202,7 @@ EntityEvents.hurt(event => {
       pd.putInt('tt_pressure', 0)
       ttEnemiesNear(p, t.x, t.y, t.z, 4).forEach(e => {
         ttBonus(event.server, e, 2 * pressure)
-        e.addMotion(0, 0.5 + 0.1 * pressure, 0)
+        e.push(0, 0.5 + 0.1 * pressure, 0)
         e.hurtMarked = true
       })
       ttParticle(t.level, 'minecraft:explosion', t.x, t.y + 0.5, t.z, 0.5, 2)
@@ -249,7 +249,7 @@ PlayerEvents.tick(event => {
     if (pd.getBoolean('tt_plunge')) {
       ttEnemiesNear(p, p.x, p.y, p.z, 4).forEach(e => {
         ttBonus(event.server, e, 8)
-        e.addMotion((e.x - p.x) * 0.3, 0.4, (e.z - p.z) * 0.3)
+        e.push((e.x - p.x) * 0.3, 0.4, (e.z - p.z) * 0.3)
         e.hurtMarked = true
       })
       ttParticle(p.level, 'minecraft:explosion', p.x, p.y + 0.2, p.z, 1.2, 4)

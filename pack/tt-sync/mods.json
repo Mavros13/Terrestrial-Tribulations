@@ -293,6 +293,13 @@
       "stage": "D"
     },
     {
+      "name": "Core Utilities",
+      "match": "core_utilities",
+      "modrinth": "core-utilities",
+      "curseforge": "core-utilities",
+      "stage": "D"
+    },
+    {
       "name": "Rats",
       "match": "rats-",
       "modrinth": "rats",

@@ -62,6 +62,7 @@ Stages in `pack/tt-sync/mods.json`: **A/B/C = Test Build 1**, **D = Test Build 2
 | Applied Energistics 2 (+ ExtendedAE, AE2WTLib) | ❔ | |
 | Mekanism + Mekanism Generators | 🔎 10.4.16.80 | **Quarry = Digital Miner**, plus power, pipes and generators (one coherent stack) |
 | ~~Powah, Pipez~~ | | Dropped as redundant with Mekanism |
+| Core Utilities | 🔎 2.0.0 (CF 1379111 / 9343420, Modrinth core-utilities) | Owner's request (2026-10-28). Solar panels, generators, crusher/alloy smelter, crop harvester, mob grinder, block breaker/placer, item pipes, backpacks, mob net. No dependencies (JEI optional). Overlaps Mekanism's power/quarry; Mekanism's Digital Miner stays the story quarry |
 | Rats (+ Citadel) | 🔎 8.1.3 | Rat Guild (Nib) |
 
 ## Accessories and cosmetics

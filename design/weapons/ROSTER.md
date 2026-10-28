@@ -1,6 +1,6 @@
 # Weapon roster, v1 (23 weapons, Tiers 1–8)
 
-Every weapon is a **new item** (`tt:` namespace), registered in KubeJS, modelled in Blockbench, given a moveset by Epic Fight, and given an ability through Epic Fight EDP, KubeJS or the `tt_bridge` mod. Status: **design spec, nothing implemented or tested yet.** 3D modelling briefs and the Blockbench export pipeline are in `blockbench/specs/weapons.md`.
+Every weapon is a **new item** (`tt:` namespace), registered in KubeJS, modelled in Blockbench, given a moveset by Epic Fight, and given an ability through Epic Fight EDP, KubeJS or the `tt_bridge` mod. Status: **design spec, nothing implemented or tested yet.** 3D modelling briefs and the Blockbench export pipeline are in `blockbench/specs/weapons.md`; which resource-pack model each weapon borrows is in `design/weapons/model-map.md`.
 
 ## Mandatory rules
 1. **Visual uniqueness.** Every weapon has its own colour scheme (primary / secondary / accent) and **its own swing-trail colour**. No two weapons may share both primary and secondary colours, and no two may share a trail colour. The registry table below is the source of truth; check it before adding a weapon. The silhouette must also differ within a family (blade curve, guard shape, size).

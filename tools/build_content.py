@@ -15,6 +15,8 @@ Hand-made art (briefs in blockbench/specs/weapons.md) is picked up automatically
   blockbench/textures/weapons/<id>_icon.png   replaces the 16x16 placeholder inventory icon
   blockbench/exports/weapons/<id>.json        Blockbench "Java Block/Item" export (the 3D held model)
   blockbench/textures/weapons/<id>.png        its single texture (+ optional .png.mcmeta for animation)
+  "model_parent" in weapons.json              otherwise, borrow a 3D model by resource location from a resource pack
+                                              (karambits: Karambit Vault x Punchy, which the player must have enabled)
 
 Usage: python3 tools/build_content.py
 """
@@ -217,10 +219,17 @@ def install_models(weapons):
         tex = os.path.join(BB, "textures", "weapons", i + ".png")
         outs = [os.path.join(models, i + ".json"), os.path.join(models, i + "_3d.json"),
                 os.path.join(textures, i + "_3d.png"), os.path.join(textures, i + "_3d.png.mcmeta")]
+        flat = {"parent": "minecraft:item/handheld", "textures": {"layer0": "tt:item/" + i}}
         if not (os.path.exists(src) and os.path.exists(tex)):
             for o in outs:
                 if os.path.exists(o):
                     os.remove(o)
+            if w.get("model_parent"):
+                # Borrowed 3D model from a resource pack the player installs (e.g. Karambit Vault x Punchy, ARR, so
+                # nothing of it is copied): we only point at its model by resource location.
+                write(outs[0], json.dumps({"loader": "forge:separate_transforms", "base": {"parent": w["model_parent"]},
+                                           "perspectives": {"gui": flat, "fixed": flat}}, indent=2) + "\n")
+                count += 1
             continue
         m = json.load(open(src, encoding="utf-8"))
         m.pop("credit", None)
@@ -233,7 +242,6 @@ def install_models(weapons):
         shutil.copyfile(tex, outs[2])
         if os.path.exists(tex + ".mcmeta"):
             shutil.copyfile(tex + ".mcmeta", outs[3])
-        flat = {"parent": "minecraft:item/handheld", "textures": {"layer0": "tt:item/" + i}}
         write(outs[0], json.dumps({"loader": "forge:separate_transforms", "base": {"parent": "tt:item/" + i + "_3d"},
                                    "perspectives": {"gui": flat, "fixed": flat}}, indent=2) + "\n")
         count += 1

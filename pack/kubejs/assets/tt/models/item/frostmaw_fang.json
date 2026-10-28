@@ -1,0 +1,20 @@
+{
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "minecraft:item/skins/heart_of_the_sea"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "tt:item/frostmaw_fang"
+      }
+    },
+    "fixed": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "tt:item/frostmaw_fang"
+      }
+    }
+  }
+}

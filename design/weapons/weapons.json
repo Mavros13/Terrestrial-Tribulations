@@ -23,6 +23,7 @@
     },
     {
       "id": "rustbite_karambit",
+      "model_parent": "minecraft:item/iron_sword",
       "name": "Rustbite Karambit",
       "family": "karambit",
       "ef": "dagger",
@@ -43,6 +44,7 @@
     },
     {
       "id": "ashfang_karambit",
+      "model_parent": "minecraft:item/skins/magma",
       "name": "Ashfang Karambit",
       "family": "karambit",
       "ef": "dagger",
@@ -223,6 +225,7 @@
     },
     {
       "id": "frostmaw_fang",
+      "model_parent": "minecraft:item/skins/heart_of_the_sea",
       "name": "Frostmaw Fang",
       "family": "karambit",
       "ef": "dagger",
@@ -403,6 +406,7 @@
     },
     {
       "id": "crownshard_karambits",
+      "model_parent": "minecraft:item/skins/gold_plated",
       "name": "Crownshard Karambits",
       "family": "karambit",
       "ef": "dagger",

@@ -1,0 +1,130 @@
+# Terrestrial Tribulations: headless server test (Windows PowerShell 5.1+).
+# Boots a Forge dedicated server with the Test Build 1 mods (stages A-C) and our kubejs + config folders, waits for it
+# to finish loading, runs `kubejs errors` and `reload`, stops it, and writes a short report of anything that went
+# wrong with our content. Everything happens in %TEMP%\tt-servertest, which is deleted at the end; only the report
+# (%TEMP%\tt-servertest-report.txt) is kept. No game window; the server runs at below-normal priority with 3 GB.
+#
+# Run in PowerShell (no admin needed):
+#   irm https://raw.githubusercontent.com/Mavros13/Terrestrial-Tribulations/claude/project-thread-gnjvhs/tools/server_test.ps1 | iex
+$Branch = 'claude/project-thread-gnjvhs'
+$Forge = '1.20.1-47.4.18'
+
+$ErrorActionPreference = 'Stop'
+$ProgressPreference = 'SilentlyContinue'   # Invoke-WebRequest is very slow with the progress bar
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$root = Join-Path $env:TEMP 'tt-servertest'
+$report = Join-Path $env:TEMP 'tt-servertest-report.txt'
+$lines = New-Object System.Collections.Generic.List[string]
+function Say($m) { Write-Host "[TT test] $m"; $lines.Add($m) }
+
+try {
+  if (Test-Path $root) { Remove-Item $root -Recurse -Force }
+  New-Item -ItemType Directory $root | Out-Null
+  $server = Join-Path $root 'server'; New-Item -ItemType Directory $server | Out-Null
+  $mods = Join-Path $server 'mods'; New-Item -ItemType Directory $mods | Out-Null
+
+  Say 'Downloading Java 17 (portable)...'
+  Invoke-WebRequest 'https://api.adoptium.net/v3/binary/latest/17/ga/windows/x64/jdk/hotspot/normal/eclipse' -OutFile "$root\jdk.zip"
+  Expand-Archive "$root\jdk.zip" "$root\jdk"
+  $java = (Get-ChildItem "$root\jdk" -Recurse -Filter java.exe | Where-Object { $_.FullName -like '*\bin\java.exe' } | Select-Object -First 1).FullName
+
+  Say "Downloading the pack ($Branch)..."
+  Invoke-WebRequest "https://github.com/Mavros13/Terrestrial-Tribulations/archive/refs/heads/$Branch.zip" -OutFile "$root\pack.zip"
+  Expand-Archive "$root\pack.zip" "$root\pack"
+  $repo = (Get-ChildItem "$root\pack" -Directory | Select-Object -First 1).FullName
+
+  Say "Installing Forge $Forge server..."
+  Invoke-WebRequest "https://maven.minecraftforge.net/net/minecraftforge/forge/$Forge/forge-$Forge-installer.jar" -OutFile "$root\forge-installer.jar"
+  Push-Location $server
+  & $java -jar "$root\forge-installer.jar" --installServer | Out-File "$root\forge-install.log"
+  Pop-Location
+  if (-not (Test-Path "$server\libraries\net\minecraftforge\forge\$Forge\win_args.txt")) { throw 'Forge server install failed (see forge-install.log)' }
+
+  Say 'Downloading Test Build 1 mods (stages A-C) from CurseForge...'
+  $skip = @('Embeddium', 'Oculus')   # client-only renderers
+  $list = (Get-Content "$repo\modpack\curseforge-mods.json" -Raw | ConvertFrom-Json).mods |
+    Where-Object { @('A', 'B', 'C') -contains $_.stage -and $skip -notcontains $_.name }
+  $failed = @()
+  foreach ($m in $list) {
+    $out = Join-Path $mods ("{0}-{1}.jar" -f $m.projectID, $m.fileID)
+    try {
+      Invoke-WebRequest "https://www.curseforge.com/api/v1/mods/$($m.projectID)/files/$($m.fileID)/download" -OutFile $out -UserAgent 'Mozilla/5.0'
+    } catch {
+      $id = [int64]$m.fileID
+      $name = if ($m.file -like '*.jar') { $m.file } else { "$($m.file).jar" }
+      try { Invoke-WebRequest ("https://mediafilez.forgecdn.net/files/{0}/{1}/{2}" -f [math]::Floor($id / 1000), ($id % 1000), [uri]::EscapeDataString($name)) -OutFile $out }
+      catch { $failed += $m.name; if (Test-Path $out) { Remove-Item $out } }
+    }
+  }
+  Say ("Mods downloaded: {0} of {1}" -f ($list.Count - $failed.Count), $list.Count)
+  if ($failed.Count) { Say ('Could not download: ' + ($failed -join ', ')) }
+
+  Copy-Item "$repo\pack\kubejs" "$server\kubejs" -Recurse
+  Copy-Item "$repo\pack\config" "$server\config" -Recurse -Force
+  Set-Content "$server\eula.txt" 'eula=true'
+  Set-Content "$server\server.properties" "online-mode=false`nview-distance=4`nsimulation-distance=4`nspawn-protection=0`nmotd=TT test"
+  Set-Content "$server\user_jvm_args.txt" '-Xmx3G'
+
+  Say 'Starting the server (hidden, below-normal priority)...'
+  $psi = New-Object System.Diagnostics.ProcessStartInfo
+  $psi.FileName = $java
+  $psi.Arguments = "@user_jvm_args.txt @libraries/net/minecraftforge/forge/$Forge/win_args.txt nogui"
+  $psi.WorkingDirectory = $server
+  $psi.UseShellExecute = $false
+  $psi.CreateNoWindow = $true
+  $psi.RedirectStandardInput = $true
+  $psi.RedirectStandardOutput = $true
+  $psi.RedirectStandardError = $true
+  $p = New-Object System.Diagnostics.Process
+  $p.StartInfo = $psi
+  $null = $p.Start()
+  $p.PriorityClass = 'BelowNormal'
+  $p.BeginOutputReadLine(); $p.BeginErrorReadLine()   # drain output so the server never blocks
+
+  $log = "$server\logs\latest.log"
+  $deadline = (Get-Date).AddMinutes(20)
+  $done = $false
+  while ((Get-Date) -lt $deadline -and -not $p.HasExited) {
+    Start-Sleep 10
+    if ((Test-Path $log) -and (Select-String -Path $log -Pattern 'Done \(' -Quiet)) { $done = $true; break }
+  }
+  if ($done) {
+    Say 'Server finished loading. Running kubejs errors, reload, stop...'
+    $p.StandardInput.WriteLine('kubejs errors'); Start-Sleep 5
+    $p.StandardInput.WriteLine('reload'); Start-Sleep 30
+    $p.StandardInput.WriteLine('stop')
+    if (-not $p.WaitForExit(120000)) { $p.Kill() }
+  } elseif ($p.HasExited) {
+    Say "Server stopped before finishing (exit code $($p.ExitCode)); see the crash report below."
+  } else {
+    Say 'Server did not finish loading within 20 minutes; stopping it.'
+    $p.Kill()
+  }
+
+  # ---------- report ----------
+  $lines.Add(''); $lines.Add('=== latest.log: errors and our content ===')
+  if (Test-Path $log) {
+    Select-String -Path $log -Pattern 'ERROR|Exception|\[TT\]|tt:|kubejs|Failed to load|Done \(' |
+      Select-Object -First 200 | ForEach-Object { $lines.Add($_.Line) }
+  }
+  foreach ($k in 'startup.log', 'server.log') {
+    $f = "$server\logs\kubejs\$k"
+    if (Test-Path $f) {
+      $lines.Add(''); $lines.Add("=== kubejs/$k (errors, warnings and tt lines) ===")
+      Select-String -Path $f -Pattern 'ERR|WARN|\[TT\]|tt_|Loaded script|scripts? in' | Select-Object -First 150 | ForEach-Object { $lines.Add($_.Line) }
+    }
+  }
+  Get-ChildItem "$server\crash-reports" -ErrorAction SilentlyContinue | ForEach-Object {
+    $lines.Add(''); $lines.Add("=== crash report $($_.Name) (first 80 lines) ===")
+    Get-Content $_.FullName -TotalCount 80 | ForEach-Object { $lines.Add($_) }
+  }
+} catch {
+  Say "Test stopped: $($_.Exception.Message)"
+} finally {
+  Get-Process java -ErrorAction SilentlyContinue | Where-Object { $_.Path -like "$root*" } | Stop-Process -Force -ErrorAction SilentlyContinue
+  Start-Sleep 2
+  $lines | Set-Content $report -Encoding UTF8
+  Remove-Item $root -Recurse -Force -ErrorAction SilentlyContinue
+  Write-Host ''
+  Write-Host "[TT test] Finished. Report: $report  (test folder deleted: $(-not (Test-Path $root)))"
+}

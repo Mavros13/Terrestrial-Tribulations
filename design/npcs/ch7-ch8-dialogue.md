@@ -69,7 +69,7 @@ Story beats (`docs/00-kickoff.md`, `design/story/boss-roles.md`): **Ch7 The Shat
    - ▶ "Should we?" → 3
    - ▶ "Show me." → 4
 3. **Pell:** Ilsabet says no. I say they're already using them on us. Rhosk says "hm". → 4
-4. **Pell:** Give me time and the parts and I'll get a suit working. Not just one. The Choir's designs are in here; there are dozens. *(grants stage `tt_ch8_heroes`: hero-pack suits and items unlock)*
+4. **Pell:** Its engine heart is still in there somewhere. Bring it to me and I'll get a suit working. Not just one. The Choir's designs are in here; there are dozens. *(quest "The Engine Heart" from `design/story/heroes-integration.md`: hand Pell the Old Engine core; grants stage `tt_ch8_heroes`, hero-pack suits and items unlock)*
 
 **Dialogue: "Choirbreaker"** (Ch8, after a Choir Herald falls)
 1. **Pell:** Their gauntlets run on an overload circuit. If you punch something hard enough, everything electrical nearby just *stops*.

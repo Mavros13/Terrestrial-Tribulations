@@ -1,10 +1,13 @@
 {
-  "_comment": "Story gates: items from these namespaces/IDs can't be worn or used until the player has the KubeJS stage (granted by FTB Quests command rewards: /kubejs stages add @p <stage>). Namespaces of the hero packs are filled in after the first launch from kubejs/exported/tt_item_namespaces.json.",
+  "_comment": "Story gates: items from these namespaces/IDs can't be worn or right-click used until the player has the KubeJS stage (granted by FTB Quests command rewards: /kubejs stages add @p <stage>). Hero-pack namespaces filled 2026-10-28 from the mod jars on the test PC (fsang = FSang18's Heroes, ~1636 item models; satsu_iron_man_addon = Satsu Iron Man Addon); confirm against kubejs/exported/tt_item_namespaces.json after the next launch. Gods and Heroes (Palladium) isn't in the CurseForge pack yet, so its namespace is still open.",
   "gates": [
     {
       "stage": "tt_ch8_heroes",
       "message": "The suit's systems stay dark. Its makers' secrets are revealed in Chapter 8: The Rise of Heroes.",
-      "namespaces": [],
+      "namespaces": [
+        "fsang",
+        "satsu_iron_man_addon"
+      ],
       "items": []
     }
   ]

@@ -39,3 +39,10 @@ The rest are well-known pairs already covered in the list: Quark needs Zeta, Sup
 
 ## What this does not cover
 Libraries can also clash with one another at runtime (mixins, version ranges). Only a launch shows that. Test Build 2 still goes through the A → B → C → D stage bisect in `docs/06-testing-guide.md` if it crashes.
+
+## Server test, 2026-10-28 (laptop, `tools/server_test.ps1` with `TT_STAGES=A,B,C,D`)
+118 mods (client-only ones skipped), reached Done after three fixes; our scripts and data load with 0 errors; Core Utilities 2.0.0 loads clean.
+- **Sophisticated Backpacks 3.26.17 needs Sophisticated Core 1.5.17+**, which has no 1.20.1 release yet (newest is 1.5.15.2427). Pinned the matching pair: Backpacks 3.26.14.2226 (9271152) + Core 1.5.15.2427 (9279280).
+- **SLM: Shader is not client-only**: Epic Fight EDP requires it on the server too.
+- **Canary** `entity.collisions.movement` mixin clashes with another stage D mod (startup crash). Disabled in `pack/config/canary.properties`.
+- Not ours, not blocking: Palladium logs 131x `PackData.getId() ... packData is null` (an addon pack, new with stage D: check addon powers in game); CoreWithStuff ~44 broken loot tables; tags pointing at absent mods (Ad Astra, tacz, wares); Lootr compat mixins without Lootr; 0-weight spawn entries in some biome data.

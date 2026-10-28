@@ -105,6 +105,12 @@ def paint_sheet(mat, seed, frame=0, frames=1):
         out[band] = lerp(out[band], white * np.ones_like(out[band]), np.full(int(band.sum()), 0.28))
         scratch = (value_noise(seed + 9, 40, 40) > 0.86) & (fine > 0.6)
         out[scratch] = a * 1.35
+    elif kind == "hammered":     # forged steel: bright planished metal pocked with dark hammer marks
+        pits = value_noise(seed + 13, SHEET // 2, SHEET // 2)
+        pits2 = value_noise(seed + 17, SHEET // 5, SHEET // 5)
+        depth = np.clip((pits * 0.65 + pits2 * 0.35 - 0.6) * 6, 0, 1)
+        out = lerp(a * (0.92 + 0.12 * fine)[..., None], b, depth * 0.9)
+        out[(depth < 0.05) & (fine > 0.8)] = lerp(a, white, np.full(1, 0.35))[0]
     elif kind == "edge":         # honed edge: near-white with a faint ripple
         out = lerp(a, white, 0.45 + 0.3 * fine + 0.1 * np.sin(Y * 0.8))
     elif kind == "dark":         # lacquer / obsidian: deep, cloudy, with sparse glints of the second colour
@@ -206,7 +212,7 @@ class Model:
     def c(self, name, y0, y1, w, d, m, dx=0.0, dz=0.0, rot=None):
         self.box(name, [8 - w / 2 + dx, y0, 8 - d / 2 + dz], [8 + w / 2 + dx, y1, 8 + d / 2 + dz], m, rot)
 
-    def taper(self, name, y0, y1, w0, w1, d, m, steps, dx0=0.0, dx1=0.0, edge=None, edge_w=0.35, ridge=True):
+    def taper(self, name, y0, y1, w0, w1, d, m, steps, dx0=0.0, dx1=0.0, edge=None, edge_w=0.35, ridge=True, ridge_f=0.28):
         """Blade from width w0 at y0 to w1 at y1, optionally drifting sideways (curve), with bright edge strips on
         both sides and a raised central ridge (ridge: True = same material, a material index, or False). Short
         steps keep curves and tapers smooth."""
@@ -224,7 +230,7 @@ class Model:
             if ridge is not False and w > 1.1 and d >= 0.5:
                 rm = m if ridge is True else ridge
                 rn = ("glow_" if self.mats[rm][0] == "glow" else "") + f"{name}_ridge_{i}"
-                self.c(rn, ya, yb, max(0.3, w * 0.28), d + 0.24, rm, dx=dx)
+                self.c(rn, ya, yb, max(0.25, w * ridge_f), d + 0.24, rm, dx=dx)
 
     def grip(self, y0, y1, r, m_wrap, m_cap=None):
         self.c("grip", y0, y1, r, r, m_wrap)
@@ -278,36 +284,65 @@ def limb_chain(m, name, x, y, segs, wid, dep, mat, sign, glow=None):
     return x, y
 
 
+def disc(m, name, cx, cy, size, depth, mat, dz=0.0):
+    """Round boss facing +z/-z: a square and a 45-degree square overlap into an octagon."""
+    h = size / 2
+    m.box(name, [cx - h, cy - h, 8 - depth / 2 + dz], [cx + h, cy + h, 8 + depth / 2 + dz], mat)
+    k = h * 0.82
+    m.box(name + "_r", [cx - k, cy - k, 8 - depth / 2 + dz + 0.01], [cx + k, cy + k, 8 + depth / 2 + dz - 0.01], mat,
+          ("z", 45, [cx, cy, 8]))
+
+
 def frontier_cleaver(m, p, s, a):
-    bone, sinew, flint = m.mat("bone", p, "#BFAF8F"), m.mat("wrap", s), m.mat("dark", a, "#9A9A9A")
-    edge = m.mat("edge", "#EDE6D4")
-    m.grip(-3, 3, 1.6, sinew, flint)
-    m.c("lash", 2.6, 4.2, 3.2, 2.2, sinew)
-    m.c("flint_wedge", 3, 5, 4.6, 1.6, flint)
-    m.taper("blade", 5, 17, 3.2, 5.6, 1.1, bone, 6, dx0=0.2, dx1=0.6)
-    m.box("edge", [10.1, 5.4, 7.5], [10.9, 17, 8.5], edge)                # straight honed edge on +x
-    m.c("spine", 5, 17.4, 0.6, 1.3, flint, dx=-2.4)                     # dark flint spine on -x
-    for i, y in enumerate((8.5, 11.5, 14.5)):                           # three knocked-out notches in the edge
-        m.box(f"notch_{i}", [10.3, y, 7.45], [11.0, y + 0.9, 8.55], flint)
-    m.c("tip_1", 17, 17.9, 4.8, 1.0, bone, dx=0.4)                      # clipped, cleaver-style point
-    m.c("tip_2", 17.9, 18.6, 3.0, 0.9, bone, dx=1.1)
-    m.box("tip_edge", [10.1, 17, 7.5], [10.9, 18.6, 8.5], edge)
-    return DISPLAY
+    steel, wood = m.mat("hammered", p, "#34312D"), m.mat("wood", s, "#5E4128")
+    edge, iron = m.mat("edge", "#F4F1E8"), m.mat("metal", a)
+    copper, sinew = m.mat("metal", "#B5653A"), m.mat("wrap", "#7A5A3A")
+    # handle: a flat, slightly swelling wooden slab with copper rivets and an iron butt cap
+    m.c("butt_cap", -7.2, -6.2, 2.0, 1.6, iron)
+    m.c("handle_low", -6.2, -2.0, 1.8, 1.35, wood)
+    m.c("handle_mid", -2.0, 1.6, 1.95, 1.45, wood)
+    m.c("handle_high", 1.6, 4.0, 1.8, 1.35, wood)
+    for y in (-4.6, 0.6):
+        m.c(f"rivet_{y}", y, y + 0.7, 0.7, 1.7, copper)
+    m.c("lashing", 3.0, 4.0, 2.05, 1.55, sinew)
+    m.c("bolster", 4.0, 5.0, 2.1, 1.6, iron)
+    # the blade: a broad rectangle hung off the spine side, with a real hanging hole near the top corner
+    m.box("blade", [6.9, 5.0, 7.62], [14.6, 16.6, 8.38], steel)
+    m.box("blade_top_spine", [6.9, 16.6, 7.62], [7.8, 18.4, 8.38], steel)
+    m.box("blade_top_main", [9.2, 16.6, 7.62], [14.6, 18.4, 8.38], steel)
+    m.box("blade_top_bar", [7.8, 17.8, 7.62], [9.2, 18.4, 8.38], steel)
+    m.box("spine", [6.7, 5.0, 7.55], [7.3, 18.4, 8.45], iron)
+    m.box("spine_top", [6.7, 18.4, 7.55], [14.6, 18.9, 8.45], iron)
+    m.box("bevel", [13.6, 4.7, 7.68], [14.6, 18.4, 8.32], edge)
+    m.box("edge", [14.6, 4.7, 7.74], [15.2, 18.6, 8.26], edge)
+    m.box("heel", [6.9, 4.4, 7.62], [15.2, 5.0, 8.38], iron)
+    return scaled_display(1.0)
 
 
 def accord_longsword(m, p, s, a):
     steel, edge, brass = m.mat("metal", STEEL), m.mat("edge", "#D8DEE4"), m.mat("metal", s)
-    crimson, cloth = m.mat("flat", p), m.mat("wrap", a)
-    m.grip(-5, 3, 1.5, cloth, brass)
-    m.c("guard", 3, 4.4, 7, 1.8, brass)
-    m.c("flame_L", 4.4, 7, 1.2, 1.2, brass, dx=-3.2, rot=("z", 22.5, [4.8, 4.4, 8]))
-    m.c("flame_R", 4.4, 7, 1.2, 1.2, brass, dx=3.2, rot=("z", -22.5, [11.2, 4.4, 8]))
-    m.taper("blade", 4.4, 27, 2.6, 1.8, 0.8, steel, 6, edge=edge)
-    m.c("fuller", 5, 22, 0.6, 0.9, crimson)
-    m.c("tip", 27, 29, 1.0, 0.7, edge)
-    m.c("ribbon_a", -1, 3, 0.8, 0.3, crimson, dx=1.4, dz=1.0, rot=("z", 22.5, [9.4, 3, 9]))
-    m.c("ribbon_b", -3.5, -0.5, 0.8, 0.3, crimson, dx=2.5, dz=1.0, rot=("z", 22.5, [10.5, -0.5, 9]))
-    return scaled_display(0.85)
+    crimson, leather, fuller = m.mat("gem", p), m.mat("wrap", p), m.mat("metal", "#7E858D")
+    # wheel pommel with a crimson gem at its heart
+    disc(m, "pommel", 8, -8.4, 2.8, 1.1, brass)
+    m.c("pommel_gem", -9.0, -7.8, 0.8, 1.3, crimson)
+    m.c("pommel_neck", -7.0, -6.4, 1.0, 1.0, brass)
+    # long two-handed grip: crimson leather with brass ferrules and a mid riser
+    m.c("ferrule_low", -6.4, -5.8, 1.6, 1.6, brass)
+    m.grip(-5.8, 2.0, 1.35, leather)
+    m.c("riser", -2.2, -1.7, 1.55, 1.55, brass)
+    m.c("ferrule_high", 2.0, 2.6, 1.6, 1.6, brass)
+    # straight cross-guard with flared ends and a langet block
+    m.c("cross", 2.6, 3.3, 9.4, 0.9, brass)
+    m.c("cross_end_L", 2.3, 3.6, 0.6, 1.1, brass, dx=-4.9)
+    m.c("cross_end_R", 2.3, 3.6, 0.6, 1.1, brass, dx=4.9)
+    m.c("quillon_block", 2.4, 4.0, 1.8, 1.4, brass)
+    m.c("quillon_gem", 2.9, 3.6, 0.6, 1.5, crimson)
+    # long, slim blade with a dark fuller running two thirds of its length
+    m.taper("blade", 4.0, 28.4, 2.3, 0.9, 0.6, steel, 12, edge=edge, edge_w=0.3, ridge=False)
+    m.c("fuller", 4.4, 20.5, 0.55, 0.68, fuller)
+    m.c("tip", 28.4, 29.6, 0.6, 0.5, edge)
+    m.c("tip_point", 29.6, 30.4, 0.3, 0.4, edge)
+    return scaled_display(0.82)
 
 
 def gnawblade(m, p, s, a):
@@ -566,11 +601,27 @@ def undergloom_scythe(m, p, s, a):
 
 
 def sculkheart_dagger(m, p, s, a):
-    glass, core, black = m.mat("dark", p, s), m.mat("glow", s, "#0E6E77"), m.mat("dark", a, p)
-    m.grip(-3, 3, 1.4, black, black)
-    for i, (dx, rot) in enumerate(((-1.6, 22.5), (1.6, -22.5), (-1.0, 45), (1.0, -45))):   # sculk tendril guard
-        m.c(f"tendril_{i}", 3, 5.2, 0.5, 0.5, black, dx=dx, rot=("z", rot, [8 + dx, 3, 8]))
-    m.taper("blade", 3.4, 12.5, 2.4, 1.0, 0.9, glass, 4, ridge=core)                     # glowing sculk core
+    blade, core, black = m.mat("dark", p, s), m.mat("glow", s, "#0E6E77"), m.mat("dark", a, p)
+    edge, horn = m.mat("edge", "#6FB8BE"), m.mat("metal", "#1E5A60")
+    # flared, fan-shaped pommel (two splayed wings) like a khanjar's
+    m.box("pommel_wing_L", [6.2, -5.3, 7.4], [8.0, -4.3, 8.6], black, ("z", -22.5, [8, -4.3, 8]))
+    m.box("pommel_wing_R", [8.0, -5.3, 7.4], [9.8, -4.3, 8.6], black, ("z", 22.5, [8, -4.3, 8]))
+    m.c("pommel_cap", -4.6, -3.6, 2.0, 1.4, black)
+    # waisted grip with two glowing sculk bosses
+    m.c("grip_low", -3.6, -0.4, 1.35, 1.2, black)
+    m.c("grip_waist", -0.4, 1.0, 1.1, 1.05, black)
+    m.c("grip_high", 1.0, 3.0, 1.4, 1.2, black)
+    disc(m, "boss_low", 8, -2.0, 1.5, 1.5, horn)
+    disc(m, "glow_boss_low", 8, -2.0, 0.8, 1.62, core)
+    disc(m, "boss_high", 8, 1.8, 1.5, 1.5, horn)
+    disc(m, "glow_boss_high", 8, 1.8, 0.8, 1.62, core)
+    m.c("collar", 3.0, 3.9, 2.2, 1.6, horn)
+    # broad J-curved blade sweeping toward -x, glowing sculk vein down its spine
+    m.taper("blade", 3.9, 13.0, 2.8, 1.0, 0.8, blade, 8, dx0=0.0, dx1=-3.2, edge=edge, edge_w=0.22, ridge=core, ridge_f=0.12)
+    x, y = 8 - 3.2, 13.0
+    m.box("hook_1", [x - 0.5, y - 0.1, 7.65], [x + 0.5, y + 1.8, 8.35], blade, ("z", 45, [x, y, 8]))
+    m.box("hook_edge", [x + 0.2, y - 0.1, 7.6], [x + 0.5, y + 1.8, 8.4], edge, ("z", 45, [x, y, 8]))
+    m.box("hook_tip", [x - 0.2, y + 1.7, 7.75], [x + 0.25, y + 2.6, 8.25], edge, ("z", 45, [x, y, 8]))
     return DISPLAY
 
 

@@ -16,6 +16,7 @@ Create a new world: **Creative**, **Allow Cheats: ON**. Pick any Heritage and Fa
 /time set day
 /kubejs stages add @p tt_ch8_heroes
 ```
+Then run the self-test once: `/kubejs custom_command tt_selftest`. The chat stays quiet; it writes `[TT] selftest ...` lines to `logs/kubejs/server.log`, which you send back at the end. It passed 180/180 on the test server, so this just confirms the same in singleplayer.
 
 ## 2. Weapon looks (15 min)
 Give yourself the weapons that got new models. Hold each one in first person and look at it in third person (F5), then put it in an item frame:

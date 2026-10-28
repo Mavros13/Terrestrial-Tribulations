@@ -256,9 +256,9 @@ def chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage, r_cmd
               tasks=[t_dim("minecraft:the_end"), t_kill("minecraft:ender_dragon", 1)], rewards=[r_xp(5000)]),
             q("c11_regent", "The Hollow Regent", "Malric Thorne", 4, 0, ["c11_end"], main=True,
               desc=["&5Malric&r: &o\"One will, one Crown, and all of it ends. Stop fighting what you are.\"",
-                    "", "Defeat &5Malric, the Hollow Regent&r.",
-                    "", "&7(His boss is picked after Test Build 2; this becomes a kill task then. Tick to continue.)"],
-              tasks=[t_check()], rewards=[r_xp(8000), r_stage("tt_ch11_done")]),
+                    "", "Defeat &5Malric, the Hollow Regent&r (Cataclysm's Scylla, renamed in lore).",
+                    "", "&7He waits in the drowned Acropolis. The Thornecutter was forged for this fight."],
+              tasks=[t_kill("cataclysm:scylla", 1)], rewards=[r_xp(8000), r_stage("tt_ch11_done")]),
         ]},
         {"key": "ch12", "title": "Chapter 12: Beyond the Throne", "icon": "tt:emberhold_oathblade", "quests": [
             q("c12_choice", "The Crown Whole", "Choose", 0, 0, ["c11_regent"], main=True,

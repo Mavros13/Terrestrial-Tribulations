@@ -50,14 +50,14 @@
 			id: "E99750B83EA6FE65"
 			title: "The Hollow Regent"
 			subtitle: "Malric Thorne"
-			description: ["&5Malric&r: &o\"One will, one Crown, and all of it ends. Stop fighting what you are.\"", "", "Defeat &5Malric, the Hollow Regent&r.", "", "&7(His boss is picked after Test Build 2; this becomes a kill task then. Tick to continue.)"]
+			description: ["&5Malric&r: &o\"One will, one Crown, and all of it ends. Stop fighting what you are.\"", "", "Defeat &5Malric, the Hollow Regent&r (Cataclysm's Scylla, renamed in lore).", "", "&7He waits in the drowned Acropolis. The Thornecutter was forged for this fight."]
 			x: 4.0d
 			y: 0.0d
 			shape: "gear"
 			size: 1.5d
 			dependencies: ["5E7FFF27712B38AE"]
 			tasks: [
-				{ id: "008E7FD195DD9B7C", type: "checkmark" }
+				{ id: "008E7FD195DD9B7C", type: "kill", entity: "cataclysm:scylla", value: 1L }
 			]
 			rewards: [
 				{ id: "6BCF72E61DA68824", type: "xp", xp: 8000 },

@@ -31,7 +31,7 @@ import shutil
 import subprocess
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.environ.get("TT_CHECK_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # tests point it at a copy
 PACK = os.path.join(ROOT, "pack")
 KJS = os.path.join(PACK, "kubejs")
 TT_ASSETS = os.path.join(KJS, "assets", "tt")

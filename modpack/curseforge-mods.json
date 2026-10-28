@@ -722,8 +722,8 @@
     {
       "name": "Packet Fixer",
       "projectID": 689467,
-      "fileID": 6195870,
-      "file": "packetfixer-forge-2.0.0-1.19-to-1.20.1.jar",
+      "fileID": 7872374,
+      "file": "packetfixer-3.3.2-1.18-1.20.4-merged.jar",
       "stage": "C",
       "dependency": true
     },

@@ -16,7 +16,7 @@
 - Tools: MCreator only for the small `tt_bridge` mod (`design/bridge/`); Blockbench for weapon models (briefs and pipeline: `blockbench/specs/weapons.md`; drop exports in `blockbench/exports/weapons/` and the build installs them).
 
 ## How the repo works
-- `tools/build_prism.py` regenerates everything and builds `dist/…TestBuild1.zip`. It runs `build_content.py` (weapons from `design/weapons/weapons.json`), `gen_quests.py`, `gen_origins.py` and `gen_skilltree.py`. **Edit the generators or their data, never the generated files.**
+- `tools/build_prism.py` regenerates everything and builds `dist/…TestBuild1.zip`. It runs `build_content.py` (weapons from `design/weapons/weapons.json`), `gen_quests.py`, `gen_origins.py`, `gen_skilltree.py` and `gen_animations.py` (our `tt:` player animations, the dev power `tt:cast_test`, and the preview page `blockbench/previews/cast-animations.html`). **Edit the generators or their data, never the generated files.**
 - **Two mod lists, keep them in step:** `modpack/curseforge-mods.json` (CurseForge project + file IDs, every library listed explicitly, used by `tools/build_curseforge.py` for the main CurseForge-format zips) and `pack/tt-sync/mods.json` (Modrinth, for the fallback ModSync instance). When a mod is added or changed, update both.
 - `pack/` is the instance's `minecraft/` folder. `pack/tt-sync/ModSync` downloads mods from Modrinth at launch, based on `pack/tt-sync/mods.json`. Stages: A/B/C = Test Build 1, D = Test Build 2.
 - Formats were checked against each mod's source on GitHub (see the docstrings in the tools). Keep doing that, or verify on the official pages from the laptop.

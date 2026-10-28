@@ -27,6 +27,7 @@ def main():
     run(sys.executable, os.path.join(ROOT, "tools", "gen_quests.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "gen_origins.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "gen_skilltree.py"))  # after build_content: merges into lang
+    run(sys.executable, os.path.join(ROOT, "tools", "gen_animations.py"))
     sync = os.path.join(ROOT, "pack", "tt-sync")
     with tempfile.TemporaryDirectory() as tmp:
         run("javac", "--release", "17", "-d", tmp, os.path.join(sync, "ModSync.java"))

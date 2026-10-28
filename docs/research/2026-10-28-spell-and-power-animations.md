@@ -222,6 +222,12 @@ These are cheap tests that prove the pipeline before any big build.
 1. `/cast @s irons_spellbooks:fireball` in a cheat world, in both normal and Epic Fight battle mode. Check that the animation shows and how first person looks.
 2. A one-file Palladium test power that plays `irons_spellbooks:self_cast_two_hands` with `palladium:player_animation` and spawns particles. Judge the 20-tick fade.
 3. One hand-made `tt:` player animation in `kubejs/assets/tt/player_animation/` played the same way.
+   **Ready:** `tools/gen_animations.py` writes seven (`tt:cast_focus`, `cast_flick`, `cast_slam`, `cast_rise`,
+   `cast_ward`, `cast_blink`, `weapon_raise`) and the dev power `tt:cast_test`, which plays each one on its own
+   ability key with charge particles at the hands and a burst plus sound on the release tick. In a cheat world:
+   `/superpower add tt:cast_test`, then use the ability keys. Preview them first in
+   `blockbench/previews/cast-animations.html`. Check: does the pose read in third person, does Epic Fight battle
+   mode override it, and does the burst land on the motion's peak.
 4. A one-skill Epic Fight KubeJS registration (`basic`) bound to a test weapon, playing a built-in Epic Fight animation. This confirms the registry ID and builder names.
 5. Stage D: add AAA Particles and play its debug effect from KubeJS on a cast.
 

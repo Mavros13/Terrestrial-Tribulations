@@ -31,3 +31,6 @@ A small MCreator workspace (`mcreator/terrestrial_tribulations`, mod ID `tt_brid
 
 ## 4. Order of work
 Flags + commands → Gale Vault and Rail Lance (they prove the projectile/movement pattern) → the rest of the BRIDGE abilities → cross-mod hooks.
+
+## 5. Cast system
+Active abilities share one cast system (windup, release, channel, recovery; data in `data/tt/casts/`; our own player animations, effects and camera shake). Design: `design/bridge/cast-system.md`. Build it together with Rail Lance, the first ability in the order above.

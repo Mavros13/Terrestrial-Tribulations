@@ -346,10 +346,22 @@ try {
 } catch (e) { console.warn('[TT] Epic Fight API not found; Reversal Cut and Iron Recoil are off') }
 const TT_EF_UUID = Java.loadClass('java.util.UUID').fromString('6f1d2c4e-7a3b-4f0e-9d1a-2b7c5e8f9a01')
 
+// On a dedicated server Rhino can't list EpicFightCapabilities' methods (one refers to the client-only LocalPlayer),
+// so its static methods look missing there (2026-10-28 server test). Read the capability field and ask Forge
+// directly instead; fall back to getPlayerPatch where the methods are visible (singleplayer).
+function ttEFPlayerPatch(p) {
+  let patch = null
+  try { patch = p.getCapability($TT_EF.CAPABILITY_ENTITY).orElse(null) } catch (e) { patch = null }
+  if (patch == null) {
+    try { patch = $TT_EF.getPlayerPatch(p) } catch (e) { patch = null }
+  }
+  return patch
+}
+
 function ttHookEpicFight(p, server) {
   if (!$TT_EF) return
   server.scheduleInTicks(20, () => ttSafe('ef_hooks', () => {
-    const patch = $TT_EF.getPlayerPatch(p)
+    const patch = ttEFPlayerPatch(p)
     if (!patch) return
     const listener = patch.getEventListener()
     // priority -1: runs after Epic Fight's own guard and dodge handlers, even when they cancel the event

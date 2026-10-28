@@ -98,6 +98,15 @@ try {
     $p.StandardInput.WriteLine('kubejs errors server'); Start-Sleep 5
     $p.StandardInput.WriteLine('reload'); Start-Sleep 30
     $p.StandardInput.WriteLine('kubejs custom_command tt_selftest'); Start-Sleep 10
+    # Smoke test: mobs take every common damage type while our hurt handlers listen, then the world ticks a while
+    foreach ($c in @('forceload add -16 -16 16 16', 'summon minecraft:zombie 0 100 0 {NoAI:1b,PersistenceRequired:1b}',
+        'summon minecraft:skeleton 3 100 0 {NoAI:1b,PersistenceRequired:1b}', 'summon minecraft:villager 0 100 3 {NoAI:1b}',
+        'damage @e[type=minecraft:zombie,limit=1] 2 minecraft:arrow', 'damage @e[type=minecraft:zombie,limit=1] 2 minecraft:magic',
+        'damage @e[type=minecraft:zombie,limit=1] 2 minecraft:generic', 'damage @e[type=minecraft:villager,limit=1] 2 minecraft:mob_attack by @e[type=minecraft:skeleton,limit=1]',
+        'damage @e[type=minecraft:skeleton,limit=1] 50 minecraft:out_of_world', 'time add 6000')) {
+      $p.StandardInput.WriteLine($c); Start-Sleep 2
+    }
+    Start-Sleep 60
     $p.StandardInput.WriteLine('stop')
     if (-not $p.WaitForExit(120000)) { $p.Kill() }
   } elseif ($p.HasExited) {

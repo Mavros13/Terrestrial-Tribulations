@@ -35,11 +35,12 @@ function ttSelfTest(server) {
     results[name] = r
     total.pass += r.pass.length
     total.fail += r.fail.length
-    let line = `[TT] selftest ${r.fail.length ? 'FAIL' : 'PASS'} ${name}: ${r.pass.length}/${ids.length}`
+    let status = r.fail.length ? 'FAIL' : (r.pass.length == 0 && ids.length > 0 ? 'SKIP' : 'PASS')
+    let line = `[TT] selftest ${status} ${name}: ${r.pass.length}/${ids.length}`
     if (r.fail.length) line += ` missing: ${r.fail.join(', ')}`
     if (r.skip.length) line += ` skipped: ${r.skip.join('; ')}`
-    if (r.fail.length) console.error(line)
-    else console.info(line)
+    if (status == 'PASS') console.info(line)
+    else console.error(line)
   }
 
   section('items', cfg.items, id => !Item.of(id).isEmpty())
@@ -49,7 +50,13 @@ function ttSelfTest(server) {
     section('epic_fight_weapons', cfg.ef_weapons, id => {
       let stack = Item.of(id)
       if (stack.isEmpty()) return 'item missing'
-      return !EFC.getItemStackCapability(stack).isEmpty()
+      // EpicFightCapabilities' methods are invisible to Rhino on a dedicated server (a method refers to a client
+      // class), so read the CAPABILITY_ITEM field and ask Forge. Items without our data get Epic Fight's EMPTY cap.
+      let cap = stack.getCapability(EFC.CAPABILITY_ITEM).orElse(null)
+      if (cap == null) return false
+      let empty = null
+      try { empty = Java.loadClass('yesman.epicfight.world.capabilities.item.CapabilityItem').EMPTY } catch (e) { empty = null }
+      return empty == null ? true : cap != empty
     })
   }
 

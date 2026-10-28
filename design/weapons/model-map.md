@@ -1,5 +1,7 @@
 # 3D model map for the 23 weapons (draft, 2026-10-28)
 
+> **Decision (2026-10-28): we build our own models.** The Fantasy pack can't be loaded on Forge, so `tools/gen_models.py` generates our own 3D models and animated textures in the colours and styles picked below (see `blockbench/previews/_sheet.png`). The karambits keep the Karambit Vault x Punchy parents.
+
 Owner's direction (2026-10-28): the weapons keep their powers, but look like the 3D resource-pack weapons, **built into each item** (no anvil renaming). Items are still obtained through the story, crafting and quests.
 
 ## How each pack can be used

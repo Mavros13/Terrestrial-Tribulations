@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the Prism Launcher instance zip: dist/Terrestrial-Tribulations-TestBuild1.zip
 
-1. Regenerates content (build_content.py, gen_quests.py).
+1. Regenerates content (gen_models.py when numpy is installed, build_content.py, gen_quests.py, ...).
 2. Compiles pack/tt-sync/ModSync.java into ModSync.jar (Java 17 bytecode).
 3. Zips prism/instance.cfg + prism/mmc-pack.json + pack/ (as the instance's minecraft/ folder).
 4. Builds the CurseForge-format zips (build_curseforge.py).
@@ -17,6 +17,11 @@ def run(*cmd, **kw):
 
 
 def main():
+    try:
+        import numpy  # noqa: F401  (gen_models.py needs it; its outputs are committed, so skipping is safe)
+        run(sys.executable, os.path.join(ROOT, "tools", "gen_models.py"))
+    except ImportError:
+        print("numpy not installed: using the committed weapon models")
     run(sys.executable, os.path.join(ROOT, "tools", "build_content.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "gen_quests.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "gen_origins.py"))

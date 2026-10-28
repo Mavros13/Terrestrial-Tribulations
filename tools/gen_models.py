@@ -101,6 +101,8 @@ def paint_sheet(mat, seed, frame=0, frames=1):
         sheen = 0.5 + 0.5 * np.sin(Y / SHEET * 2 * math.pi * 3 + n * 4)
         f = 0.82 + 0.22 * streak + 0.12 * sheen + 0.06 * fine
         out = a * f[..., None]
+        band = np.abs(((X * 0.7 - Y) % 56) - 28) < 3.5                 # polished highlight running across the parts
+        out[band] = lerp(out[band], white * np.ones_like(out[band]), np.full(int(band.sum()), 0.28))
         scratch = (value_noise(seed + 9, 40, 40) > 0.86) & (fine > 0.6)
         out[scratch] = a * 1.35
     elif kind == "edge":         # honed edge: near-white with a faint ripple
@@ -132,8 +134,8 @@ def paint_sheet(mat, seed, frame=0, frames=1):
         out = lerp(b, a, e * 1.3) * pulse
         out = lerp(out, lerp(a, white, np.full(X.shape, 0.6)), np.clip(e - 0.62, 0, 1) * 2.6)
     elif kind == "veins":        # dark stone with branching cracks that glow and pulse
-        r = np.abs(fbm(seed + 11, 4, 4) - 0.5)
-        crack = np.clip(1 - r / 0.045, 0, 1)
+        r = np.abs(fbm(seed + 11, 9, 3) - 0.5)                    # thin branching cracks
+        crack = np.clip(1 - r / 0.028, 0, 1) ** 1.5
         heat = 0.75 + 0.25 * np.sin(ph + n * 5)
         out = a * (0.75 + 0.35 * n)[..., None]
         out = lerp(out, lerp(b, white, np.full(X.shape, 0.25)) * heat[..., None], crack)
@@ -153,15 +155,27 @@ def paint_sheet(mat, seed, frame=0, frames=1):
     return np.clip(out, 0, 255)
 
 
-def bevel(patch):
-    """Light the top/left rim and shade the bottom/right rim of a face patch."""
+def bevel(patch, face):
+    """Two-step rim light (top/left bright, bottom/right dark) plus light falling off down each side face, so
+    every cube reads as a rounded, lit object rather than a flat colour."""
     h, w = patch.shape[:2]
+    if face in ("north", "south", "east", "west") and h > 2:
+        patch *= np.linspace(1.07, 0.9, h, dtype=np.float32)[:, None, None]
+    elif face == "up":
+        patch *= 1.05
     if w >= 3 and h >= 3:
-        patch[0, :] *= 1.18
+        patch[0, :] *= 1.2
         patch[:, 0] *= 1.12
-        patch[-1, :] *= 0.72
+        patch[-1, :] *= 0.7
         patch[:, -1] *= 0.8
+    if w >= 8 and h >= 8:
+        patch[1, 1:-1] *= 1.08
+        patch[1:-1, 1] *= 1.05
+        patch[-2, 1:-1] *= 0.88
+        patch[1:-1, -2] *= 0.92
     return np.clip(patch, 0, 255)
+
+
 # ---------- geometry builder ----------
 class Model:
     def __init__(self, wid):
@@ -192,9 +206,11 @@ class Model:
     def c(self, name, y0, y1, w, d, m, dx=0.0, dz=0.0, rot=None):
         self.box(name, [8 - w / 2 + dx, y0, 8 - d / 2 + dz], [8 + w / 2 + dx, y1, 8 + d / 2 + dz], m, rot)
 
-    def taper(self, name, y0, y1, w0, w1, d, m, steps, dx0=0.0, dx1=0.0, edge=None, edge_w=0.35):
-        """Blade from width w0 at y0 to w1 at y1 in `steps` boxes, optionally drifting sideways (curve) and with
-        bright edge strips on both sides."""
+    def taper(self, name, y0, y1, w0, w1, d, m, steps, dx0=0.0, dx1=0.0, edge=None, edge_w=0.35, ridge=True):
+        """Blade from width w0 at y0 to w1 at y1, optionally drifting sideways (curve), with bright edge strips on
+        both sides and a raised central ridge (ridge: True = same material, a material index, or False). Short
+        steps keep curves and tapers smooth."""
+        steps = max(steps, int(round((y1 - y0) / 1.4)))
         h = (y1 - y0) / steps
         for i in range(steps):
             t = (i + 0.5) / steps
@@ -205,11 +221,20 @@ class Model:
             if edge is not None and w > 2 * edge_w + 0.2:
                 self.c(f"{name}_edgeL_{i}", ya, yb, edge_w, d + 0.1, edge, dx=dx - w / 2 + edge_w / 2)
                 self.c(f"{name}_edgeR_{i}", ya, yb, edge_w, d + 0.1, edge, dx=dx + w / 2 - edge_w / 2)
+            if ridge is not False and w > 1.1 and d >= 0.5:
+                rm = m if ridge is True else ridge
+                rn = ("glow_" if self.mats[rm][0] == "glow" else "") + f"{name}_ridge_{i}"
+                self.c(rn, ya, yb, max(0.3, w * 0.28), d + 0.24, rm, dx=dx)
 
     def grip(self, y0, y1, r, m_wrap, m_cap=None):
         self.c("grip", y0, y1, r, r, m_wrap)
+        y = y0 + 0.7
+        while y < y1 - 0.5:                                         # raised wrap ribs
+            self.c(f"grip_rib_{round(y, 1)}", y, y + 0.35, r + 0.22, r + 0.22, m_wrap)
+            y += 1.3
         if m_cap is not None:
             self.c("grip_cap", y0 - 1.2, y0, r + 0.8, r + 0.8, m_cap)
+            self.c("grip_knob", y0 - 1.7, y0 - 1.2, r + 0.2, r + 0.2, m_cap)
 
 
 # ---------- display (vanilla item/handheld with Z - 45) ----------
@@ -373,16 +398,26 @@ def cogwright_breaker(m, p, s, a):
 def prism_ward_staff(m, p, s, a):
     ivory, gold, prism = m.mat("bone", p, "#D9D0B8"), m.mat("metal", s), m.mat("gem", a)
     glowp = m.mat("glow", a, "#2346B8")
-    m.c("foot", -14, -12.6, 1.6, 1.6, gold)
-    m.c("shaft", -12.6, 21, 1.2, 1.2, ivory)
-    m.c("collar", 21, 22.4, 2.4, 2.4, gold)
-    for i, (dx, dz) in enumerate(((-2.2, 0), (2.2, 0), (0, -2.2), (0, 2.2))):   # four bowed cage bars
-        m.c(f"bar_low_{i}", 22.4, 25, 0.5, 0.5, gold, dx=dx * 0.7, dz=dz * 0.7)
-        m.c(f"bar_mid_{i}", 25, 28, 0.5, 0.5, gold, dx=dx, dz=dz)
-        m.c(f"bar_top_{i}", 28, 30.6, 0.5, 0.5, gold, dx=dx * 0.7, dz=dz * 0.7)
-    m.c("crown", 30.6, 31.6, 2.6, 2.6, gold)
-    m.c("prism", 24.6, 28.4, 1.9, 1.9, prism, rot=("y", 45, [8, 26.5, 8]))
-    m.c("glow_prism", 25.4, 27.6, 1.0, 1.0, glowp, rot=("y", 45, [8, 26.5, 8]))
+    m.c("foot_spike", -15.4, -14, 0.8, 0.8, gold)
+    m.c("foot", -14, -12.6, 1.8, 1.8, gold)
+    m.c("shaft", -12.6, 21, 1.4, 1.4, ivory)
+    for y in (-8, -1, 6, 13):                                      # gold bands with tiny inset gems
+        m.c(f"band_{y}", y, y + 0.7, 1.8, 1.8, gold)
+        m.c(f"glow_band_gem_{y}", y + 0.15, y + 0.55, 0.5, 1.9, glowp)
+    m.grip(0, 4, 1.5, m.mat("wrap", "#3B3F7A"))
+    m.c("collar", 21, 22.4, 2.6, 2.6, gold)
+    m.c("collar_lip", 22.4, 22.9, 3.2, 3.2, gold)
+    for i, (dx, dz) in enumerate(((-2.4, 0), (2.4, 0), (0, -2.4), (0, 2.4))):   # four bowed cage bars
+        m.c(f"bar_low_{i}", 22.9, 25, 0.55, 0.55, gold, dx=dx * 0.7, dz=dz * 0.7)
+        m.c(f"bar_mid_{i}", 25, 28.4, 0.55, 0.55, gold, dx=dx, dz=dz)
+        m.c(f"bar_top_{i}", 28.4, 30.4, 0.55, 0.55, gold, dx=dx * 0.7, dz=dz * 0.7)
+        m.c(f"bar_gem_{i}", 26.3, 27.1, 0.8, 0.8, prism, dx=dx * 1.08, dz=dz * 1.08)
+    m.c("crown", 30.4, 31.2, 3.0, 3.0, gold)
+    m.c("crown_spike", 31.2, 32, 0.8, 0.8, gold)
+    m.c("prism", 24.4, 28.8, 2.0, 2.0, prism, rot=("y", 45, [8, 26.6, 8]))
+    m.c("prism_cap_low", 23.8, 24.4, 1.0, 1.0, prism, rot=("y", 45, [8, 26.6, 8]))
+    m.c("prism_cap_high", 28.8, 29.4, 1.0, 1.0, prism, rot=("y", 45, [8, 26.6, 8]))
+    m.c("glow_prism", 25.0, 28.2, 1.2, 1.2, glowp, rot=("y", 45, [8, 26.6, 8]))
     return scaled_display(1.05)
 
 
@@ -415,62 +450,102 @@ def cinder_crown(m, p, s, a):
     m.c("guard", 3, 4.8, 8, 2.4, obsidian)
     for i, dx in enumerate((-3.2, -1.6, 0, 1.6, 3.2)):             # crown of five spikes
         m.c(f"spike_{i}", 4.8, 7 + (1.2 if dx == 0 else 0), 0.9, 0.9, magma, dx=dx)
-    m.taper("blade", 4.8, 26, 6.2, 5.4, 1.4, obsidian, 4)
+    m.taper("blade", 4.8, 26, 6.2, 5.4, 1.4, obsidian, 4, ridge=False)
     m.c("glow_cracks_F", 6, 25, 5.4, 0.02, veins, dz=0.72)
     m.c("glow_cracks_B", 6, 25, 5.4, 0.02, veins, dz=-0.72)
-    m.c("tip", 26, 28.4, 4.0, 1.2, obsidian)
+    m.c("tip", 26, 27.4, 4.4, 1.2, obsidian)
+    m.c("tip_2", 27.4, 28.6, 2.6, 1.1, obsidian)
+    m.c("tip_3", 28.6, 29.6, 1.0, 1.0, magma)
+    for i in range(6):                                             # jagged, ember-tipped teeth along both edges
+        y = 7 + i * 3.2
+        hw = 3.1 - 0.4 * (y - 4.8) / 21.2
+        for side in (-1, 1):
+            x = 8 + side * hw
+            m.box(f"tooth_{i}_{side}", [x - 0.6, y, 7.45], [x + 0.6, y + 1.6, 8.55], obsidian, ("z", -22.5 * side, [x, y, 8]))
+            m.box(f"glow_ember_{i}_{side}", [x - 0.3, y + 1.0, 7.4], [x + 0.3, y + 1.6, 8.6], magma, ("z", -22.5 * side, [x, y, 8]))
     return scaled_display(1.0)
 
 
 def wroughtnaut_bulwark(m, p, s, a):
     iron, rust, rivet = m.mat("metal", p), m.mat("dark", s, "#C46A4E"), m.mat("metal", a)
     edge, handle = m.mat("edge", "#A9AEB3"), m.mat("wood", "#3B2E25", "#251C16")
-    m.c("haft", -8, 22, 1.4, 1.4, handle)
-    m.c("pommel", -9.4, -8, 2, 2, iron)
-    m.c("plate", 9, 24, 7.5, 1.3, iron, dx=3.6)
-    m.c("rust_streak", 10, 21, 2, 1.32, rust, dx=2.2)
-    m.c("edge", 9.6, 23.4, 0.8, 1.4, edge, dx=7.6)
+    m.c("haft", -8, 23, 1.5, 1.5, handle)
+    m.c("pommel", -9.6, -8, 2.2, 2.2, iron)
+    m.c("pommel_spike", -10.6, -9.6, 1.0, 1.0, rivet)
+    m.grip(-7, -1, 1.65, m.mat("wrap", "#4A3A2C"))
+    for y in (2, 7):
+        m.c(f"strap_{y}", y, y + 0.8, 1.9, 1.9, rivet)
+    # great slab blade on +x: straight top, bearded lower edge
+    m.box("plate", [8.6, 12, 7.35], [15.4, 23.4, 8.65], iron)
+    m.box("beard_1", [10.4, 10.4, 7.4], [15.4, 12, 8.6], iron)
+    m.box("beard_2", [12.4, 9.0, 7.45], [15.4, 10.4, 8.55], iron)
+    m.box("edge", [15.4, 9.0, 7.5], [16.2, 23.4, 8.5], edge)
+    m.box("edge_tip", [15.4, 23.4, 7.55], [16.0, 24.2, 8.45], edge)
+    m.box("rust_streak_a", [10.6, 13, 7.32], [12.2, 21.5, 8.68], rust)
+    m.box("rust_streak_b", [13.2, 10.6, 7.32], [14.0, 16, 8.68], rust)
     for r in range(3):
-        for col in range(3):
-            m.c(f"rivet_{r}_{col}", 12 + r * 3.5, 12.8 + r * 3.5, 0.8, 1.6, rivet, dx=1.5 + col * 2.1)
-    m.c("cap", 22, 23.6, 2.2, 2.2, iron)
+        for c in range(3):
+            y = 14 + r * 3.2
+            m.box(f"rivet_{r}_{c}", [9.4 + c * 2.0, y, 7.1], [10.2 + c * 2.0, y + 0.8, 8.9], rivet)
+    m.box("spine", [8.4, 23.4, 7.25], [15.6, 24.4, 8.75], rivet)
+    # back hammer poll on -x
+    m.box("poll_neck", [5.8, 16.5, 7.4], [8.6, 19.5, 8.6], iron)
+    m.box("poll", [3.6, 15.6, 6.9], [5.8, 20.4, 9.1], iron)
+    m.box("poll_face", [3.2, 16.0, 7.1], [3.6, 20.0, 8.9], rivet)
+    m.c("cap", 23, 24.8, 2.2, 2.2, iron)
+    m.c("cap_spike", 24.8, 26, 0.9, 0.9, rivet)
     return scaled_display(0.95)
 
 
 def skyreach_spear(m, p, s, a):
     shaft, gold, vane, white = m.mat("metal", s), m.mat("metal", "#E8D27A"), m.mat("feather", p, a), m.mat("edge", a)
-    glowtip = m.mat("glow", s, "#C9B25E")
-    m.c("butt", -15, -13.6, 1.3, 1.3, gold)
-    m.c("shaft", -13.6, 20, 0.9, 0.9, shaft)
-    for y in (-4, 4, 12):
-        m.c(f"wrap_{y}", y, y + 1.0, 1.2, 1.2, white)
-    m.c("collar", 20, 21.4, 1.8, 1.8, gold)
-    for i, sign in enumerate((-1, 1)):                             # two pairs of feather vanes
-        m.c(f"vane_{i}_a", 17, 21, 2.4, 0.01, vane, dx=1.6 * sign, rot=("z", 22.5 * sign, [8, 21, 8]))
-        m.c(f"vane_{i}_b", 17, 21, 0.01, 2.4, vane, dz=1.6 * sign, rot=("x", -22.5 * sign, [8, 21, 8]))
-    m.taper("tip", 21.4, 31.5, 1.3, 0.3, 0.6, white, 5)
-    m.c("glow_tip", 27, 31.6, 0.3, 0.3, glowtip)
+    glowtip, sky = m.mat("glow", p, "#2A7FC0"), m.mat("metal", p)
+    m.c("butt_spike", -15.8, -14.6, 0.6, 0.6, gold)
+    m.c("butt", -14.6, -13.4, 1.4, 1.4, gold)
+    m.c("shaft", -13.4, 20, 1.1, 1.1, shaft)
+    m.grip(-2, 4, 1.3, m.mat("wrap", "#5B8FC4"))
+    for y in (-9, 9, 15):
+        m.c(f"ring_{y}", y, y + 0.6, 1.4, 1.4, gold)
+    m.c("collar", 18.6, 20.4, 1.9, 1.9, gold)
+    m.c("socket", 20.4, 22.2, 1.5, 1.5, sky)
+    for sign in (-1, 1):                                           # swept wings of three stepped feathers each
+        for k, (L, y) in enumerate(((4.2, 20.6), (3.4, 19.8), (2.6, 19.0))):
+            x0 = 8 + 0.7 * sign
+            x1 = x0 + L * sign
+            m.box(f"wing_{sign}_{k}", [min(x0, x1), y, 7.95], [max(x0, x1), y + 1.0, 8.05], vane,
+                  ("z", 22.5 * sign, [x0, y, 8]))
+    m.taper("tip", 22.2, 31.2, 1.9, 0.3, 0.7, sky, 6, edge=white, edge_w=0.3, ridge=glowtip)
+    m.c("tip_point", 31.2, 32, 0.3, 0.3, white)
     return scaled_display(1.15)
 
 
 def hydras_tri_edge(m, p, s, a):
     scale, venom, black = m.mat("scale", p), m.mat("glow", s, "#2E7F12"), m.mat("dark", a, p)
-    edge = m.mat("edge", "#9FE0BE")
+    edge, fang = m.mat("edge", "#9FE0BE"), m.mat("bone", "#EDE8D5", "#C9C2A8")
     m.grip(-4, 3, 1.5, black, scale)
     m.c("guard", 3, 4.4, 6, 1.8, scale)
+    m.c("glow_guard_eye", 3.3, 4.1, 1.2, 1.9, venom)
     m.taper("root", 4.4, 9, 3.2, 2.6, 0.9, scale, 2)
-    for i, (rot, dx) in enumerate(((-22.5, 1.2), (0, 0), (22.5, -1.2))):   # three prongs
+    for i, (rot, dx) in enumerate(((-22.5, 1.2), (0, 0), (22.5, -1.2))):   # three serpent-headed prongs
         org = [8 + dx, 9, 8]
         y1 = 22 if rot == 0 else 19
-        m.c(f"prong_{i}", 9, y1, 1.3, 0.8, scale, dx=dx, rot=("z", rot, org) if rot else None)
-        m.c(f"prong_edge_{i}", 9.5, y1 - 0.3, 0.3, 0.85, edge, dx=dx + 0.5, rot=("z", rot, org) if rot else None)
-        m.c(f"head_{i}", y1, y1 + 1.6, 1.8, 1.4, black, dx=dx, rot=("z", rot, org) if rot else None)
-        m.c(f"glow_eyes_{i + 1}", y1 + 0.6, y1 + 1.1, 1.9, 0.3, venom, dx=dx, dz=0.6, rot=("z", rot, org) if rot else None)
+        r = ("z", rot, org) if rot else None
+        m.c(f"prong_{i}", 9, y1, 1.3, 0.8, scale, dx=dx, rot=r)
+        m.c(f"prong_edge_{i}", 9.5, y1 - 0.3, 0.3, 0.85, edge, dx=dx + 0.5, rot=r)
+        m.c(f"neck_{i}", y1 - 1.2, y1, 1.6, 1.1, scale, dx=dx, rot=r)
+        m.c(f"skull_{i}", y1, y1 + 1.4, 1.9, 1.6, black, dx=dx, rot=r)
+        m.c(f"snout_{i}", y1 + 1.4, y1 + 2.6, 1.3, 1.2, black, dx=dx, dz=0.1, rot=r)
+        m.c(f"jaw_{i}", y1 + 0.4, y1 + 2.2, 1.1, 0.4, black, dx=dx, dz=-0.9, rot=r)
+        m.c(f"fang_L_{i}", y1 + 1.8, y1 + 2.5, 0.25, 0.25, fang, dx=dx - 0.4, dz=-0.55, rot=r)
+        m.c(f"fang_R_{i}", y1 + 1.8, y1 + 2.5, 0.25, 0.25, fang, dx=dx + 0.4, dz=-0.55, rot=r)
+        m.c(f"glow_eyes_{i + 1}", y1 + 0.7, y1 + 1.15, 2.0, 0.35, venom, dx=dx, dz=0.45, rot=r)
+        m.c(f"crest_{i}", y1 + 0.2, y1 + 1.2, 0.4, 1.0, edge, dx=dx, dz=0.9, rot=r)
     return DISPLAY
 
 
 def undergloom_scythe(m, p, s, a):
-    blade, bone, cord, edge = m.mat("metal", p), m.mat("bone", s, "#B5AC93"), m.mat("wrap", a), m.mat("edge", "#9FD3CB")
+    blade, bone, cord = m.mat("metal", p), m.mat("bone", s, "#B5AC93"), m.mat("wrap", a)
+    edge = m.mat("glow", "#BFF5EC", p)                             # soul-light edge, animated
     spine = m.mat("dark", a, p)
     m.c("haft", -15, 24, 1.2, 1.2, bone)
     m.c("foot", -15.6, -14, 1.5, 1.5, cord)
@@ -484,7 +559,7 @@ def undergloom_scythe(m, p, s, a):
         rot = ("z", ang, [x, y, 8]) if ang else None
         m.box(f"blade_{i}", [x - L, y - b, 7.65], [x, y, 8.35], blade, rot)
         m.box(f"spine_{i}", [x - L, y - 0.35, 7.55], [x, y + 0.15, 8.45], spine, rot)
-        m.box(f"edge_{i}", [x - L, y - b - 0.4, 7.7], [x, y - b, 8.3], edge, rot)
+        m.box(f"glow_edge_{i}", [x - L, y - b - 0.4, 7.7], [x, y - b, 8.3], edge, rot)
         r = math.radians(ang)
         x, y = x - L * math.cos(r), y - L * math.sin(r)
     return scaled_display(1.05)
@@ -495,8 +570,7 @@ def sculkheart_dagger(m, p, s, a):
     m.grip(-3, 3, 1.4, black, black)
     for i, (dx, rot) in enumerate(((-1.6, 22.5), (1.6, -22.5), (-1.0, 45), (1.0, -45))):   # sculk tendril guard
         m.c(f"tendril_{i}", 3, 5.2, 0.5, 0.5, black, dx=dx, rot=("z", rot, [8 + dx, 3, 8]))
-    m.taper("blade", 3.4, 12.5, 2.4, 1.0, 0.9, glass, 4)
-    m.c("glow_core", 3.6, 11.4, 0.6, 1.0, core)
+    m.taper("blade", 3.4, 12.5, 2.4, 1.0, 0.9, glass, 4, ridge=core)                     # glowing sculk core
     return DISPLAY
 
 
@@ -520,16 +594,27 @@ def choirbreaker_gauntlets(m, p, s, a):
 
 def harbingers_railblade(m, p, s, a):
     gun, neon, hazard = m.mat("metal", p), m.mat("glow", s, "#127A06"), m.mat("wrap", a)
+    dark = m.mat("dark", "#15191B", s)
     m.grip(-6, 2.5, 1.6, gun, gun)
-    m.c("housing", 2.5, 5.5, 4.4, 2.6, gun)
-    m.c("emitter_L", 5.5, 6.5, 1.2, 2.0, hazard, dx=-1.6)
-    m.c("emitter_R", 5.5, 6.5, 1.2, 2.0, hazard, dx=1.6)
-    m.c("rail_L", 5.5, 28, 0.9, 1.2, gun, dx=-1.25)
-    m.c("rail_R", 5.5, 28, 0.9, 1.2, gun, dx=1.25)
-    m.c("glow_channel", 6, 27.5, 1.6, 0.5, neon)
-    for y in (10, 16, 22):                                         # hazard coils
-        m.c(f"coil_{y}", y, y + 1.2, 3.8, 1.6, hazard)
-    m.c("tip", 28, 29.5, 3.4, 1.2, gun)
+    m.c("trigger_guard", -1, 2, 0.5, 1.2, gun, dx=1.3)
+    m.c("housing", 2.5, 6, 4.6, 2.8, gun)
+    m.c("battery", 2.9, 5.6, 1.4, 3.2, dark, dx=-1.0)
+    m.c("glow_battery_cell", 3.3, 5.2, 0.8, 3.3, neon, dx=-1.0)
+    for i in range(3):                                             # cooling vents
+        m.c(f"vent_{i}", 3.1 + i * 0.9, 3.5 + i * 0.9, 1.6, 2.9, dark, dx=1.1)
+    m.c("emitter_L", 6, 7, 1.3, 2.2, hazard, dx=-1.7)
+    m.c("emitter_R", 6, 7, 1.3, 2.2, hazard, dx=1.7)
+    m.c("rail_L", 6, 27.6, 0.9, 1.3, gun, dx=-1.35)
+    m.c("rail_R", 6, 27.6, 0.9, 1.3, gun, dx=1.35)
+    m.c("rail_edge_L", 6.5, 27, 0.25, 1.35, dark, dx=-1.9)
+    m.c("rail_edge_R", 6.5, 27, 0.25, 1.35, dark, dx=1.9)
+    m.c("glow_channel", 6.4, 27.2, 1.8, 0.5, neon)
+    for y in (10, 15, 20, 24.5):                                   # hazard coils
+        m.c(f"coil_{y}", y, y + 1.2, 4.0, 1.7, hazard)
+        m.c(f"coil_core_{y}", y + 0.3, y + 0.9, 4.2, 1.8, dark)
+    m.c("prong_L", 27.6, 30, 0.9, 1.2, gun, dx=-1.35)
+    m.c("prong_R", 27.6, 30, 0.9, 1.2, gun, dx=1.35)
+    m.c("glow_muzzle", 27.4, 28.6, 1.8, 0.7, neon)
     return scaled_display(0.82)
 
 
@@ -556,10 +641,9 @@ def thornecutter(m, p, s, a):
     m.grip(-6, 3, 1.7, wrap, black)
     m.c("guard", 3, 4.6, 7.4, 2.0, black)
     m.c("guard_gem", 3.2, 4.4, 1.4, 2.2, gold)
-    m.taper("blade", 4.6, 27, 4.6, 1.6, 1.2, void, 7, edge=grey, edge_w=0.4)
+    m.taper("blade", 4.6, 27, 4.6, 1.6, 1.2, void, 7, edge=grey, edge_w=0.4, ridge=gold)
     for side in (-1, 1):                                           # gold seams running up both faces
         m.c(f"glow_seam_F{side}", 5.4, 24, 0.3, 1.3, gold, dx=0.9 * side)
-    m.c("glow_core", 5.4, 22, 0.5, 1.28, gold)
     m.c("chips", 12, 20, 0.45, 1.25, grey, dx=2.05)
     m.c("tip", 27, 29.4, 0.9, 0.9, grey)
     return scaled_display(1.0)
@@ -574,8 +658,7 @@ def emberhold_oathblade(m, p, s, a):
     m.c("guard_tip_L", 3.4, 5.0, 0.9, 1.4, crimson, dx=-3.4)
     m.c("guard_tip_R", 3.4, 5.0, 0.9, 1.4, crimson, dx=3.4)
     m.c("crest", 2.4, 5, 2.4, 2.2, crimson)
-    m.taper("blade", 4.3, 22, 2.6, 1.8, 0.8, white, 5, edge=edge)
-    m.c("glow_fuller", 5.2, 19.5, 0.5, 0.86, flame)
+    m.taper("blade", 4.3, 22, 2.6, 1.8, 0.8, white, 5, edge=edge, ridge=flame)          # glowing fuller
     m.c("tip", 22, 24, 1.0, 0.7, white)
     for i, (y, h) in enumerate(((7, 3.6), (12, 4.2), (17, 3.0))):       # flame tongues licking off the edge
         x = 8.7                                                         # rooted inside the edge
@@ -650,7 +733,7 @@ def build(w):
         for (ei, f, sx, sy, pw, ph), (ax, ay) in zip(faces, pos):
             patch = sheets[m.els[ei]["m"]][fr][sy:sy + ph, sx:sx + pw].copy()
             if not m.els[ei]["name"].startswith("glow"):
-                patch = bevel(patch)
+                patch = bevel(patch, f)
             oy = fr * side
             tex[oy + ay:oy + ay + ph, ax:ax + pw, :3] = patch
             # 1 px bleed border so mipmaps and filtering never pick up a neighbour

@@ -255,13 +255,18 @@ def limb_chain(m, name, x, y, segs, wid, dep, mat, sign, glow=None):
 
 def frontier_cleaver(m, p, s, a):
     bone, sinew, flint = m.mat("bone", p, "#BFAF8F"), m.mat("wrap", s), m.mat("dark", a, "#9A9A9A")
+    edge = m.mat("edge", "#EDE6D4")
     m.grip(-3, 3, 1.6, sinew, flint)
     m.c("lash", 2.6, 4.2, 3.2, 2.2, sinew)
     m.c("flint_wedge", 3, 5, 4.6, 1.6, flint)
-    m.taper("blade", 5, 17, 3.2, 5.6, 1.1, bone, 6)               # wider at the tip than the base
-    for i, y in enumerate((8.5, 11.5, 14.5)):                      # three knocked-out notches: dark chips on the edge
-        m.c(f"notch_{i}", y, y + 0.9, 0.7, 1.2, flint, dx=2.6 + 0.35 * i)
-    m.c("tip", 17, 18.2, 4.2, 1.0, bone, dx=0.6, rot=("z", 22.5, [8, 17, 8]))
+    m.taper("blade", 5, 17, 3.2, 5.6, 1.1, bone, 6, dx0=0.2, dx1=0.6)
+    m.box("edge", [10.1, 5.4, 7.5], [10.9, 17, 8.5], edge)                # straight honed edge on +x
+    m.c("spine", 5, 17.4, 0.6, 1.3, flint, dx=-2.4)                     # dark flint spine on -x
+    for i, y in enumerate((8.5, 11.5, 14.5)):                           # three knocked-out notches in the edge
+        m.box(f"notch_{i}", [10.3, y, 7.45], [11.0, y + 0.9, 8.55], flint)
+    m.c("tip_1", 17, 17.9, 4.8, 1.0, bone, dx=0.4)                      # clipped, cleaver-style point
+    m.c("tip_2", 17.9, 18.6, 3.0, 0.9, bone, dx=1.1)
+    m.box("tip_edge", [10.1, 17, 7.5], [10.9, 18.6, 8.5], edge)
     return DISPLAY
 
 
@@ -285,14 +290,19 @@ def gnawblade(m, p, s, a):
     wrap, bone, tail = m.mat("wrap", s), m.mat("bone", "#E6DECB", "#B8AE98"), m.mat("flat", a)
     m.c("skull", -3.6, -1.2, 2.6, 2.6, bone)
     m.c("skull_snout", -2.8, -1.8, 1.2, 1.4, bone, dz=1.6)
+    m.c("ear_L", -1.4, -0.6, 0.7, 0.7, bone, dx=-1.0)
+    m.c("ear_R", -1.4, -0.6, 0.7, 0.7, bone, dx=1.0)
     m.c("eye_L", -2.4, -2.0, 0.5, 0.2, tail, dx=-0.6, dz=1.31)
     m.c("eye_R", -2.4, -2.0, 0.5, 0.2, tail, dx=0.6, dz=1.31)
     m.c("tail_loop", -6, -3.6, 0.4, 0.4, tail, dx=1.2, rot=("z", 22.5, [9.2, -3.6, 8]))
     m.grip(-1.2, 3, 1.5, wrap)
-    m.c("guard", 3, 3.8, 3.2, 1.4, blade)
-    m.taper("blade", 3.8, 11.5, 2.4, 1.6, 0.8, blade, 4, edge=edge)
-    for i, y in enumerate((6, 8, 10)):                             # chisel teeth
-        m.c(f"tooth_{i}", y, y + 0.9, 0.8, 0.8, edge, dx=1.5)
+    m.c("guard", 3, 3.8, 4.2, 1.4, blade)
+    m.c("guard_tooth_L", 3.4, 4.6, 0.6, 0.8, edge, dx=-2.0)
+    m.c("guard_tooth_R", 3.4, 4.6, 0.6, 0.8, edge, dx=2.0)
+    m.taper("blade", 3.8, 14, 2.8, 1.4, 0.8, blade, 5, edge=edge)
+    m.c("tip", 14, 15.2, 0.8, 0.6, edge)
+    for i, y in enumerate((5.5, 7.5, 9.5, 11.5)):                       # rat-tooth serrations on the spine
+        m.c(f"tooth_{i}", y, y + 1.0, 0.7, 0.7, edge, dx=-1.6 + 0.12 * i)
     return DISPLAY
 
 
@@ -380,15 +390,20 @@ def hollowbane_tachi(m, p, s, a):
     lacquer, hamon, silver = m.mat("dark", p, s), m.mat("glow", s, "#3B1677"), m.mat("metal", a)
     wrap = m.mat("wrap", "#2A2530")
     m.grip(-7, 3, 1.4, wrap, silver)
+    for y in (-5, -2, 1):                                               # menuki diamonds on the wrap
+        m.c(f"menuki_{y}", y, y + 0.8, 0.6, 1.6, silver)
     m.c("tsuba", 3, 3.7, 3.6, 3.6, silver)
+    m.c("tsuba_rim", 3.05, 3.65, 3.9, 0.6, lacquer)
     m.c("habaki", 3.7, 4.8, 1.6, 1.2, silver)
     m.taper("blade", 4.8, 29, 1.7, 1.2, 0.6, lacquer, 8, dx0=0, dx1=-2.6)   # curved single edge
-    for i in range(4):                                             # hamon line along the edge, following the curve
-        t0, t1 = i / 4, (i + 1) / 4
+    for i in range(6):                                                  # hamon along the edge, following the curve
+        t0, t1 = i / 6, (i + 1) / 6
         y0, y1 = 4.8 + 24.2 * t0, 4.8 + 24.2 * t1
         dx = -2.6 * ((t0 + t1) / 2) ** 2
         m.c(f"glow_hamon_{i + 1}", y0, y1 + 0.01, 0.35, 0.65, hamon, dx=dx + 0.55)
-    m.c("kissaki", 29, 30.5, 0.9, 0.55, lacquer, dx=-2.8, rot=("z", 22.5, [5.2, 29, 8]))
+    m.c("kissaki_1", 29, 30, 1.0, 0.55, lacquer, dx=-2.75)
+    m.c("kissaki_2", 30, 30.8, 0.5, 0.5, lacquer, dx=-3.0)
+    m.c("glow_kissaki", 29, 30.4, 0.3, 0.6, hamon, dx=-2.3)
     return scaled_display(0.8)
 
 
@@ -487,15 +502,20 @@ def sculkheart_dagger(m, p, s, a):
 
 def choirbreaker_gauntlets(m, p, s, a):
     chrome, red, black = m.mat("metal", p), m.mat("glow", s, "#6E0B18"), m.mat("dark", a, "#3A3A3A")
-    for i in range(3):                                             # wrist servo rings
-        m.c(f"servo_{i}", -3 + i * 1.3, -2 + i * 1.3, 3.6, 3.6, black)
-    m.c("plate_back", 1, 5, 4.4, 0.8, chrome, dz=2.3)
-    m.c("plate_front", 4, 6, 4.6, 4.2, chrome)
-    for i in range(4):                                             # knuckle ridges
-        m.c(f"ridge_{i}", 6, 6.8, 0.8, 1.2, chrome, dx=-1.7 + i * 1.13, dz=1.4)
-    m.c("glow_emitter_1", 2, 3.2, 1.2, 0.4, red, dx=-1, dz=2.75)
-    m.c("glow_emitter_2", 2, 3.2, 1.2, 0.4, red, dx=1, dz=2.75)
-    return DISPLAY
+    m.c("cuff", -5, 0.6, 4.0, 4.0, black)
+    for i, y in enumerate((-4.4, -2.6, -0.8)):                          # chrome servo rings around the cuff
+        m.c(f"servo_{i}", y, y + 0.7, 4.4, 4.4, chrome)
+    m.c("glow_cuff_line", -4, 0.2, 0.4, 4.1, red, dx=1.6)
+    m.c("palm", 0.6, 5, 4.4, 3.2, black)
+    m.c("back_plate", 1, 5.2, 4.6, 0.8, chrome, dz=-1.9)
+    m.c("glow_emitter", 2.2, 4.0, 1.8, 0.3, red, dz=-2.4)                # sonic emitter on the back of the hand
+    for i in range(4):
+        x = -1.65 + i * 1.1
+        m.c(f"knuckle_{i}", 5, 6.4, 0.95, 3.4, chrome, dx=x)
+        m.c(f"finger_{i}", 3.6, 6.0, 0.9, 1.3, black, dx=x, dz=2.2)    # fingers curled into a fist
+        m.c(f"glow_knuckle_{i}", 5.6, 6.0, 0.6, 0.2, red, dx=x, dz=-1.75)
+    m.c("thumb", 2.4, 4.4, 1.0, 2.6, chrome, dx=2.6, dz=0.8)
+    return scaled_display(1.2)
 
 
 def harbingers_railblade(m, p, s, a):
@@ -546,15 +566,21 @@ def thornecutter(m, p, s, a):
 
 
 def emberhold_oathblade(m, p, s, a):
-    white, crimson, flame, edge = m.mat("metal", p), m.mat("metal", s), m.mat("glow", a, "#FFD9A0"), m.mat("edge", "#FFFFFF")
+    white, crimson, flame, edge = m.mat("metal", p), m.mat("metal", s), m.mat("glow", a, s), m.mat("edge", "#FFFFFF")
     m.c("pommel", -5, -3.6, 2, 2, crimson)
+    m.c("glow_pommel_gem", -4.6, -4.0, 0.8, 2.1, flame)
     m.grip(-3.6, 3, 1.5, m.mat("wrap", s))
     m.c("guard", 3, 4.3, 6.6, 1.8, crimson)
+    m.c("guard_tip_L", 3.4, 5.0, 0.9, 1.4, crimson, dx=-3.4)
+    m.c("guard_tip_R", 3.4, 5.0, 0.9, 1.4, crimson, dx=3.4)
     m.c("crest", 2.4, 5, 2.4, 2.2, crimson)
     m.taper("blade", 4.3, 22, 2.6, 1.8, 0.8, white, 5, edge=edge)
+    m.c("glow_fuller", 5.2, 19.5, 0.5, 0.86, flame)
     m.c("tip", 22, 24, 1.0, 0.7, white)
-    for i, (y, h) in enumerate(((8, 3.2), (13, 4.0), (18, 2.8))):  # white flame tongues along the edge
-        m.c(f"glow_flame_{i + 1}", y, y + h, 0.7, 0.6, flame, dx=1.7, rot=("z", -22.5, [9.4, y, 8]))
+    for i, (y, h) in enumerate(((7, 3.6), (12, 4.2), (17, 3.0))):       # flame tongues licking off the edge
+        x = 8.7                                                         # rooted inside the edge
+        m.box(f"glow_flame_{i + 1}a", [x, y, 7.75], [x + 0.8, y + h, 8.25], flame, ("z", -22.5, [x, y, 8]))
+        m.box(f"glow_flame_{i + 1}b", [x + 0.3, y + 0.6, 7.8], [x + 0.9, y + h * 0.65, 8.2], flame, ("z", -45, [x, y, 8]))
     return DISPLAY
 
 

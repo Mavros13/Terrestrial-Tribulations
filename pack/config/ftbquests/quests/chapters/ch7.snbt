@@ -169,7 +169,8 @@
 			]
 			rewards: [
 				{ id: "C877427874BFA92F", type: "xp", xp: 1500 },
-				{ id: "47D67029D768B9BF", type: "command", command: "/kubejs stages add @p tt_ch7_done", elevate_perms: true, silent: true }
+				{ id: "47D67029D768B9BF", type: "command", command: "/kubejs stages add @p tt_ch7_done", elevate_perms: true, silent: true },
+				{ id: "F98278D55E7A72EF", type: "command", command: "/origin set @p origins:super_powers/origin super_powers:speedster", elevate_perms: true, silent: true }
 			]
 		}
 	]

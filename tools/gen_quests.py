@@ -43,6 +43,9 @@ def r_item(i, count=1):
     return f'type: "item", item: {item(i, min(count, 64))}'
 def r_xp(n):
     return f'type: "xp", xp: {n}'
+def r_cmd(cmd):
+    """Runs a server command as the player's reward (operator rights)."""
+    return f'type: "command", command: {s(cmd)}, elevate_perms: true, silent: true'
 def r_stage(stage):
     """Grants a KubeJS stage (used by story gates). The command needs operator rights, hence elevate_perms."""
     return f'type: "command", command: "/kubejs stages add @p {stage}", elevate_perms: true, silent: true'
@@ -152,7 +155,7 @@ CHAPTERS = [
 
 from quest_story import chapters as story_chapters  # Chapters 2-12 (main story)
 
-CHAPTERS = CHAPTERS[:2] + story_chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage) + CHAPTERS[2:]
+CHAPTERS = CHAPTERS[:2] + story_chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage, r_cmd) + CHAPTERS[2:]
 
 
 def quest_snbt(q):

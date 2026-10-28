@@ -194,6 +194,7 @@
   ],
   "gate_namespaces": [
     "fsang",
+    "ghmorak",
     "satsu_iron_man_addon"
   ],
   "quest_items": [

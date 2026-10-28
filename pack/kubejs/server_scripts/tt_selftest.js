@@ -81,7 +81,10 @@ function ttSelfTest(server) {
   }
 
   // Story gates are useless if their namespace has no items (wrong namespace or mod missing)
-  section('gate_namespaces', cfg.gate_namespaces, ns => Ingredient.of(`@${ns}`).itemIds.size() > 0)
+  section('gate_namespaces', cfg.gate_namespaces, ns => {
+    if (Ingredient.of(`@${ns}`).itemIds.size() > 0) return true
+    return Platform.isLoaded(ns) ? false : `no items; mod ${ns} not installed (or its mod id differs)`
+  })
 
   section('gated_dimensions', cfg.dimensions, id => {
     let ns = id.split(':')[0]

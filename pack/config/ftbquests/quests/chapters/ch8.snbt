@@ -60,7 +60,8 @@
 			]
 			rewards: [
 				{ id: "AFE65CBA05C2E299", type: "xp", xp: 1000 },
-				{ id: "F4977638B1E8999B", type: "command", command: "/kubejs stages add @p tt_ch8_heroes", elevate_perms: true, silent: true }
+				{ id: "F4977638B1E8999B", type: "command", command: "/kubejs stages add @p tt_ch8_heroes", elevate_perms: true, silent: true },
+				{ id: "0B9B3F55837CF29F", type: "command", command: "/origin set @p origins:super_powers/origin super_powers:jumper", elevate_perms: true, silent: true }
 			]
 		},
 		{

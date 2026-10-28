@@ -27,7 +27,7 @@ Their exact item IDs and namespaces get filled in after the first launch, from `
 | `tt_ch8_heroes` | Ch8 opening quest: "The Engine Heart" (bring Pell an Old Engine core) | Wearing or using any gated hero item (`tt_story_gates.json`) |
 | `tt_ch9_marks` | Ch9: defeat the first Iron Choir Herald | Higher Satsu Marks. The pack's own XP blueprint costs stay as an extra gate |
 | `tt_ch10_echoes` | Ch10 Mythic Crucible tier I | FSang18 top-tier heroes |
-| Gods and Heroes awakenings | One per Crown Shard collected (Ch7+) | Speedster → Jumper → Kryptonian, in that order. Because they're origins, hide the pack's layer at character creation and grant each one by command (`/origin set`) from the Crown Shard quest. Layer and origin IDs come from the first launch |
+| Gods and Heroes awakenings | Ch7 "The Voice Grows Louder" (5 Shards), Ch8 "The Engine Heart", Ch10 "Seven" (7 Shards) | Speedster → Jumper → Kryptonian. The pack's "Super Power" layer (`origins:super_powers/origin`) is hidden at character creation and each origin (`super_powers:speedster`, `jumper`, `kryptonian`) is granted by `/origin set` from those quests. IDs checked from the 1.4 jar: `docs/research/2026-10-28-gods-and-heroes.md` |
 
 Recipes: the pack recipes for top-tier items get **story materials** added by KubeJS (boss drops: Harbinger core, Leviathan scale, Crown Shard Fragment), so the strongest suits can't be built early. They're also gated by the stage.
 

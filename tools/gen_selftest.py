@@ -1,7 +1,8 @@
 """Writes pack/kubejs/config/tt_selftest.json: what the in-game self-test (server_scripts/tt_selftest.js) expects to
 find loaded. Built from the pack's own data, so it stays in step with the generators:
 items (design/weapons/weapons.json), Epic Fight weapon capabilities (data/tt/capabilities/weapons/), Palladium
-powers (data/tt/palladium/powers/), origins and layers (data/tt/origins/, data/*/origin_layers/), dimension-gate
+powers (data/tt/palladium/powers/), Passive Skill Tree trees and skills (data/tt/skill_trees/, data/tt/skills/),
+story-gate namespaces, origins and layers (data/tt/origins/, data/*/origin_layers/), dimension-gate
 dimensions (kubejs/config/tt_story_gates.json). Run by build_prism.py."""
 import json, os
 
@@ -24,10 +25,13 @@ out = {
     "powers": ["tt:" + n for n in names("data/tt/palladium/powers")],
     "origins": ["tt:" + n for n in names("data/tt/origins")],
     "layers": layers,
+    "skill_trees": [json.load(open(os.path.join(KJ, "data", "tt", "skill_trees", n + ".json")))["id"] for n in names("data/tt/skill_trees")],
+    "skills": ["tt:" + n for n in names("data/tt/skills")],
+    "gate_namespaces": sorted({ns for g in gates.get("gates", []) for ns in g.get("namespaces", [])}),
     "dimensions": sorted({d for g in gates.get("dimension_gates", {}).get("gates", []) for d in g["dimensions"]}),
 }
 with open(os.path.join(KJ, "config", "tt_selftest.json"), "w") as f:
     json.dump(out, f, indent=2)
     f.write("\n")
 print(f"Self-test list: {len(out['items'])} items, {len(out['ef_weapons'])} EF weapons, {len(out['powers'])} powers, "
-      f"{len(out['origins'])} origins, {len(out['layers'])} layers, {len(out['dimensions'])} dimensions")
+      f"{len(out['origins'])} origins, {len(out['skills'])} skills, {len(out['layers'])} layers, {len(out['dimensions'])} dimensions")

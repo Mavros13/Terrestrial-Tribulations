@@ -1,12 +1,14 @@
 // Terrestrial Tribulations: self-test (hand-written). Run from the server console or in game (op):
 //   /kubejs custom_command tt_selftest
 // Checks that our content really loaded: every tt: weapon item exists, our Epic Fight weapon capabilities apply,
-// our Palladium powers, origins and origin layers are registered, and every dimension-gate dimension exists (when its
+// our Palladium powers, origins, origin layers, Passive Skill Tree tree and skills are registered, story-gate
+// namespaces have items, and every dimension-gate dimension exists (when its
 // mod is installed). The expected lists come from kubejs/config/tt_selftest.json (tools/gen_selftest.py).
 // Prints "[TT] selftest ..." lines to the log and writes kubejs/exported/tt_selftest.json. tools/server_test.ps1 runs
 // it on the headless test server. Mod APIs checked against source: Epic Fight 1.20.1
 // (EpicFightCapabilities.getItemStackCapability, CapabilityItem.isEmpty), Palladium 1.20/main
-// (PowerManager.getInstance(Level).getPower(ResourceLocation)), Origins Forge (OriginsAPI.getOriginsRegistry/
+// (PowerManager.getInstance(Level).getPower(ResourceLocation)), Passive Skill Tree 1.20.1 (SkillTreesReloader.getSkillTrees,
+// SkillsReloader.getSkillById), Origins Forge (OriginsAPI.getOriginsRegistry/
 // getLayersRegistry(MinecraftServer)).
 
 function ttSelfTest(server) {
@@ -70,6 +72,16 @@ function ttSelfTest(server) {
     section('origins', cfg.origins, id => OAPI.getOriginsRegistry(server).containsKey(new RL(id)))
     section('origin_layers', cfg.layers, id => OAPI.getLayersRegistry(server).containsKey(new RL(id)))
   }
+
+  if (Platform.isLoaded('skilltree')) {
+    let STR = Java.loadClass('daripher.skilltree.data.reloader.SkillTreesReloader')
+    let SR = Java.loadClass('daripher.skilltree.data.reloader.SkillsReloader')
+    section('skill_trees', cfg.skill_trees, id => STR.getSkillTrees().containsKey(new RL(id)))
+    section('skills', cfg.skills, id => SR.getSkillById(new RL(id)) != null)
+  }
+
+  // Story gates are useless if their namespace has no items (wrong namespace or mod missing)
+  section('gate_namespaces', cfg.gate_namespaces, ns => Ingredient.of(`@${ns}`).itemIds.size() > 0)
 
   section('gated_dimensions', cfg.dimensions, id => {
     let ns = id.split(':')[0]

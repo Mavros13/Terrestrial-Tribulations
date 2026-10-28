@@ -449,6 +449,134 @@
           }
         ]
       }
+    },
+    "railblade_charge": {
+      "type": "palladium:player_animation",
+      "animation": "tt:railblade_charge",
+      "list_index": 7,
+      "title": "Railblade Charge",
+      "description": {
+        "text": "Rail Lance windup: blade drawn back low at the hip, off hand braced, then driven forward."
+      },
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:activation",
+            "ticks": 24,
+            "cooldown": 34
+          }
+        ]
+      }
+    },
+    "railblade_charge_charge": {
+      "type": "palladium:command",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "commands": [
+        "execute anchored eyes run particle minecraft:electric_spark ^ ^-0.45 ^0.75 0.12 0.12 0.12 0.02 3 normal"
+      ],
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "railblade_charge"
+          },
+          {
+            "type": "palladium:ability_ticks",
+            "ability": "railblade_charge",
+            "min": 1,
+            "max": 15
+          }
+        ]
+      }
+    },
+    "railblade_charge_release": {
+      "type": "palladium:command",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "commands": [],
+      "first_tick_commands": [
+        "execute anchored eyes run particle minecraft:crit ^ ^-0.4 ^1.40 0.25 0.25 0.25 0.08 25 normal",
+        "playsound minecraft:entity.illusioner.cast_spell player @a ~ ~ ~ 0.8 1.1"
+      ],
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "railblade_charge"
+          },
+          {
+            "type": "palladium:ability_ticks",
+            "ability": "railblade_charge",
+            "min": 16,
+            "max": 16
+          }
+        ]
+      }
+    },
+    "gauntlet_charge": {
+      "type": "palladium:player_animation",
+      "animation": "tt:gauntlet_charge",
+      "list_index": 8,
+      "title": "Gauntlet Charge",
+      "description": {
+        "text": "Overload Punch: fist cocked back with a torso twist, then a straight drive."
+      },
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:activation",
+            "ticks": 18,
+            "cooldown": 28
+          }
+        ]
+      }
+    },
+    "gauntlet_charge_charge": {
+      "type": "palladium:command",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "commands": [
+        "execute anchored eyes run particle minecraft:ash ^ ^-0.45 ^0.45 0.12 0.12 0.12 0.02 3 normal"
+      ],
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "gauntlet_charge"
+          },
+          {
+            "type": "palladium:ability_ticks",
+            "ability": "gauntlet_charge",
+            "min": 1,
+            "max": 10
+          }
+        ]
+      }
+    },
+    "gauntlet_charge_release": {
+      "type": "palladium:command",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "commands": [],
+      "first_tick_commands": [
+        "execute anchored eyes run particle minecraft:explosion ~ ~0.1 ~ 0.25 0.25 0.25 0.08 1 normal",
+        "playsound minecraft:entity.generic.explode player @a ~ ~ ~ 0.8 1.1"
+      ],
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "gauntlet_charge"
+          },
+          {
+            "type": "palladium:ability_ticks",
+            "ability": "gauntlet_charge",
+            "min": 11,
+            "max": 11
+          }
+        ]
+      }
     }
   }
 }

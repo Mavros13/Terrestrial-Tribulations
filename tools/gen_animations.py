@@ -91,6 +91,24 @@ CASTS = {
               head=[-22, 0, 0]),
             k(0.75, "linear", right_arm=[-175, -5, -6], left_arm=[-48, 0, -52], torso=[-7, -4, 0], head=[-20, 0, 0]),
         ]),
+    "railblade_charge": (
+        "Rail Lance windup: blade drawn back low at the hip, off hand braced, then driven forward.", 1.2, 16, "spark", [
+            k(0.3, "easeOutCubic", right_arm=[25, 30, 20], left_arm=[-80, 45, 0], torso=[10, 35, 0], head=[0, -30, 0],
+              right_leg=([12, 0, 0], [0, 0, 1]), left_leg=([-15, 0, 0], [0, 0, -1])),
+            k(0.75, "linear", right_arm=[30, 32, 22], left_arm=[-84, 47, 0], torso=[12, 38, 0], head=[0, -32, 0],
+              right_leg=([12, 0, 0], [0, 0, 1]), left_leg=([-15, 0, 0], [0, 0, -1])),
+            k(0.85, "easeOutBack", right_arm=[-95, -5, 0], left_arm=[-40, 0, -30], torso=[10, -15, 0], head=[2, 10, 0],
+              right_leg=([-15, 0, 0], [0, 0, -1]), left_leg=([12, 0, 0], [0, 0, 1])),
+            k(1.0, "linear", right_arm=[-92, -5, 0], left_arm=[-38, 0, -28], torso=[8, -12, 0]),
+        ]),
+    "gauntlet_charge": (
+        "Overload Punch: fist cocked back with a torso twist, then a straight drive.", 0.9, 11, "slam", [
+            k(0.3, "easeOutCubic", right_arm=[-60, 40, 10], left_arm=[-70, 20, 0], torso=[6, 30, 0], head=[0, -25, 0]),
+            k(0.5, "linear", right_arm=[-62, 44, 10], left_arm=[-72, 22, 0], torso=[7, 33, 0], head=[0, -28, 0]),
+            k(0.58, "easeOutExpo", right_arm=[-92, -8, 0], left_arm=[-20, 0, -10], torso=[12, -20, 0], head=[3, 15, 0],
+              right_leg=([-15, 0, 0], [0, 0, -1]), left_leg=([12, 0, 0], [0, 0, 1])),
+            k(0.72, "linear", right_arm=[-90, -6, 0], left_arm=[-18, 0, -10], torso=[10, -18, 0]),
+        ]),
 }
 
 # Particles at the hands while charging, and a burst plus sound on the release tick. Commands run as the player

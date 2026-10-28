@@ -1,4 +1,4 @@
-# Test session 2: weapons and cast animations (about 45 minutes)
+# Test session 2: weapons, abilities and cast animations (about 55 minutes)
 
 Do the steps in order. Each one has what to look for. If something is wrong, write down the step number and what you saw, or take a screenshot. Nothing needs to be fixed during the session. Send everything back at the end.
 
@@ -41,6 +41,14 @@ The other 15 weapons: `/give @p tt:<id>` with ids from JEI (search `@kubejs`). A
 Switch to **Survival** (`/gamemode survival`). Press **R** for Epic Fight battle mode. Swing the cleaver, longsword and scythe at a zombie (`/summon zombie ~ ~ ~3`).
 - Does the swing trail run along the blade, and stop at the tip and the handle?
 - Does each weapon use a fitting move set?
+
+## 3b. Weapon abilities (10 min)
+All 23 weapons now have working abilities. Try these, with a few zombies around (`/summon zombie ~ ~ ~4`):
+- **Sneak + right click:** Skyreach Spear (launch up; hit something in the air to plunge), Harbinger's Railblade (1.5 s charge, then beam), Choirbreaker Gauntlets (EMP stun), Crownshard Karambits (blink between enemies).
+- **Cogwright Breaker:** hit 3 to 5 times (watch the "Pressure" counter), then sneak and hit to release it.
+- **Bows:** Rootstring Bow and Abyssal Longbow should draw and shoot like a normal bow (you need arrows outside creative). A full draw with the Rootstring roots enemies where it lands; the Abyssal arrow pierces and drags.
+- **Epic Fight:** Rustbite Karambit: dodge an attack, then hit within 1 s (extra damage, target flinches). Wroughtnaut Bulwark: parry (guard just as the hit lands) and the attacker takes the damage back.
+- Each active ability greys out on the hotbar while it cools down.
 
 ## 4. Cast animations (10 min)
 ```

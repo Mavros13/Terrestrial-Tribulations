@@ -7,21 +7,8 @@ A small MCreator workspace (`mcreator/terrestrial_tribulations`, mod ID `tt_brid
 - Commands: `/tt flag set <player> <flag>`, `/tt flag check`. FTB Quests rewards call these as *command rewards*.
 - Every flag is also mirrored to a KubeJS player stage, so KubeJS scripts can read it.
 
-## 2. Weapon abilities marked BRIDGE in weapons.json
-| Weapon | Ability | MCreator approach |
-|---|---|---|
-| Rustbite Karambit | Reversal Cut | Subscribe to `PlayerEventListener.EventType.DODGE_SUCCESS_EVENT` on the ServerPlayerPatch; store a 1 s window; next hit +2 damage and a short stun |
-| Wroughtnaut Bulwark | Iron Recoil | Listen for a successful parry with this item held; reflect the blocked damage to the attacker and stun it 1 s |
-| Cogwright Breaker | Pressure Release | Item NBT counter, sneak-attack procedure, AoE knock-up |
-| Rootstring Bow | Seedshot | Custom ranged item; arrow-hit procedure places temporary briar blocks |
-| Prism Ward Staff | Prism Ward | On spell cast (Iron's Spells event) → reflect-shield effect |
-| Skyreach Spear | Gale Vault | Right-click launch (+Y velocity), mid-air attack → dive AoE, cancel fall damage |
-| Choirbreaker Gauntlets | Overload Punch | Charged use → EMP AoE: Slowness 255 + Weakness on tagged mobs |
-| Harbinger's Railblade | Rail Lance | Charged use → raycast beam with particles, piercing damage |
-| Abyssal Longbow | Undertow Arrow | Custom projectile: piercing, pulls hit entities |
-| Crownshard Karambits | Shard Rend | Teleport chain between 3 nearest hostiles, damage each, brief invulnerability |
-| Thornecutter | Sunder the Regent | Damage multiplier vs `#forge:bosses` by missing health; skill removes one effect |
-| Emberhold Oathblade | Oath of the Capital | Reads the MineColonies Town Hall level (MineColonies API), scales damage, heals citizens |
+## 2. Weapon abilities (moved to KubeJS, 2026-10-28)
+All 12 abilities first listed here now run in KubeJS (`pack/kubejs/server_scripts/tt_active_abilities.js`, bows in `startup_scripts/tt_bows.js`, Iron's spell hook in `startup_scripts/tt_forge_events.js`). KubeJS reaches Epic Fight's dodge and parry listeners, MineColonies' colony manager and Iron's spell event through their Java APIs, so none of them needs Java. tt_bridge can still upgrade them later (the cast system in section 5 for proper body animation, GeckoLib weapons, a real ground-flame line for Flame Wake and thorn line for Briar Line).
 
 ## 3. Cross-mod hooks
 - MineColonies Town Hall level → story flag `city_stage_N` (unlocks chapters).

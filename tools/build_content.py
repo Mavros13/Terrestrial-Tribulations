@@ -281,8 +281,11 @@ def main():
     for w in weapons:
         make_texture(w)
         if w["family"] == "bow":
-            items.append(f"  // {w['name']}: bow behaviour needs the tt_bridge mod; registered as a placeholder item for now\n"
-                         f"  event.create('tt:{w['id']}').maxStackSize(1).rarity('{VANILLA_RARITY[w['rarity']]}')")
+            # Shooting lives in startup_scripts/tt_bows.js; base arrow damage grows with tier (vanilla bow = 2.0).
+            opts = {"id": "tt:" + w["id"], "damage": round(2.0 + w["tier"] * 0.25, 2), "pierce": w.get("pierce", 0)}
+            items.append(f"  event.create('tt:{w['id']}').maxStackSize(1).rarity('{VANILLA_RARITY[w['rarity']]}')"
+                         f".useAnimation('bow').useDuration(s => 72000).use((level, player, hand) => true)\n"
+                         f"    .releaseUsing((stack, level, entity, timeLeft) => global.ttShootBow(stack, level, entity, timeLeft, {json.dumps(opts)}))")
             continue
         tiers.append(f"  event.add('tt_{w['id']}', t => {{ t.uses = {w['durability']}; t.speed = 6.0; t.attackDamageBonus = 0.0; "
                      f"t.level = {min(4, max(1, w['tier'] // 2))}; t.enchantmentValue = {10 + w['tier']}; t.repairIngredient = 'minecraft:iron_ingot' }})")
@@ -299,7 +302,7 @@ def main():
     for w in weapons:
         lang[f"item.tt.{w['id']}"] = RARITY_COLOR[w["rarity"]] + w["name"]
         lines = [f"§8{TIER_NAMES[w['tier']]} · {w['rarity'].capitalize()} {w['family'].capitalize()}",
-                 f"§6{w['ability_name']}", f"§7{w['ability_text']}", f"§8§o\"{w['lore']}\"", f"§3{w['story']}"]
+                 f"§6{w['ability_name']}" + (f" §e[{w['trigger']}]" if w.get("trigger") else ""), f"§7{w['ability_text']}", f"§8§o\"{w['lore']}\"", f"§3{w['story']}"]
         if w["impl"] == "BRIDGE":
             lines.append("§c[Prototype] Ability arrives with the tt_bridge mod")
         elif w["impl"] == "EDP":

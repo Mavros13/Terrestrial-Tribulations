@@ -225,7 +225,7 @@
     },
     {
       "id": "frostmaw_fang",
-      "model_parent": "minecraft:item/skins/heart_of_the_sea",
+      "model_parent": "minecraft:item/diamond_sword",
       "name": "Frostmaw Fang",
       "family": "karambit",
       "ef": "dagger",
@@ -406,7 +406,7 @@
     },
     {
       "id": "crownshard_karambits",
-      "model_parent": "minecraft:item/skins/gold_plated",
+      "model_parent": "minecraft:item/golden_sword",
       "name": "Crownshard Karambits",
       "family": "karambit",
       "ef": "dagger",

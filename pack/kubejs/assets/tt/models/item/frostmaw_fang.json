@@ -1,7 +1,7 @@
 {
   "loader": "forge:separate_transforms",
   "base": {
-    "parent": "minecraft:item/skins/heart_of_the_sea"
+    "parent": "minecraft:item/diamond_sword"
   },
   "perspectives": {
     "gui": {

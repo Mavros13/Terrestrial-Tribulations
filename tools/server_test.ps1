@@ -41,9 +41,9 @@ try {
   if (-not (Test-Path "$server\libraries\net\minecraftforge\forge\$Forge\win_args.txt")) { throw 'Forge server install failed (see forge-install.log)' }
 
   Say 'Downloading Test Build 1 mods (stages A-C) from CurseForge...'
-  $skip = @('Embeddium', 'Oculus')   # client-only renderers
+  $skip = @('Embeddium', 'Oculus')   # client-only renderers; entries with "side": "client" are skipped too
   $list = (Get-Content "$repo\modpack\curseforge-mods.json" -Raw | ConvertFrom-Json).mods |
-    Where-Object { @('A', 'B', 'C') -contains $_.stage -and $skip -notcontains $_.name }
+    Where-Object { @('A', 'B', 'C') -contains $_.stage -and $skip -notcontains $_.name -and $_.side -ne 'client' }
   $failed = @()
   foreach ($m in $list) {
     $out = Join-Path $mods ("{0}-{1}.jar" -f $m.projectID, $m.fileID)
@@ -90,7 +90,7 @@ try {
   }
   if ($done) {
     Say 'Server finished loading. Running kubejs errors, reload, stop...'
-    $p.StandardInput.WriteLine('kubejs errors'); Start-Sleep 5
+    $p.StandardInput.WriteLine('kubejs errors server'); Start-Sleep 5
     $p.StandardInput.WriteLine('reload'); Start-Sleep 30
     $p.StandardInput.WriteLine('stop')
     if (-not $p.WaitForExit(120000)) { $p.Kill() }

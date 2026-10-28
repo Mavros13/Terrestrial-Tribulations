@@ -140,7 +140,7 @@ EntityEvents.hurt(event => {
   const t = event.entity
 
   // No fall damage during Gale Vault, or just after landing from it
-  if (t.isPlayer() && event.source.getMsgId() == 'fall' &&
+  if (t.isPlayer() && event.source.type == 'fall' &&
       (t.persistentData.getBoolean('tt_vault') || t.level.gameTime <= t.persistentData.getLong('tt_nofall_until'))) {
     event.cancel()
     return
@@ -150,7 +150,7 @@ EntityEvents.hurt(event => {
   // (KubeJS throws to stop it), so it is called outside ttSafe.
   let ttReflected = false
   if (t.isPlayer() && t.level.gameTime <= t.persistentData.getLong('tt_prism_until')) ttSafe('prism_reflect', () => {
-    const direct = event.source.getDirectEntity(), shooter = event.source.getEntity()
+    const direct = event.source.immediate, shooter = event.source.actual
     if (!direct || !shooter || direct == shooter || !shooter.isLiving()) return
     t.persistentData.putLong('tt_prism_until', 0)
     direct.discard()
@@ -164,8 +164,9 @@ EntityEvents.hurt(event => {
     return
   }
 
-  // Bow abilities: the arrow carries its bow's id (tt_bows.js)
-  const arrow = event.source.getDirectEntity()
+  // Bow abilities: the arrow carries its bow's id (tt_bows.js). Use KubeJS's immediate/actual/type: Rhino can't see
+  // DamageSource.getDirectEntity()/getEntity()/getMsgId() on a server (found by the 2026-10-28 server test).
+  const arrow = event.source.immediate
   if (arrow && arrow.persistentData.contains('tt_bow')) ttSafe('bow_hit', () => {
     const bow = arrow.persistentData.getString('tt_bow')
     const owner = arrow.owner
@@ -359,8 +360,8 @@ function ttHookEpicFight(p, server) {
     }), -1)
     listener.addEventListener($TT_EFEvent.TAKE_DAMAGE_EVENT_ATTACK, TT_EF_UUID, ev => ttSafe('iron_recoil', () => {
       if (!ev.isParried() || p.mainHandItem.id != 'tt:wroughtnaut_bulwark') return
-      const src = ev.getDamageSource(), attacker = src.getEntity()
-      if (!attacker || attacker != src.getDirectEntity() || !attacker.isLiving()) return  // melee only
+      const src = ev.getDamageSource(), attacker = src.actual
+      if (!attacker || attacker != src.immediate || !attacker.isLiving()) return  // melee only
       ttBonus(server, attacker, ev.getDamage())
       attacker.potionEffects.add('minecraft:slowness', 20, 254)
       attacker.potionEffects.add('minecraft:weakness', 20, 2)

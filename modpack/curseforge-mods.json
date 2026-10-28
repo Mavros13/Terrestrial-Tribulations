@@ -144,7 +144,8 @@
       "projectID": 1397222,
       "fileID": 7367457,
       "file": "NEpicloobNeonSword.jar",
-      "stage": "C"
+      "stage": "C",
+      "side": "client"
     },
     {
       "name": "Embeddium",
@@ -185,7 +186,7 @@
       "name": "Origins (Forge)",
       "projectID": 474438,
       "fileID": 5314209,
-      "file": "origins-forge 1.10.0.9",
+      "file": "origins-forge-1.20.1-1.10.0.9-all.jar",
       "stage": "A"
     },
     {
@@ -739,7 +740,7 @@
       "name": "Architectury API",
       "projectID": 419699,
       "fileID": 5137938,
-      "file": "architectury forge 1.20.1 v9.2.14",
+      "file": "architectury-9.2.14-forge.jar",
       "stage": "C",
       "dependency": true
     },
@@ -986,7 +987,7 @@
       "name": "MezzConfig",
       "projectID": 1689768,
       "fileID": 9048661,
-      "file": "MezzConfig 0.6.8 Forge 1.20.1",
+      "file": "mezz_config-1.20.1-forge-0.6.8.jar",
       "stage": "C",
       "dependency": true
     },
@@ -1002,7 +1003,7 @@
       "name": "CoreWithStuff",
       "projectID": 1480241,
       "fileID": 8834862,
-      "file": "corewithstuff-v1.6-quickfix.jar",
+      "file": "corewithstuff-v1.6.jar",
       "stage": "C",
       "dependency": true
     }

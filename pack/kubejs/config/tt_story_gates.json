@@ -11,7 +11,7 @@
       "items": []
     }
   ],
-  "_dimensions_comment": "Dimension gates: a player without the stage can't travel into these dimensions (portals just don't fire; startup_scripts/tt_dimension_gates.js). Chapter mapping from docs/00-kickoff.md: Ch7 The Shattered Realms opens the Aether, Twilight Forest, Undergarden and Blue Skies; Ch11 The Final Convergence opens the Otherside (Deeper and Darker). For testing: /kubejs stages add @p tt_ch7_realms (or tt_ch11_convergence). Set enabled to false to switch all dimension gates off.",
+  "_dimensions_comment": "Dimension gates: a player without the stage can't travel into these dimensions (portals just don't fire; startup_scripts/tt_dimension_gates.js). Ch7 The Shattered Realms opens the Aether, Twilight Forest, Undergarden, Blue Skies and the Otherside (design/story/boss-roles.md puts the Otherside Shard in Ch7). The Ch11 Convergence dimension isn't decided yet, so it has no gate. For testing: /kubejs stages add @p tt_ch7_realms. Set enabled to false to switch all dimension gates off.",
   "dimension_gates": {
     "enabled": true,
     "gates": [
@@ -23,13 +23,7 @@
           "twilightforest:twilight_forest",
           "undergarden:undergarden",
           "blue_skies:everbright",
-          "blue_skies:everdawn"
-        ]
-      },
-      {
-        "stage": "tt_ch11_convergence",
-        "message": "Something on the other side pushes back. The Convergence is not ready for you yet (Chapter 11).",
-        "dimensions": [
+          "blue_skies:everdawn",
           "deeperdarker:otherside"
         ]
       }

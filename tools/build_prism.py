@@ -22,6 +22,7 @@ def main():
         run(sys.executable, os.path.join(ROOT, "tools", "gen_models.py"))
     except ImportError:
         print("numpy not installed: using the committed weapon models")
+    run(sys.executable, os.path.join(ROOT, "tools", "build_model_viewer.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "build_content.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "gen_quests.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "gen_origins.py"))

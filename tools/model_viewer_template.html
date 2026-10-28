@@ -1,0 +1,295 @@
+<meta charset="utf-8">
+<title>Terrestrial Tribulations Armory</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an armory bench. Weapon rack on the left, the turning model in the middle, its tag on the right. */
+:root {
+  --bg: #121118; --panel: #1A1922; --raise: #23212D; --line: #2E2B3B;
+  --fg: #ECE9F4; --muted: #9A95AF; --accent: #E8A84A; --glow: #8FE3D6;
+  --display: "Silkscreen", "Courier New", monospace;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 14px; }
+.app { height: 100%; display: grid; grid-template-columns: 230px minmax(0, 1fr) 320px; grid-template-rows: auto minmax(0, 1fr); }
+header { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  padding-block: 12px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  border-bottom: 1px solid var(--line); }
+header h1 { font-family: var(--display); font-weight: 400; font-size: 18px; margin: 0; letter-spacing: 0.04em; color: var(--accent); }
+header p { margin: 0; color: var(--muted); font-size: 13px; }
+.rack { overflow-y: auto; border-right: 1px solid var(--line); padding: 10px 8px 10px max(8px, env(safe-area-inset-left, 0px)); display: flex; flex-direction: column; gap: 2px; }
+.tier { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 10px 8px 4px; }
+.rack button { display: grid; grid-template-columns: 32px minmax(0, 1fr); align-items: center; gap: 10px; width: 100%;
+  background: none; border: 1px solid transparent; color: var(--fg); font: inherit; text-align: left; padding: 5px 8px; border-radius: 6px; cursor: pointer; }
+.rack button img { width: 32px; height: 32px; image-rendering: pixelated; }
+.rack button span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rack button:hover { background: var(--raise); }
+.rack button[aria-current="true"] { background: var(--raise); border-color: var(--accent); }
+.rack button:focus-visible, .controls button:focus-visible, .parts button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.stage { position: relative; min-width: 0; min-height: 320px; }
+.stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.controls { position: absolute; left: 12px; bottom: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+.controls button { background: var(--panel); color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; font: 500 12px var(--body); cursor: pointer; }
+.controls button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+.hint { position: absolute; right: 12px; bottom: 14px; color: var(--muted); font-size: 12px; }
+.tag { overflow-y: auto; border-left: 1px solid var(--line); padding: 16px max(16px, env(safe-area-inset-right, 0px)) 24px 16px; display: flex; flex-direction: column; gap: 14px; }
+.tag h2 { font-family: var(--display); font-weight: 400; font-size: 20px; margin: 0; text-wrap: balance; line-height: 1.25; }
+.meta { font-family: var(--mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.swatches { display: flex; gap: 6px; }
+.swatches i { width: 22px; height: 22px; border-radius: 4px; border: 1px solid var(--line); }
+dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 0; font-size: 13px; }
+dt { color: var(--muted); } dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.ability { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; display: grid; gap: 4px; }
+.ability b { color: var(--accent); font-weight: 600; }
+.ability p, .lore { margin: 0; line-height: 1.5; color: var(--fg); }
+.lore { color: var(--muted); font-style: italic; }
+h3 { font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 4px 0 0; }
+.parts { display: flex; flex-direction: column; gap: 1px; font-family: var(--mono); font-size: 12px; }
+.parts button { display: flex; justify-content: space-between; gap: 8px; background: none; border: 0; color: var(--fg); font: inherit; text-align: left; padding: 3px 6px; border-radius: 4px; cursor: pointer; }
+.parts button:hover, .parts button[aria-pressed="true"] { background: var(--raise); }
+.parts small { color: var(--muted); }
+.parts .lit { color: var(--glow); }
+@media (max-width: 900px) {
+  .app { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 60vh auto; height: auto; }
+  .rack { flex-direction: row; overflow-x: auto; overflow-y: hidden; border-right: 0; border-bottom: 1px solid var(--line); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .tier { display: none; }
+  .rack button { width: auto; flex: 0 0 auto; grid-template-columns: 32px auto; }
+  .tag { border-left: 0; border-top: 1px solid var(--line); padding-left: max(16px, env(safe-area-inset-left, 0px)); }
+  .hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .controls button { transition: none; } }
+</style>
+
+<div class="app">
+  <header>
+    <h1>Armory</h1>
+    <p id="count">Generated 3D weapon models, rendered the way Minecraft draws them</p>
+  </header>
+  <nav class="rack" id="rack" aria-label="Weapons"></nav>
+  <main class="stage" id="stage">
+    <div class="controls">
+      <button id="spin" type="button" aria-pressed="true">Turntable</button>
+      <button id="anim" type="button" aria-pressed="true">Animate glow</button>
+      <button id="block" type="button" aria-pressed="false">1-block outline</button>
+      <button id="reset" type="button">Reset view</button>
+    </div>
+    <div class="hint">Drag to turn, scroll or pinch to zoom</div>
+  </main>
+  <aside class="tag" id="tag"></aside>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const WEAPONS = /*__DATA__*/[];
+const CORNERS = {
+  south: ([x0, y0, z0], [x1, y1, z1]) => [[x0, y1, z1], [x1, y1, z1], [x0, y0, z1], [x1, y0, z1]],
+  north: ([x0, y0, z0], [x1, y1, z1]) => [[x1, y1, z0], [x0, y1, z0], [x1, y0, z0], [x0, y0, z0]],
+  east:  ([x0, y0, z0], [x1, y1, z1]) => [[x1, y1, z1], [x1, y1, z0], [x1, y0, z1], [x1, y0, z0]],
+  west:  ([x0, y0, z0], [x1, y1, z1]) => [[x0, y1, z0], [x0, y1, z1], [x0, y0, z0], [x0, y0, z1]],
+  up:    ([x0, y0, z0], [x1, y1, z1]) => [[x0, y1, z0], [x1, y1, z0], [x0, y1, z1], [x1, y1, z1]],
+  down:  ([x0, y0, z0], [x1, y1, z1]) => [[x0, y0, z1], [x1, y0, z1], [x0, y0, z0], [x1, y0, z0]],
+};
+
+function rotate(p, r) {
+  if (!r) return p;
+  const a = r.angle * Math.PI / 180, c = Math.cos(a), s = Math.sin(a);
+  let [x, y, z] = [p[0] - r.origin[0], p[1] - r.origin[1], p[2] - r.origin[2]];
+  if (r.axis === "x") [y, z] = [y * c - z * s, y * s + z * c];
+  else if (r.axis === "y") [x, z] = [x * c + z * s, -x * s + z * c];
+  else [x, y] = [x * c - y * s, x * s + y * c];
+  return [x + r.origin[0], y + r.origin[1], z + r.origin[2]];
+}
+
+// ---------- scene ----------
+const stage = document.getElementById("stage");
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+renderer.setClearColor(0x121118);
+stage.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 500);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 1.6;
+scene.add(new THREE.AmbientLight(0xffffff, 0.62));
+const sun = new THREE.DirectionalLight(0xffffff, 0.62); sun.position.set(-20, 40, 30); scene.add(sun);
+const rim = new THREE.DirectionalLight(0xbcd0ff, 0.25); rim.position.set(30, -10, -30); scene.add(rim);
+const floor = new THREE.Mesh(new THREE.CircleGeometry(14, 48), new THREE.MeshBasicMaterial({ color: 0x1a1922 }));
+floor.rotation.x = -Math.PI / 2; scene.add(floor);
+
+let current = null, highlight = null, blockBox = null, animOn = true;
+
+function buildWeapon(w) {
+  const img = new Image();
+  const canvas = document.createElement("canvas");
+  canvas.width = canvas.height = w.size;
+  const ctx = canvas.getContext("2d");
+  ctx.imageSmoothingEnabled = false;
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.magFilter = THREE.NearestFilter; tex.minFilter = THREE.NearestFilter; tex.generateMipmaps = false;
+  const lit = { pos: [], uv: [] }, glow = { pos: [], uv: [] };
+  const all = [];
+  w.elements.forEach((el) => {
+    const bucket = el.name.startsWith("glow") ? glow : lit;
+    for (const [f, fd] of Object.entries(el.faces)) {
+      const c = CORNERS[f](el.from, el.to).map((p) => rotate(p, el.rotation));
+      const [u0, v0, u1, v1] = fd.uv.map((t) => t / 16);
+      const uv = [[u0, 1 - v0], [u1, 1 - v0], [u0, 1 - v1], [u1, 1 - v1]];
+      for (const i of [0, 2, 1, 1, 2, 3]) { bucket.pos.push(...c[i]); bucket.uv.push(...uv[i]); }
+      all.push(...c);
+    }
+  });
+  const group = new THREE.Group();
+  const mk = (b, mat) => {
+    if (!b.pos.length) return;
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.Float32BufferAttribute(b.pos, 3));
+    g.setAttribute("uv", new THREE.Float32BufferAttribute(b.uv, 2));
+    g.computeVertexNormals();
+    group.add(new THREE.Mesh(g, mat));
+  };
+  mk(lit, new THREE.MeshLambertMaterial({ map: tex, side: THREE.DoubleSide }));
+  mk(glow, new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide }));
+  const box = new THREE.Box3();
+  all.forEach((p) => box.expandByPoint(new THREE.Vector3(...p)));
+  const center = box.getCenter(new THREE.Vector3());
+  group.position.set(-center.x, -box.min.y, -center.z);
+  const frames = { img, ctx, tex, n: 1, size: w.size, anim: w.anim };
+  img.onload = () => { frames.n = Math.max(1, Math.round(img.height / w.size)); drawFrame(frames, 0); };
+  img.src = w.tex;
+  return { group, frames, box, offset: group.position.clone() };
+}
+
+function drawFrame(fr, t) {
+  const { ctx, img, size, n, anim } = fr;
+  if (!img.complete || !img.naturalWidth) return;
+  ctx.clearRect(0, 0, size, size);
+  if (n === 1 || !anim) { ctx.drawImage(img, 0, 0, size, size, 0, 0, size, size); fr.tex.needsUpdate = true; return; }
+  const ticks = t / 50, step = ticks / (anim.frametime || 1);
+  const f = Math.floor(step) % n, next = (f + 1) % n, frac = step - Math.floor(step);
+  ctx.globalAlpha = 1; ctx.drawImage(img, 0, f * size, size, size, 0, 0, size, size);
+  if (anim.interpolate) { ctx.globalAlpha = frac; ctx.drawImage(img, 0, next * size, size, size, 0, 0, size, size); ctx.globalAlpha = 1; }
+  fr.tex.needsUpdate = true;
+}
+
+function frame(w) {
+  const h = current.box.max.y - current.box.min.y;
+  const r = Math.max(h, current.box.max.x - current.box.min.x) * 0.5;
+  controls.target.set(0, h / 2, 0);
+  camera.position.set(r * 1.6, h * 0.62, r * 2.9 + 6);
+  controls.update();
+}
+
+// ---------- UI ----------
+const rack = document.getElementById("rack"), tag = document.getElementById("tag");
+let lastTier = null;
+WEAPONS.forEach((w) => {
+  if (w.tier !== lastTier) {
+    const t = document.createElement("div"); t.className = "tier"; t.textContent = "Tier " + w.tier; rack.append(t); lastTier = w.tier;
+  }
+  const b = document.createElement("button");
+  b.type = "button"; b.dataset.id = w.id;
+  b.innerHTML = `<img alt="" src="${w.icon}"><span></span>`;
+  b.querySelector("span").textContent = w.name;
+  b.addEventListener("click", () => { location.hash = w.id; });
+  rack.append(b);
+});
+document.getElementById("count").textContent =
+  `${WEAPONS.length} generated 3D weapon models, rendered the way Minecraft draws them. The four karambits use Karambit Vault models and aren't shown.`;
+
+function esc(s) { return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+function show(id) {
+  const w = WEAPONS.find((x) => x.id === id) || WEAPONS[0];
+  if (!w) return;
+  if (current) scene.remove(current.group);
+  current = buildWeapon(w);
+  scene.add(current.group);
+  setHighlight(null);
+  if (blockBox) placeBlock();
+  frame(w);
+  rack.querySelectorAll("button").forEach((b) => b.setAttribute("aria-current", String(b.dataset.id === w.id)));
+  const glowCount = w.elements.filter((e) => e.name.startsWith("glow")).length;
+  const groups = {};
+  w.elements.forEach((e, i) => { const k = e.name.replace(/(_(-?\d+(\.\d+)?|L|R|F|B|a|b|up|down|low|mid|high|top))+$/, "").replace(/_edge[LR]$/, "_edge") || e.name; (groups[k] = groups[k] || []).push(i); });
+  tag.innerHTML = `
+    <div class="meta">${esc(w.rarity)} · ${esc(w.family)}</div>
+    <h2>${esc(w.name)}</h2>
+    <div class="swatches">${w.colors.map((c) => `<i style="background:${esc(c)}" title="${esc(c)}"></i>`).join("")}</div>
+    <div class="ability"><b>${esc(w.ability)}</b><p>${esc(w.abilityText)}</p></div>
+    ${w.lore ? `<p class="lore">“${esc(w.lore)}”</p>` : ""}
+    <dl>
+      <dt>Damage</dt><dd>${w.damage}</dd><dt>Speed</dt><dd>${w.speed}</dd>
+      <dt>Unlock</dt><dd>${esc(w.story)}</dd>
+      <dt>Cubes</dt><dd>${w.elements.length} (${glowCount} glowing)</dd>
+      <dt>Texture</dt><dd>${w.size}×${w.size} px${w.anim ? ", animated" : ""}</dd>
+    </dl>
+    <h3>Parts</h3>
+    <div class="parts" id="parts">${Object.entries(groups).map(([k, idx]) =>
+      `<button type="button" data-idx="${idx.join(",")}" aria-pressed="false"><span class="${k.startsWith("glow") ? "lit" : ""}">${esc(k)}</span><small>${idx.length}</small></button>`).join("")}</div>`;
+  tag.querySelectorAll(".parts button").forEach((b) => b.addEventListener("click", () => {
+    const on = b.getAttribute("aria-pressed") !== "true";
+    tag.querySelectorAll(".parts button").forEach((x) => x.setAttribute("aria-pressed", "false"));
+    b.setAttribute("aria-pressed", String(on));
+    setHighlight(on ? b.dataset.idx.split(",").map(Number).map((i) => w.elements[i]) : null);
+  }));
+}
+
+function setHighlight(els) {
+  if (highlight) { scene.remove(highlight); highlight = null; }
+  if (!els) return;
+  const box = new THREE.Box3();
+  els.forEach((el) => Object.keys(CORNERS).forEach((f) => CORNERS[f](el.from, el.to).forEach((p) => box.expandByPoint(new THREE.Vector3(...rotate(p, el.rotation))))));
+  box.expandByScalar(0.15);
+  box.translate(current.offset);
+  highlight = new THREE.Box3Helper(box, 0xe8a84a);
+  scene.add(highlight);
+}
+
+function placeBlock() {
+  if (blockBox) scene.remove(blockBox);
+  const geo = new THREE.EdgesGeometry(new THREE.BoxGeometry(16, 16, 16));
+  blockBox = new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color: 0x5d5873 }));
+  blockBox.position.set(-20, 8, 0);
+  scene.add(blockBox);
+}
+
+const toggle = (id, fn) => {
+  const b = document.getElementById(id);
+  b.addEventListener("click", () => { const on = b.getAttribute("aria-pressed") !== "true"; b.setAttribute("aria-pressed", String(on)); fn(on); });
+};
+toggle("spin", (on) => { controls.autoRotate = on; });
+toggle("anim", (on) => { animOn = on; });
+toggle("block", (on) => { if (on) placeBlock(); else if (blockBox) { scene.remove(blockBox); blockBox = null; } });
+document.getElementById("reset").addEventListener("click", () => current && frame());
+if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  controls.autoRotate = false; document.getElementById("spin").setAttribute("aria-pressed", "false");
+}
+
+function resize() {
+  const r = stage.getBoundingClientRect();
+  renderer.setSize(Math.max(1, r.width), Math.max(1, r.height), false);
+  camera.aspect = Math.max(1, r.width) / Math.max(1, r.height);
+  camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(stage);
+resize();
+
+let last = 0;
+function loop(t) {
+  requestAnimationFrame(loop);
+  controls.update();
+  if (current && animOn && current.frames.n > 1 && t - last > 40) { drawFrame(current.frames, t); last = t; }
+  renderer.render(scene, camera);
+}
+const route = () => show(location.hash.slice(1));
+window.addEventListener("hashchange", route);
+route();
+requestAnimationFrame(loop);
+</script>

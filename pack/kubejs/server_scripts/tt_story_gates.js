@@ -6,8 +6,9 @@
 
 let TT_GATES = []
 try {
-  const cfg = JsonIO.read('kubejs/config/tt_story_gates.json')
-  if (cfg && cfg.gates) TT_GATES = cfg.gates
+  // Server scripts share one scope with the Palladium addon packs' scripts; FSang18's Heroes (random_power.js) already declares `cfg`.
+  const ttGatesCfg = JsonIO.read('kubejs/config/tt_story_gates.json')
+  if (ttGatesCfg && ttGatesCfg.gates) TT_GATES = ttGatesCfg.gates
 } catch (e) { console.error(`[TT] could not read tt_story_gates.json: ${e}`) }
 
 function ttGateFor(id) {

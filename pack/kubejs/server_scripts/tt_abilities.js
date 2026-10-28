@@ -9,11 +9,12 @@
 const TT_FOOD = { 'minecraft:cow': 'minecraft:beef', 'minecraft:pig': 'minecraft:porkchop', 'minecraft:sheep': 'minecraft:mutton',
   'minecraft:chicken': 'minecraft:chicken', 'minecraft:rabbit': 'minecraft:rabbit' }
 
-const $TagKey = Java.loadClass('net.minecraft.tags.TagKey')
-const $Registries = Java.loadClass('net.minecraft.core.registries.Registries')
-const $ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
-const $MobEffects = Java.loadClass('net.minecraft.world.effect.MobEffects')
-const TT_INNATE = $TagKey.create($Registries.DAMAGE_TYPE, new $ResourceLocation('epicfight', 'weapon_innate'))
+// Prefixed names: all server scripts (ours and the hero packs') share one global scope.
+const $TT_TagKey = Java.loadClass('net.minecraft.tags.TagKey')
+const $TT_Registries = Java.loadClass('net.minecraft.core.registries.Registries')
+const $TT_ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
+const $TT_MobEffects = Java.loadClass('net.minecraft.world.effect.MobEffects')
+const TT_INNATE = $TT_TagKey.create($TT_Registries.DAMAGE_TYPE, new $TT_ResourceLocation('epicfight', 'weapon_innate'))
 // Entity IDs that count as "Hollowed" for Soul Severance. Empty until the boss and mob roles are final.
 const TT_HOLLOWED = []
 
@@ -111,7 +112,7 @@ EntityEvents.hurt(event => {
 
   // Soul Severance (Hollowbane Tachi, innate = Rushing Tempo): strip invisibility; +100% vs entities in TT_HOLLOWED.
   if (held == 'tt:hollowbane_tachi' && innate) ttSafe('soul_severance', () => {
-    t.removeEffect($MobEffects.INVISIBILITY)
+    t.removeEffect($TT_MobEffects.INVISIBILITY)
     if (TT_HOLLOWED.includes(String(t.type))) t.attack(event.damage)
   })
 

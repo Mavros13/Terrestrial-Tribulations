@@ -106,16 +106,19 @@ try {
   }
 
   # ---------- report ----------
+  # Other mods' load chatter fills any line cap before the results; drop it instead of capping early.
+  $noise = 'Loaded Java class|Loaded script addonpack|Failed to parse recipe|Tried to add unknown item|^\s+at '
   $lines.Add(''); $lines.Add('=== latest.log: errors and our content ===')
   if (Test-Path $log) {
     Select-String -Path $log -Pattern 'ERROR|Exception|\[TT\]|tt:|kubejs|Failed to load|Done \(' |
-      Select-Object -First 200 | ForEach-Object { $lines.Add($_.Line) }
+      Where-Object { $_.Line -notmatch $noise } | Select-Object -First 300 | ForEach-Object { $lines.Add($_.Line) }
   }
   foreach ($k in 'startup.log', 'server.log') {
     $f = "$server\logs\kubejs\$k"
     if (Test-Path $f) {
       $lines.Add(''); $lines.Add("=== kubejs/$k (errors, warnings and tt lines) ===")
-      Select-String -Path $f -Pattern 'ERR|WARN|\[TT\]|tt_|Loaded script|scripts? in' | Select-Object -First 150 | ForEach-Object { $lines.Add($_.Line) }
+      Select-String -Path $f -Pattern 'ERR|WARN|\[TT\]|tt_|Loaded script|scripts? in' |
+        Where-Object { $_.Line -notmatch $noise } | Select-Object -First 300 | ForEach-Object { $lines.Add($_.Line) }
     }
   }
   Get-ChildItem "$server\crash-reports" -ErrorAction SilentlyContinue | ForEach-Object {

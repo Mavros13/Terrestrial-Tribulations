@@ -194,10 +194,33 @@ TRAIL_POS = {"sword": ([0.0, 0.1, -0.1], [0.0, -0.05, -0.95]), "dagger": ([0.0, 
              "axe": ([0.0, -0.15, -0.35], [0.0, -0.15, -0.7]), "fist": ([0.0, 0.0, 0.0], [0.0, 0.0, -0.3])}
 
 
+# Model units -> Epic Fight trail blocks, calibrated so a vanilla sword sprite (tip ~15.6 units from the grip at
+# display scale 0.85) lands on Epic Fight's own iron_sword trail end (-0.95).
+TRAIL_K = 0.95 / (15.6 * 0.85 / 16)
+GRIP_Y = 1.0  # where the hand holds our upright models (tools/gen_models.py convention)
+
+
+def model_trail(w, begin, end):
+    """Fit the trail to the weapon's 3D model: from the bottom of the striking part to the tip, along -Z. Keeps the
+    preset's sideways and vertical offsets. Returns the preset unchanged when there is no model."""
+    exp = os.path.join(BB, "exports", "weapons", w["id"] + ".json")
+    if not os.path.exists(exp) or w["ef"] in ("bow", "crossbow", "fist", "shield"):
+        return begin, end
+    m = json.load(open(exp, encoding="utf-8"))
+    tip = max(e["to"][1] for e in m["elements"])
+    strike = min((e["from"][1] for e in m["elements"] if e["from"][1] >= GRIP_Y + 2.5
+                  and not e["name"].startswith(("grip", "shaft", "haft", "handle", "band", "ring", "cord", "vine", "thorn_", "wrap", "strap", "side_grip"))),
+                 default=GRIP_Y + 3)
+    scale = m.get("display", {}).get("thirdperson_righthand", {}).get("scale", [0.85])[0]
+    to_blocks = lambda y: round(-(y - GRIP_Y) * scale / 16 * TRAIL_K, 2)
+    return [begin[0], begin[1], to_blocks(strike)], [end[0], end[1], to_blocks(tip)]
+
+
 def item_skin(w):
     """Epic Fight item skin (client resource, read by ItemSkinsReloadListener from assets/<ns>/item_skins/<item>.json).
-    Trails of Elite (tier 5) and up are drawn at full brightness."""
+    Trails of Elite (tier 5) and up are drawn at full brightness. Weapons with a 3D model get a trail fitted to it."""
     begin, end = TRAIL_POS[w["ef"] if w["ef"] in TRAIL_POS else EF_TYPE[w["ef"]]]
+    begin, end = model_trail(w, begin, end)
     trail = {"color": list(hexrgb(w["trail"])), "begin_pos": begin, "end_pos": end, "lifetime": 4, "interpolations": 5,
              "texture_path": "epicfight:textures/particle/swing_trail.png", "particle_type": "epicfight:swing_trail"}
     if w["tier"] >= 5:

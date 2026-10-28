@@ -31,7 +31,7 @@
   - Begin and end positions are copied from Epic Fight's own skins for the same preset (`iron_sword`, `iron_dagger`, `iron_longsword`, `iron_tachi`, `iron_greatsword`, `iron_spear`, `iron_axe`).
   - The fist position is a guess, because Epic Fight's glove has no trail.
   - Elite (tier 5) and stronger weapons get full-brightness trails.
-- **When 3D models arrive:** a weapon much longer or shorter than the preset needs its own `end_pos`. The Blockbench length targets are close to Epic Fight's presets on purpose.
+- **Fitted to the 3D models (2026-10-28):** `build_content.py` (`model_trail`) now sets each melee weapon's begin/end Z from its model: the bottom of the striking part to the tip, converted to blocks with the model's third-person scale and a factor calibrated on the vanilla sword (whose sprite matches Epic Fight's `iron_sword` trail). Results sit close to the presets (longsword end −1.45 vs −1.5, spear −2.17 vs −2.0), which is a good sign; still to be checked in-game.
 
 ## 3. Innate skills: base Epic Fight can only *choose*, not *create*
 - **Built-in skills only.** Skills are a code-registered Forge registry. Data can assign a registered innate skill per style, but only inside a **custom weapon type** (`data/<ns>/capabilities/weapons/types/<name>.json`, key `innate_skills`). A per-item capability file cannot. `skill_parameters/` data retunes a skill globally, for every weapon that uses it.

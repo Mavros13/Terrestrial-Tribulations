@@ -8,12 +8,12 @@
     "begin_pos": [
       0.0,
       -0.15,
-      -0.35
+      -0.46
     ],
     "end_pos": [
       0.0,
       -0.15,
-      -0.7
+      -1.45
     ],
     "lifetime": 4,
     "interpolations": 5,

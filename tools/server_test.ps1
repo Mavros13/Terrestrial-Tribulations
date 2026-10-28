@@ -87,6 +87,10 @@ try {
   while ((Get-Date) -lt $deadline -and -not $p.HasExited) {
     Start-Sleep 10
     if ((Test-Path $log) -and (Select-String -Path $log -Pattern 'Done \(' -Quiet)) { $done = $true; break }
+    if ((Test-Path $log) -and (Select-String -Path $log -Pattern 'Failed to start the minecraft server' -Quiet)) {
+      Start-Sleep 5; if (-not $p.HasExited) { $p.Kill(); $null = $p.WaitForExit(10000) }   # Forge can hang after a failed start
+      break
+    }
   }
   if ($done) {
     Say 'Server finished loading. Running kubejs errors, reload, stop...'
@@ -95,7 +99,7 @@ try {
     $p.StandardInput.WriteLine('stop')
     if (-not $p.WaitForExit(120000)) { $p.Kill() }
   } elseif ($p.HasExited) {
-    Say "Server stopped before finishing (exit code $($p.ExitCode)); see the crash report below."
+    Say "Server failed to start; see the errors and crash report below."
   } else {
     Say 'Server did not finish loading within 20 minutes; stopping it.'
     $p.Kill()

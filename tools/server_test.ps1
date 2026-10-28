@@ -109,6 +109,10 @@ try {
   # ---------- report ----------
   # Other mods' load chatter fills any line cap before the results; drop it instead of capping early.
   $noise = 'Loaded Java class|Loaded script addonpack|Failed to parse recipe|Tried to add unknown item|^\s+at '
+  # Our own log lines first, so no cap can push them out
+  $lines.Add(''); $lines.Add('=== [TT] lines (all logs) ===')
+  Get-ChildItem "$server\logs" -Recurse -Filter *.log -ErrorAction SilentlyContinue |
+    Select-String -Pattern '\[TT\]' | ForEach-Object { $lines.Add("$($_.Filename): $($_.Line)") }
   $lines.Add(''); $lines.Add('=== latest.log: errors and our content ===')
   if (Test-Path $log) {
     Select-String -Path $log -Pattern 'ERROR|Exception|\[TT\]|tt:|kubejs|Failed to load|Done \(' |

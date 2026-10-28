@@ -8,6 +8,7 @@
 #   irm https://raw.githubusercontent.com/Mavros13/Terrestrial-Tribulations/claude/project-thread-gnjvhs/tools/server_test.ps1 | iex
 $Branch = 'claude/project-thread-gnjvhs'
 $Forge = '1.20.1-47.4.18'
+$Stages = if ($env:TT_STAGES) { $env:TT_STAGES -split ',' } else { @('A', 'B', 'C') }   # TT_STAGES=A,B,C,D for Test Build 2
 
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'   # Invoke-WebRequest is very slow with the progress bar
@@ -40,10 +41,10 @@ try {
   Pop-Location
   if (-not (Test-Path "$server\libraries\net\minecraftforge\forge\$Forge\win_args.txt")) { throw 'Forge server install failed (see forge-install.log)' }
 
-  Say 'Downloading Test Build 1 mods (stages A-C) from CurseForge...'
+  Say "Downloading mods for stages $($Stages -join ',') from CurseForge..."
   $skip = @('Embeddium', 'Oculus')   # client-only renderers; entries with "side": "client" are skipped too
   $list = (Get-Content "$repo\modpack\curseforge-mods.json" -Raw | ConvertFrom-Json).mods |
-    Where-Object { @('A', 'B', 'C') -contains $_.stage -and $skip -notcontains $_.name -and $_.side -ne 'client' }
+    Where-Object { $Stages -contains $_.stage -and $skip -notcontains $_.name -and $_.side -ne 'client' }
   $failed = @()
   foreach ($m in $list) {
     $out = Join-Path $mods ("{0}-{1}.jar" -f $m.projectID, $m.fileID)
@@ -63,7 +64,7 @@ try {
   Copy-Item "$repo\pack\config" "$server\config" -Recurse -Force
   Set-Content "$server\eula.txt" 'eula=true'
   Set-Content "$server\server.properties" "online-mode=false`nview-distance=4`nsimulation-distance=4`nspawn-protection=0`nmotd=TT test"
-  Set-Content "$server\user_jvm_args.txt" '-Xmx3G'
+  Set-Content "$server\user_jvm_args.txt" $(if ($Stages -contains 'D') { '-Xmx4G' } else { '-Xmx3G' })
 
   Say 'Starting the server (hidden, below-normal priority)...'
   $psi = New-Object System.Diagnostics.ProcessStartInfo

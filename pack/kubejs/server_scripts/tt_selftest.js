@@ -96,7 +96,8 @@ function ttSelfTest(server) {
   // installed mod is a real error (the quest task can't be completed)
   let ttNsCheck = (id, test) => {
     let ns = id.split(':')[0]
-    if (ns != 'minecraft' && !Platform.isLoaded(ns)) return `mod ${ns} not installed`
+    // tt: items are registered by KubeJS, not by a Forge mod called tt, so always check them
+    if (ns != 'minecraft' && ns != 'tt' && ns != 'kubejs' && !Platform.isLoaded(ns)) return `mod ${ns} not installed`
     return test()
   }
   section('quest_items', cfg.quest_items, id => ttNsCheck(id, () => !Item.of(id).isEmpty()))

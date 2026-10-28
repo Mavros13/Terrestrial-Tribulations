@@ -60,13 +60,6 @@
       "stage": "A"
     },
     {
-      "name": "Easy NPC",
-      "projectID": 559312,
-      "fileID": 9032755,
-      "file": "easy_npc_bundle-forge-1.20.1-7.14.0.jar",
-      "stage": "B"
-    },
-    {
       "name": "Champions Unofficial",
       "projectID": 1074990,
       "fileID": 8825005,
@@ -976,19 +969,18 @@
     },
     {
       "name": "Easy NPC: Core",
+      "_note": "No bundle jar: the Easy NPC bundle is only a launcher helper with no content, and its author blocks third-party downloads. Core + Config UI are the mod.",
       "projectID": 1308987,
       "fileID": 9032743,
       "file": "easy_npc-forge-1.20.1-7.14.0.jar",
-      "stage": "C",
-      "dependency": true
+      "stage": "B"
     },
     {
       "name": "Easy NPC: Config UI",
       "projectID": 1214728,
       "fileID": 9032749,
       "file": "easy_npc_config_ui-forge-1.20.1-7.14.0.jar",
-      "stage": "C",
-      "dependency": true
+      "stage": "B"
     },
     {
       "name": "MezzConfig",

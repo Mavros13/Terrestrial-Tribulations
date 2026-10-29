@@ -105,7 +105,18 @@ try {
         'damage @e[type=minecraft:zombie,limit=1] 2 minecraft:generic', 'damage @e[type=minecraft:villager,limit=1] 2 minecraft:mob_attack by @e[type=minecraft:skeleton,limit=1]',
         'damage @e[type=minecraft:skeleton,limit=1] 50 minecraft:out_of_world',
         'summon minecraft:wither 0 100 -4 {NoAI:1b,Invul:0}', 'damage @e[type=minecraft:wither,limit=1] 5 minecraft:generic',
-        'kill @e[type=minecraft:wither]', 'time add 6000')) {
+        'kill @e[type=minecraft:wither]',
+        # Story NPC presets (tools/gen_npcs.py): each should import as a new Easy NPC
+        'easy_npc preset import_new data tt:easy_npc/preset/humanoid_slim/maera.npc.snbt 0 100 8',
+        'easy_npc preset import_new data tt:easy_npc/preset/humanoid/doran.npc.snbt 2 100 8',
+        'easy_npc preset import_new data tt:easy_npc/preset/humanoid/rhosk.npc.snbt 4 100 8',
+        'easy_npc preset import_new data tt:easy_npc/preset/humanoid/pell.npc.snbt 6 100 8',
+        'easy_npc preset import_new data tt:easy_npc/preset/humanoid_slim/tamsin.npc.snbt 8 100 8',
+        'easy_npc preset import_new data tt:easy_npc/preset/humanoid_slim/ilsabet.npc.snbt 10 100 8',
+        'easy_npc preset import_new data tt:easy_npc/preset/humanoid/stranger.npc.snbt 12 100 8',
+        'easy_npc preset import_new data tt:easy_npc/preset/humanoid_slim/wren.npc.snbt 14 100 8',
+        'easy_npc preset import_new data tt:easy_npc/preset/humanoid/sol.npc.snbt 16 100 8',
+        'easy_npc list', 'time add 6000')) {
       $p.StandardInput.WriteLine($c); Start-Sleep 2
     }
     Start-Sleep 60

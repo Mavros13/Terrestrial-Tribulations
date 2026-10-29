@@ -138,13 +138,16 @@ EntityEvents.hurt(event => {
   })
 
   // Rallying Strike (Accord Longsword, The Guillotine; Sharp Stab with a shield): Strength I + Resistance I 6s to you,
-  // players and tamed animals within 8 blocks. Once per second so multi-hit skills don't stack. MineColonies guards: tt_bridge.
+  // players, tamed animals and the citizens and guards of your own MineColonies colony (ttColony, tt_active_abilities.js)
+  // within 8 blocks. Once per second so multi-hit skills don't stack.
   if (held == 'tt:accord_longsword' && innate) ttSafe('rallying_strike', () => {
     const pd = p.persistentData
     if (now < pd.getLong('tt_rally_cd')) return
     pd.putLong('tt_rally_cd', now + 20)
+    const colony = ttColony(p)
     p.level.getEntitiesWithin(p.boundingBox.inflate(8)).forEach(a => {
-      if (a.isLiving() && (a == p || a.isPlayer() || (a.owner && a.owner == p))) {
+      const citizen = colony && String(a.type) == 'minecolonies:citizen' && colony.isCoordInColony(a.level, a.blockPosition())
+      if (a.isLiving() && (a == p || a.isPlayer() || (a.owner && a.owner == p) || citizen)) {
         a.potionEffects.add('minecraft:strength', 120, 0)
         a.potionEffects.add('minecraft:resistance', 120, 0)
       }

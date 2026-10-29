@@ -7,7 +7,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "tt:npc/sol_archive",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "tt:npc/sol_archive"
       }
     }
   ]

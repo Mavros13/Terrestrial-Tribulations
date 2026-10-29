@@ -7,7 +7,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "tt:npc/pell_ruin",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "tt:npc/pell_ruin"
       }
     }
   ]

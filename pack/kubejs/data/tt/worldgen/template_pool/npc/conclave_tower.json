@@ -7,7 +7,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "tt:npc/conclave_tower",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "tt:npc/conclave_tower"
       }
     }
   ]

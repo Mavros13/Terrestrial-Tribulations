@@ -7,7 +7,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "tt:npc/wren_lookout",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "tt:npc/wren_lookout"
       }
     }
   ]

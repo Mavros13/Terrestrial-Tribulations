@@ -34,8 +34,30 @@ COLORS = {
     "stripped_spruce_wood": "#74593a", "target": "#e4c9a6", "water_cauldron": "#3f76e4",
     "waxed_copper_block": "#c06b4f", "weathered_cut_copper": "#6c9a77", "white_carpet": "#e9ecec",
     "white_wool": "#e9ecec",
+    # dressing (paths, lights, plants)
+    "cobblestone_wall": "#7f7f7f", "composter": "#7a5631", "crafting_table": "#8f6a3e", "dandelion": "#f2d93a",
+    "decorated_pot": "#9c5b3c", "fern": "#4f8a2c", "grass": "#6aa33a", "loom": "#a58a65", "oxeye_daisy": "#f3f3e8",
+    "packed_mud": "#8c6a50", "pink_petals": "#f2a6c8", "poppy": "#d02a1e", "red_banner": "#a02722",
+    "stripped_spruce_log": "#74593a", "wall_torch": "#ffd36b", "green_banner": "#546d1b", "spruce_stairs": "#725434",
+    "dead_bush": "#8a6a32", "cut_copper_stairs": "#bf6a50", "exposed_cut_copper": "#9f7d68", "chain": "#4b5060",
+    "weathered_copper": "#6c9a77", "chipped_anvil": "#444444", "exposed_cut_copper_slab": "#9f7d68",
+    "cauldron": "#3f3f42", "redstone_torch": "#e03a2a", "brown_mushroom": "#9a7356", "red_mushroom": "#d03a2e",
+    "lily_of_the_valley": "#f5f5f0", "azure_bluet": "#dfe7f2", "allium": "#b77de8", "mossy_stone_brick_slab": "#73796a",
+    "polished_deepslate_wall": "#48484a", "soul_lantern": "#6ce0e8", "purple_candle": "#7f3fb2", "sea_lantern": "#cfe8e2",
+    "brewing_stand": "#7a6e5a", "purple_carpet": "#7f3fb2", "grass_block": "#6c9a3c", "potted_white_tulip": "#f0f0ea",
+    "white_banner": "#e9ecec", "spruce_trapdoor": "#6b5032", "white_candle": "#f2efe6",
+    "potted_lily_of_the_valley": "#f5f5f0", "white_tulip": "#f0f0ea", "light_blue_banner": "#3ab3da",
+    "azalea_leaves": "#5d7a2e", "birch_fence": "#c8b77a", "birch_stairs": "#c8b77a", "birch_trapdoor": "#d2c08a",
+    "carved_pumpkin": "#c6731a", "dark_oak_planks": "#43301a", "deepslate_brick_stairs": "#4a4a4c",
+    "deepslate_bricks": "#4a4a4c", "deepslate_tiles": "#3a3a3c", "green_wall_banner": "#546d1b",
+    "mossy_stone_brick_stairs": "#73796a", "mossy_stone_brick_wall": "#73796a", "observer": "#5e5e5e",
+    "polished_blackstone_bricks": "#302a33", "polished_deepslate_slab": "#48484a", "purpur_pillar": "#ab81ab",
+    "stone": "#7d7d7d", "stone_brick_slab": "#7a7a7a", "stone_brick_stairs": "#7a7a7a", "stripped_birch_log": "#c5b07b",
+    "stripped_birch_wood": "#c5b07b", "stripped_dark_oak_log": "#5a4630", "tuff": "#6c6d66", "diorite": "#bdbdbd",
+    "cracked_deepslate_bricks": "#454547",
+    "snow": "#f4fafa", "andesite": "#888888", "stone_brick_wall": "#7a7a7a", "skeleton_skull": "#d8d8cc",
 }
-SEE_THROUGH = {"purple_stained_glass", "iron_bars", "cobweb", "spruce_fence", "oak_leaves", "flowering_azalea_leaves"}
+SEE_THROUGH = {"chain", "purple_stained_glass", "iron_bars", "cobweb", "spruce_fence", "oak_leaves", "flowering_azalea_leaves"}
 
 
 def shape(name, props):
@@ -46,6 +68,19 @@ def shape(name, props):
         return 0.19, 0
     if name.endswith("_slab"):
         return (1, 0) if props.get("type") == "double" else (0.5, 0)
+    if name == "snow":
+        return int(props.get("layers", 1)) / 8, 0
+    if name.endswith("_stairs"):
+        return 0.75, 0
+    if name.endswith("_banner"):
+        return 1.8, 0.4
+    if name.endswith("_wall"):
+        return 1, 0.25
+    if name in ("grass", "fern", "dead_bush", "poppy", "dandelion", "oxeye_daisy", "lily_of_the_valley", "azure_bluet",
+                "allium", "white_tulip", "brown_mushroom", "red_mushroom", "pink_petals", "wall_torch", "redstone_torch",
+                "chain", "potted_white_tulip", "potted_lily_of_the_valley", "skeleton_skull", "white_candle",
+                "purple_candle", "soul_lantern", "decorated_pot", "brewing_stand"):
+        return (0.15 if name == "pink_petals" else 0.6), 0.35
     if name in ("candle", "lantern", "end_rod", "lightning_rod", "amethyst_cluster", "campfire", "azalea",
                 "flowering_azalea", "spruce_fence", "iron_bars", "ladder", "cobweb"):
         return (0.45 if name == "campfire" else 0.8), 0.3

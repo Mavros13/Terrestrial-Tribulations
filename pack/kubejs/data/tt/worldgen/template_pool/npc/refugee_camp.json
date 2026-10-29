@@ -7,7 +7,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "tt:npc/refugee_camp",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "tt:npc/refugee_camp"
       }
     }
   ]

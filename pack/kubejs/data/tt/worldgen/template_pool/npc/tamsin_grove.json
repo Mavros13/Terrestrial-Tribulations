@@ -7,7 +7,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "tt:npc/tamsin_grove",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "tt:npc/tamsin_grove"
       }
     }
   ]

@@ -63,7 +63,9 @@ try {
   Copy-Item "$repo\pack\kubejs" "$server\kubejs" -Recurse
   Copy-Item "$repo\pack\config" "$server\config" -Recurse -Force
   Set-Content "$server\eula.txt" 'eula=true'
-  Set-Content "$server\server.properties" "online-mode=false`nview-distance=4`nsimulation-distance=4`nspawn-protection=0`nmotd=TT test"
+  Set-Content "$server\server.properties" "online-mode=false`nview-distance=4`nsimulation-distance=4`nspawn-protection=0`nmax-tick-time=-1`nmotd=TT test"
+  # max-tick-time=-1: no watchdog. A /reload of the full pack can block one tick for over 60 s on a laptop at
+  # below-normal priority (2026-10-29: ModernFix resource cache + Palladium addon preload), which killed the server.
   Set-Content "$server\user_jvm_args.txt" $(if ($Stages -contains 'D') { '-Xmx4G' } else { '-Xmx3G' })
 
   Say 'Starting the server (hidden, below-normal priority)...'
@@ -96,7 +98,7 @@ try {
   if ($done) {
     Say 'Server finished loading. Running kubejs errors, reload, tt_selftest, stop...'
     $p.StandardInput.WriteLine('kubejs errors server'); Start-Sleep 5
-    $p.StandardInput.WriteLine('reload'); Start-Sleep 30
+    $p.StandardInput.WriteLine('reload'); Start-Sleep 120
     $p.StandardInput.WriteLine('kubejs custom_command tt_selftest'); Start-Sleep 10
     # Smoke test: mobs take every common damage type while our hurt handlers listen, then the world ticks a while
     foreach ($c in @('forceload add -16 -16 16 16', 'summon minecraft:zombie 0 100 0 {NoAI:1b,PersistenceRequired:1b}',

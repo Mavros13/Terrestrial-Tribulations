@@ -14,7 +14,12 @@
 1. Install the CurseForge app, then go to **Minecraft → Create Custom Profile**.
 2. Name: `TT Test Build 1` · Game version: **1.20.1** · Mod loader: **Forge**. Choose the **newest 47.4.x** build listed.
 3. Profile options (⋯) → **Profile Options** → turn **off** "Use system memory settings" → set memory to **8192 MB** for now.
-4. The JVM arguments field (in CurseForge: Settings → Minecraft → Java Settings) can stay at the default for this test.
+4. JVM arguments (optional, fewer garbage-collection stutters). In **Prism**: Edit instance → Settings → Java → tick
+   *Java arguments* and paste this one line (Java 17, G1 garbage collector tuned for an 8 GB heap):
+   ```
+   -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1
+   ```
+   Keep min and max memory both at 8192 MB; more than about 10 GB makes pauses longer, not shorter.
 
 (Prism Launcher also works. If you use it, you'll need to add dependencies manually.)
 

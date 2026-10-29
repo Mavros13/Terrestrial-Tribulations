@@ -59,7 +59,7 @@ New libraries: Resourceful Config (for Structure Layout Optimizer) and Almanac L
   - FancyMenu and Legendary Tooltips: check their GUI cost with Spark.
 - **MineColonies:** cap citizens per colony and use its pathfinding thread setting, since colonies are the biggest steady load.
 - **Mob caps:** Champions and Botz Mob Leveling make each mob costlier, so keep vanilla spawn caps (no mod raising them) and check mob counts with Spark.
-- **Java:** recommended Prism JVM arguments (G1 tuning for 8 GB) in the install docs, and in the ModSync instance's `instance.cfg`.
+- **Done: Java arguments.** Recommended G1 settings for 8 GB are in `docs/05-test-build-1-install.md` step 4.
 
 ### Measure, don't guess
 After the additions, one Spark profile on the desktop covers it:

@@ -196,39 +196,1038 @@
   },
   "work": {
     "Elder Maera": {
-      "swing": false,
       "sound": "minecraft:item.book.page_turn",
       "particle": null
     },
     "Doran": {
-      "swing": true,
       "sound": "minecraft:block.anvil.use",
       "particle": "minecraft:lava"
     },
     "Captain Rhosk": {
-      "swing": true,
       "sound": "minecraft:entity.player.attack.sweep",
       "particle": "minecraft:sweep_attack"
     },
     "Pell": {
-      "swing": true,
       "sound": "minecraft:block.copper.hit",
       "particle": "minecraft:smoke"
     },
     "Tamsin Rootwarden": {
-      "swing": false,
       "sound": "minecraft:block.azalea_leaves.place",
       "particle": "minecraft:happy_villager"
     },
     "Ilsabet": {
-      "swing": true,
       "sound": "minecraft:block.amethyst_block.chime",
       "particle": "minecraft:enchant"
     },
     "Archivist Sol": {
-      "swing": false,
       "sound": "minecraft:item.book.page_turn",
       "particle": "minecraft:enchant"
     }
+  },
+  "looks": {
+    "Elder Maera": [
+      {
+        "main": "minecraft:paper",
+        "off": "",
+        "pose": {
+          "Head": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            0.25,
+            0.0,
+            0.1,
+            0.0
+          ],
+          "LeftArm": [
+            0.25,
+            0.0,
+            -0.1,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "main": "",
+        "off": "",
+        "pose": {
+          "Head": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            0.25,
+            0.0,
+            0.1,
+            0.0
+          ],
+          "LeftArm": [
+            0.25,
+            0.0,
+            -0.1,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "main": "minecraft:map",
+        "off": "",
+        "pose": {
+          "Head": [
+            0.35,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -0.7,
+            0.25,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            -0.6,
+            -0.25,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    ],
+    "Doran": [
+      {
+        "main": "minecraft:iron_pickaxe",
+        "off": "tt:ashfang_karambit",
+        "pose": null
+      },
+      {
+        "main": "tt:ashfang_karambit",
+        "off": "",
+        "pose": {
+          "Head": [
+            0.3,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -0.95,
+            -0.2,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "main": "",
+        "off": "",
+        "pose": {
+          "Head": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -0.95,
+            -0.55,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            -0.95,
+            0.55,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    ],
+    "Captain Rhosk": [
+      {
+        "main": "tt:thornwatch_halberd",
+        "off": "minecraft:shield",
+        "pose": null
+      },
+      {
+        "main": "tt:thornwatch_halberd",
+        "off": "minecraft:shield",
+        "pose": {
+          "Head": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -0.3,
+            0.0,
+            0.05,
+            0.0
+          ],
+          "LeftArm": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "main": "",
+        "off": "",
+        "pose": {
+          "Head": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            0.25,
+            0.0,
+            0.1,
+            0.0
+          ],
+          "LeftArm": [
+            0.25,
+            0.0,
+            -0.1,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    ],
+    "Pell": [
+      {
+        "main": "tt:cogwright_breaker",
+        "off": "create:wrench",
+        "pose": null
+      },
+      {
+        "main": "create:cogwheel",
+        "off": "create:wrench",
+        "pose": {
+          "Head": [
+            0.3,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -0.95,
+            -0.2,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "main": "",
+        "off": "",
+        "pose": {
+          "Head": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -0.95,
+            -0.55,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            -0.95,
+            0.55,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    ],
+    "Tamsin Rootwarden": [
+      {
+        "main": "tt:rootstring_bow",
+        "off": "minecraft:oak_sapling",
+        "pose": {
+          "Head": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            -0.9,
+            0.2,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "main": "tt:rootstring_bow",
+        "off": "",
+        "pose": {
+          "Head": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -1.5,
+            -0.4,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            -1.5,
+            0.1,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "main": "",
+        "off": "minecraft:oak_sapling",
+        "pose": {
+          "Head": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            0.25,
+            0.0,
+            0.1,
+            0.0
+          ],
+          "LeftArm": [
+            0.25,
+            0.0,
+            -0.1,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    ],
+    "Ilsabet": [
+      {
+        "main": "tt:prism_ward_staff",
+        "off": "minecraft:amethyst_shard",
+        "pose": null
+      },
+      {
+        "main": "tt:prism_ward_staff",
+        "off": "",
+        "pose": {
+          "Head": [
+            -0.25,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -2.6,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "main": "minecraft:enchanted_book",
+        "off": "",
+        "pose": {
+          "Head": [
+            0.35,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -0.7,
+            0.25,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            -0.6,
+            -0.25,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    ],
+    "The Stranger": [
+      {
+        "main": "minecraft:emerald",
+        "off": "tt:sculkheart_dagger",
+        "pose": {
+          "Head": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -0.4,
+            -0.3,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            0.2,
+            0.0,
+            -0.05,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "main": "",
+        "off": "tt:sculkheart_dagger",
+        "pose": {
+          "Head": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -0.95,
+            -0.55,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            -0.95,
+            0.55,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "main": "",
+        "off": "",
+        "pose": {
+          "Head": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            0.25,
+            0.0,
+            0.1,
+            0.0
+          ],
+          "LeftArm": [
+            0.25,
+            0.0,
+            -0.1,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    ],
+    "Wren": [
+      {
+        "main": "minecraft:spyglass",
+        "off": "tt:rustbite_karambit",
+        "pose": {
+          "Head": [
+            -0.15,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -1.9,
+            -0.35,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "main": "tt:rustbite_karambit",
+        "off": "minecraft:spyglass",
+        "pose": {
+          "Head": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -0.3,
+            0.0,
+            0.05,
+            0.0
+          ],
+          "LeftArm": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "main": "minecraft:map",
+        "off": "",
+        "pose": {
+          "Head": [
+            0.35,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -0.7,
+            0.25,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            -0.6,
+            -0.25,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    ],
+    "Archivist Sol": [
+      {
+        "main": "minecraft:book",
+        "off": "",
+        "pose": {
+          "Head": [
+            0.35,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -0.7,
+            0.25,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            -0.6,
+            -0.25,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "main": "minecraft:writable_book",
+        "off": "",
+        "pose": {
+          "Head": [
+            0.35,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            -0.7,
+            0.25,
+            0.0,
+            0.0
+          ],
+          "LeftArm": [
+            -0.6,
+            -0.25,
+            0.0,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "main": "minecraft:book",
+        "off": "",
+        "pose": {
+          "Head": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Body": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "RightArm": [
+            0.25,
+            0.0,
+            0.1,
+            0.0
+          ],
+          "LeftArm": [
+            0.25,
+            0.0,
+            -0.1,
+            0.0
+          ],
+          "RightLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "LeftLeg": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      }
+    ]
   }
 }

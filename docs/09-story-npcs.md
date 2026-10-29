@@ -54,24 +54,26 @@ Tamsin never comes into the colony, and the Stranger keeps his caravan.
 
 ## Looking busy (2026-10-29)
 Easy NPC 1.20.1 has poses and its own limb and head motion, but no keyframe animations for its NPCs (checked against
-its wiki and changelogs; animation libraries like playerAnimator only drive players). So, from `WORK` in
-`tools/gen_npcs.py`:
+its wiki, changelogs and source; animation libraries like playerAnimator only drive players). So each NPC has three
+**looks** (`LOOKS` in `tools/gen_npcs.py`): what's in their hands and a still custom pose, or no pose (then they swing
+their arm while working). **Each time an NPC loads in, it takes one at random.**
 
-| NPC | Hands (main / off) | Busy with |
-|---|---|---|
-| Elder Maera | paper | hands behind her back (pose), pages rustle |
-| Doran | pickaxe / Ashfang Karambit (the blade he's forging) | hammering: anvil clang and sparks |
-| Captain Rhosk | Thornwatch Halberd / shield | drill swings |
-| Pell | Cogwright Breaker / Create wrench | hammering, copper clanks and smoke |
-| Tamsin | Rootstring Bow / oak sapling | holds the sapling out (pose), leaves rustle |
-| Ilsabet | Prism Ward Staff / amethyst shard | staff flicks, amethyst chimes, enchant sparkles |
-| The Stranger | emerald / Sculkheart Dagger (a hint before Chapter 8) | offers the emerald (pose) |
-| Wren | spyglass / Rustbite Karambit (the Ember scouts' blade) | spyglass to her eye (pose) |
-| Archivist Sol | book | reading, head bowed (pose), pages turn |
+| NPC | Working | At rest | Off duty |
+|---|---|---|---|
+| Elder Maera | paper, hands behind her back | hands behind her back | reading a map |
+| Doran | pickaxe + Ashfang Karambit, hammering | inspecting the Ashfang Karambit | arms crossed |
+| Captain Rhosk | Thornwatch Halberd + shield, drilling | halberd lowered, shield up | weapon away, at attention |
+| Pell | Cogwright Breaker + wrench, hammering | inspecting a cogwheel | arms crossed |
+| Tamsin | Rootstring Bow, holding out a sapling | bow drawn | bow away, sapling behind her |
+| Ilsabet | Prism Ward Staff + amethyst, flicking | staff raised high | reading an enchanted book |
+| The Stranger | offering an emerald, Sculkheart Dagger in the off hand | arms crossed, dagger in hand | hands behind his back |
+| Wren | spyglass to her eye, Rustbite Karambit | karambit lowered | reading a map |
+| Archivist Sol | reading a book | writing in a book | book behind his back |
 
-The work loop runs while a player is within 20 blocks: every few seconds an arm swing (for those without a pose),
-a sound and a few particles at their hands. Poses are Easy NPC custom poses (`ModelData`, `Pose:"CUSTOM"`), still
-stances that can be changed in the Easy NPC editor.
+Weapons come from our roster and match the story (the Stranger's dagger hints at his Chapter 8 reveal). A weapon
+"put away" is simply not shown: Easy NPC draws nothing on an NPC's back or belt, and back-item mods only
+draw on players. While a player is within 20 blocks, every few seconds they also make a sound and a few particles
+at their hands (`WORK`).
 
 ## Placing one by hand (cheats on, stand where it should go)
 

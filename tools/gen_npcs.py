@@ -81,36 +81,55 @@ MOVES = {
     "sol": ("tt_ch7_done", ["library"], ["minecraft:lectern", "minecraft:chiseled_bookshelf", "minecraft:bookshelf"],
             "If you have shelves, I have books. A library, then."),
 }
-# Looking busy (owner, 2026-10-29: "add animations so they are more realistic", then "use modded weapons for the
-# NPCs that could have a weapon based on the story"). Easy NPC 1.20.1 has no keyframe animations for its NPCs, so:
-# - hands: what they hold (preset HandItems, main and off hand). Fighters carry their story weapon from our roster:
-#   Rhosk the Thornwatch Halberd, Pell the Cogwright Breaker, Ilsabet the Prism Ward Staff, Tamsin the Rootstring Bow;
-#   Wren a Rustbite Karambit (the Ember scouts' blade), Doran the Ashfang Karambit he is forging, and the Stranger a
-#   Sculkheart Dagger kept in the off hand (a hint before the Ch8 reveal).
-# - work: with a player nearby, now and then an arm swing ("swing"), a sound and a few particles at their hands
-#   (server_scripts/tt_npc_sites.js, "work" in tt_npc_sites.json).
-# - pose: for NPCs who don't swing, a still custom pose (Easy NPC ModelData, Pose "CUSTOM"; part rotations in
-#   radians, x first; format from Easy NPC's default preset skeleton/sitting_skeleton.npc.snbt).
-WORK = {
-    "maera": {"hands": ("minecraft:paper", None), "sound": "minecraft:item.book.page_turn",
-              "pose": {"RightArm": (0.25, 0.0, 0.1), "LeftArm": (0.25, 0.0, -0.1)}},           # hands behind her back
-    "doran": {"hands": ("minecraft:iron_pickaxe", "tt:ashfang_karambit"), "swing": True,
-              "sound": "minecraft:block.anvil.use", "particle": "minecraft:lava"},
-    "rhosk": {"hands": ("tt:thornwatch_halberd", "minecraft:shield"), "swing": True,
-              "sound": "minecraft:entity.player.attack.sweep", "particle": "minecraft:sweep_attack"},
-    "pell": {"hands": ("tt:cogwright_breaker", "create:wrench"), "swing": True,
-             "sound": "minecraft:block.copper.hit", "particle": "minecraft:smoke"},
-    "tamsin": {"hands": ("tt:rootstring_bow", "minecraft:oak_sapling"), "sound": "minecraft:block.azalea_leaves.place",
-               "particle": "minecraft:happy_villager", "pose": {"LeftArm": (-0.9, 0.2, 0.0)}},    # offers the sapling
-    "ilsabet": {"hands": ("tt:prism_ward_staff", "minecraft:amethyst_shard"), "swing": True,
-                "sound": "minecraft:block.amethyst_block.chime", "particle": "minecraft:enchant"},
-    "stranger": {"hands": ("minecraft:emerald", "tt:sculkheart_dagger"),
-                 "pose": {"RightArm": (-0.4, -0.3, 0.0), "LeftArm": (0.2, 0.0, -0.05)}},       # offering the emerald
-    "wren": {"hands": ("minecraft:spyglass", "tt:rustbite_karambit"),
-             "pose": {"RightArm": (-1.9, -0.35, 0.0), "Head": (-0.15, 0.0, 0.0)}},             # spyglass to her eye
-    "sol": {"hands": ("minecraft:book", None), "sound": "minecraft:item.book.page_turn", "particle": "minecraft:enchant",
-            "pose": {"Head": (0.35, 0.0, 0.0), "RightArm": (-0.7, 0.25, 0.0), "LeftArm": (-0.6, -0.25, 0.0)}},  # reading
+# Looking busy (owner, 2026-10-29: "add animations so they are more realistic", "use modded weapons for the NPCs that
+# could have a weapon based on the story", then "alternate poses based on chunk loading randomness"). Easy NPC 1.20.1
+# has no keyframe animations for its NPCs, so each NPC has a few LOOKS: what's in their hands (main, off) and a still
+# custom pose (Easy NPC ModelData, Pose "CUSTOM"; part rotations in radians, x first; format from Easy NPC's default
+# preset skeleton/sitting_skeleton.npc.snbt), or no pose, in which case they swing their arm while they work. Each time
+# an NPC loads in, server_scripts/tt_npc_sites.js picks one at random; the first is the preset's own. Fighters carry
+# their roster weapon: Rhosk the Thornwatch Halberd, Pell the Cogwright Breaker, Ilsabet the Prism Ward Staff, Tamsin
+# the Rootstring Bow, Wren a Rustbite Karambit (the Ember scouts' blade), Doran the Ashfang Karambit he is forging, and
+# the Stranger a Sculkheart Dagger in the off hand (a hint before the Ch8 reveal). "Off duty" looks put the weapon
+# away: Easy NPC draws nothing on an NPC's back or belt, so a put-away weapon is simply not shown.
+# WORK adds a sound and particles at their hands now and then while a player is near.
+CROSSED = {"RightArm": (-0.95, -0.55, 0.0), "LeftArm": (-0.95, 0.55, 0.0)}
+BEHIND = {"RightArm": (0.25, 0.0, 0.1), "LeftArm": (0.25, 0.0, -0.1)}
+AT_REST = {"RightArm": (-0.3, 0.0, 0.05)}
+READING = {"Head": (0.35, 0.0, 0.0), "RightArm": (-0.7, 0.25, 0.0), "LeftArm": (-0.6, -0.25, 0.0)}
+INSPECT = {"Head": (0.3, 0.0, 0.0), "RightArm": (-0.95, -0.2, 0.0)}
+LOOKS = {
+    "maera": [("minecraft:paper", None, BEHIND), (None, None, BEHIND), ("minecraft:map", None, READING)],
+    "doran": [("minecraft:iron_pickaxe", "tt:ashfang_karambit", None), ("tt:ashfang_karambit", None, INSPECT),
+              (None, None, CROSSED)],
+    "rhosk": [("tt:thornwatch_halberd", "minecraft:shield", None), ("tt:thornwatch_halberd", "minecraft:shield", AT_REST),
+              (None, None, BEHIND)],
+    "pell": [("tt:cogwright_breaker", "create:wrench", None), ("create:cogwheel", "create:wrench", INSPECT),
+             (None, None, CROSSED)],
+    "tamsin": [("tt:rootstring_bow", "minecraft:oak_sapling", {"LeftArm": (-0.9, 0.2, 0.0)}),
+               ("tt:rootstring_bow", None, {"RightArm": (-1.5, -0.4, 0.0), "LeftArm": (-1.5, 0.1, 0.0)}),
+               (None, "minecraft:oak_sapling", BEHIND)],
+    "ilsabet": [("tt:prism_ward_staff", "minecraft:amethyst_shard", None),
+                ("tt:prism_ward_staff", None, {"RightArm": (-2.6, 0.0, 0.0), "Head": (-0.25, 0.0, 0.0)}),
+                ("minecraft:enchanted_book", None, READING)],
+    "stranger": [("minecraft:emerald", "tt:sculkheart_dagger", {"RightArm": (-0.4, -0.3, 0.0), "LeftArm": (0.2, 0.0, -0.05)}),
+                 (None, "tt:sculkheart_dagger", CROSSED), (None, None, BEHIND)],
+    "wren": [("minecraft:spyglass", "tt:rustbite_karambit", {"RightArm": (-1.9, -0.35, 0.0), "Head": (-0.15, 0.0, 0.0)}),
+             ("tt:rustbite_karambit", "minecraft:spyglass", AT_REST), ("minecraft:map", None, READING)],
+    "sol": [("minecraft:book", None, READING), ("minecraft:writable_book", None, READING), ("minecraft:book", None, BEHIND)],
 }
+WORK = {
+    "maera": {"sound": "minecraft:item.book.page_turn"},
+    "doran": {"sound": "minecraft:block.anvil.use", "particle": "minecraft:lava"},
+    "rhosk": {"sound": "minecraft:entity.player.attack.sweep", "particle": "minecraft:sweep_attack"},
+    "pell": {"sound": "minecraft:block.copper.hit", "particle": "minecraft:smoke"},
+    "tamsin": {"sound": "minecraft:block.azalea_leaves.place", "particle": "minecraft:happy_villager"},
+    "ilsabet": {"sound": "minecraft:block.amethyst_block.chime", "particle": "minecraft:enchant"},
+    "sol": {"sound": "minecraft:item.book.page_turn", "particle": "minecraft:enchant"},
+}
+
+
+def pose_nbt(pose):
+    return "{Pose:\"CUSTOM\",Rotation:{%s}}" % ",".join("%s:[%sf,%sf,%sf,0.0f]" % (k, *r) for k, r in pose.items())
 
 
 GREET_QUESTS = {"rhosk": "c2_rhosk"}  # no Ch2 talk: his greeting is the intro, so Goodbye completes it
@@ -302,11 +321,10 @@ def build(key, data):
     meta = ("PresetMetadata:{author:\"Terrestrial Tribulations\",category:\"Story\",description:%s,"
             "entityTypeId:\"easy_npc:%s\",name:%s,variantType:%s,version:\"1.0.0\"}") % (
         s(f"Story NPC generated by tools/gen_npcs.py from design/npcs/. {len(hub)} conversations."), model, s(display), s(variant))
-    w = WORK.get(key, {})
-    hand = "HandItems:[%s]," % ",".join("{Count:1b,id:%s}" % s(i) if i else "{}" for i in w.get("hands", (None, None)))
-    if w.get("pose"):
-        hand += "ModelData:{Pose:\"CUSTOM\",Rotation:{%s}}," % ",".join(
-            "%s:[%sf,%sf,%sf,0.0f]" % (part, *r) for part, r in w["pose"].items())
+    main, off, pose = LOOKS[key][0]                     # the preset starts in the first look
+    hand = "HandItems:[%s]," % ",".join("{Count:1b,id:%s}" % s(i) if i else "{}" for i in (main, off))
+    if pose:
+        hand += "ModelData:%s," % pose_nbt(pose)
     body = ("data:{CustomName:%s,DialogData:{DialogDataSet:[%s],Type:\"STANDARD\"},EasyNPCVersion:3," + hand + "Invulnerable:1b,"
             "ActionData:{ActionPermissionLevel:2},ObjectiveData:{ObjectiveDataSet:[{Type:\"LOOK_AT_PLAYER\"},{Type:\"LOOK_AT_RESET\"}]},PersistenceRequired:1b,"
             "SkinData:{Texture:%s,Type:\"RESOURCE_LOCATION\"},%sVariantType:%s,id:\"easy_npc:%s\"}") % (

@@ -25,7 +25,7 @@ Data folders are 1.20.1 names: structures/, loot_tables/ (both singular from 1.2
 import gzip, io, json, os, struct, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gen_npcs import CAST, MOVES, WORK
+from gen_npcs import CAST, MOVES, WORK, LOOKS
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "pack", "kubejs", "data", "tt")
@@ -783,8 +783,12 @@ def main():
     cfg["moves"] = {npc: {"stage": st, "buildings": ["minecolonies:" + b for b in blds], "spots": spots,
                           "name": CAST[npc][1], "line": line}
                     for npc, (st, blds, spots, line) in MOVES.items()}
-    cfg["work"] = {CAST[npc][1]: {"swing": bool(w.get("swing")), "sound": w.get("sound"), "particle": w.get("particle")}
-                   for npc, w in WORK.items() if w.get("swing") or w.get("sound") or w.get("particle")}
+    cfg["work"] = {CAST[npc][1]: {"sound": w.get("sound"), "particle": w.get("particle")} for npc, w in WORK.items()}
+    # every part listed, so switching looks resets the parts the previous pose had turned
+    parts = ["Head", "Body", "RightArm", "LeftArm", "RightLeg", "LeftLeg"]
+    cfg["looks"] = {CAST[npc][1]: [{"main": m or "", "off": o or "",
+                                    "pose": {pt: list((pose or {}).get(pt, (0.0, 0.0, 0.0))) + [0.0] for pt in parts} if pose else None}
+                                   for m, o, pose in looks] for npc, looks in LOOKS.items()}
     write(os.path.join(DATA, "tags", "worldgen", "structure", "npc_sites.json"), {"values": [f"tt:npc/{s}" for s in SITES]})
     write(CFG, cfg)
     print(f"NPC sites: {len(SITES)} structures ({sum(len(v['npcs']) for v in cfg['sites'].values())} NPCs), "

@@ -10,7 +10,8 @@
 //   same NPC into the first built building of a listed type in the player's colony (else the Town Hall), once, and
 //   stands it beside a fitting block inside (config "spots": anvil, lectern...), facing it; else by the hut block.
 //   Every free tile beside those blocks is stored, and each time the NPC's chunk loads it starts on a random one.
-// - Looking busy: story NPCs hold a tool of their trade and now and then work (swing, sound, particles; "work").
+// - Looking busy: each time a story NPC loads in it takes a random look (hands + pose, "looks"), and near players it
+//   now and then works (sound, particles, and an arm swing in looks without a pose; "work").
 // Uses $TT_TagKey, $TT_Registries, $TT_ResourceLocation and ttSafe from tt_abilities.js, $TT_AABB, ttColony and
 // ttBuildingManager from tt_active_abilities.js (shared scope).
 // DRAFT: untested in-game.
@@ -138,19 +139,36 @@ function ttMoveNpc(server, p, npc, mv) {
   server.scheduleInTicks(200, () => server.runCommandSilent(`execute in minecraft:overworld run forceload remove ${hub.x} ${hub.z}`))
 }
 
-// Each time a moved NPC's chunk loads, it starts at a different one of its spots (Doran at the anvil one day, the
-// blast furnace the next). Done a second later, once the chunk around it is ready.
+// Each time a story NPC loads in, it takes one of its looks at random (config "looks": what's in its hands and a
+// still pose, or no pose = it swings while working). A moved NPC also starts at a different one of its spots (Doran
+// at the anvil one day, the blast furnace the next). Done a second later, once the chunk around it is ready.
 const ttMovedByName = {}
 if (ttSites) Object.keys(ttSites.moves || {}).forEach(npc => { ttMovedByName[ttSites.moves[npc].name] = npc })
+
+function ttApplyLook(e, look) {
+  e.setMainHandItem(look.main ? Item.of(look.main) : Item.empty)
+  e.setOffHandItem(look.off ? Item.of(look.off) : Item.empty)
+  const rot = {}
+  const parts = look.pose || { Head: [0, 0, 0, 0], Body: [0, 0, 0, 0], RightArm: [0, 0, 0, 0], LeftArm: [0, 0, 0, 0],
+    RightLeg: [0, 0, 0, 0], LeftLeg: [0, 0, 0, 0] }
+  Object.keys(parts).forEach(k => { rot[k] = parts[k].map(v => NBT.f(v)) })
+  e.mergeNbt({ ModelData: { Pose: look.pose ? 'CUSTOM' : 'VANILLA', Rotation: rot } })
+  e.persistentData.putBoolean('tt_look_swing', !look.pose)
+}
+
 EntityEvents.spawned(event => {
   const e = event.entity
   if (!ttSites || !String(e.type).startsWith('easy_npc:') || !e.customName) return
-  const npc = ttMovedByName[String(e.customName.string)]
-  if (!npc) return
+  const name = String(e.customName.string)
+  const looks = (ttSites.looks || {})[name]
+  const npc = ttMovedByName[name]
+  if (!looks && !npc) return
   const server = event.server, spd = server.persistentData
-  if (!spd.getBoolean('tt_npc_moved_' + npc) || !spd.contains('tt_npc_spots_' + npc)) return
-  server.scheduleInTicks(20, () => ttSafe('npc_spot', () => {
-    if (e.isAlive()) ttPlaceAtRandomSpot(e.level, e, JSON.parse(String(spd.getString('tt_npc_spots_' + npc))))
+  server.scheduleInTicks(20, () => ttSafe('npc_load', () => {
+    if (!e.isAlive()) return
+    if (looks) ttApplyLook(e, looks[Math.floor(Math.random() * looks.length)])
+    if (npc && spd.getBoolean('tt_npc_moved_' + npc) && spd.contains('tt_npc_spots_' + npc))
+      ttPlaceAtRandomSpot(e.level, e, JSON.parse(String(spd.getString('tt_npc_spots_' + npc))))
   }))
 })
 
@@ -166,7 +184,7 @@ function ttWork(server, p) {
     const w = ttSites.work[String(e.customName.string)]
     if (!w || e.persistentData.getLong('tt_work') > now || Math.random() < 0.4) return
     e.persistentData.putLong('tt_work', now + 50)
-    if (w.swing && $TT_Hand) e.swing($TT_Hand.MAIN_HAND, true)
+    if (e.persistentData.getBoolean('tt_look_swing') && $TT_Hand) e.swing($TT_Hand.MAIN_HAND, true)
     const yaw = e.yRot * Math.PI / 180
     const hx = e.x - Math.sin(yaw) * 0.6, hz = e.z + Math.cos(yaw) * 0.6, hy = e.y + 1.1
     if (w.sound) server.runCommandSilent(`execute in minecraft:overworld positioned ${hx} ${hy} ${hz} run playsound ${w.sound} neutral @a[distance=..16] ~ ~ ~ 0.35 ${0.9 + Math.random() * 0.2}`)

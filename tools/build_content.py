@@ -252,8 +252,15 @@ def install_models(weapons):
             if w.get("model_parent"):
                 # Borrowed 3D model from a resource pack the player installs (e.g. Karambit Vault x Punchy, ARR, so
                 # nothing of it is copied): we only point at its model by resource location.
+                # Karambit Vault's own first-person transform (scale 0.3, no translation) relies on the Punchy mod's
+                # hand animation; without it the knife sits inside the hand (2026-10-29 test). Our own first-person
+                # placement, keeping the pack's rotation; tune FP_KARAMBIT after an in-game look.
+                fp = {"parent": w["model_parent"], "display": {
+                    "firstperson_righthand": dict(FP_KARAMBIT, rotation=[-80, 90, -60]),
+                    "firstperson_lefthand": dict(FP_KARAMBIT, rotation=[-80, -90, 60])}}
                 write(outs[0], json.dumps({"loader": "forge:separate_transforms", "base": {"parent": w["model_parent"]},
-                                           "perspectives": {"gui": flat, "fixed": flat}}, indent=2) + "\n")
+                                           "perspectives": {"gui": flat, "fixed": flat, "firstperson_righthand": fp,
+                                                            "firstperson_lefthand": fp}}, indent=2) + "\n")
                 count += 1
             continue
         m = json.load(open(src, encoding="utf-8"))
@@ -271,6 +278,9 @@ def install_models(weapons):
                                    "perspectives": {"gui": flat, "fixed": flat}}, indent=2) + "\n")
         count += 1
     return count
+
+
+FP_KARAMBIT = {"translation": [2.0, 4.0, 1.0], "scale": [0.45, 0.45, 0.45]}
 
 
 # ---------- scripts ----------

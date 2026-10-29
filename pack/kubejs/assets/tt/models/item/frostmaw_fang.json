@@ -15,6 +15,84 @@
       "textures": {
         "layer0": "tt:item/frostmaw_fang"
       }
+    },
+    "firstperson_righthand": {
+      "parent": "minecraft:item/diamond_sword",
+      "display": {
+        "firstperson_righthand": {
+          "translation": [
+            2.0,
+            4.0,
+            1.0
+          ],
+          "scale": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "rotation": [
+            -80,
+            90,
+            -60
+          ]
+        },
+        "firstperson_lefthand": {
+          "translation": [
+            2.0,
+            4.0,
+            1.0
+          ],
+          "scale": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "rotation": [
+            -80,
+            -90,
+            60
+          ]
+        }
+      }
+    },
+    "firstperson_lefthand": {
+      "parent": "minecraft:item/diamond_sword",
+      "display": {
+        "firstperson_righthand": {
+          "translation": [
+            2.0,
+            4.0,
+            1.0
+          ],
+          "scale": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "rotation": [
+            -80,
+            90,
+            -60
+          ]
+        },
+        "firstperson_lefthand": {
+          "translation": [
+            2.0,
+            4.0,
+            1.0
+          ],
+          "scale": [
+            0.45,
+            0.45,
+            0.45
+          ],
+          "rotation": [
+            -80,
+            -90,
+            60
+          ]
+        }
+      }
     }
   }
 }

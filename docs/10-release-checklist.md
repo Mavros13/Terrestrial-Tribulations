@@ -8,4 +8,4 @@ Things to do before the public release. Add to this list whenever something is p
 - [x] **Default options without overwriting players' settings** (2026-10-29): `pack/options.txt` is gone (Prism and CurseForge overwrite override files on every pack update). **Default Options** (+ Balm) now switches Karambit Vault x Punchy on once per instance from `pack/config/defaultoptions-common.toml`; its journal remembers that, so a player who turns the pack off keeps it off. Confirm on the desktop: fresh import has the pack on; turn it off, update the pack, still off.
 - [x] **Amendments** (Supplementaries' companion mod, avoids its startup warning): added to both mod lists, stage D (2026-10-29).
 - [ ] **Side quest tabs** (2026-10-29: written, `tools/quest_side.py`, 5 tabs in the "Side Paths" group). Still to do: confirm every item ID on the next server test (selftest `quest_items`) and play through one tab on the desktop.
-- [ ] **Merge PR #1** and point the install links at `main`.
+- [x] **Merge PR #1** and point the install links at `main` (2026-10-29, owner's go). Desktop check of everything since: `docs/11-test-session-3.md`.

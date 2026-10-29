@@ -4,7 +4,7 @@
 - **Family / Epic Fight category:**
 - **Tier (1–8) / rarity:**
 - **Base stats:** damage, attack speed, durability, reach
-- **Innate skill (EDP):** name, input, cooldown, effect
+- **Innate skill (built-in Epic Fight skill + KubeJS rider):** name, input, cooldown, effect
 - **Passive:**
 - **Story role:** chapter, who gives it or where it drops, lore line
 - **Acquisition:** recipe / boss drop / quest reward + gate
@@ -12,4 +12,4 @@
 - **Blockbench model:** file, polygon budget, texture size
 - **Test notes:**
 - **Colour scheme (must be unique, see ROSTER registry):** primary / secondary / accent / trail hex
-- **Implementation path:** EDP / KJS / BRIDGE
+- **Implementation path:** INNATE / KJS / BRIDGE

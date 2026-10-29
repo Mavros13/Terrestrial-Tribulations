@@ -1,12 +1,12 @@
 # Weapon roster, v1 (23 weapons, Tiers 1–8)
 
-Every weapon is a **new item** (`tt:` namespace), registered in KubeJS, modelled in Blockbench, given a moveset by Epic Fight, and given an ability through Epic Fight EDP, KubeJS or the `tt_bridge` mod. Status: **design spec, nothing implemented or tested yet.** 3D modelling briefs and the Blockbench export pipeline are in `blockbench/specs/weapons.md`; which resource-pack model each weapon borrows is in `design/weapons/model-map.md`.
+Every weapon is a **new item** (`tt:` namespace), registered in KubeJS, modelled in Blockbench, given a moveset by Epic Fight, and given an ability through Epic Fight's innate skills plus KubeJS, KubeJS alone or the `tt_bridge` mod. Status: **design spec, nothing implemented or tested yet.** 3D modelling briefs and the Blockbench export pipeline are in `blockbench/specs/weapons.md`; which resource-pack model each weapon borrows is in `design/weapons/model-map.md`.
 
 ## Mandatory rules
 1. **Visual uniqueness.** Every weapon has its own colour scheme (primary / secondary / accent) and **its own swing-trail colour**. No two weapons may share both primary and secondary colours, and no two may share a trail colour. The registry table below is the source of truth; check it before adding a weapon. The silhouette must also differ within a family (blade curve, guard shape, size).
 2. **Ability uniqueness.** Every weapon has a mechanically distinct ability. Reusing a mechanic (pull, freeze, lifesteal, beam and so on) on a second weapon is not allowed, and neither is renaming a "+X% damage" effect.
 3. **Story integration.** Every weapon names its chapter, source (NPC, boss, faction or location) and a lore line, and is unlocked by a quest or boss flag.
-4. **Implementation path** is stated per weapon: `EDP` (a custom innate skill made with the Epic Fight EDP add-on; until then the family's built-in innate skill plus a KubeJS rider on its hits, see `docs/research/2026-10-27-epic-fight-data-formats.md`), `KJS` (KubeJS event script) or `BRIDGE` (MCreator `tt_bridge` code). BRIDGE is used only when the other two can't do it.
+4. **Implementation path** is stated per weapon: `INNATE` (a built-in Epic Fight innate skill does the motion and a KubeJS rider on its hits does the rest; EDP skill files were dropped because they retune shared animations, see `docs/research/2026-10-27-epic-fight-data-formats.md` §5), `KJS` (KubeJS event script) or `BRIDGE` (MCreator `tt_bridge` code). BRIDGE is used only when the other two can't do it.
 
 ## Stat baselines (vanilla reference: iron sword = 6 damage, 1.6 attack speed)
 | Family | Epic Fight category | Damage vs a same-tier sword | Speed |
@@ -83,7 +83,7 @@ Vanilla iron and copper gear fills the rest of Tier 2 (re-themed with lore toolt
 ### 3. Ashfang Karambit: `tt:ashfang_karambit`
 - **Family:** Karambit (longer, serrated, fang-shaped curve; charcoal blade with a glowing ember seam) · **Rarity:** Uncommon
 - **Stats:** 7 damage · 2.0 speed · 600 durability
-- **Ability: Ember Hook** (EDP innate, 12 s cooldown): a hooking slash that drags you behind the target. Your next hit within 2 s is a guaranteed critical and sets the target on fire for 3 s.
+- **Ability: Ember Hook** (innate skill, 12 s cooldown): a hooking slash that drags you behind the target. Your next hit within 2 s is a guaranteed critical and sets the target on fire for 3 s.
 - **Story:** Ch2 *The First Settlement*. After the outpost defence, Doran forges it from a Hollow Alpha fang. *"Curved like the ash dunes. Bites twice."*
 - **Acquisition:** Ch2 finale quest reward. Re-craftable later at Doran's anvil: 2 Hollow Fang + Rustbite Karambit + 1 blaze powder.
 - **Fate synergy:** Duelist, Reaper.
@@ -91,7 +91,7 @@ Vanilla iron and copper gear fills the rest of Tier 2 (re-themed with lore toolt
 ### 4. Accord Longsword: `tt:accord_longsword`
 - **Family:** Longsword (straight blade, brass crossguard shaped like a flame, crimson tabard ribbon) · **Rarity:** Uncommon
 - **Stats:** 8 damage · 1.4 speed · 750 durability
-- **Ability: Rallying Strike** (EDP innate, 20 s cooldown): an overhead strike that gives you and every ally within 8 blocks Strength I and Resistance I for 6 s. Allies include players, MineColonies guards and tamed pets.
+- **Ability: Rallying Strike** (innate skill, 20 s cooldown): an overhead strike that gives you and every ally within 8 blocks Strength I and Resistance I for 6 s. Allies include players, MineColonies guards and tamed pets.
 - **Story:** Ch2. Captain of the Ember Accord militia (Rhosk's predecessor). It's awarded when Emberhold reaches City Stage 2 (Town Hall level 2). *"Raised over the first wall we built."*
 - **Acquisition:** quest reward (Town Hall level 2 + Ch2 complete).
 - **Fate synergy:** Vanguard, Warden.
@@ -117,7 +117,7 @@ Vanilla iron and copper gear fills the rest of Tier 2 (re-themed with lore toolt
 ### 7. Thornwatch Halberd: `tt:thornwatch_halberd`
 - **Family:** Spear/halberd (axe-head with thorn-vine engraving, bronze ferrule) · **Rarity:** Rare
 - **Stats:** 9.5 damage · 1.2 speed · 1100 durability · +1 reach
-- **Ability: Briar Line** (EDP innate, 15 s cooldown): a wide sweep that leaves a 6-block line of thorns for 5 s. Enemies crossing it take 2 damage per second and are slowed.
+- **Ability: Briar Line** (innate skill, 15 s cooldown): a wide sweep that leaves a 6-block line of thorns for 5 s. Enemies crossing it take 2 damage per second and are slowed.
 - **Story:** Ch5 *Kingdoms in Conflict*. Captain Rhosk's reward for defending the Thornwatch siege line. *"The Thornwatch never retreats. It plants."*
 - **Acquisition:** Thornwatch faction reward (Ch5 siege).
 - **Fate synergy:** Vanguard, Warden.
@@ -143,7 +143,7 @@ Vanilla iron and copper gear fills the rest of Tier 2 (re-themed with lore toolt
 ### 10. Hollowbane Tachi: `tt:hollowbane_tachi`
 - **Family:** Tachi (black lacquered single-edge blade with a violet glowing hamon line) · **Rarity:** Epic
 - **Stats:** 9.5 damage · 1.4 speed · 1800 durability (Veteran tier; lowered from 11 on 2026-10-28 so a Ch4 weapon doesn't outclass the Ch5 Thornwatch Halberd; see docs/research/2026-10-28-weapon-balance.md)
-- **Ability: Soul Severance** (EDP innate, 18 s cooldown): an iaijutsu draw-cut through a line. It deals +100% damage to Hollowed enemies, and strips invisibility and Hollow shields from everything hit.
+- **Ability: Soul Severance** (innate skill, 18 s cooldown): an iaijutsu draw-cut through a line. It deals +100% damage to Hollowed enemies, and strips invisibility and Hollow shields from everything hit.
 - **Story:** Ch4 *The Awakening*. It drops from your Hollow self after the mirror duel. *"It was always yours. You just hadn't faced the one holding it."*
 - **Acquisition:** Ch4 boss drop (guaranteed).
 - **Fate synergy:** Duelist, Ascendant.
@@ -151,7 +151,7 @@ Vanilla iron and copper gear fills the rest of Tier 2 (re-themed with lore toolt
 ### 11. Cinder Crown: `tt:cinder_crown`
 - **Family:** Greatsword (obsidian slab blade cracked with molten veins, a crown-like guard) · **Rarity:** Epic
 - **Stats:** 15 damage · 0.9 speed · 2000 durability · fire immune as a dropped item
-- **Ability: Flame Wake** (EDP innate, 16 s cooldown): a dragging ground slash that sends a 10-block line of erupting flame forward.
+- **Ability: Flame Wake** (innate skill, 16 s cooldown): a dragging ground slash that sends a 10-block line of erupting flame forward.
 - **Story:** Ch6. Forged from the core of **Ignis** (L_Ender's Cataclysm) in the Nether arc. *"A king of fire fell. His crown did not go out."*
 - **Acquisition:** crafted at the Artifact Forge: Ignis core + netherite + 4 magma blocks.
 - **Fate synergy:** Vanguard, Reaper.

@@ -18,6 +18,7 @@ Minecraft 1.20.1, Forge 47.4.18, 143 mods. Recommended memory: 8 GB.
 
 ### Combat and character
 - **23 custom weapons**, each with its own 3D model, colours, swing trail and ability. They include karambits, longswords, a halberd, gauntlets, bows, a staff and more.
+- Weapon skills with real effects: Ashfang's Ember Hook pulls you behind your target, the Thornwatch Halberd plants a line of thorns, the Cinder Crown sends a wave of flame, and the Accord Longsword's skill is now an overhead leap-strike that rallies nearby allies.
 - Epic Fight combat with dodges, stamina and movesets. Champions (elite mobs) and mob levelling.
 - Origins with **Heritage** and **Fate** layers, and the **Shard-Born** passive skill tree.
 - The karambits use the Karambit Vault models and first-person animations. Vanilla swords keep their normal look. Both resource packs can be switched off in Options → Resource Packs.

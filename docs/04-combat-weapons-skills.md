@@ -23,7 +23,7 @@ The karambit family is the exception: each karambit is a **new registered item**
 | Item registration (ID, tier, damage, speed, durability, rarity) | **KubeJS** `StartupEvents.registry('item')` |
 | 3D model + texture | **Blockbench** (our own), exported as item models in the KubeJS assets folder |
 | Moveset, trail and hitbox | Epic Fight weapon capability datapack (weapon category: dagger, sword, longsword, greatsword, spear, tachi and so on) |
-| Innate or active ability | Epic Fight EDP innate skills (JSON) + KubeJS events for effects that EDP can't express |
+| Innate or active ability | Built-in Epic Fight innate skills (a custom weapon type can swap which one) + KubeJS riders for the effect; EDP skill files dropped (research doc §5) |
 | Story hook | FTB Quests reward or unlock + KubeJS recipe gate + lore tooltip |
 
 **Karambits:** add a "Karambit" weapon family (dagger moveset: fast combos, short reach, high crits) as new items. Visuals: either license or recreate the Karambit Vault look in Blockbench. Spec format (karambits only): `design/weapons/_TEMPLATE.md`, first example: `design/weapons/ashfang_karambit.md`.

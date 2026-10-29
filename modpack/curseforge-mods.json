@@ -1040,6 +1040,14 @@
       "stage": "A",
       "side": "client",
       "type": "resourcepack"
+    },
+    {
+      "name": "Punchy",
+      "projectID": 1374153,
+      "fileID": 9239893,
+      "file": "punchy-2.8g-forge-1.20.1.jar",
+      "stage": "A",
+      "side": "client"
     }
   ]
 }

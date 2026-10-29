@@ -25,7 +25,10 @@
 			]
 			rewards: [
 				{ id: "4DC62C4388217CCF", type: "item", item: { Count: 32b, id: "minecraft:oak_log" } },
-				{ id: "BA6666BAB6AFEE58", type: "xp", xp: 150 }
+				{ id: "BA6666BAB6AFEE58", type: "xp", xp: 150 },
+				{ id: "81A26DF539624E88", type: "command", command: "/kubejs stages add @p tt_emberhold", elevate_perms: true, silent: true },
+				{ id: "FFDC98216823D635", type: "command", command: "/kubejs stages add @p tt_meet_rhosk", elevate_perms: true, silent: true },
+				{ id: "47208A2160749CB2", type: "command", command: "/loot give @p loot tt:npc_maps/thornwatch_outpost", elevate_perms: true, silent: true }
 			]
 		},
 		{
@@ -50,7 +53,7 @@
 			id: "7F81C70D874F205D"
 			title: "The Thornwatch Visits"
 			subtitle: "Old walls, new walls"
-			description: ["A tall knight in green-and-bronze plate watches your walls go up.", "", "&6Captain Rhosk&r: &o\"The Thornwatch remembers Emberhold's old walls. We'll see whether you deserve new ones.\"", "", "&7(Talk to Captain Rhosk: saying goodbye ticks this. No NPC placed yet? Tick it yourself.)"]
+			description: ["A tall knight in green-and-bronze plate watches your walls go up.", "", "&6Captain Rhosk&r: &o\"The Thornwatch remembers Emberhold's old walls. We'll see whether you deserve new ones.\"", "", "&7(Talk to Captain Rhosk: saying goodbye ticks this. Each story NPC lives at their own site; the quest that introduces them gives you a map.)"]
 			x: 2.0d
 			y: -2.0d
 			shape: "circle"
@@ -131,7 +134,9 @@
 			rewards: [
 				{ id: "B36D649B48BAE873", type: "item", item: { Count: 1b, id: "tt:accord_longsword" } },
 				{ id: "E545BBC1F83461F7", type: "xp", xp: 300 },
-				{ id: "C815CF672D79ABA4", type: "command", command: "/kubejs stages add @p tt_ch2_done", elevate_perms: true, silent: true }
+				{ id: "C815CF672D79ABA4", type: "command", command: "/kubejs stages add @p tt_ch2_done", elevate_perms: true, silent: true },
+				{ id: "1969D4A78099A407", type: "command", command: "/kubejs stages add @p tt_meet_pell", elevate_perms: true, silent: true },
+				{ id: "9FB7F7B059FC67FE", type: "command", command: "/loot give @p loot tt:npc_maps/pell_ruin", elevate_perms: true, silent: true }
 			]
 		}
 	]

@@ -117,7 +117,7 @@ CHAPTERS = [
                  desc=["Following the smoke, you find a ring of tents and frightened faces: the last of the &cEmber Accord&r.",
                        "", "An old woman with ash in her braids studies you. &o\"You walked through the Hollow fields and lived. No one lives.\"",
                        "", "&6Elder Maera&r: &o\"Sit. Eat. Then tell me why the Hollowed turned away from you.\"",
-                       "", "&7(Finishing your talk with Elder Maera ticks this. No NPC placed yet? Tick it yourself.)"],
+                       "", "&7(Elder Maera waits at the refugee camp just beside where you woke up. Finishing your talk with her ticks this.)"],
                  tasks=[t_check()], rewards=[r_item("minecraft:cooked_porkchop", 6), r_xp(100)]),
             dict(key="c1_karambit", title="Teeth for the Night", sub="Maera's gift", main=True, x=10, y=0, deps=["c1_smoke", "c1_iron"],
                  desc=["&6Elder Maera&r unrolls a scrap of leather with a curved blade sketched on it.",
@@ -159,6 +159,14 @@ from quest_side import chapters as side_chapters    # optional tech, magic, city
 
 CHAPTERS = (CHAPTERS[:2] + story_chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage, r_cmd) + CHAPTERS[2:]
             + side_chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp))
+# Story NPC sites (tools/gen_npc_sites.py): the quest before an NPC's first talk unlocks their site and hands out a map.
+from gen_npc_sites import MEET_AFTER
+for _c in CHAPTERS:
+    for _q in _c["quests"]:
+        if _q["key"] in MEET_AFTER:
+            _stage, _table = MEET_AFTER[_q["key"]]
+            _q["rewards"] = _q["rewards"] + [r_stage(_stage), r_cmd(f"/loot give @p loot {_table}")]
+assert all(any(q["key"] == k for c in CHAPTERS for q in c["quests"]) for k in MEET_AFTER), "MEET_AFTER names a missing quest"
 GROUPS = {"side": "Side Paths"}  # chapter group key -> title; chapters without "group" stay ungrouped
 
 

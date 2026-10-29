@@ -1072,6 +1072,79 @@
       "file": "punchy-2.8g-forge-1.20.1.jar",
       "stage": "A",
       "side": "client"
+    },
+    {
+      "name": "Async Locator",
+      "projectID": 625069,
+      "fileID": 4603343,
+      "file": "async-locator-forge-1.20-1.3.0.jar",
+      "stage": "D"
+    },
+    {
+      "name": "Structure Layout Optimizer",
+      "projectID": 1087831,
+      "fileID": 7139029,
+      "file": "structure_layout_optimizer-forge-1.0.11.jar",
+      "stage": "D"
+    },
+    {
+      "name": "Resourceful Config",
+      "projectID": 714059,
+      "fileID": 6231176,
+      "file": "resourcefulconfig-forge-1.20.1-2.1.3.jar",
+      "stage": "D",
+      "dependency": true
+    },
+    {
+      "name": "Clumps",
+      "projectID": 256717,
+      "fileID": 5278538,
+      "file": "Clumps-forge-1.20.1-12.0.0.4.jar",
+      "stage": "D"
+    },
+    {
+      "name": "Let Me Despawn",
+      "projectID": 663477,
+      "fileID": 9201694,
+      "file": "letmedespawn-forge-1.20.1-1.26.10.1.jar",
+      "stage": "D"
+    },
+    {
+      "name": "Almanac Lib",
+      "projectID": 1115285,
+      "fileID": 9201652,
+      "file": "almanac-forge-1.20.1-1.26.10.2.jar",
+      "stage": "D",
+      "dependency": true
+    },
+    {
+      "name": "FastSuite",
+      "projectID": 475117,
+      "fileID": 7527943,
+      "file": "FastSuite-1.20.1-5.1.2.jar",
+      "stage": "D"
+    },
+    {
+      "name": "AllTheLeaks",
+      "projectID": 1091339,
+      "fileID": 8779054,
+      "file": "alltheleaks-1.1.3+1.20.1-forge.jar",
+      "stage": "D"
+    },
+    {
+      "name": "Dynamic FPS",
+      "projectID": 335493,
+      "fileID": 7546908,
+      "file": "dynamic-fps-3.11.4+minecraft-1.20.0-forge.jar",
+      "stage": "D",
+      "side": "client"
+    },
+    {
+      "name": "Smooth Boot (Reloaded)",
+      "projectID": 633412,
+      "fileID": 5016280,
+      "file": "smoothboot(reloaded)-mc1.20.1-0.0.4.jar",
+      "stage": "D"
     }
   ]
 }

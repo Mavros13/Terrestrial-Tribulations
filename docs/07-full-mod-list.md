@@ -113,7 +113,7 @@ Stages in `pack/tt-sync/mods.json`: **A/B/C = Test Build 1**, **D = Test Build 2
 | AmbientSounds, Sound Physics Remastered | ❔ |
 
 ## Performance
-Embeddium, Oculus (optional shaders), ModernFix, FerriteCore, EntityCulling, ImmediatelyFast, Canary, Spark, Chunky (pre-generate the spawn area).
+Embeddium, Oculus (optional shaders), ModernFix, FerriteCore, EntityCulling, ImmediatelyFast, Canary, Spark, Chunky (pre-generate the spawn area). Added 2026-10-29: Async Locator, Structure Layout Optimizer (+ Resourceful Config), Clumps, Let Me Despawn (+ Almanac Lib), FastSuite, AllTheLeaks, Dynamic FPS (client), Smooth Boot (Reloaded); see docs/12-remaining-work.md.
 
 ## Other
 - **CreeperMax123:** I found no CurseForge author page. Their known work is mostly vanilla mob **resource packs** (Better Vanilla Mobs, Better Illagers and others). They're candidates for an optional visual pack. Check them alongside Epic Fight's mob models.

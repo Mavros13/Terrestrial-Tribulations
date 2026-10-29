@@ -754,6 +754,62 @@
       "curseforge": "punchy",
       "stage": "A",
       "_note": "Client-only first-person animations; off in Epic Fight battle mode (kubejs/client_scripts/tt_punchy_battle.js). Karambit Vault x Punchy (resource pack) is CurseForge-only and not installed by ModSync."
+    },
+    {
+      "name": "Async Locator",
+      "match": "asynclocator",
+      "modrinth": "async-locator",
+      "curseforge": "async-locator",
+      "stage": "D"
+    },
+    {
+      "name": "Structure Layout Optimizer",
+      "match": "structure_layout_optimizer",
+      "modrinth": "structure-layout-optimizer",
+      "curseforge": "structure-layout-optimizer",
+      "stage": "D"
+    },
+    {
+      "name": "Clumps",
+      "match": "clumps",
+      "modrinth": "clumps",
+      "curseforge": "clumps",
+      "stage": "D"
+    },
+    {
+      "name": "Let Me Despawn",
+      "match": "letmedespawn",
+      "modrinth": "lmd",
+      "curseforge": "let-me-despawn",
+      "stage": "D"
+    },
+    {
+      "name": "FastSuite",
+      "match": "fastsuite",
+      "modrinth": "fastsuite",
+      "curseforge": "fastsuite",
+      "stage": "D"
+    },
+    {
+      "name": "AllTheLeaks",
+      "match": "alltheleaks",
+      "modrinth": "",
+      "curseforge": "alltheleaks",
+      "stage": "D"
+    },
+    {
+      "name": "Dynamic FPS",
+      "match": "dynamic-fps",
+      "modrinth": "dynamic-fps",
+      "curseforge": "dynamic-fps",
+      "stage": "D"
+    },
+    {
+      "name": "Smooth Boot (Reloaded)",
+      "match": "smoothboot",
+      "modrinth": "smooth-boot-reloaded",
+      "curseforge": "smooth-boot-reloaded",
+      "stage": "D"
     }
   ],
   "skip_dependencies": {

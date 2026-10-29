@@ -26,7 +26,9 @@
 			rewards: [
 				{ id: "F56BA1AFA02BDF25", type: "item", item: { Count: 1b, id: "create:water_wheel" } },
 				{ id: "6505C10D8F31C571", type: "item", item: { Count: 8b, id: "create:shaft" } },
-				{ id: "96AE9FC1B5CEA509", type: "xp", xp: 150 }
+				{ id: "96AE9FC1B5CEA509", type: "xp", xp: 150 },
+				{ id: "A3B35ABFDF07D2D9", type: "command", command: "/kubejs stages add @p tt_meet_tamsin", elevate_perms: true, silent: true },
+				{ id: "64EC8E1A889347AC", type: "command", command: "/loot give @p loot tt:npc_maps/tamsin_grove", elevate_perms: true, silent: true }
 			]
 		},
 		{

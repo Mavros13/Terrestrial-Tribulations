@@ -4,11 +4,12 @@ Player-facing changes for each release of Terrestrial Tribulations. The release 
 
 ## 0.9.0 (first public beta, not released yet)
 
-Minecraft 1.20.1, Forge 47.4.18, 143 mods. Recommended memory: 8 GB.
+Minecraft 1.20.1, Forge 47.4.18, 153 mods. Recommended memory: 8 GB.
 
 ### Story
 - **The main campaign, Chapters 1–12**, in the quest book: from the Hollow fields to founding Emberhold, the Shattered Realms, the Iron Choir and the fight for the Crown. It has three endings.
 - **Nine story NPCs** with their own skins and branching conversations: Elder Maera, Doran, Captain Rhosk, Pell, Tamsin, Ilsabet, the Stranger, Wren and Archivist Sol. Later chapters' talks unlock as you progress, and finishing a talk ticks off its quest.
+- **Every story NPC lives somewhere:** Elder Maera and Doran wait at a refugee camp beside spawn, and the others have their own outposts, ruins, groves and towers out in the world. Each site stays closed until its chapter, and the quest that sends you there gives you a map. Later, most of them will move into Emberhold when you invite them, settling inside the matching building (Doran at the Blacksmith's anvil, Sol at the Library's lectern, and so on), at a different spot each time you come back. Story NPCs carry their story weapons and tools (Rhosk his Thornwatch Halberd, Pell his Cogwright Breaker, Ilsabet her Prism Ward Staff...), strike fitting poses and work while you're nearby.
 - **Shops** run by Doran, Pell, Ilsabet and the Stranger, priced for the chapter you meet them in.
 - **14 existing bosses take story roles.** Each has a story name on its boss bar and speaks lines when you fight it.
 - Story gates: the realm dimensions (Aether, Twilight Forest, Undergarden, Blue Skies, Otherside) open in Chapter 7, and The End, the last of the Convergence, opens in Chapter 10. Hero suits and powers arrive with their chapters.
@@ -25,4 +26,6 @@ Minecraft 1.20.1, Forge 47.4.18, 143 mods. Recommended memory: 8 GB.
 
 ### Quality of life
 - The land around spawn is pre-generated in the background on a new world's first load, so exploring stutters less. `/chunky pause` stops it.
+- Smoother play: structure searches run in the background, structures generate faster, XP orbs merge, mobs that picked up items still despawn, faster crafting lookups, memory-leak fixes, and the game idles when its window is in the background.
+- Lighter video and sound-physics settings on first launch (render distance 10). Colonies are capped at 150 citizens and raids at 40 raiders, to keep frame rates steady. Your own settings are never overwritten.
 - Pack updates never reset your own game settings.

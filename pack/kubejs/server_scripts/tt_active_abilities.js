@@ -308,13 +308,18 @@ function ttColony(p) {
   return $TT_Colonies.getInstance().getIColonyByOwner(p.level, p)
 }
 
+// Recent MineColonies 1.20.1 builds call it getServerBuildingManager(); older ones getBuildingManager().
+function ttBuildingManager(colony) {
+  try { return colony.getServerBuildingManager() } catch (e) { return colony.getBuildingManager() }
+}
+
 EntityEvents.hurt(event => {
   const p = event.source.player
   if (!p || p.mainHandItem.id != 'tt:emberhold_oathblade') return
   ttSafe('oath_damage', () => {
     const colony = ttColony(p)
     if (!colony) return
-    const hall = colony.getBuildingManager().getTownHall()
+    const hall = ttBuildingManager(colony).getTownHall()
     const lvl = hall ? Math.min(5, hall.getBuildingLevel()) : 0
     if (lvl > 0) ttBonus(event.server, event.entity, lvl)
   })

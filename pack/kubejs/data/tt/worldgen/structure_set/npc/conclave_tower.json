@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "tt:npc/conclave_tower",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 36,
+    "separation": 14,
+    "salt": 74511204
+  }
+}

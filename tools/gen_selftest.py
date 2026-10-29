@@ -41,6 +41,7 @@ out = {
     "quest_entities": quest_entities,
     "npc_trade_items": npc_trade_items,
     "quest_dimensions": quest_dims,
+    "npc_sites": sorted(json.load(open(os.path.join(KJ, "config", "tt_npc_sites.json")))["sites"]),
     "lore_entities": sorted(json.load(open(os.path.join(KJ, "config", "tt_boss_lore.json")))["bosses"]),
     "dimensions": sorted({d for g in gates.get("dimension_gates", {}).get("gates", []) for d in g["dimensions"]}),
 }

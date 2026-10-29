@@ -106,6 +106,9 @@ function ttSelfTest(server) {
   section('quest_entities', cfg.quest_entities, id => ttNsCheck(id, () => BRegs.ENTITY_TYPE.containsKey(new RL(id))))
   section('lore_entities', cfg.lore_entities, id => ttNsCheck(id, () => BRegs.ENTITY_TYPE.containsKey(new RL(id))))
   section('quest_dimensions', cfg.quest_dimensions, id => ttNsCheck(id, () => server.getLevel(id) != null))
+  // Story NPC sites (tools/gen_npc_sites.py): every structure loaded from our data pack
+  let structures = server.registryAccess().registryOrThrow(Java.loadClass('net.minecraft.core.registries.Registries').STRUCTURE)
+  section('npc_sites', cfg.npc_sites || [], id => structures.containsKey(new RL(id)))
 
   console.info(`[TT] selftest done: ${total.pass} passed, ${total.fail} failed`)
   try {

@@ -2,10 +2,9 @@
   "type": "epicfight:tachi",
   "attributes": {
     "common": {
-      "armor_negation": 12.5,
-      "impact": 1.15,
+      "armor_negation": 10.0,
+      "impact": 1.0,
       "max_strikes": 1
     }
-  },
-  "_tt_trail_color": "#9B5CFF"
+  }
 }

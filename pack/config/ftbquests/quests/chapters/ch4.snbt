@@ -1,0 +1,86 @@
+{
+	id: "8E838A3E99A95DA4"
+	group: ""
+	order_index: 4
+	filename: "ch4"
+	title: "Chapter 4: The Awakening"
+	icon: { Count: 1b, id: "tt:crown_shard" }
+	default_quest_shape: ""
+	default_hide_dependency_lines: false
+	quest_links: [ ]
+	images: [ ]
+	quests: [
+		{
+			id: "A253DF6F9835F3C5"
+			title: "The Shard Wakes"
+			subtitle: "A voice that knows your name"
+			description: ["Deep in a ruin, a stone pulses when you come near. When you touch it, a voice says your name.", "", "&6Elder Maera&r: &o\"That's a Crown Shard. And you, child, are made of the same stuff.\"", "", "Find a Shard: explore a &estronghold&r (the old Crown vaults lie beneath them)."]
+			x: 0.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["017F2A336A675710"]
+			tasks: [
+				{ id: "2F5B79741B1C445B", type: "advancement", advancement: "minecraft:story/follow_ender_eye", criterion: "" }
+			]
+			rewards: [
+				{ id: "A66F7D5F124087A8", type: "item", item: { Count: 1b, id: "tt:crown_shard" } },
+				{ id: "73C5CCE955D8A811", type: "xp", xp: 400 }
+			]
+		},
+		{
+			id: "39A8CD043ED75308"
+			title: "Choose Before It Chooses"
+			subtitle: "Your Fate"
+			description: ["&6Maera&r: &o\"The Shard will make you stronger, whichever path you take. Choose before it chooses for you.\"", "", "If you haven't, confirm your &eFate&r (Origins: Fate layer) and spend 5 skill points in the &6Passive Skill Tree&r.", "", "&7Tick once done."]
+			x: 2.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["A253DF6F9835F3C5"]
+			tasks: [
+				{ id: "1479AD91CA96A788", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "E0EB7FC2BA2F2E89", type: "xp", xp: 300 }
+			]
+		},
+		{
+			id: "85EDDA4CBEDBEB7A"
+			title: "The Voice"
+			subtitle: "The Regent"
+			description: ["The voice comes back at night. It calls itself the &5Regent&r.", "", "&6Maera&r: &o\"Malric Thorne. Whatever he is now, he's in the Shards. Go to the old shrine on the ridge. Take your best blade.\""]
+			x: 4.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["39A8CD043ED75308"]
+			tasks: [
+				{ id: "A017EF0A835BE849", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "22A37B4749C10ACF", type: "item", item: { Count: 2b, id: "minecraft:golden_apple" } },
+				{ id: "42B728819EA1B2C0", type: "xp", xp: 150 }
+			]
+		},
+		{
+			id: "647B0590E8BC022E"
+			title: "Your Own Face"
+			subtitle: "The Hollow self"
+			description: ["At the shrine, the Shard shows you what the Regent would make of you. It wears your face, and it fights with your hands.", "", "Defeat your Hollow self: &cUmvuthi&r (Mowzie's Mobs), at its sun-scorched arena."]
+			x: 6.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["85EDDA4CBEDBEB7A"]
+			tasks: [
+				{ id: "668AE9B4DCE73506", type: "kill", entity: "mowziesmobs:umvuthi", value: 1L }
+			]
+			rewards: [
+				{ id: "486F86C7BED4EFF7", type: "item", item: { Count: 1b, id: "tt:hollowbane_tachi" } },
+				{ id: "3BF2BA230B3B9CB2", type: "xp", xp: 600 },
+				{ id: "55AB57AE273F81DD", type: "command", command: "/kubejs stages add @p tt_ch4_done", elevate_perms: true, silent: true }
+			]
+		}
+	]
+}

@@ -1,0 +1,20 @@
+{
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "tt:item/rootstring_bow_3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "tt:item/rootstring_bow"
+      }
+    },
+    "fixed": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "tt:item/rootstring_bow"
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "tt:item/emberhold_oathblade_3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "tt:item/emberhold_oathblade"
+      }
+    },
+    "fixed": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "tt:item/emberhold_oathblade"
+      }
+    }
+  }
+}

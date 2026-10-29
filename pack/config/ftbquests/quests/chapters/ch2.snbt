@@ -1,0 +1,138 @@
+{
+	id: "627CBC0387C1641E"
+	group: ""
+	order_index: 2
+	filename: "ch2"
+	title: "Chapter 2: The First Settlement"
+	icon: { Count: 1b, id: "minecolonies:blockhuttownhall" }
+	default_quest_shape: ""
+	default_hide_dependency_lines: false
+	quest_links: [ ]
+	images: [ ]
+	quests: [
+		{
+			id: "BC7B140352112BF4"
+			title: "Plant the Charter"
+			subtitle: "Emberhold begins"
+			description: ["&6Elder Maera&r: &o\"Plant this where you mean to stay. We'll follow.\"", "", "Choose good ground (water, stone, wood) and place a &eTown Hall&r (MineColonies) to found &6Emberhold&r.", "", "&7City stage 1: Outpost."]
+			x: 0.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["A88C6AB1B2597253"]
+			tasks: [
+				{ id: "A99A280715F8C6CA", type: "item", item: { Count: 1b, id: "minecolonies:blockhuttownhall" } }
+			]
+			rewards: [
+				{ id: "4DC62C4388217CCF", type: "item", item: { Count: 32b, id: "minecraft:oak_log" } },
+				{ id: "BA6666BAB6AFEE58", type: "xp", xp: 150 }
+			]
+		},
+		{
+			id: "3AD0FF0B654D9820"
+			title: "Hands to Build"
+			subtitle: "The first colonists"
+			description: ["A colony is people. Place a &eBuilder's Hut&r and let your first colonists raise the walls.", "", "&7MineColonies' Builder builds and upgrades every other hut."]
+			x: 2.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["BC7B140352112BF4"]
+			tasks: [
+				{ id: "C0BA40F8C1AB2D78", type: "item", item: { Count: 1b, id: "minecolonies:blockhutbuilder" } }
+			]
+			rewards: [
+				{ id: "EA3CC63272C9AB50", type: "item", item: { Count: 64b, id: "minecraft:cobblestone" } },
+				{ id: "CD4EDADFEA17A20B", type: "xp", xp: 100 }
+			]
+		},
+		{
+			id: "7F81C70D874F205D"
+			title: "The Thornwatch Visits"
+			subtitle: "Old walls, new walls"
+			description: ["A tall knight in green-and-bronze plate watches your walls go up.", "", "&6Captain Rhosk&r: &o\"The Thornwatch remembers Emberhold's old walls. We'll see whether you deserve new ones.\"", "", "&7(Talk to Captain Rhosk: saying goodbye ticks this. No NPC placed yet? Tick it yourself.)"]
+			x: 2.0d
+			y: -2.0d
+			shape: "circle"
+			dependencies: ["BC7B140352112BF4"]
+			tasks: [
+				{ id: "B08FEBE2736CE69B", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "4F62538B68FA4D0D", type: "xp", xp: 60 }
+			]
+		},
+		{
+			id: "66E2FDDD1C084739"
+			title: "Someone on the Walls"
+			subtitle: "Guards"
+			description: ["Hollowed packs are circling. Build a &eGuard Tower&r so Emberhold isn't defended by you alone."]
+			x: 4.0d
+			y: -2.0d
+			shape: "circle"
+			dependencies: ["3AD0FF0B654D9820"]
+			tasks: [
+				{ id: "81015018D6B65E66", type: "item", item: { Count: 1b, id: "minecolonies:blockhutguardtower" } }
+			]
+			rewards: [
+				{ id: "62E083EDB3B7986F", type: "item", item: { Count: 1b, id: "minecraft:iron_sword" } },
+				{ id: "4DDDE6B04280510E", type: "xp", xp: 100 }
+			]
+		},
+		{
+			id: "9B1AB18426B4A4FF"
+			title: "The Hollow Pack Alpha"
+			subtitle: "They come for the outpost"
+			description: ["Night falls and the Hollowed come in force, led by something bigger and smarter: a &cChampion&r.", "", "Defend the outpost. Defeat &e15 Zombies&r (the Alpha rides among them as a Champion; its fangs are what Doran wants).", "", "&7Kill the elite Champion if you see one: its fangs are the reward here either way."]
+			x: 4.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["3AD0FF0B654D9820"]
+			tasks: [
+				{ id: "6196AA05F0C5E3FA", type: "kill", entity: "minecraft:zombie", value: 15L }
+			]
+			rewards: [
+				{ id: "738B2B51AD1EE7C9", type: "item", item: { Count: 2b, id: "tt:hollow_fang" } },
+				{ id: "EFE60E63BA18D472", type: "xp", xp: 250 }
+			]
+		},
+		{
+			id: "6A251F20EF701C0B"
+			title: "Fangs"
+			subtitle: "Doran's forge"
+			description: ["&6Doran&r: &o\"That thing that led the pack. You kept its teeth? Good. Hollow bone holds heat like nothing else.\"", "", "Bring Doran &e2 Hollow Fangs&r. He forges your karambit into the &6Ashfang Karambit&r.", "", "&7(Or craft it yourself: Rustbite Karambit + 2 Hollow Fang + Blaze Powder.)"]
+			x: 6.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["9B1AB18426B4A4FF"]
+			tasks: [
+				{ id: "2BD4280B57B8FC89", type: "item", item: { Count: 1b, id: "tt:hollow_fang" }, count: 2L }
+			]
+			rewards: [
+				{ id: "3979445373877B50", type: "item", item: { Count: 1b, id: "tt:ashfang_karambit" } },
+				{ id: "D094A8FBA7A95256", type: "xp", xp: 200 }
+			]
+		},
+		{
+			id: "B7EC18DD9382E61D"
+			title: "A Village Now"
+			subtitle: "City stage 2"
+			description: ["Emberhold has walls, a smith, and a guard who doesn't flinch.", "", "Upgrade the &eTown Hall to level 2&r (MineColonies: ask your Builder).", "", "&6Elder Maera&r: &o\"A village. Forty mouths, and every one of them fed.\"", "", "&7Tick once the Town Hall shows level 2."]
+			x: 8.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["6A251F20EF701C0B", "66E2FDDD1C084739"]
+			tasks: [
+				{ id: "F084A4DF24E4B05C", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "B36D649B48BAE873", type: "item", item: { Count: 1b, id: "tt:accord_longsword" } },
+				{ id: "E545BBC1F83461F7", type: "xp", xp: 300 },
+				{ id: "C815CF672D79ABA4", type: "command", command: "/kubejs stages add @p tt_ch2_done", elevate_perms: true, silent: true }
+			]
+		}
+	]
+}

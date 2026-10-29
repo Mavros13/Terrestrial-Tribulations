@@ -43,6 +43,9 @@ def r_item(i, count=1):
     return f'type: "item", item: {item(i, min(count, 64))}'
 def r_xp(n):
     return f'type: "xp", xp: {n}'
+def r_cmd(cmd):
+    """Runs a server command as the player's reward (operator rights)."""
+    return f'type: "command", command: {s(cmd)}, elevate_perms: true, silent: true'
 def r_stage(stage):
     """Grants a KubeJS stage (used by story gates). The command needs operator rights, hence elevate_perms."""
     return f'type: "command", command: "/kubejs stages add @p {stage}", elevate_perms: true, silent: true'
@@ -114,7 +117,7 @@ CHAPTERS = [
                  desc=["Following the smoke, you find a ring of tents and frightened faces: the last of the &cEmber Accord&r.",
                        "", "An old woman with ash in her braids studies you. &o\"You walked through the Hollow fields and lived. No one lives.\"",
                        "", "&6Elder Maera&r: &o\"Sit. Eat. Then tell me why the Hollowed turned away from you.\"",
-                       "", "&7(Elder Maera's NPC arrives with the Emberhold build. Tick to continue.)"],
+                       "", "&7(Finishing your talk with Elder Maera ticks this. No NPC placed yet? Tick it yourself.)"],
                  tasks=[t_check()], rewards=[r_item("minecraft:cooked_porkchop", 6), r_xp(100)]),
             dict(key="c1_karambit", title="Teeth for the Night", sub="Maera's gift", main=True, x=10, y=0, deps=["c1_smoke", "c1_iron"],
                  desc=["&6Elder Maera&r unrolls a scrap of leather with a curved blade sketched on it.",
@@ -150,6 +153,15 @@ CHAPTERS = [
 ]
 
 
+from quest_story import chapters as story_chapters  # Chapters 2-12 (main story)
+
+from quest_side import chapters as side_chapters    # optional tech, magic, city and world tabs
+
+CHAPTERS = (CHAPTERS[:2] + story_chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage, r_cmd) + CHAPTERS[2:]
+            + side_chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp))
+GROUPS = {"side": "Side Paths"}  # chapter group key -> title; chapters without "group" stay ungrouped
+
+
 def quest_snbt(q):
     tasks = ",\n".join(f'\t\t\t\t{{ id: "{qid(q["key"] + ":task:" + str(i))}", {t} }}' for i, t in enumerate(q["tasks"]))
     rewards = ",\n".join(f'\t\t\t\t{{ id: "{qid(q["key"] + ":reward:" + str(i))}", {r} }}' for i, r in enumerate(q["rewards"]))
@@ -158,6 +170,7 @@ def quest_snbt(q):
     return (f'\t\t{{\n\t\t\tid: "{qid(q["key"])}"\n\t\t\ttitle: {s(q["title"])}\n\t\t\tsubtitle: {s(q["sub"])}\n'
             f'\t\t\tdescription: [{desc}]\n\t\t\tx: {float(q["x"])}d\n\t\t\ty: {float(q["y"])}d\n'
             f'\t\t\tshape: "{"gear" if q.get("main") else "circle"}"\n' + (f'\t\t\tsize: 1.5d\n' if q.get("main") else "")
+            + ('\t\t\tdependency_requirement: "one_completed"\n' if q.get("dep_any") else "")
             + f'\t\t\tdependencies: [{deps}]\n\t\t\ttasks: [\n{tasks}\n\t\t\t]\n\t\t\trewards: [\n{rewards}\n\t\t\t]\n\t\t}}')
 
 
@@ -169,8 +182,9 @@ def main():
                 '\tdefault_reward_team: false\n\tdefault_consume_items: false\n\tdefault_quest_shape: "circle"\n'
                 '\tdrop_book_on_death: false\n\tpause_game: false\n\tprogression_mode: "linear"\n\tdetection_delay: 20\n}\n')
     with open(os.path.join(OUT, "chapter_groups.snbt"), "w") as f:
-        f.write("{\n\tchapter_groups: [ ]\n}\n")
-    lang = []
+        f.write("{\n\tchapter_groups: [\n" + ",\n".join(f'\t\t{{ id: "{qid("group:" + g)}", title: {s(n)} }}' for g, n in GROUPS.items())
+                + "\n\t]\n}\n")
+    lang = [f'\tchapter_group.{qid("group:" + g)}.title: {s(n)}' for g, n in GROUPS.items()]
     all_keys = {q["key"] for c in CHAPTERS for q in c["quests"]}
     for i, c in enumerate(CHAPTERS):
         for q in c["quests"]:
@@ -182,7 +196,7 @@ def main():
         lang.append(f'\tchapter.{qid("chapter:" + c["key"])}.title: {s(c["title"])}')
         body = ",\n".join(quest_snbt(q) for q in c["quests"])
         with open(os.path.join(OUT, "chapters", c["key"] + ".snbt"), "w") as f:
-            f.write(f'{{\n\tid: "{qid("chapter:" + c["key"])}"\n\tgroup: ""\n\torder_index: {i}\n\tfilename: "{c["key"]}"\n'
+            f.write(f'{{\n\tid: "{qid("chapter:" + c["key"])}"\n\tgroup: "{qid("group:" + c["group"]) if c.get("group") else ""}"\n\torder_index: {i}\n\tfilename: "{c["key"]}"\n'
                     f'\ttitle: {s(c["title"])}\n\ticon: {item(c["icon"])}\n\tdefault_quest_shape: ""\n\tdefault_hide_dependency_lines: false\n'
                     f'\tquest_links: [ ]\n\timages: [ ]\n\tquests: [\n{body}\n\t]\n}}\n')
     # circular dependency check

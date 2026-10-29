@@ -2,12 +2,20 @@
 
 Replaces the CurseForge-app instructions in docs/05. The mod stages and checklist in docs/05 still apply.
 
-## Import
-See the README: Prism → Add Instance → Import → paste the zip URL. Memory is preset to 8 GB, with G1GC flags.
+## Import (recommended: CurseForge-format zip, fully automatic)
+Prism → **Add Instance** → **Import** → paste:
+`https://github.com/Mavros13/Terrestrial-Tribulations/raw/main/dist/Terrestrial-Tribulations-TestBuild1-CurseForge.zip`
+
+Prism reads the pack's mod list and downloads **every** mod itself, from CurseForge, with no manual step. If a mod's author blocks downloads in other apps, Prism shows its own "blocked mods" window with links. Then: right-click the instance → **Edit** → **Settings** → **Java** → set memory to **8 GB** (this format can't preset it). Test Build 2 is the same link with `TestBuild2` in place of `TestBuild1`.
+
+Not included: **Gods and Heroes (Palladium)**. It's only on Modrinth and its licence doesn't allow re-hosting. Add it from Prism's Modrinth tab if you want it (Edit → Mods → Download mods → Modrinth); skip the Fabric "Origins" dependency Prism may offer.
+
+## Import (fallback: ModSync instance)
+`…/dist/Terrestrial-Tribulations-TestBuild1.zip` is the older route: mods download from Modrinth when you press Launch, and the CurseForge-only ones are added by hand (step 2 below). Memory is preset to 8 GB, with G1GC flags. Use it only if the CurseForge-format import fails.
 
 ## First launch
-1. Press **Launch**. Prism shows the pre-launch log: `[TT ModSync] Downloading …` for each mod.
-2. If a **"manual downloads"** window appears: choose *Open download pages + stop launch*, download each listed mod's newest **1.20.1 Forge** file into the `mods` folder that opens, then press Launch again.
+1. Press **Launch**. With the ModSync instance, Prism shows the pre-launch log: `[TT ModSync] Downloading …` for each mod.
+2. ModSync instance only: if a **"manual downloads"** window appears, choose *Stop launch*. These mods are CurseForge-only, so add them from inside Prism: right-click the instance → **Edit** → **Mods** → **Download mods** → **CurseForge** tab. Search each listed name, pick the newest **1.20.1 Forge** file, then **Review and confirm**. If Prism offers extra dependencies, skip any already in the mods folder (ModSync installed them from Modrinth; a second copy can crash the game). Then press Launch again. If Prism says a mod blocks third-party downloads, use the website link in `tt-sync/MANUAL_DOWNLOADS.html` instead.
 3. Java: Prism needs **Java 17** for 1.20.1. If it asks, let it auto-download Java 17, or select it in Settings → Java.
 
 ## Stages (only if something crashes)
@@ -29,4 +37,4 @@ See the README: Prism → Add Instance → Import → paste the zip URL. Memory 
 ## Send back
 `logs/latest.log` (or the crash report), `tt-sync/sync-report.txt` and `tt-sync/lock.json` (the exact mod versions that were downloaded). Upload them to https://mclo.gs or paste them in chat. Note anything that looks wrong.
 
-Known placeholders: textures are 16×16 stand-ins until the Blockbench models exist. Abilities marked "[Prototype]" in tooltips are not active yet.
+Weapons now have generated 3D models (held in hand) with 32×32 icons; see `docs/08-test-session-2.md` for the session that checks them. Abilities marked "[Prototype]" in tooltips are not active yet.

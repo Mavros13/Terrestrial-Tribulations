@@ -1,12 +1,12 @@
 # Weapon roster, v1 (23 weapons, Tiers 1–8)
 
-Every weapon is a **new item** (`tt:` namespace), registered in KubeJS, modelled in Blockbench, given a moveset by Epic Fight, and given an ability through Epic Fight EDP, KubeJS or the `tt_bridge` mod. Status: **design spec, nothing implemented or tested yet.**
+Every weapon is a **new item** (`tt:` namespace), registered in KubeJS, modelled in Blockbench, given a moveset by Epic Fight, and given an ability through Epic Fight EDP, KubeJS or the `tt_bridge` mod. Status: **design spec, nothing implemented or tested yet.** 3D modelling briefs and the Blockbench export pipeline are in `blockbench/specs/weapons.md`; which resource-pack model each weapon borrows is in `design/weapons/model-map.md`.
 
 ## Mandatory rules
 1. **Visual uniqueness.** Every weapon has its own colour scheme (primary / secondary / accent) and **its own swing-trail colour**. No two weapons may share both primary and secondary colours, and no two may share a trail colour. The registry table below is the source of truth; check it before adding a weapon. The silhouette must also differ within a family (blade curve, guard shape, size).
 2. **Ability uniqueness.** Every weapon has a mechanically distinct ability. Reusing a mechanic (pull, freeze, lifesteal, beam and so on) on a second weapon is not allowed, and neither is renaming a "+X% damage" effect.
 3. **Story integration.** Every weapon names its chapter, source (NPC, boss, faction or location) and a lore line, and is unlocked by a quest or boss flag.
-4. **Implementation path** is stated per weapon: `EDP` (Epic Fight data-driven skill), `KJS` (KubeJS event script) or `BRIDGE` (MCreator `tt_bridge` code). BRIDGE is used only when the other two can't do it.
+4. **Implementation path** is stated per weapon: `EDP` (a custom innate skill made with the Epic Fight EDP add-on; until then the family's built-in innate skill plus a KubeJS rider on its hits, see `docs/research/2026-10-27-epic-fight-data-formats.md`), `KJS` (KubeJS event script) or `BRIDGE` (MCreator `tt_bridge` code). BRIDGE is used only when the other two can't do it.
 
 ## Stat baselines (vanilla reference: iron sword = 6 damage, 1.6 attack speed)
 | Family | Epic Fight category | Damage vs a same-tier sword | Speed |
@@ -70,7 +70,7 @@ Duplicate check: primary/secondary pairs are all distinct. Trails are distinct h
 - **Family:** Karambit (plain hooked blade, finger ring, leather-wrapped grip; scratched and slightly rusted) · **Rarity:** Common
 - **Stats:** **6 damage (same as an iron sword) · 1.8 speed (iron sword is 1.6)** · 250 durability (iron sword: 250)
   - This is the **starter karambit**. Every later karambit is balanced against it.
-- **Ability: Reversal Cut** (EDP + KJS): after a successful Epic Fight dodge, your next hit within 1 s deals +2 damage and makes the target flinch. No cooldown, but it needs a dodge.
+- **Ability: Reversal Cut** (BRIDGE: Epic Fight's dodge-success event is internal, so neither data nor KubeJS can see it): after a successful Epic Fight dodge, your next hit within 1 s deals +2 damage and makes the target flinch. No cooldown, but it needs a dodge.
 - **Story:** Ch1 finale, Q1.8 "Teeth for the Night". Elder Maera gives you the plans: *"Ember scouts carried these. Small enough to hide, cruel enough to matter."* It introduces the Karambit family and Epic Fight dodging.
 - **Acquisition:** crafted: 2 iron ingots + 1 leather + 1 stick (recipe unlocks after Q1.8).
 - **Fate synergy:** Duelist, Ranger (as a sidearm).
@@ -142,7 +142,7 @@ Vanilla iron and copper gear fills the rest of Tier 2 (re-themed with lore toolt
 
 ### 10. Hollowbane Tachi: `tt:hollowbane_tachi`
 - **Family:** Tachi (black lacquered single-edge blade with a violet glowing hamon line) · **Rarity:** Epic
-- **Stats:** 11 damage · 1.4 speed · 1800 durability
+- **Stats:** 9.5 damage · 1.4 speed · 1800 durability (Veteran tier; lowered from 11 on 2026-10-28 so a Ch4 weapon doesn't outclass the Ch5 Thornwatch Halberd; see docs/research/2026-10-28-weapon-balance.md)
 - **Ability: Soul Severance** (EDP innate, 18 s cooldown): an iaijutsu draw-cut through a line. It deals +100% damage to Hollowed enemies, and strips invisibility and Hollow shields from everything hit.
 - **Story:** Ch4 *The Awakening*. It drops from your Hollow self after the mirror duel. *"It was always yours. You just hadn't faced the one holding it."*
 - **Acquisition:** Ch4 boss drop (guaranteed).
@@ -167,7 +167,7 @@ Vanilla iron and copper gear fills the rest of Tier 2 (re-themed with lore toolt
 ### 13. Wroughtnaut Bulwark: `tt:wroughtnaut_bulwark`
 - **Family:** Axe (a riveted iron shield-axe, half-tower-shield, half-blade) · **Rarity:** Epic
 - **Stats:** 12 damage · 1.0 speed · 2600 durability · can guard
-- **Ability: Iron Recoil** (EDP passive): a perfectly timed Epic Fight guard reflects 100% of the blocked melee damage, and staggers the attacker for 1 s.
+- **Ability: Iron Recoil** (BRIDGE: no data hook for a successful parry): a perfectly timed Epic Fight guard reflects 100% of the blocked melee damage, and staggers the attacker for 1 s.
 - **Story:** Ch5–6. It drops from the **Ferrous Wroughtnaut** (Mowzie's Mobs) in Thornwatch ruins. *"It guarded an empty hall for a hundred years. Now it guards you."*
 - **Acquisition:** boss drop.
 - **Fate synergy:** Warden.

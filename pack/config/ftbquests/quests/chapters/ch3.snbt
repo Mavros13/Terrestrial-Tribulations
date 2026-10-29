@@ -1,0 +1,105 @@
+{
+	id: "56C94068A57A9CDB"
+	group: ""
+	order_index: 3
+	filename: "ch3"
+	title: "Chapter 3: Echoes of the Old World"
+	icon: { Count: 1b, id: "tt:cogwright_breaker" }
+	default_quest_shape: ""
+	default_hide_dependency_lines: false
+	quest_links: [ ]
+	images: [ ]
+	quests: [
+		{
+			id: "14680D94DDB8FE4E"
+			title: "The Ticking Hand"
+			subtitle: "A tinker in the ruins"
+			description: ["Among the ruins of a Tinker-King relay station, a wiry man with a ticking brass hand waves you over.", "", "&6Pell&r: &o\"The parts didn't forget how to turn. Bring me andesite and I'll show you.\"", "", "Craft &eAndesite Alloy&r (Create)."]
+			x: 0.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["B7EC18DD9382E61D"]
+			tasks: [
+				{ id: "414878E9E36BAAF1", type: "item", item: { Count: 1b, id: "create:andesite_alloy" }, count: 8L }
+			]
+			rewards: [
+				{ id: "F56BA1AFA02BDF25", type: "item", item: { Count: 1b, id: "create:water_wheel" } },
+				{ id: "6505C10D8F31C571", type: "item", item: { Count: 8b, id: "create:shaft" } },
+				{ id: "96AE9FC1B5CEA509", type: "xp", xp: 150 }
+			]
+		},
+		{
+			id: "C88C630F27FB25EC"
+			title: "Water and Wheels"
+			subtitle: "Power without ley-lines"
+			description: ["The Old Engines ran on the Convergence. Yours will run on water.", "", "Build a &eMechanical Press&r and power it with a water wheel."]
+			x: 2.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["14680D94DDB8FE4E"]
+			tasks: [
+				{ id: "0CD5768E28622ADC", type: "item", item: { Count: 1b, id: "create:mechanical_press" } }
+			]
+			rewards: [
+				{ id: "0D47F65EDAA7F99C", type: "item", item: { Count: 8b, id: "create:cogwheel" } },
+				{ id: "0A3C006B19E82C5E", type: "xp", xp: 150 }
+			]
+		},
+		{
+			id: "2CF9CA3C89FDA85A"
+			title: "The Root Remembers"
+			subtitle: "Verdant Pact"
+			description: ["A warden in a cloak of living moss stops you at the forest edge.", "", "&6Tamsin Rootwarden&r: &o\"We ask that you put back what you take. Ten saplings, please.\"", "", "Bring &e10 Oak Saplings&r (plant them where you cut)."]
+			x: 2.0d
+			y: -2.0d
+			shape: "circle"
+			dependencies: ["14680D94DDB8FE4E"]
+			tasks: [
+				{ id: "E5E6631EDFDF0666", type: "item", item: { Count: 1b, id: "minecraft:oak_sapling" }, count: 10L }
+			]
+			rewards: [
+				{ id: "0F744FB300F66574", type: "item", item: { Count: 1b, id: "tt:rootstring_bow" } },
+				{ id: "F34BE2885C2437B6", type: "xp", xp: 200 }
+			]
+		},
+		{
+			id: "A7653CF0CE8A5868"
+			title: "The Sealed Armoury"
+			subtitle: "Thornwatch history"
+			description: ["Pell's relay maps show a sealed Thornwatch armoury. Its guardian still walks the halls.", "", "Defeat the &cFerrous Wroughtnaut&r (Mowzie's Mobs). It hides in deep, iron-walled chambers underground.", "", "&7Its weak point is its back; dodge the axe, then strike."]
+			x: 4.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["C88C630F27FB25EC"]
+			tasks: [
+				{ id: "9BF08D38AD0152F0", type: "kill", entity: "mowziesmobs:ferrous_wroughtnaut", value: 1L }
+			]
+			rewards: [
+				{ id: "A4F9F95A7AF4ECF2", type: "item", item: { Count: 2b, id: "minecraft:iron_block" } },
+				{ id: "9C2675A31DF9AC8D", type: "xp", xp: 400 }
+			]
+		},
+		{
+			id: "017F2A336A675710"
+			title: "Pressure"
+			subtitle: "The Cogwright Breaker"
+			description: ["&6Pell&r: &o\"Its pressure core survived. I'll build it into a hammer head. Every hit builds pressure, and when you let go...\"", "", "Bring Pell &e4 Brass Ingots&r for the frame."]
+			x: 6.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["A7653CF0CE8A5868"]
+			tasks: [
+				{ id: "75117B07AC182AC1", type: "item", item: { Count: 1b, id: "create:brass_ingot" }, count: 4L }
+			]
+			rewards: [
+				{ id: "F4876D2C935CF898", type: "item", item: { Count: 1b, id: "tt:cogwright_breaker" } },
+				{ id: "FD9A83B05F1092AD", type: "xp", xp: 300 },
+				{ id: "5AC333193D61337C", type: "command", command: "/kubejs stages add @p tt_ch3_done", elevate_perms: true, silent: true }
+			]
+		}
+	]
+}

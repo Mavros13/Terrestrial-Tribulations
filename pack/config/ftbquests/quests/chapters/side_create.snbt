@@ -1,0 +1,241 @@
+{
+	id: "8DE8609A7AE6BCE7"
+	group: "9DAB9DE842B66190"
+	order_index: 14
+	filename: "side_create"
+	title: "Cogwright Workshop"
+	icon: { Count: 1b, id: "create:cogwheel" }
+	default_quest_shape: ""
+	default_hide_dependency_lines: false
+	quest_links: [ ]
+	images: [ ]
+	quests: [
+		{
+			id: "27556D7F3308CE37"
+			title: "Grey Metal"
+			subtitle: "Andesite Alloy"
+			description: ["&6Pell&r: &o\"Everything the Guild builds starts with this ugly grey stuff. Learn to love it.\"", "", "Make &eAndesite Alloy&r (andesite + iron nuggets or zinc nuggets)."]
+			x: 0.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["14680D94DDB8FE4E"]
+			tasks: [
+				{ id: "BC3D8DCAE7D69F69", type: "item", item: { Count: 1b, id: "create:andesite_alloy" }, count: 16L }
+			]
+			rewards: [
+				{ id: "43A71AAA746686D4", type: "item", item: { Count: 8b, id: "create:shaft" } },
+				{ id: "70F6FE8BFEE191D4", type: "xp", xp: 40 }
+			]
+		},
+		{
+			id: "F9D38906FD08352D"
+			title: "Turning Things"
+			subtitle: "Shafts and cogs"
+			description: ["Rotation is power. Shafts carry it straight, cogwheels turn corners and change speed.", "", "&7Hold a wrench or goggles to see what your contraption is doing."]
+			x: 2.0d
+			y: 0.0d
+			shape: "circle"
+			dependencies: ["27556D7F3308CE37"]
+			tasks: [
+				{ id: "2AB782101AB24B54", type: "item", item: { Count: 1b, id: "create:cogwheel" }, count: 4L },
+				{ id: "9740973F8FD019B5", type: "item", item: { Count: 1b, id: "create:large_cogwheel" }, count: 2L }
+			]
+			rewards: [
+				{ id: "4CABBA8B2DF57075", type: "item", item: { Count: 1b, id: "create:wrench" } },
+				{ id: "A254AA11DEF3A26A", type: "xp", xp: 40 }
+			]
+		},
+		{
+			id: "5367045285EC9E5C"
+			title: "See the Stress"
+			subtitle: "Engineer's Goggles"
+			description: ["&6Pell&r: &o\"If it groans, it's overstressed. If it squeals, it's me.\"", "", "Wear &eEngineer's Goggles&r to read speed and stress on anything you look at."]
+			x: 2.0d
+			y: -2.0d
+			shape: "circle"
+			dependencies: ["F9D38906FD08352D"]
+			tasks: [
+				{ id: "E97429ECC97AC7F6", type: "item", item: { Count: 1b, id: "create:goggles" } }
+			]
+			rewards: [
+				{ id: "A2567DE8073BB439", type: "xp", xp: 30 }
+			]
+		},
+		{
+			id: "FA3F57DC6EF7FD28"
+			title: "Pressed Flat"
+			subtitle: "Mechanical Press"
+			description: ["Put a &eMechanical Press&r over a depot or belt and it flattens ingots into sheets.", "", "Make &e8 Iron Sheets&r with it."]
+			x: 4.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["F9D38906FD08352D"]
+			tasks: [
+				{ id: "A9E94772F21D6596", type: "item", item: { Count: 1b, id: "create:mechanical_press" } },
+				{ id: "4DF4949CCF271D5C", type: "item", item: { Count: 1b, id: "create:iron_sheet" }, count: 8L }
+			]
+			rewards: [
+				{ id: "C886E7800E0922BA", type: "item", item: { Count: 8b, id: "create:andesite_casing" } },
+				{ id: "C5296E4A34B1BDC0", type: "xp", xp: 60 }
+			]
+		},
+		{
+			id: "C0B5DEA7BCE9038B"
+			title: "Stir It"
+			subtitle: "Mixer and Basin"
+			description: ["A &eMechanical Mixer&r over a &eBasin&r makes alloys, doughs and more. Heat it with a Blaze Burner for brass."]
+			x: 4.0d
+			y: 2.0d
+			shape: "circle"
+			dependencies: ["FA3F57DC6EF7FD28"]
+			tasks: [
+				{ id: "6AE22D32607C102A", type: "item", item: { Count: 1b, id: "create:mechanical_mixer" } },
+				{ id: "935E69F4903FDEEB", type: "item", item: { Count: 1b, id: "create:basin" } }
+			]
+			rewards: [
+				{ id: "5D4DE989F8019530", type: "xp", xp: 60 }
+			]
+		},
+		{
+			id: "9E2DCA30FE679569"
+			title: "Brass Age"
+			subtitle: "The Guild's metal"
+			description: ["Copper and zinc, mixed hot. Brass is where the Guild stops tinkering and starts engineering.", "", "&7Needs a heated basin: a Blaze Burner fed with a blaze."]
+			x: 6.0d
+			y: 2.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["C0B5DEA7BCE9038B"]
+			tasks: [
+				{ id: "D25A1AC97F3C275A", type: "item", item: { Count: 1b, id: "create:blaze_burner" } },
+				{ id: "402D2657F02D8F90", type: "item", item: { Count: 1b, id: "create:brass_ingot" }, count: 16L }
+			]
+			rewards: [
+				{ id: "4931997E73AA62E4", type: "item", item: { Count: 8b, id: "create:brass_casing" } },
+				{ id: "A421C0EEBFA4BCDB", type: "xp", xp: 100 }
+			]
+		},
+		{
+			id: "341CFB86ABEDDD87"
+			title: "Precision"
+			subtitle: "Sequenced assembly"
+			description: ["&6Pell&r: &o\"Five steps, in order, on a belt. Get one wrong and you've made scrap. Get it right and you've made a heart.\"", "", "Craft &e4 Precision Mechanisms&r."]
+			x: 8.0d
+			y: 2.0d
+			shape: "circle"
+			dependencies: ["9E2DCA30FE679569"]
+			tasks: [
+				{ id: "652676666DB5D9F2", type: "item", item: { Count: 1b, id: "create:precision_mechanism" }, count: 4L }
+			]
+			rewards: [
+				{ id: "0707AF14853DAA0C", type: "item", item: { Count: 4b, id: "create:electron_tube" } },
+				{ id: "CC690A46AEF680C3", type: "xp", xp: 150 }
+			]
+		},
+		{
+			id: "4C1769BD59D7472E"
+			title: "Moving Parts"
+			subtitle: "Belts and depots"
+			description: ["Belts move items between machines. A &eDepot&r holds one stack for a press or a deployer to work on."]
+			x: 6.0d
+			y: 0.0d
+			shape: "circle"
+			dependencies: ["FA3F57DC6EF7FD28"]
+			tasks: [
+				{ id: "58D22A2E354ABB1D", type: "item", item: { Count: 1b, id: "create:belt_connector" }, count: 4L },
+				{ id: "978F060BFCFE96B0", type: "item", item: { Count: 1b, id: "create:depot" }, count: 2L }
+			]
+			rewards: [
+				{ id: "B2DA5F190EEB1067", type: "xp", xp: 50 }
+			]
+		},
+		{
+			id: "E62D9BABDDC45D0A"
+			title: "Mechanical Miner"
+			subtitle: "Contraptions"
+			description: ["Glue a &eMechanical Drill&r to a moving contraption and it digs as it goes. Emberhold's quarries started this way."]
+			x: 8.0d
+			y: 0.0d
+			shape: "circle"
+			dependencies: ["4C1769BD59D7472E"]
+			tasks: [
+				{ id: "6F5E55FE0D82F84F", type: "item", item: { Count: 1b, id: "create:mechanical_drill" }, count: 2L },
+				{ id: "89CBBE02C0612510", type: "item", item: { Count: 1b, id: "create:mechanical_bearing" } }
+			]
+			rewards: [
+				{ id: "620D37C75162D18E", type: "xp", xp: 80 }
+			]
+		},
+		{
+			id: "AC2461AA1A2CA4A1"
+			title: "Steam Power"
+			subtitle: "Boilers and engines"
+			description: ["Water wheels won't run a city. A heated &eFluid Tank&r becomes a boiler; &eSteam Engines&r on it turn real power.", "", "&7Watch the boiler level on your goggles."]
+			x: 10.0d
+			y: 2.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["341CFB86ABEDDD87"]
+			tasks: [
+				{ id: "15F75FB4D0DA7175", type: "item", item: { Count: 1b, id: "create:steam_engine" }, count: 2L },
+				{ id: "D838396050B721FF", type: "item", item: { Count: 1b, id: "create:fluid_tank" }, count: 4L }
+			]
+			rewards: [
+				{ id: "B24DB1B7EECE8B26", type: "xp", xp: 200 }
+			]
+		},
+		{
+			id: "CC5911EE7716D17C"
+			title: "Alternating Current"
+			subtitle: "Crafts & Additions"
+			description: ["An &eAlternator&r turns rotation into Forge Energy; an &eElectric Motor&r turns it back. This is the bridge to the Deep Engines."]
+			x: 12.0d
+			y: 2.0d
+			shape: "circle"
+			dependencies: ["AC2461AA1A2CA4A1"]
+			tasks: [
+				{ id: "CE76873CB780DB0C", type: "item", item: { Count: 1b, id: "createaddition:alternator" } },
+				{ id: "87E9138B476CC8E4", type: "item", item: { Count: 1b, id: "createaddition:electric_motor" } }
+			]
+			rewards: [
+				{ id: "14ADC09F3970317C", type: "xp", xp: 150 }
+			]
+		},
+		{
+			id: "55ED1A60E1723F5C"
+			title: "Liquid Knowledge"
+			subtitle: "Create Enchantment Industry"
+			description: ["The Guild found a way to pour experience like water. A &eBlaze Enchanter&r enchants with liquid experience; the &ePrinter&r copies books."]
+			x: 12.0d
+			y: 0.0d
+			shape: "circle"
+			dependencies: ["AC2461AA1A2CA4A1"]
+			tasks: [
+				{ id: "F6297AD431D857AF", type: "item", item: { Count: 1b, id: "create_enchantment_industry:blaze_enchanter" } },
+				{ id: "9EFC756BD2113404", type: "item", item: { Count: 1b, id: "create_enchantment_industry:printer" } }
+			]
+			rewards: [
+				{ id: "F11C413FB2859F00", type: "xp", xp: 200 }
+			]
+		},
+		{
+			id: "30182D69DA4F4DA2"
+			title: "The Iron Road"
+			subtitle: "Trains"
+			description: ["&6Pell&r: &o\"Walls keep things out. Rails bring things in. Emberhold needs both.\"", "", "Lay &e64 Train Tracks&r and build a &eTrain Station&r."]
+			x: 14.0d
+			y: 2.0d
+			shape: "circle"
+			dependencies: ["CC5911EE7716D17C"]
+			tasks: [
+				{ id: "3C34084B89FD5C6A", type: "item", item: { Count: 1b, id: "create:track" }, count: 64L },
+				{ id: "0AAEE3DDD5D03143", type: "item", item: { Count: 1b, id: "create:track_station" } }
+			]
+			rewards: [
+				{ id: "E49E151BDE988A41", type: "xp", xp: 300 }
+			]
+		}
+	]
+}

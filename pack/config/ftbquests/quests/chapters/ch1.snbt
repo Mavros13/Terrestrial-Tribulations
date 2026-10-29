@@ -139,7 +139,7 @@
 			id: "B646621DC752CCD3"
 			title: "Voices in the Smoke"
 			subtitle: "East, where the fires burn"
-			description: ["Following the smoke, you find a ring of tents and frightened faces: the last of the &cEmber Accord&r.", "", "An old woman with ash in her braids studies you. &o\"You walked through the Hollow fields and lived. No one lives.\"", "", "&6Elder Maera&r: &o\"Sit. Eat. Then tell me why the Hollowed turned away from you.\"", "", "&7(Elder Maera's NPC arrives with the Emberhold build. Tick to continue.)"]
+			description: ["Following the smoke, you find a ring of tents and frightened faces: the last of the &cEmber Accord&r.", "", "An old woman with ash in her braids studies you. &o\"You walked through the Hollow fields and lived. No one lives.\"", "", "&6Elder Maera&r: &o\"Sit. Eat. Then tell me why the Hollowed turned away from you.\"", "", "&7(Finishing your talk with Elder Maera ticks this. No NPC placed yet? Tick it yourself.)"]
 			x: 8.0d
 			y: 0.0d
 			shape: "gear"

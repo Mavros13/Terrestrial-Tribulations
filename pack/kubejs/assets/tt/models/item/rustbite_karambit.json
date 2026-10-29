@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/skins/breeze",
+  "textures": {
+    "1": "minecraft:item/karambits_default",
+    "particle": "minecraft:item/karambits_default"
+  }
+}

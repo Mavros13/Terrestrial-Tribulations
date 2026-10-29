@@ -36,7 +36,7 @@ Rules: **never redistribute modified jars.** All changes live in our own scripts
 | **Bosses** | L_Ender's Cataclysm, Mowzie's Mobs, Bosses of Mass Destruction (1.20.1 build to verify), Alex's Caves, Twilight Forest, Aether, plus ChaosBosses (25 bosses, to evaluate) | Each boss is assigned a story role. The final boss **Malric** is an existing boss re-skinned in Blockbench through the resource pack, with stats and phases set by KubeJS. A fully custom model only if no base fits |
 | **Dimensions** | Twilight Forest, Aether, Undergarden, Deeper and Darker, Blue Skies (to verify), plus the Nether and End overhauls | Each is mapped to a Crown Shard |
 | **Rats automation** | Rats 8.1.3 | Faction: Nib the rat-catcher |
-| **Create / AE2 / quarry / power** | Create 6 + addons, AE2, Mekanism Digital Miner *or* another quarry (to decide) | Cogwright Guild quest line |
+| **Create / AE2 / quarry / power** | Create 6 + addons, AE2, Mekanism + Generators (Digital Miner is the quarry), Core Utilities (early-game solar, generators, harvesters, mob grinder, item pipes) | Cogwright Guild quest line: Core Utilities is the Guild's starter kit, Mekanism its advanced tier |
 
 ## 3. What Blockbench and MCreator are still used for
 - **Blockbench:** retextures and re-models of existing mobs and bosses for story characters (Malric, Iron Choir heralds, Hollowed variants), done as resource-pack overrides of GeckoLib geo and animation files. Also used for the occasional unique item model.

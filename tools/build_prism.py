@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Build the Prism Launcher instance zip: dist/Terrestrial-Tribulations-TestBuild1.zip
 
-1. Regenerates content (build_content.py, gen_quests.py).
+1. Regenerates content (gen_models.py when numpy is installed, build_content.py, gen_quests.py, ...).
 2. Compiles pack/tt-sync/ModSync.java into ModSync.jar (Java 17 bytecode).
 3. Zips prism/instance.cfg + prism/mmc-pack.json + pack/ (as the instance's minecraft/ folder).
+4. Builds the CurseForge-format zips (build_curseforge.py).
 """
 import os, shutil, subprocess, sys, tempfile, zipfile
 
@@ -16,10 +17,23 @@ def run(*cmd, **kw):
 
 
 def main():
+    try:
+        import numpy  # noqa: F401  (gen_models.py needs it; its outputs are committed, so skipping is safe)
+        run(sys.executable, os.path.join(ROOT, "tools", "gen_models.py"))
+    except ImportError:
+        print("numpy not installed: using the committed weapon models")
+    run(sys.executable, os.path.join(ROOT, "tools", "build_model_viewer.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "build_content.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "gen_quests.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "gen_origins.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "gen_skilltree.py"))  # after build_content: merges into lang
+    run(sys.executable, os.path.join(ROOT, "tools", "gen_animations.py"))
+    run(sys.executable, os.path.join(ROOT, "tools", "gen_npc_skins.py"))  # story NPC skins (Easy NPC textures)
+    run(sys.executable, os.path.join(ROOT, "tools", "build_npc_viewer.py"))  # 3D review page for the skins
+    run(sys.executable, os.path.join(ROOT, "tools", "gen_npcs.py"))  # Easy NPC story presets from design/npcs/
+    run(sys.executable, os.path.join(ROOT, "tools", "gen_branding.py"))  # window title + icon, loading colours
+    run(sys.executable, os.path.join(ROOT, "tools", "gen_selftest.py"))
+    run(sys.executable, os.path.join(ROOT, "tools", "check_pack.py"))  # stops the build on broken pack files
     sync = os.path.join(ROOT, "pack", "tt-sync")
     with tempfile.TemporaryDirectory() as tmp:
         run("javac", "--release", "17", "-d", tmp, os.path.join(sync, "ModSync.java"))
@@ -41,6 +55,8 @@ def main():
                 full = os.path.join(dp, f)
                 z.write(full, f"{NAME}/minecraft/" + os.path.relpath(full, base).replace(os.sep, "/"))
     print("Built", out, os.path.getsize(out), "bytes")
+    run(sys.executable, os.path.join(ROOT, "tools", "build_curseforge.py"))  # CurseForge-format zips (Prism imports these too)
+    run(sys.executable, os.path.join(ROOT, "tools", "build_curseforge.py"), "--release")  # versioned release zip, no test helpers
 
 
 if __name__ == "__main__":

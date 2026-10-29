@@ -8,6 +8,8 @@ Target: **Minecraft 1.20.1 · Forge 47.4.x · Java 17**. Status key:
 
 A mod becomes CONFIRMED only after it loads in your instance (ModSync's `lock.json` records the exact files).
 
+**Availability check (2026-10-27):** every entry was checked on Modrinth and CurseForge for a 1.20.1 Forge file. 74 download automatically; 19 are CurseForge-only (manual download, 11 of them in Test Build 1). Details, file names and fixes: [`docs/research/2026-10-27-mod-availability.md`](research/2026-10-27-mod-availability.md).
+
 Stages in `pack/tt-sync/mods.json`: **A/B/C = Test Build 1**, **D = Test Build 2** (world, bosses, tech, magic, accessories). Stage D only loads when `stage.txt` says `D`.
 
 ## Story-critical
@@ -18,7 +20,7 @@ Stages in `pack/tt-sync/mods.json`: **A/B/C = Test Build 1**, **D = Test Build 2
 | MineColonies (+ Structurize, MultiPiston, BlockUI, Domum Ornamentum) | Emberhold: Town Hall levels 1–5 = city stages | 🔎 | Snapshot builds only since 2024; cap the colony size for performance |
 | Origins (Forge) | Heritage + Fate layers | ✅ format · 🔎 1.10.0.9 | Archived; avoid Forge 47.2.0 |
 | Passive Skill Tree (+ PassiveSTJS) | Talent tree, points from XP | ✅ format · 🔎 | `tt:shardborn` tree generated |
-| Palladium + FSang18's Heropack + Satsu Iron Man Addon + Gods and Heroes | Superheroes and the Iron Choir villains | 🔎 4.5.9 | **Existing packs only** (no custom heroes). Story fit: `design/story/heroes-integration.md` |
+| Palladium + FSang18's Heropack + Satsu Iron Man Addon + Gods and Heroes (Palladium edition) | Superheroes and the Iron Choir villains | 🔎 4.5.9; FSang18 12.5.7 and Satsu 3.6.0 released after it; Gods and Heroes 1.4 needs a launch test | **Existing packs only** (no custom heroes). Story fit: `design/story/heroes-integration.md` |
 | L_Ender's Cataclysm | Ignis, Harbinger, Leviathan, Netherite Monstrosity, Ender Guardian… | 🔎 | Chapter 6–9 bosses |
 | Mowzie's Mobs | Frostmaw, Ferrous Wroughtnaut, Umvuthi | 🔎 | Chapter 5–6 bosses |
 | Bosses of Mass Destruction | Night Lich, Obsidilith, Gauntlet, Void Blossom | 🔎 1.1.2 | Needs CerbonsAPI |
@@ -33,14 +35,14 @@ Stages in `pack/tt-sync/mods.json`: **A/B/C = Test Build 1**, **D = Test Build 2
 | Mod | Status | Notes |
 |---|---|---|
 | Epic Fight | ✅ format · 🔎 20.14.x | Our 22 melee weapons have capability files |
-| Epic Fight - Impactful | 🔎 | Hit-stop and screen shake |
-| NEpicloob NeonSword | 🔎 ⚠️ | Listed for Epic Fight 20.9/20.11; test it on 20.14 |
-| Epic Fight EDP (Extended Datapacks) | 🔎 ⚠️ | 1.20.1 backport may lag; needed for data-driven weapon skills |
+| Epic Fight - Impactful | 🔎 CurseForge-only | Hit-stop and screen shake. Modrinth copy is 2023 (too old); use impactful-20.14.2 from CurseForge, plus its resource pack and datapack |
+| NEpicloob NeonSword | 🔎 | Author's range: Epic Fight ≤20.9.7 or ≥20.11.2, so 20.14 is supported |
+| Epic Fight EDP (Extended Datapacks) | ✅ CurseForge-only, stage D | 2.5.5 for 1.20.1 Forge (Oct 2026). Needs SL Library, SLM: Epic Fight and SLM: Shader (all added). Custom innate skills from JSON; see docs/research/2026-10-27-epic-fight-data-formats.md |
 | CompatLink - Epic Fight Weapons Compat | 🔎 | Needs Epic Fight 20.14.17+ |
 | Simply Swords | ❔ | Loot weapons |
 | Marium's Soulslike Weaponry | 🔎 1.4.8 | Legendary loot weapons |
 | Wakes (Forge port) | 🔎 1.0.5 | Water trails |
-| ~~Afterswing~~ | ⚠️ | No 1.20.1 Forge file found |
+| ~~Afterswing~~ | ⚠️ | Not on Modrinth or CurseForge for 1.20.1 Forge (rechecked 2026-10-27). Dropped |
 
 ## RPG systems
 | Mod | Status | Notes |
@@ -60,6 +62,7 @@ Stages in `pack/tt-sync/mods.json`: **A/B/C = Test Build 1**, **D = Test Build 2
 | Applied Energistics 2 (+ ExtendedAE, AE2WTLib) | ❔ | |
 | Mekanism + Mekanism Generators | 🔎 10.4.16.80 | **Quarry = Digital Miner**, plus power, pipes and generators (one coherent stack) |
 | ~~Powah, Pipez~~ | | Dropped as redundant with Mekanism |
+| Core Utilities | 🔎 2.0.0 (CF 1379111 / 9343420, Modrinth core-utilities) | Owner's request (2026-10-28). Solar panels, generators, crusher/alloy smelter, crop harvester, mob grinder, block breaker/placer, item pipes, backpacks, mob net. No dependencies (JEI optional). Overlaps Mekanism's power/quarry; Mekanism's Digital Miner stays the story quarry |
 | Rats (+ Citadel) | 🔎 8.1.3 | Rat Guild (Nib) |
 
 ## Accessories and cosmetics
@@ -74,6 +77,7 @@ Stages in `pack/tt-sync/mods.json`: **A/B/C = Test Build 1**, **D = Test Build 2
 | Goner's Armor Trims | 🔎 1.0.4 | ⚠️ Replaces "More Armor Trims", which has no Forge 1.20.1 build I could find |
 | Cosmetic Armor Reworked | ❔ | Armour transmog |
 | Karambit Vault x Punchy (resource pack) | 🔎 | ⚠️ Punchy animations are Fabric-only. Our own karambits need our own models (or the author's permission) |
+| Default Options (+ Balm) | ✅ 18.0.5 | Switches Karambit Vault x Punchy on once per player without shipping `options.txt` (2026-10-29) |
 
 ## World generation and structures
 | Mod | Status | Notes |
@@ -85,7 +89,8 @@ Stages in `pack/tt-sync/mods.json`: **A/B/C = Test Build 1**, **D = Test Build 2
 | Dungeons and Taverns | 🔎 3.0.1 | |
 | When Dungeons Arise | ❔ | Reduce its density in config |
 | Incendium | 🔎 5.3.x | Nether |
-| BetterEnd (Forge port) | 🔎 ⚠️ | Unofficial port; End overhaul. Nullscape has no 1.20.1 build |
+| **Nullscape** | 🔎 1.2.8 | **End overhaul (chosen 2026-10-27)**, Stardust Labs like Terralith and Incendium. Check alongside YUNG's Better End Island in Test Build 2 |
+| ~~BetterEnd: Before Dawn (Forge port)~~ | 🔎 | Not chosen: unofficial port, needs BCLib + WunderLib, adds lots of loot. Swap in if Nullscape disappoints |
 
 ## Building and quality of life
 | Mod | Status |
@@ -96,7 +101,7 @@ Stages in `pack/tt-sync/mods.json`: **A/B/C = Test Build 1**, **D = Test Build 2
 | Sophisticated Backpacks (+ Core) | ❔ |
 | Construction Wand, Building Gadgets 2 | ❔ |
 | Handcrafted, Supplementaries (+ Moonlight), Macaw's Doors/Roofs/Bridges, Medieval Deco | 🔎 / ❔ |
-| Leaves Be Gone | ❔ ⚠️ no Forge 1.20.1 result yet |
+| Leaves Be Gone | 🔎 v8.0.0 (Modrinth) |
 | Catalogue + Configured (Forge's "Mod Menu") | ❔ |
 
 ## Interface and audio
@@ -114,6 +119,7 @@ Embeddium, Oculus (optional shaders), ModernFix, FerriteCore, EntityCulling, Imm
 - **CreeperMax123:** I found no CurseForge author page. Their known work is mostly vanilla mob **resource packs** (Better Vanilla Mobs, Better Illagers and others). They're candidates for an optional visual pack. Check them alongside Epic Fight's mob models.
 
 ## Still open
-1. End overhaul: BetterEnd Forge port, or YUNG's Better End Island only.
+1. ~~End overhaul~~: decided, Nullscape + YUNG's Better End Island (see the research note).
 2. Apotheosis + Champions overlap: decide after Test Build 2.
 3. Palladium hero packs: fill in the story-gate namespaces after the first launch (`kubejs/exported/tt_item_namespaces.json`).
+4. Gods and Heroes (Palladium) adds its powers as origins on the selection screen. Decide after the first launch whether to hide its layer and grant powers by command at each Crown Shard.

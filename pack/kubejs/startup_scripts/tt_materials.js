@@ -4,4 +4,6 @@ StartupEvents.registry('item', event => {
   event.create('tt:hollow_fang')           // dropped by Hollowed enemies / Hollow Pack Alpha (Ch2)
   event.create('tt:crown_shard_fragment').rarity('epic').glow(true)   // Mythic crafting (Ch10+)
   event.create('tt:emberhold_charter').maxStackSize(1).rarity('uncommon') // Ch2 story key: founding Emberhold
+  event.create('tt:crown_shard').maxStackSize(7).rarity('epic').glow(true)  // story key: the seven Crown Shards (Ch4, Ch7, Ch10 quests)
+  event.create('tt:old_engine_core').maxStackSize(1).rarity('rare')       // Ch8 story key: the war-engine's heart for Pell ("The Engine Heart")
 })

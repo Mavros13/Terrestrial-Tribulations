@@ -1,11 +1,33 @@
 {
-  "_comment": "Story gates: items from these namespaces/IDs can't be worn or used until the player has the KubeJS stage (granted by FTB Quests command rewards: /kubejs stages add @p <stage>). Namespaces of the hero packs are filled in after the first launch from kubejs/exported/tt_item_namespaces.json.",
+  "_comment": "Story gates: items from these namespaces/IDs can't be worn or right-click used until the player has the KubeJS stage (granted by FTB Quests command rewards: /kubejs stages add @p <stage>). Hero-pack namespaces filled 2026-10-28 from the mod jars on the test PC (fsang = FSang18's Heroes, ~1636 item models; satsu_iron_man_addon = Satsu Iron Man Addon); confirm against kubejs/exported/tt_item_namespaces.json after the next launch. Gods and Heroes (Palladium edition) uses namespace ghmorak (mod id ghmorak; checked from its 1.4 jar 2026-10-28); it isn't in the CurseForge pack (All Rights Reserved) but is in the ModSync list.",
   "gates": [
     {
       "stage": "tt_ch8_heroes",
       "message": "The suit's systems stay dark. Its makers' secrets are revealed in Chapter 8: The Rise of Heroes.",
-      "namespaces": [],
+      "namespaces": [
+        "fsang",
+        "satsu_iron_man_addon",
+        "ghmorak"
+      ],
       "items": []
     }
-  ]
+  ],
+  "_dimensions_comment": "Dimension gates: a player without the stage can't travel into these dimensions (portals just don't fire; startup_scripts/tt_dimension_gates.js). Ch7 The Shattered Realms opens the Aether, Twilight Forest, Undergarden, Blue Skies and the Otherside (design/story/boss-roles.md puts the Otherside Shard in Ch7). The Ch11 Convergence dimension isn't decided yet, so it has no gate. For testing: /kubejs stages add @p tt_ch7_realms. Set enabled to false to switch all dimension gates off.",
+  "dimension_gates": {
+    "enabled": true,
+    "gates": [
+      {
+        "stage": "tt_ch7_realms",
+        "message": "The portal shivers but won't open. The Shattered Realms answer only to a Shard-Born who has reached Chapter 7.",
+        "dimensions": [
+          "aether:the_aether",
+          "twilightforest:twilight_forest",
+          "undergarden:undergarden",
+          "blue_skies:everbright",
+          "blue_skies:everdawn",
+          "deeperdarker:otherside"
+        ]
+      }
+    ]
+  }
 }

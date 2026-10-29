@@ -1,5 +1,6 @@
 // Terrestrial Tribulations: boss lore (hand-written).
-// Gives existing mod bosses their story names (boss bar) and speaks their story lines to nearby players, from
+// Gives existing mod bosses their story names (boss bar; build_content.py also renames the entity types in every other
+// place through lang overrides in kubejs/assets/<mod>/lang) and speaks their story lines to nearby players, from
 // kubejs/config/tt_boss_lore.json. We never change the bosses' models or fights (design/story/boss-roles.md).
 
 let TT_LORE = {}
@@ -27,9 +28,11 @@ EntityEvents.spawned(event => {
   try {
     if (!e.persistentData.getBoolean('tt_lore')) {
       e.persistentData.putBoolean('tt_lore', true)
-      if (!e.hasCustomName()) ttLoreName(e, lore)
+      // Always on the first spawn: some mods name their bosses themselves (the Aether's generated Valkyrie names), and
+      // their boss bars follow setCustomName. Again a second later, in case the mod names it after joining the world.
+      ttLoreName(e, lore)
       // Wait a tick so the boss is in the world (and players are near it) before it speaks
-      event.server.scheduleInTicks(20, () => { if (e.isAlive()) ttLoreSay(e, lore.intro) })
+      event.server.scheduleInTicks(20, () => { if (e.isAlive()) { ttLoreName(e, lore); ttLoreSay(e, lore.intro) } })
     }
   } catch (err) { console.error(`[TT] boss lore spawn failed: ${err}`) }
 })

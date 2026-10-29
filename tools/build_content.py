@@ -5,6 +5,7 @@ Outputs (all under pack/kubejs/):
   startup_scripts/tt_weapons.generated.js   item + tool-tier registration
   client_scripts/tt_tooltips.generated.js   ability, lore and stat tooltips
   assets/tt/lang/en_us.json                 names coloured by rarity
+  assets/<mod>/lang/en_us.json              boss story names (from config/tt_boss_lore.json)
   assets/tt/textures/item/<id>.png          16x16 placeholder textures in each weapon's palette
   data/tt/capabilities/weapons/<id>.json    Epic Fight weapon capabilities (moveset preset + attributes)
   assets/tt/item_skins/<id>.json            Epic Fight swing trail (colour, length along the blade)
@@ -384,6 +385,15 @@ def main():
                  "item.tt.crown_shard_fragment": "§6Crown Shard Fragment", "item.tt.emberhold_charter": "§eEmberhold Charter",
                  "item.tt.crown_shard": "§dCrown Shard", "item.tt.old_engine_core": "§6Old Engine Core"})
     write(os.path.join(KJS, "assets", "tt", "lang", "en_us.json"), json.dumps(lang, indent=2, ensure_ascii=False) + "\n")
+    # Boss story names everywhere the game names the entity type (death messages, Jade, spawn tooltips, quest kill
+    # tasks, the Ender Dragon's boss bar, which ignores custom names). Mods' lang files merge with these per key.
+    boss_lang = {}
+    for eid, lore in json.load(open(os.path.join(KJS, "config", "tt_boss_lore.json"), encoding="utf-8"))["bosses"].items():
+        ns, path = eid.split(":")
+        boss_lang.setdefault(ns, {})[f"entity.{ns}.{path}"] = lore.get("short", lore["name"])
+    for ns, entries in sorted(boss_lang.items()):
+        assert ns != "tt", "boss lang would overwrite our own lang file"
+        write(os.path.join(KJS, "assets", ns, "lang", "en_us.json"), json.dumps(entries, indent=2, ensure_ascii=False) + "\n")
     write(os.path.join(KJS, "client_scripts", "tt_tooltips.generated.js"), hdr +
           "ItemEvents.tooltip(event => {\n" + "\n".join(tips) + "\n})\n")
 

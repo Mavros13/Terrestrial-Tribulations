@@ -33,6 +33,29 @@ ServerEvents.loaded(event => {
 
 const TT_ARMOR_SLOTS = ['head', 'chest', 'legs', 'feet']
 
+// "You can now..." hints: each item or dimension gate's "unlocked" line, told once per player the first time they
+// hold the gate's stage (a flag in the player's persistent data, so it survives relogs).
+let TT_UNLOCK_HINTS = []
+try {
+  let ttDims = ttGatesCfg && ttGatesCfg.dimension_gates ? ttGatesCfg.dimension_gates.gates : []
+  TT_GATES.concat(ttDims || []).forEach(g => { if (g.stage && g.unlocked) TT_UNLOCK_HINTS.push(g) })
+} catch (e) { console.error(`[TT] unlock hints failed: ${e}`) }
+
+PlayerEvents.tick(event => {
+  const p = event.player
+  if (TT_UNLOCK_HINTS.length == 0 || p.level.gameTime % 40 != 7) return
+  try {
+    TT_UNLOCK_HINTS.forEach(g => {
+      let flag = `tt_hint_${g.stage}`
+      if (p.stages.has(g.stage) && !p.persistentData.getBoolean(flag)) {
+        p.persistentData.putBoolean(flag, true)
+        p.tell(Text.gold(g.unlocked))
+        p.server.runCommandSilent(`execute at ${p.username} run playsound minecraft:ui.toast.challenge_complete player ${p.username} ~ ~ ~ 0.6 1`)
+      }
+    })
+  } catch (e) { console.error(`[TT] unlock hint failed: ${e}`) }
+})
+
 PlayerEvents.tick(event => {
   const p = event.player
   if (TT_GATES.length == 0 || p.level.gameTime % 20 != 0) return

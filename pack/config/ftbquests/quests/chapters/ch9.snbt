@@ -14,7 +14,7 @@
 			id: "4B8FD02CFDE7FA78"
 			title: "The Herald"
 			subtitle: "It sings while it kills"
-			description: ["&6Rhosk&r: &o\"A war-machine walks the eastern road, and it sings while it kills.\"", "", "Defeat &cThe Harbinger&r (L_Ender's Cataclysm), the Choir Herald."]
+			description: ["&6Rhosk&r: &o\"A war-machine walks the eastern road, and it sings while it kills.\"", "", "Defeat &cThe Choir Herald&r (&8L_Ender's Cataclysm&r)."]
 			x: 0.0d
 			y: 0.0d
 			shape: "gear"
@@ -33,7 +33,7 @@
 			id: "35B4E1FD4E2F46D1"
 			title: "Something in the Water"
 			subtitle: "The sunken city"
-			description: ["&6Wren&r: &o\"I found a city. Under the sea. With lights on. And something huge moving around it.\"", "", "Defeat &cThe Leviathan&r (L_Ender's Cataclysm)."]
+			description: ["&6Wren&r: &o\"I found a city. Under the sea. With lights on. And something huge moving around it.\"", "", "Defeat &cThe Leviathan of the Sunken City&r (&8L_Ender's Cataclysm&r)."]
 			x: 2.0d
 			y: 2.0d
 			shape: "circle"
@@ -50,7 +50,7 @@
 			id: "2CC64D3E4BF80BA7"
 			title: "Old Engine Sentries"
 			subtitle: "Choir strongholds"
-			description: ["The Choir hides behind Old Engine guardians. Defeat the &cObsidilith&r and the &cGauntlet&r (Bosses of Mass Destruction)."]
+			description: ["The Choir hides behind Old Engine guardians. Defeat the two sentries, &cObsidilith&r and &cThe Gauntlet&r (&8Bosses of Mass Destruction&r)."]
 			x: 2.0d
 			y: -2.0d
 			shape: "circle"

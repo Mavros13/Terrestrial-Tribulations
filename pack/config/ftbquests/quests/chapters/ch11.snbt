@@ -32,7 +32,7 @@
 			id: "5E7FFF27712B38AE"
 			title: "The Bound Beast"
 			subtitle: "Malric's leash"
-			description: ["&5Malric&r: &o\"Little splinter of my Crown. Did you think you found them? They found you, for me.\"", "", "Enter the heart of the Convergence, &eThe End&r, and slay the &cEnder Dragon&r, the Regent's bound beast."]
+			description: ["&5Malric&r: &o\"Little splinter of my Crown. Did you think you found them? They found you, for me.\"", "", "Enter the heart of the Convergence, &eThe End&r, and slay &cMalric's Bound Beast&r."]
 			x: 2.0d
 			y: 0.0d
 			shape: "gear"
@@ -50,7 +50,7 @@
 			id: "E99750B83EA6FE65"
 			title: "The Hollow Regent"
 			subtitle: "Malric Thorne"
-			description: ["&5Malric&r: &o\"One will, one Crown, and all of it ends. Stop fighting what you are.\"", "", "Defeat &5Malric, the Hollow Regent&r (Cataclysm's Scylla, renamed in lore).", "", "&7He waits in the drowned Acropolis. The Thornecutter was forged for this fight."]
+			description: ["&5Malric&r: &o\"One will, one Crown, and all of it ends. Stop fighting what you are.\"", "", "Defeat &5Malric, the Hollow Regent&r.", "", "&7He waits in the drowned Acropolis. The Thornecutter was forged for this fight."]
 			x: 4.0d
 			y: 0.0d
 			shape: "gear"

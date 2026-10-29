@@ -67,7 +67,7 @@
 			id: "647B0590E8BC022E"
 			title: "Your Own Face"
 			subtitle: "The Hollow self"
-			description: ["At the shrine, the Shard shows you what the Regent would make of you. It wears your face, and it fights with your hands.", "", "Defeat your Hollow self: &cUmvuthi&r (Mowzie's Mobs), at its sun-scorched arena."]
+			description: ["At the shrine, the Shard shows you what the Regent would make of you. It wears your face, and it fights with your hands.", "", "Defeat &cYour Hollow Self&r (&8Mowzie's Mobs&r) at its sun-scorched arena."]
 			x: 6.0d
 			y: 0.0d
 			shape: "gear"

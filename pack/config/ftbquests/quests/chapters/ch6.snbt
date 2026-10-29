@@ -50,7 +50,7 @@
 			id: "74D0B2142ABE76A2"
 			title: "The Burning King"
 			subtitle: "Ignis"
-			description: ["In a burning citadel, a king of fire waits on a throne of slag.", "", "Defeat &cIgnis&r (L_Ender's Cataclysm)."]
+			description: ["In a burning citadel, a king of fire waits on a throne of slag.", "", "Defeat &cIgnis, the Burning King&r (&8L_Ender's Cataclysm&r)."]
 			x: 2.0d
 			y: 0.0d
 			shape: "gear"
@@ -85,7 +85,7 @@
 			id: "E4AE1246384F7CEE"
 			title: "The Big White"
 			subtitle: "Wren's northern hunt"
-			description: ["&6Wren&r: &o\"There's a thing up north. Big. White. Tusks like this. If I'm wrong, run.\"", "", "Defeat &cFrostmaw&r (Mowzie's Mobs) in the frozen north."]
+			description: ["&6Wren&r: &o\"There's a thing up north. Big. White. Tusks like this. If I'm wrong, run.\"", "", "Defeat &cFrostmaw&r (&8Mowzie's Mobs&r) in the frozen north."]
 			x: 2.0d
 			y: 2.0d
 			shape: "circle"

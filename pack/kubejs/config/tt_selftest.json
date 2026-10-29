@@ -435,7 +435,13 @@
     "tt:npc/wren_lookout"
   ],
   "lore_entities": [
+    "aether:slider",
+    "aether:sun_spirit",
+    "aether:valkyrie_queen",
+    "bosses_of_mass_destruction:gauntlet",
     "bosses_of_mass_destruction:lich",
+    "bosses_of_mass_destruction:obsidilith",
+    "bosses_of_mass_destruction:void_blossom",
     "cataclysm:ancient_remnant",
     "cataclysm:ender_guardian",
     "cataclysm:ignis",
@@ -445,10 +451,16 @@
     "cataclysm:the_harbinger",
     "cataclysm:the_leviathan",
     "minecraft:ender_dragon",
+    "minecraft:warden",
     "minecraft:wither",
     "mowziesmobs:ferrous_wroughtnaut",
     "mowziesmobs:frostmaw",
-    "mowziesmobs:umvuthi"
+    "mowziesmobs:umvuthi",
+    "twilightforest:hydra",
+    "twilightforest:lich",
+    "twilightforest:naga",
+    "twilightforest:ur_ghast",
+    "undergarden:forgotten_guardian"
   ],
   "dimensions": [
     "aether:the_aether",

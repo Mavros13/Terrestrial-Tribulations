@@ -70,7 +70,7 @@
 			id: "A7653CF0CE8A5868"
 			title: "The Sealed Armoury"
 			subtitle: "Thornwatch history"
-			description: ["Pell's relay maps show a sealed Thornwatch armoury. Its guardian still walks the halls.", "", "Defeat the &cFerrous Wroughtnaut&r (Mowzie's Mobs). It hides in deep, iron-walled chambers underground.", "", "&7Its weak point is its back; dodge the axe, then strike."]
+			description: ["Pell's relay maps show a sealed Thornwatch armoury. Its guardian still walks the halls.", "", "Defeat &cThe Armoury Warden&r (&8Mowzie's Mobs&r). It hides in deep, iron-walled chambers underground.", "", "&7Its weak point is its back; dodge the axe, then strike."]
 			x: 4.0d
 			y: 0.0d
 			shape: "gear"

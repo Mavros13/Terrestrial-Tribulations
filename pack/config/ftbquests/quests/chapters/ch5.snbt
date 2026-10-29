@@ -65,7 +65,7 @@
 			id: "DB0040EBED7F4378"
 			title: "Old Walls"
 			subtitle: "The Thorn Gate"
-			description: ["&6Captain Rhosk&r: &o\"Our fortress at the Thorn Gate is under siege. Something leads them. Something that remembers how to command.\"", "", "Break the siege: defeat the &cNight Lich&r (Bosses of Mass Destruction), the first Hollow general."]
+			description: ["&6Captain Rhosk&r: &o\"Our fortress at the Thorn Gate is under siege. Something leads them. Something that remembers how to command.\"", "", "Break the siege: defeat &cThe Night Lich&r (&8Bosses of Mass Destruction&r), the first Hollow general."]
 			x: 4.0d
 			y: 0.0d
 			shape: "gear"

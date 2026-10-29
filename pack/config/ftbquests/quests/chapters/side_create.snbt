@@ -207,13 +207,14 @@
 			id: "55ED1A60E1723F5C"
 			title: "Liquid Knowledge"
 			subtitle: "Create Enchantment Industry"
-			description: ["The Guild found a way to pour experience like water. A &eDisenchanter&r strips books from gear; the &ePrinter&r copies them."]
+			description: ["The Guild found a way to pour experience like water. A &eBlaze Enchanter&r enchants with liquid experience; the &ePrinter&r copies books."]
 			x: 12.0d
 			y: 0.0d
 			shape: "circle"
 			dependencies: ["AC2461AA1A2CA4A1"]
 			tasks: [
-				{ id: "F6297AD431D857AF", type: "item", item: { Count: 1b, id: "create_enchantment_industry:disenchanter" } }
+				{ id: "F6297AD431D857AF", type: "item", item: { Count: 1b, id: "create_enchantment_industry:blaze_enchanter" } },
+				{ id: "9EFC756BD2113404", type: "item", item: { Count: 1b, id: "create_enchantment_industry:printer" } }
 			]
 			rewards: [
 				{ id: "F11C413FB2859F00", type: "xp", xp: 200 }

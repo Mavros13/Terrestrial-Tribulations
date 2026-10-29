@@ -141,13 +141,15 @@ try {
   # Everything the server logged after it finished loading: the Done line, the test commands' own feedback (NPC
   # preset imports, easy_npc list, damage smoke test) and any error they caused. Other mods' load errors can fill
   # the 300-line cap below before these, so they get their own section.
+  # The reload repeats every other mod's datapack errors (loot tables, tags, recipes); skip those here.
+  $reloadNoise = 'ForgeHooks|TagLoader|LootDataType|LootTable|RecipeManager|Couldn''t parse|Couldn''t load|Failed to load|Missing pack_format|Parsing error'
   $lines.Add(''); $lines.Add('=== latest.log from "Done" on: test commands and their results ===')
   if (Test-Path $log) {
     $after = $false
     Get-Content $log | ForEach-Object {
       if (-not $after -and $_ -match 'Done \(') { $after = $true }
-      if ($after -and $_ -notmatch $noise) { $_ }
-    } | Select-Object -First 250 | ForEach-Object { $lines.Add($_) }
+      if ($after -and $_ -notmatch $noise -and $_ -notmatch $reloadNoise) { $_ }
+    } | Select-Object -First 400 | ForEach-Object { $lines.Add($_) }
   }
   $lines.Add(''); $lines.Add('=== latest.log: errors and our content ===')
   if (Test-Path $log) {

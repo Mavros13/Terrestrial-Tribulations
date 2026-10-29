@@ -17,7 +17,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BUILDS = [("Terrestrial-Tribulations-TestBuild1-CurseForge", "Test Build 1", "C"),
           ("Terrestrial-Tribulations-TestBuild2-CurseForge", "Test Build 2", "D")]
 SKIP_DIRS = {"tt-sync"}
-# --release: one zip with every stage and without the test-only files listed in tools/dev_only.txt
+# --release: one zip with every stage and without the test-only files listed in tools/dev_only.txt, named and
+# versioned from "pack_version" in modpack/curseforge-mods.json (bump it for every public release)
 RELEASE = ("Terrestrial-Tribulations-Release-CurseForge", "Release", "Z")
 
 
@@ -44,6 +45,9 @@ def main():
             "files": [{"projectID": m["projectID"], "fileID": m["fileID"], "required": True} for m in mods],
             "overrides": "overrides",
         }
+        if release:  # versioned file and manifest: Terrestrial-Tribulations-<pack_version>-CurseForge.zip
+            name, label = f"Terrestrial-Tribulations-{data['pack_version']}-CurseForge", data["pack_version"]
+            manifest["name"], manifest["version"] = "Terrestrial Tribulations", label
         out = os.path.join(ROOT, "dist", name + ".zip")
         base = os.path.join(ROOT, "pack")
         with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:

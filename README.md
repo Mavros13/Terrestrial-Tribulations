@@ -2,6 +2,11 @@
 
 A story-driven fantasy action-RPG modpack for **Minecraft 1.20.1 (Forge 47.4.18)**: Epic Fight combat, Palladium superheroes, Iron's Spells, Origins and Fates, Passive Skill Tree, MineColonies capital, FTB Quests campaign.
 
+## Play the beta (0.9.0)
+Prism Launcher → **Add Instance** → **Import**, paste
+`https://github.com/Mavros13/Terrestrial-Tribulations/raw/main/dist/Terrestrial-Tribulations-0.9.0-CurseForge.zip`,
+then set memory to 8 GB (Edit → Settings → Java) and **Launch**. The CurseForge app imports the same zip. What's in it: [CHANGELOG.md](CHANGELOG.md).
+
 ## Play Test Build 1 (Prism Launcher)
 **Import by URL (fully automatic)**
 1. Prism → **Add Instance** → **Import**.

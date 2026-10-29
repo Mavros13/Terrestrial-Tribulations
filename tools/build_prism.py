@@ -55,6 +55,7 @@ def main():
                 z.write(full, f"{NAME}/minecraft/" + os.path.relpath(full, base).replace(os.sep, "/"))
     print("Built", out, os.path.getsize(out), "bytes")
     run(sys.executable, os.path.join(ROOT, "tools", "build_curseforge.py"))  # CurseForge-format zips (Prism imports these too)
+    run(sys.executable, os.path.join(ROOT, "tools", "build_curseforge.py"), "--release")  # versioned release zip, no test helpers
 
 
 if __name__ == "__main__":

@@ -535,6 +535,165 @@ def extras(s, key):
             P(leg, "front", 2, 6, "#E0C35A", o=False, n=0)
 
 
+def weave(s, parts, every=4, f=0.9):
+    """Cloth texture: a faint diagonal weave on the base layer of the given parts' side faces."""
+    for part in parts:
+        for face, (fx, fy, fw, fh) in s.faces(part).items():
+            if face in ("top", "bottom"):
+                continue
+            for y in range(fh):
+                for x in range(fw):
+                    if (x + y * 2) % every == 0:
+                        c = s.img.getpixel((fx + x, fy + y))
+                        s.img.putpixel((fx + x, fy + y), shade(c, f))
+
+
+def more(s, key):
+    """Third pass (owner, 2026-10-29: "add more detail"): headgear, back pieces, cloth texture, finer faces."""
+    P = lambda part, face, x, y, c, o=True, n=0.04: s.px(part, face, x, y, c, overlay=o, noise=n)
+    if key == "maera":
+        weave(s, ("body", "rleg", "lleg"))
+        for face in ("left", "right"):                     # braids start at the temples (hat layer)
+            for y in range(2, 8):
+                P("head", face, 7 if face == "left" else 0, y, "#9A9C9F" if y % 2 else "#B9BBBE")
+        for x in range(8):                                 # fringe along the shawl's back edge
+            P("body", "back", x, 6, "#7A1820" if x % 2 else "#A3212A")
+            if x % 2 == 0:
+                P("body", "back", x, 7, "#7A1820")
+        for arm in ("rarm", "larm"):                       # brass pins on the shoulders
+            P(arm, "front", 1, 1, "#D8A93A", n=0)
+        P("head", "front", 2, 6, shade(hexc("#C9946B"), 0.8), o=False)   # laugh lines
+        P("head", "front", 5, 6, shade(hexc("#C9946B"), 0.8), o=False)
+    elif key == "doran":
+        weave(s, ("rleg", "lleg"))
+        for arm in ("rarm", "larm"):                       # soot-black hands, burn-scarred knuckles
+            for face in ("right", "front", "left", "back"):
+                for x in range(s.side_width(arm, face)):
+                    P(arm, face, x, 10, "#2E2420", o=False, n=0.1)
+            P(arm, "front", 1, 11, "#8A3A22", o=False, n=0)
+        for x in range(8):                                 # bald crown with stubble
+            P("head", "front", x, 0, shade(hexc("#6B4A35"), 0.9), o=False)
+        for x in (1, 6):                                   # heavy brows
+            P("head", "front", x, 3, "#14100E", o=False, n=0)
+        for leg in ("rleg", "lleg"):                       # apron hangs to the knees
+            for x in range(4):
+                P(leg, "front", x, 7, "#4A2E18")
+    elif key == "rhosk":
+        weave(s, ("rleg", "lleg"), every=5, f=0.93)
+        bronze, crest = "#B0813B", "#4E8F3A"
+        for face in ("front", "left", "right", "back"):    # open bronze helm with cheek guards
+            for x in range(8):
+                P("head", face, x, 0, bronze)
+                P("head", face, x, 1, shade(hexc(bronze), 0.8) if face == "front" else bronze)
+            if face in ("left", "right", "back"):
+                for y in range(2, 6):
+                    for x in range(8):
+                        if face == "back" or (face == "right" and x < 5) or (face == "left" and x > 2):
+                            P("head", face, x, y, bronze if y < 5 else shade(hexc(bronze), 0.75))
+        for y in range(2, 6):
+            P("head", "front", 0, y, bronze)
+            P("head", "front", 7, y, bronze)
+        s.fill("head", lambda f, x, y, w, h: crest if x in (3, 4) else bronze, overlay=True, faces=("top",))
+        for y in range(3):                                 # green crest runs over the top and down the back
+            P("head", "back", 3, y, crest)
+            P("head", "back", 4, y, crest)
+        for x, y in ((2, 3), (3, 2), (4, 2), (5, 3), (2, 4), (5, 4), (3, 5), (4, 5),   # thorn ring on the cloak
+                     (1, 3), (6, 4), (3, 6), (4, 1)):
+            P("body", "back", x, y, "#E0B35A", n=0)
+        P("body", "back", 3, 3, "#24401F", n=0)
+        P("body", "back", 4, 4, "#24401F", n=0)
+    elif key == "pell":
+        weave(s, ("body", "rarm"), every=3, f=0.92)
+        for face in ("left", "right"):                     # frizz poking out over the ears
+            for y in (2, 3):
+                P("head", face, 2 if face == "left" else 5, y, "#C4622D")
+        for x in (1, 2, 5, 6):                             # lens glint
+            P("head", "front", x, 1, "#BDF3FA" if x in (1, 5) else "#7FC9D6", n=0)
+        for face in ("front", "right", "left", "back"):    # brass hand plates and a cyan gear
+            for x in range(s.side_width("larm", face)):
+                P("larm", face, x, 8, "#E0B84A", o=False, n=0)
+        P("larm", "front", 1, 10, "#7FC9D6", o=False, n=0)
+        for x, y in ((0, 3), (6, 3), (0, 7), (6, 7)):     # pocket flaps
+            P("body", "front", x, y, "#5A4228", o=False)
+            P("body", "front", x + 1, y, "#5A4228", o=False)
+        P("head", "front", 2, 5, "#C77A5A", o=False)       # freckles
+        P("head", "front", 5, 5, "#C77A5A", o=False)
+    elif key == "tamsin":
+        moss = "#4E7A2E"
+        for face in ("left", "right", "back"):             # moss hood framing the face
+            for y in range(1, 7):
+                for x in range(8):
+                    if face == "back" or (face == "right" and x < 4) or (face == "left" and x > 3):
+                        if (x * 3 + y) % 7:
+                            P("head", face, x, y, moss if (x + y) % 3 else "#5F9238")
+        for y in range(1, 7):
+            P("head", "front", 0, y, moss)
+            P("head", "front", 7, y, moss)
+        for x0 in (2, 5):                                  # amber eyes
+            P("head", "front", x0, 4, "#E0A030", o=False, n=0)
+        for y in range(12):                                # longbow across the back
+            P("body", "back", y * 7 // 11, y, "#7A5230")
+        for y in range(0, 12, 3):                          # its root-fibre string
+            P("body", "back", 7 - (y // 2), y, "#C9B98A")
+    elif key == "ilsabet":
+        for arm in ("rarm", "larm"):                       # bell sleeves
+            for face in ("right", "front", "left", "back"):
+                for x in range(s.side_width(arm, face)):
+                    for y in (7, 8, 9, 10):
+                        P(arm, face, x, y, "#C9B2EE" if y < 10 else "#E8E2F2")
+        for x in range(8):                                 # silver-trimmed collar
+            P("body", "front", x, 0, "#C9CED6")
+        for y in range(1, 12):                             # a column of faint stars down the robe
+            if y % 3 == 0:
+                P("body", "front", 5, y, "#F4EEFF", o=False, n=0)
+        P("head", "front", 3, 6, "#B07A9A", o=False, n=0)  # tinted lips
+        P("head", "front", 4, 6, "#B07A9A", o=False, n=0)
+    elif key == "stranger":
+        weave(s, ("body", "rleg", "lleg"), every=6, f=0.95)
+        P("head", "front", 2, 4, "#E8C547", o=False, n=0)  # gold eyes: a quiet hint of the Crown
+        P("head", "front", 5, 4, "#E8C547", o=False, n=0)
+        P("head", "front", 6, 1, "#D8A93A", n=0)           # gold pin in the hat band
+        for y in (3, 5, 7, 9):                             # double-breasted coat
+            P("body", "front", 2, y, "#C9CED6", o=False, n=0)
+            P("body", "front", 5, y, "#C9CED6", o=False, n=0)
+        for face in ("left", "right", "front", "back"):    # hat brim casts a shadow over the eyes
+            for x in range(8):
+                c = s.img.getpixel((s.faces("head")[face][0] + x, s.faces("head")[face][1] + 2))
+                if c[3]:
+                    P("head", face, x, 2, shade(c, 0.82), o=False, n=0)
+    elif key == "wren":
+        teal, fur = "#2F7F86", "#E8DCC4"
+        s.fill("head", lambda face, x, y, w, h: teal if face in ("top", "back") or (face in ("left", "right") and y < 7)
+               else None, overlay=True)
+        for x in range(8):
+            P("head", "front", x, 0, fur)
+        for y in range(7):
+            P("head", "front", 0, y, fur)
+            P("head", "front", 7, y, fur)
+        for face in ("left", "right"):
+            for y in range(7):
+                P("head", face, 7 if face == "left" else 0, y, fur)
+        for face in ("left", "right", "back"):             # map rolls with red ties all round the belt
+            for x in range(s.side_width("body", face)):
+                if x % 2 == 0:
+                    P("body", face, x, 8, "#B03A2E", n=0)
+        for x in (1, 5):
+            P("body", "front", x, 8, "#B03A2E", n=0)
+        P("head", "front", 1, 5, "#E39A86", o=False, n=0)  # windburnt cheeks
+        P("head", "front", 6, 5, "#E39A86", o=False, n=0)
+    elif key == "sol":
+        weave(s, ("body", "rleg", "lleg"), every=5, f=0.93)
+        for x in range(1, 7):                              # an open book resting on the lectern
+            for y in (3, 4, 5):
+                P("body", "back", x, y, "#F1E8D2" if x not in (3, 4) else "#D9CBA3", n=0.02)
+        for x in (1, 2, 5, 6):
+            P("body", "back", x, 4, "#6A6050", n=0)
+        P("body", "back", 4, 6, "#A3212A", n=0)            # ribbon bookmark
+        P("body", "back", 4, 7, "#A3212A", n=0)
+        for y in range(5, 8):                              # the spectacles' chain down to the robe
+            P("body", "front", 0, y - 5, "#C9A84A", n=0)
+
+
 CAST = {"maera": (maera, True), "doran": (doran, False), "rhosk": (rhosk, False), "pell": (pell, False),
         "tamsin": (tamsin, True), "ilsabet": (ilsabet, True), "stranger": (stranger, False), "wren": (wren, True),
         "sol": (sol, False)}
@@ -573,6 +732,7 @@ def main():
         s = Skin(slim, key)
         paint(s)
         extras(s, key)
+        more(s, key)
         finish(s)
         s.img.save(os.path.join(OUT, key + ".png"))
         sheet.alpha_composite(front_back(s.img, slim), (36 * i, 0))

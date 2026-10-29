@@ -1,0 +1,6 @@
+{
+  "_comment": "Read by server_scripts/tt_pregen.js. Pre-generates the terrain around world spawn once per world with Chunky (risk R1: Terralith + structure mods stutter while generating). radius is in blocks; set enabled to false to skip.",
+  "enabled": true,
+  "radius": 768,
+  "delay_seconds": 60
+}

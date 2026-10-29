@@ -15,8 +15,9 @@ const $TT_Registries = Java.loadClass('net.minecraft.core.registries.Registries'
 const $TT_ResourceLocation = Java.loadClass('net.minecraft.resources.ResourceLocation')
 const $TT_MobEffects = Java.loadClass('net.minecraft.world.effect.MobEffects')
 const TT_INNATE = $TT_TagKey.create($TT_Registries.DAMAGE_TYPE, new $TT_ResourceLocation('epicfight', 'weapon_innate'))
-// Entity IDs that count as "Hollowed" for Soul Severance. Empty until the boss and mob roles are final.
-const TT_HOLLOWED = []
+// Entity IDs that count as "Hollowed" for Soul Severance: the undead Hollowed and the Hollow bosses (boss-roles.md).
+const TT_HOLLOWED = ['minecraft:zombie', 'minecraft:husk', 'minecraft:drowned', 'minecraft:zombie_villager',
+  'bosses_of_mass_destruction:lich', 'mowziesmobs:umvuthi', 'cataclysm:scylla']
 
 function ttSafe(name, fn) {
   try { fn() } catch (e) { console.error(`[TT] ability ${name} failed: ${e}`) }

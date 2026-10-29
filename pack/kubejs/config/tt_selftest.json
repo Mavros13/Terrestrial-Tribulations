@@ -297,6 +297,22 @@
     "twilightforest:twilight_forest",
     "undergarden:undergarden"
   ],
+  "lore_entities": [
+    "bosses_of_mass_destruction:lich",
+    "cataclysm:ancient_remnant",
+    "cataclysm:ender_guardian",
+    "cataclysm:ignis",
+    "cataclysm:maledictus",
+    "cataclysm:netherite_monstrosity",
+    "cataclysm:scylla",
+    "cataclysm:the_harbinger",
+    "cataclysm:the_leviathan",
+    "minecraft:ender_dragon",
+    "minecraft:wither",
+    "mowziesmobs:ferrous_wroughtnaut",
+    "mowziesmobs:frostmaw",
+    "mowziesmobs:umvuthi"
+  ],
   "dimensions": [
     "aether:the_aether",
     "blue_skies:everbright",

@@ -103,7 +103,9 @@ try {
         'summon minecraft:skeleton 3 100 0 {NoAI:1b,PersistenceRequired:1b}', 'summon minecraft:villager 0 100 3 {NoAI:1b}',
         'damage @e[type=minecraft:zombie,limit=1] 2 minecraft:arrow', 'damage @e[type=minecraft:zombie,limit=1] 2 minecraft:magic',
         'damage @e[type=minecraft:zombie,limit=1] 2 minecraft:generic', 'damage @e[type=minecraft:villager,limit=1] 2 minecraft:mob_attack by @e[type=minecraft:skeleton,limit=1]',
-        'damage @e[type=minecraft:skeleton,limit=1] 50 minecraft:out_of_world', 'time add 6000')) {
+        'damage @e[type=minecraft:skeleton,limit=1] 50 minecraft:out_of_world',
+        'summon minecraft:wither 0 100 -4 {NoAI:1b,Invul:0}', 'damage @e[type=minecraft:wither,limit=1] 5 minecraft:generic',
+        'kill @e[type=minecraft:wither]', 'time add 6000')) {
       $p.StandardInput.WriteLine($c); Start-Sleep 2
     }
     Start-Sleep 60

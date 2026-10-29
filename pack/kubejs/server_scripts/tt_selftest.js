@@ -103,6 +103,7 @@ function ttSelfTest(server) {
   section('quest_items', cfg.quest_items, id => ttNsCheck(id, () => !Item.of(id).isEmpty()))
   let BRegs = Java.loadClass('net.minecraft.core.registries.BuiltInRegistries')
   section('quest_entities', cfg.quest_entities, id => ttNsCheck(id, () => BRegs.ENTITY_TYPE.containsKey(new RL(id))))
+  section('lore_entities', cfg.lore_entities, id => ttNsCheck(id, () => BRegs.ENTITY_TYPE.containsKey(new RL(id))))
   section('quest_dimensions', cfg.quest_dimensions, id => ttNsCheck(id, () => server.getLevel(id) != null))
 
   console.info(`[TT] selftest done: ${total.pass} passed, ${total.fail} failed`)

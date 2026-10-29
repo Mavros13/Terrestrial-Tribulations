@@ -37,6 +37,7 @@ out = {
     "quest_items": quest_items,
     "quest_entities": quest_entities,
     "quest_dimensions": quest_dims,
+    "lore_entities": sorted(json.load(open(os.path.join(KJ, "config", "tt_boss_lore.json")))["bosses"]),
     "dimensions": sorted({d for g in gates.get("dimension_gates", {}).get("gates", []) for d in g["dimensions"]}),
 }
 with open(os.path.join(KJ, "config", "tt_selftest.json"), "w") as f:

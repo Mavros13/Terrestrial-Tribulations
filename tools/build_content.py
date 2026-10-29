@@ -34,6 +34,33 @@ VANILLA_RARITY = {"common": "common", "uncommon": "uncommon", "rare": "rare", "e
 INNATE = {"sword": "Sweeping Edge", "dagger": "Eviscerate", "longsword": "Sharp Stab", "tachi": "Rushing Tempo",
           "greatsword": "Steel Whirlwind", "spear": "Heartpiercer", "axe": "The Guillotine", "fist": "Relentless Combo",
           "staff": "Heartpiercer"}
+# Display names of the Epic Fight innate skills a weapon can name in its "innate" field (EpicFightSkills, 1.20.1).
+SKILL_NAMES = {"epicfight:the_guillotine": "The Guillotine", "epicfight:sharp_stab": "Sharp Stab"}
+# Custom weapon types (data/tt/capabilities/weapons/types/, read by WeaponTypeReloadListener): the only way data can give
+# a weapon a different built-in innate skill. Each copies Epic Fight's preset for the family (WeaponCapabilityPresets,
+# 1.20.1, animation IDs from Animations.java) and swaps in the weapon's "innate" skills. Data types can't set the
+# preset's extra reach or code-only style switches, so only families without those (longsword: the OCHS style only
+# exists for Liechtenauer, which the override replaces) are listed. EDP's simple innate skills were not used: Epic
+# Fight's SimpleWeaponInnateSkill writes its properties onto the shared animation, changing every weapon that uses it.
+_EF = "epicfight:biped/"
+_HOLD_LS = {m: _EF + "living/hold_longsword" for m in ("idle", "sneak", "kneel", "jump", "swim")}
+TYPE_TEMPLATES = {
+    "longsword": {
+        "category": "longsword", "usable_in_offhand": False,
+        "hit_particle": "epicfight:hit_blade", "hit_sound": "epicfight:entity.hit.blade",
+        "collider": {"number": 3, "size": [0.4, 0.4, 0.8], "center": [0.0, 0.0, -0.75]},
+        "styles": {"default": "two_hand", "cases": [
+            {"style": "one_hand", "conditions": [{"predicate": "epicfight:offhand_item_category", "category": "shield"}]}]},
+        "combos": {s: [_EF + "combat/longsword_auto1", _EF + "combat/longsword_auto2", _EF + "combat/longsword_auto3",
+                       _EF + "combat/longsword_dash", _EF + "combat/longsword_airslash"] for s in ("one_hand", "two_hand")}
+                  | {"mount": [_EF + "combat/sword_mount_attack"]},
+        "livingmotion_modifier": {
+            "common": _HOLD_LS | {"walk": _EF + "living/walk_longsword", "chase": _EF + "living/walk_longsword",
+                                  "run": _EF + "living/run_longsword", "block": _EF + "skill/guard_longsword"},
+            "one_hand": {"block": _EF + "skill/guard_sword"}},
+        "custom_tags": ["epicfight:longsword"],
+    },
+}
 TIER_NAMES = ["", "Primitive", "Reinforced", "Adventurer", "Veteran", "Elite", "Relic", "Legendary", "Mythic"]
 # Epic Fight weapon categories. Staff uses the spear moveset until Iron's Spells integration is done.
 EF_TYPE = {"sword": "sword", "dagger": "dagger", "longsword": "longsword", "tachi": "tachi", "greatsword": "greatsword",
@@ -349,8 +376,9 @@ def main():
                  f"§6{w['ability_name']}" + (f" §e[{w['trigger']}]" if w.get("trigger") else ""), f"§7{w['ability_text']}", f"§8§o\"{w['lore']}\"", f"§3{w['story']}"]
         if w["impl"] == "BRIDGE":
             lines.append("§c[Prototype] Ability arrives with the tt_bridge mod")
-        elif w["impl"] == "EDP":
-            lines.append("§c[Prototype] Ability rides on the " + INNATE[w["ef"]] + " innate skill until its own EDP skill exists")
+        elif w["impl"] == "INNATE":
+            skill = SKILL_NAMES[w["innate"]["two_hand"]] if w.get("innate") else INNATE[w["ef"]]
+            lines.append("§8Triggers on Epic Fight's " + skill + " weapon skill")
         tips.append(f"  event.add('tt:{w['id']}', {json.dumps(lines, ensure_ascii=False)})")
     lang.update({"item.tt.bone_shard": "Bone Shard", "item.tt.hollow_fang": "Hollow Fang",
                  "item.tt.crown_shard_fragment": "§6Crown Shard Fragment", "item.tt.emberhold_charter": "§eEmberhold Charter",
@@ -362,7 +390,14 @@ def main():
     for w in weapons:
         if w["family"] == "bow":
             continue
-        cap = {"type": "epicfight:" + EF_TYPE[w["ef"]],
+        etype = "epicfight:" + EF_TYPE[w["ef"]]
+        if w.get("innate"):
+            assert w["ef"] in TYPE_TEMPLATES, f"{w['id']}: no custom weapon type template for {w['ef']}"
+            assert all(v in SKILL_NAMES for v in w["innate"].values()), f"{w['id']}: add the skill to SKILL_NAMES"
+            wtype = dict(TYPE_TEMPLATES[w["ef"]], innate_skills=w["innate"])
+            write(os.path.join(KJS, "data", "tt", "capabilities", "weapons", "types", w["id"] + ".json"), json.dumps(wtype, indent=2) + "\n")
+            etype = "tt:" + w["id"]
+        cap = {"type": etype,
                "attributes": {"common": {"armor_negation": round(w["tier"] * 2.5, 1), "impact": round(0.4 + w["tier"] * 0.15, 2),
                                          "max_strikes": 3 if w["ef"] in ("greatsword",) else 1}}}
         write(os.path.join(KJS, "data", "tt", "capabilities", "weapons", w["id"] + ".json"), json.dumps(cap, indent=2) + "\n")

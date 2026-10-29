@@ -1,9 +1,9 @@
 // Terrestrial Tribulations: weapon abilities that KubeJS can do on its own (impl = KJS in weapons.json).
 // Active abilities (sneak + use) and the BRIDGE abilities KubeJS can do are in tt_active_abilities.js; the rest wait for tt_bridge.
-// EDP weapons: Epic Fight data can only assign its built-in innate skills (no new skills), so each EDP weapon keeps
-// its family's built-in innate skill and the custom effect is added here as a "rider" on hits that skill deals.
-// Epic Fight tags those hits with the runtime damage tag epicfight:weapon_innate (EpicFightDamageSource.is, 1.20.1
-// source). See docs/research/2026-10-27-epic-fight-data-formats.md.
+// INNATE weapons (impl in weapons.json): each one uses a built-in Epic Fight innate skill for the motion (its family's,
+// or one named in a custom weapon type, see build_content.py TYPE_TEMPLATES) and the ability is added here as a "rider"
+// on the hits that skill deals. Epic Fight tags those hits with the runtime damage tag epicfight:weapon_innate
+// (EpicFightSkills, 1.20.1 source). See docs/research/2026-10-27-epic-fight-data-formats.md.
 // DRAFT: untested in-game. Every handler is wrapped so that one failure can't break the others.
 
 const TT_FOOD = { 'minecraft:cow': 'minecraft:beef', 'minecraft:pig': 'minecraft:porkchop', 'minecraft:sheep': 'minecraft:mutton',
@@ -31,6 +31,33 @@ function ttBonus(server, target, amount) {
     target.invulnerableTime = 0
     target.attack(amount)
   })
+}
+
+// A line on the ground from the player along their horizontal facing, `len` blocks long.
+// step 20: the whole line at once, pulsing once a second for `seconds`. Smaller step: a wave that lights one more block
+// every `step` ticks and hits each enemy once. onHit runs for each enemy standing on a lit part (enemies as in
+// ttEnemiesNear, tt_active_abilities.js: living, not the player, not other players, not the player's pets).
+function ttGroundLine(p, len, seconds, particle, step, onHit) {
+  const level = p.level, server = p.level.server
+  const yaw = p.getYRot() * Math.PI / 180
+  const dx = -Math.sin(yaw), dz = Math.cos(yaw)
+  const sx = p.x, sy = p.y, sz = p.z
+  const wave = step < 20
+  const hitOnce = {}
+  // a function per pulse, so each closure keeps its own k (Rhino's for-let doesn't make one binding per loop)
+  const pulse = k => () => ttSafe('ground_line', () => {
+    const from = wave ? k + 0.5 : 0.5, to = wave ? k + 1.5 : len + 0.5
+    for (let d = from; d < to; d += 0.5) ttParticle(level, particle, sx + dx * d, sy + 0.15, sz + dz * d, 0.15, wave ? 4 : 2)
+    ttEnemiesNear(p, sx + dx * (from + to) / 2, sy + 1, sz + dz * (from + to) / 2, (to - from) / 2 + 1).forEach(e => {
+      // where the enemy is along the line and how far off it
+      const ex = e.x - sx, ez = e.z - sz
+      const along = ex * dx + ez * dz, across = Math.abs(ex * dz - ez * dx)
+      if (along < from - 0.5 || along > to || across > e.bbWidth / 2 + 0.7 || Math.abs(e.y - sy) > 2) return
+      if (wave) { let id = String(e.uuid); if (hitOnce[id]) return; hitOnce[id] = true }
+      onHit(e)
+    })
+  })
+  for (let k = 0; k < (wave ? len : seconds); k++) server.scheduleInTicks(k * (wave ? step : 20), pulse(k))
 }
 
 // Scavenger's Edge (Frontier Cleaver)
@@ -90,18 +117,28 @@ EntityEvents.hurt(event => {
     else if (count > 3 && pd.getBoolean('tt_gloom_on') && pd.getLong('tt_gloom_cd') == now + 40) p.heal(2)
   })
 
-  // ----- EDP riders: only on hits dealt by the weapon's Epic Fight innate skill -----
+  // ----- INNATE riders: only on hits dealt by the weapon's Epic Fight innate skill -----
   const innate = event.source.is(TT_INNATE)
 
-  // Ember Hook (Ashfang Karambit, innate = Eviscerate): fire 3s; the next normal hit within 2s deals +50% (the "crit")
+  // Ember Hook (Ashfang Karambit, Eviscerate): the first skill hit hooks you behind the target and sets it on fire for
+  // 3 s; your next normal hit within 2 s deals +50% (the "crit").
   if (held == 'tt:ashfang_karambit') ttSafe('ember_hook', () => {
     const pd = p.persistentData
-    if (innate) { t.setSecondsOnFire(3); pd.putLong('tt_ember_until', now + 40) }
+    if (innate) {
+      t.setSecondsOnFire(3)
+      if (now > pd.getLong('tt_ember_until')) event.server.scheduleInTicks(2, () => ttSafe('ember_hook_move', () => {
+        if (!p.isAlive() || !t.isAlive()) return
+        ttParticle(p.level, 'minecraft:flame', p.x, p.y + 1, p.z, 0.3, 12)
+        p.teleportTo(t.x - t.lookAngle.x() * 1.2, t.y, t.z - t.lookAngle.z() * 1.2)
+        ttSound(p.level, 'minecraft:item.firecharge.use', t.x, t.y, t.z, 1.4)
+      }))
+      pd.putLong('tt_ember_until', now + 40)
+    }
     else if (now <= pd.getLong('tt_ember_until')) { pd.putLong('tt_ember_until', 0); ttBonus(event.server, t, event.damage * 0.5) }
   })
 
-  // Rallying Strike (Accord Longsword, innate = Sharp Stab / Liechtenauer): Strength I + Resistance I 6s to you, players
-  // and tamed animals within 8 blocks. Once per second so multi-hit skills don't stack. MineColonies guards: tt_bridge.
+  // Rallying Strike (Accord Longsword, The Guillotine; Sharp Stab with a shield): Strength I + Resistance I 6s to you,
+  // players and tamed animals within 8 blocks. Once per second so multi-hit skills don't stack. MineColonies guards: tt_bridge.
   if (held == 'tt:accord_longsword' && innate) ttSafe('rallying_strike', () => {
     const pd = p.persistentData
     if (now < pd.getLong('tt_rally_cd')) return
@@ -112,24 +149,44 @@ EntityEvents.hurt(event => {
         a.potionEffects.add('minecraft:resistance', 120, 0)
       }
     })
+    ttSound(p.level, 'minecraft:event.raid.horn', p.x, p.y, p.z, 1.6)
   })
 
-  // Briar Line (Thornwatch Halberd, innate = Heartpiercer / Grasping Spire): Slowness II 5s + 2 damage per second for 5s.
-  // The persistent 6-block thorn line on the ground needs tt_bridge.
+  // Briar Line (Thornwatch Halberd, Grasping Spire / Heartpiercer): the target is slowed (Slowness II 5 s), and the first
+  // skill hit plants a 6-block thorn line along your facing for 5 s: 2 damage per second and Slowness II to enemies on it.
   if (held == 'tt:thornwatch_halberd' && innate) ttSafe('briar_line', () => {
     t.potionEffects.add('minecraft:slowness', 100, 1)
-    for (let i = 1; i <= 5; i++) event.server.scheduleInTicks(20 * i - 1, () => ttBonus(event.server, t, 2))
+    const pd = p.persistentData
+    if (now < pd.getLong('tt_briar_cd')) return
+    pd.putLong('tt_briar_cd', now + 40)
+    ttGroundLine(p, 6, 5, 'minecraft:composter', 20, e => {
+      e.invulnerableTime = 0
+      e.attack(2)
+      e.potionEffects.add('minecraft:slowness', 30, 1)
+    })
+    ttSound(p.level, 'minecraft:block.sweet_berry_bush.place', p.x, p.y, p.z, 0.7)
   })
 
-  // Soul Severance (Hollowbane Tachi, innate = Rushing Tempo): strip invisibility; +100% vs entities in TT_HOLLOWED.
+  // Soul Severance (Hollowbane Tachi, Rushing Tempo): strip invisibility; +100% vs entities in TT_HOLLOWED.
   if (held == 'tt:hollowbane_tachi' && innate) ttSafe('soul_severance', () => {
     t.removeEffect($TT_MobEffects.INVISIBILITY)
     if (TT_HOLLOWED.includes(String(t.type))) ttBonus(event.server, t, event.damage)
   })
 
-  // Flame Wake (Cinder Crown, innate = Steel Whirlwind): every enemy the skill hits burns 5s. The 10-block flame line
-  // on the ground needs tt_bridge.
-  if (held == 'tt:cinder_crown' && innate) ttSafe('flame_wake', () => t.setSecondsOnFire(5))
+  // Flame Wake (Cinder Crown, Steel Whirlwind): every enemy the skill hits burns 5 s, and the first hit sends a 10-block
+  // wave of erupting flame along your facing: 4 damage and 5 s of fire to each enemy it reaches. No fire blocks placed.
+  if (held == 'tt:cinder_crown' && innate) ttSafe('flame_wake', () => {
+    t.setSecondsOnFire(5)
+    const pd = p.persistentData
+    if (now < pd.getLong('tt_wake_cd')) return
+    pd.putLong('tt_wake_cd', now + 60)
+    ttGroundLine(p, 10, 1, 'minecraft:flame', 2, e => {
+      e.invulnerableTime = 0
+      e.attack(4)
+      e.setSecondsOnFire(5)
+    })
+    ttSound(p.level, 'minecraft:item.firecharge.use', p.x, p.y, p.z, 0.6)
+  })
 
   // Pack Mark (Gnawblade): mark target 8s (glowing). Rat focus-fire is added by tt_bridge once Rats is in the pack.
   if (held == 'tt:gnawblade') ttSafe('pack_mark', () => {

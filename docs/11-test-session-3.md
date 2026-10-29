@@ -27,6 +27,18 @@ New world: **Creative**, cheats **on**. Then:
 - **Each karambit:** the inventory icon is the 3D karambit, matching what's in your hand. Outside battle mode, the karambit animations play: idle, swing and **Y** to inspect.
 - Battle mode (**R**): Epic Fight's arms only, no doubled weapon.
 
+## 2b. Weapon skills (5 min)
+Survival is easier for this (skills charge by hitting things): `/gamemode survival`, `/kubejs custom_command tt_mobs` for targets, then in battle mode (**R**) hit until the skill gauge is full and press the weapon skill key.
+```
+/give @p tt:accord_longsword
+/give @p tt:thornwatch_halberd
+/give @p tt:cinder_crown
+```
+- **Accord Longsword:** the skill is an overhead leap-strike (The Guillotine), and you get Strength and Resistance. Normal swings are the usual longsword ones.
+- **Thornwatch Halberd:** after the skill hits, a line of green specks stays on the ground ahead of you for 5 s, and mobs standing on it take damage and slow down.
+- **Cinder Crown:** the first skill hit sends a wave of flame 10 blocks ahead of you, setting mobs on it alight.
+- **Ashfang Karambit** (from step 2): the skill hit moves you behind the target.
+
 ## 3. NPCs: talk quests and shops (10 min)
 ```
 /kubejs custom_command tt_story

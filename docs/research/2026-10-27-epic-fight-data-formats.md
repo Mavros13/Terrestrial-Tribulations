@@ -85,7 +85,25 @@ What this could move off tt_bridge, to be confirmed when the skills are written:
 - None of our EDP skill files exist yet.
 - EDP doesn't state a minimum Epic Fight version, so confirm 2.5.5 loads with Epic Fight 20.14.17 in Test Build 2. If it doesn't, move Epic Fight to the newest 20.15.x in both lists.
 
+## 5. Decision (2026-10-29): built-in skills + KubeJS, no EDP skill files
+Checked against Epic Fight's 1.20.1 source before writing the EDP skills:
+- **EDP simple innate skills would change other weapons.** A simple innate skill is "an existing animation plus properties", and Epic Fight's `SimpleWeaponInnateSkill.registerPropertiesToAnimation` writes those properties onto the animation's phases. Animations are shared: every skill animation already belongs to a built-in skill, and the unused attack animations are the ones Epic Fight's mobs swing. So a `tt:` skill on `eviscerate_first` would retune Eviscerate on every dagger in the pack, and one on `mob_longsword1` would buff every zombie with a sword. EDP's wiki says virtual animations can't be used for skills, and its animation registry needs our own animation files. EDP's source isn't public and its jar can't be fetched from the container, so EDP can't be checked to work differently.
+- **Hits from EDP skills may also lose the `epicfight:weapon_innate` tag.** Epic Fight's built-in skills add it themselves (`EpicFightSkills`: `SOURCE_TAG` = `WEAPON_INNATE`), and EDP's skill fields have no source-tag option, so our KubeJS riders could stop seeing the hits.
+- **What we did instead** (`impl: "INNATE"` in `weapons.json`):
+  - Each of the 5 weapons keeps a built-in innate skill, and the whole ability is now in `server_scripts/tt_abilities.js`, using the same tools as the active abilities:
+    - Ember Hook (Eviscerate): the first skill hit moves you behind the target.
+    - Briar Line (Grasping Spire / Heartpiercer): a real 6-block thorn line on the ground for 5 s.
+    - Flame Wake (Steel Whirlwind): a 10-block flame wave along your facing.
+    - Rallying Strike and Soul Severance: unchanged.
+  - A weapon can name a different built-in skill with an `innate` field. `build_content.py` then writes a **custom weapon type** (`data/tt/capabilities/weapons/types/<id>.json`, `WeaponTypeReloadListener`): a copy of the family's preset (combos, motions, collider, styles; animation IDs from `Animations.java`) with `innate_skills` swapped. The capability file points at `tt:<id>`.
+    - Used once: the **Accord Longsword gets The Guillotine** (an overhead leap-strike, matching "overhead strike"), and Sharp Stab with a shield.
+    - Data types can't set a preset's extra reach (spear, greatsword) or code-only style switches. So only families without those get templates (`TYPE_TEMPLATES`).
+    - Battojutsu was rejected for the tachi: `BattojutsuSkill` reads the sheath flag from the weapon-passive slot, which a tachi doesn't fill.
+- EDP stays in the pack at stage D, for animation events and visuals later.
+
 ## Still unverified (needs a launch)
+- The Accord Longsword's custom type loads (selftest `epic_fight_weapons` fails for it if the type is missing) and The Guillotine plays with the longsword moveset otherwise unchanged.
+- The ground lines and the hook teleport in `tt_abilities.js` (`ttGroundLine`, Ember Hook).
 - The KubeJS calls in the riders: `Java.loadClass` of `TagKey`, `Registries`, `ResourceLocation` and `MobEffects`, plus `event.source.is(TagKey)` on Epic Fight's damage source.
 - Whether a multi-hit innate skill fires the rider once per hit. The Rallying Strike rider has a 1 s guard for that.
 - That the item-skin trail positions look right on our placeholder (flat) items. Epic Fight draws the trail from the joint, not the model, so it should.

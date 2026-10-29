@@ -1,0 +1,6 @@
+# Test-only files: in every test build, left out of the release build (python tools/build_curseforge.py --release).
+# Paths are relative to pack/. Add a line here to keep a new test helper out of the release.
+kubejs/server_scripts/tt_testkit.js
+kubejs/server_scripts/tt_selftest.js
+kubejs/config/tt_selftest.json
+kubejs/data/tt/palladium/powers/cast_test.json

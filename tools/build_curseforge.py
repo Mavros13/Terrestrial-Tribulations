@@ -11,18 +11,27 @@ Every mod, including libraries, must be listed: the importer does not resolve de
 Data: modpack/curseforge-mods.json. Overrides: pack/ without tt-sync/ (ModSync isn't needed when the
 launcher downloads the mods itself). Run after the generators (build_prism.py calls this).
 """
-import json, os, zipfile
+import json, os, sys, zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BUILDS = [("Terrestrial-Tribulations-TestBuild1-CurseForge", "Test Build 1", "C"),
           ("Terrestrial-Tribulations-TestBuild2-CurseForge", "Test Build 2", "D")]
 SKIP_DIRS = {"tt-sync"}
+# --release: one zip with every stage and without the test-only files listed in tools/dev_only.txt
+RELEASE = ("Terrestrial-Tribulations-Release-CurseForge", "Release", "Z")
+
+
+def dev_only():
+    lines = open(os.path.join(ROOT, "tools", "dev_only.txt"), encoding="utf-8").read().splitlines()
+    return {l.strip() for l in lines if l.strip() and not l.startswith("#")}
 
 
 def main():
     data = json.load(open(os.path.join(ROOT, "modpack", "curseforge-mods.json"), encoding="utf-8"))
     os.makedirs(os.path.join(ROOT, "dist"), exist_ok=True)
-    for name, label, max_stage in BUILDS:
+    release = "--release" in sys.argv
+    skip = dev_only() if release else set()
+    for name, label, max_stage in ([RELEASE] if release else BUILDS):
         mods = [m for m in data["mods"] if m["stage"] <= max_stage]
         manifest = {
             "minecraft": {"version": data["minecraft"],
@@ -45,6 +54,8 @@ def main():
                 dn[:] = [d for d in dn if not (dp == base and d in SKIP_DIRS)]
                 for f in fn:
                     full = os.path.join(dp, f)
+                    if os.path.relpath(full, base).replace(os.sep, "/") in skip:
+                        continue
                     z.write(full, "overrides/" + os.path.relpath(full, base).replace(os.sep, "/"))
         print("Built", out, len(mods), "mods,", os.path.getsize(out), "bytes")
 

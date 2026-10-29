@@ -1,4 +1,5 @@
 // Terrestrial Tribulations: in-game test shortcuts (hand-written). Cheats/operator only (KubeJS custom commands need op).
+// Test-only: listed in tools/dev_only.txt, so the release build (build_curseforge.py --release) leaves it out.
 //   /kubejs custom_command tt_kit    every tt weapon + arrows, unlocks the hero and realm stages, daytime
 //   /kubejs custom_command tt_npcs   places the 9 story NPCs in a row in front of you (docs/09-story-npcs.md)
 //   /kubejs custom_command tt_mobs   6 zombies and 2 skeletons around you, for weapon and ability tests

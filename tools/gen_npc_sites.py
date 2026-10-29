@@ -786,9 +786,10 @@ def main():
     cfg["work"] = {CAST[npc][1]: {"sound": w.get("sound"), "particle": w.get("particle")} for npc, w in WORK.items()}
     # every part listed, so switching looks resets the parts the previous pose had turned
     parts = ["Head", "Body", "RightArm", "LeftArm", "RightLeg", "LeftLeg"]
-    cfg["looks"] = {CAST[npc][1]: [{"main": m or "", "off": o or "",
-                                    "pose": {pt: list((pose or {}).get(pt, (0.0, 0.0, 0.0))) + [0.0] for pt in parts} if pose else None}
-                                   for m, o, pose in looks] for npc, looks in LOOKS.items()}
+    cfg["looks"] = {CAST[npc][1]: [{"main": lk[0] or "", "off": lk[1] or "",
+                                    "pose": {pt: list(lk[2].get(pt, (0.0, 0.0, 0.0))) + [0.0] for pt in parts} if lk[2] else None,
+                                    "holster": {"at": lk[3][0], "item": lk[3][1]} if len(lk) > 3 else None}
+                                   for lk in looks] for npc, looks in LOOKS.items()}
     write(os.path.join(DATA, "tags", "worldgen", "structure", "npc_sites.json"), {"values": [f"tt:npc/{s}" for s in SITES]})
     write(CFG, cfg)
     print(f"NPC sites: {len(SITES)} structures ({sum(len(v['npcs']) for v in cfg['sites'].values())} NPCs), "

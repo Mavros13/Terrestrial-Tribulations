@@ -266,7 +266,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       },
       {
         "main": "",
@@ -308,7 +309,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       },
       {
         "main": "minecraft:map",
@@ -350,14 +352,16 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       }
     ],
     "Doran": [
       {
         "main": "minecraft:iron_pickaxe",
         "off": "tt:ashfang_karambit",
-        "pose": null
+        "pose": null,
+        "holster": null
       },
       {
         "main": "tt:ashfang_karambit",
@@ -399,7 +403,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       },
       {
         "main": "",
@@ -441,6 +446,10 @@
             0.0,
             0.0
           ]
+        },
+        "holster": {
+          "at": "belt",
+          "item": "tt:ashfang_karambit"
         }
       }
     ],
@@ -448,7 +457,8 @@
       {
         "main": "tt:thornwatch_halberd",
         "off": "minecraft:shield",
-        "pose": null
+        "pose": null,
+        "holster": null
       },
       {
         "main": "tt:thornwatch_halberd",
@@ -490,7 +500,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       },
       {
         "main": "",
@@ -532,6 +543,10 @@
             0.0,
             0.0
           ]
+        },
+        "holster": {
+          "at": "back",
+          "item": "tt:thornwatch_halberd"
         }
       }
     ],
@@ -539,7 +554,8 @@
       {
         "main": "tt:cogwright_breaker",
         "off": "create:wrench",
-        "pose": null
+        "pose": null,
+        "holster": null
       },
       {
         "main": "create:cogwheel",
@@ -581,7 +597,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       },
       {
         "main": "",
@@ -623,6 +640,10 @@
             0.0,
             0.0
           ]
+        },
+        "holster": {
+          "at": "back",
+          "item": "tt:cogwright_breaker"
         }
       }
     ],
@@ -667,7 +688,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       },
       {
         "main": "tt:rootstring_bow",
@@ -709,7 +731,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       },
       {
         "main": "",
@@ -751,6 +774,10 @@
             0.0,
             0.0
           ]
+        },
+        "holster": {
+          "at": "back",
+          "item": "tt:rootstring_bow"
         }
       }
     ],
@@ -758,7 +785,8 @@
       {
         "main": "tt:prism_ward_staff",
         "off": "minecraft:amethyst_shard",
-        "pose": null
+        "pose": null,
+        "holster": null
       },
       {
         "main": "tt:prism_ward_staff",
@@ -800,7 +828,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       },
       {
         "main": "minecraft:enchanted_book",
@@ -842,6 +871,10 @@
             0.0,
             0.0
           ]
+        },
+        "holster": {
+          "at": "back",
+          "item": "tt:prism_ward_staff"
         }
       }
     ],
@@ -886,7 +919,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       },
       {
         "main": "",
@@ -928,7 +962,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       },
       {
         "main": "",
@@ -970,6 +1005,10 @@
             0.0,
             0.0
           ]
+        },
+        "holster": {
+          "at": "belt",
+          "item": "tt:sculkheart_dagger"
         }
       }
     ],
@@ -1014,7 +1053,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       },
       {
         "main": "tt:rustbite_karambit",
@@ -1056,7 +1096,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       },
       {
         "main": "minecraft:map",
@@ -1098,6 +1139,10 @@
             0.0,
             0.0
           ]
+        },
+        "holster": {
+          "at": "belt",
+          "item": "tt:rustbite_karambit"
         }
       }
     ],
@@ -1142,7 +1187,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       },
       {
         "main": "minecraft:writable_book",
@@ -1184,7 +1230,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       },
       {
         "main": "minecraft:book",
@@ -1226,7 +1273,8 @@
             0.0,
             0.0
           ]
-        }
+        },
+        "holster": null
       }
     ]
   }

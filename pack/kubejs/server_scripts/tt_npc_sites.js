@@ -134,6 +134,7 @@ function ttMoveNpc(server, p, npc, mv) {
     const spots = ttBuildingSpots(level, building, mv.spots)
     spd.putString('tt_npc_spots_' + npc, JSON.stringify(spots))  // used again each time the NPC's chunk loads
     ttPlaceAtRandomSpot(level, found, spots)
+    if (found.persistentData.getBoolean('tt_holster')) ttHolsterSync(server, found)
     console.info(`[TT] ${npc} moved into Emberhold (${spots.length} spots)`)
   }))
   server.scheduleInTicks(200, () => server.runCommandSilent(`execute in minecraft:overworld run forceload remove ${hub.x} ${hub.z}`))
@@ -145,7 +146,20 @@ function ttMoveNpc(server, p, npc, mv) {
 const ttMovedByName = {}
 if (ttSites) Object.keys(ttSites.moves || {}).forEach(npc => { ttMovedByName[ttSites.moves[npc].name] = npc })
 
-function ttApplyLook(e, look) {
+// Holstered weapons: no Forge 1.20.1 mod draws back or belt items on NPCs, so a vanilla item_display of the weapon
+// (its own model and texture) stands at the NPC, turned with its body, offset onto the back or the belt. Display
+// rotation is the entity yaw, so local +z is the NPC's front: the back is -z, the belt is to the side.
+const TT_HOLSTER = {
+  back: '{translation:[0.0f,1.25f,-0.24f],left_rotation:[0.0f,0.0f,0.3827f,0.9239f],scale:[0.9f,0.9f,0.9f],right_rotation:[0.0f,0.0f,0.0f,1.0f]}',
+  belt: '{translation:[0.3f,0.78f,0.02f],left_rotation:[0.0f,0.7071f,0.0f,0.7071f],scale:[0.6f,0.6f,0.6f],right_rotation:[0.0f,0.0f,-0.866f,0.5f]}'
+}
+function ttHolsterTag(e) { return 'tt_holster_' + String(e.customName.string).toLowerCase().replace(/[^a-z]/g, '') }
+
+function ttHolsterSync(server, e) {
+  server.runCommandSilent(`execute in ${e.level.dimension} run tp @e[type=minecraft:item_display,tag=${ttHolsterTag(e)}] ${e.x} ${e.y} ${e.z} ${e.yBodyRot} 0`)
+}
+
+function ttApplyLook(server, e, look) {
   e.setMainHandItem(look.main ? Item.of(look.main) : Item.empty)
   e.setOffHandItem(look.off ? Item.of(look.off) : Item.empty)
   const rot = {}
@@ -154,6 +168,13 @@ function ttApplyLook(e, look) {
   Object.keys(parts).forEach(k => { rot[k] = parts[k].map(v => NBT.f(v)) })
   e.mergeNbt({ ModelData: { Pose: look.pose ? 'CUSTOM' : 'VANILLA', Rotation: rot } })
   e.persistentData.putBoolean('tt_look_swing', !look.pose)
+  const tag = ttHolsterTag(e)
+  server.runCommandSilent(`kill @e[type=minecraft:item_display,tag=${tag}]`)
+  e.persistentData.putBoolean('tt_holster', !!look.holster)
+  if (look.holster)
+    server.runCommandSilent(`execute in ${e.level.dimension} run summon minecraft:item_display ${e.x} ${e.y} ${e.z} ` +
+      `{Tags:["tt_holster","${tag}"],Rotation:[${e.yBodyRot}f,0.0f],item:{id:"${look.holster.item}",Count:1b},` +
+      `item_display:"fixed",transformation:${TT_HOLSTER[look.holster.at]}}`)
 }
 
 EntityEvents.spawned(event => {
@@ -166,9 +187,10 @@ EntityEvents.spawned(event => {
   const server = event.server, spd = server.persistentData
   server.scheduleInTicks(20, () => ttSafe('npc_load', () => {
     if (!e.isAlive()) return
-    if (looks) ttApplyLook(e, looks[Math.floor(Math.random() * looks.length)])
+    if (looks) ttApplyLook(server, e, looks[Math.floor(Math.random() * looks.length)])
     if (npc && spd.getBoolean('tt_npc_moved_' + npc) && spd.contains('tt_npc_spots_' + npc))
       ttPlaceAtRandomSpot(e.level, e, JSON.parse(String(spd.getString('tt_npc_spots_' + npc))))
+    if (e.persistentData.getBoolean('tt_holster')) ttHolsterSync(server, e)
   }))
 })
 
@@ -196,6 +218,12 @@ PlayerEvents.tick(event => {
   const p = event.player
   if (!ttSites || p.level.gameTime % 20 != 7 || String(p.level.dimension) != 'minecraft:overworld') return
   if (ttSites.work && p.level.gameTime % 60 == 7) ttSafe('npc_work', () => ttWork(event.server, p))
+  ttSafe('npc_holsters', () => {  // holstered weapons turn with their NPC
+    const box = new $TT_AABB(p.x - 24, p.y - 8, p.z - 24, p.x + 24, p.y + 8, p.z + 24)
+    p.level.getEntitiesWithin(box).forEach(e => {
+      if (String(e.type).startsWith('easy_npc:') && e.customName && e.persistentData.getBoolean('tt_holster')) ttHolsterSync(event.server, e)
+    })
+  })
   ttSafe('npc_moves', () => {
     const spd = event.server.persistentData
     Object.keys(ttSites.moves || {}).forEach(npc => {

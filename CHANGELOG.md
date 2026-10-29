@@ -25,7 +25,7 @@ Minecraft 1.20.1, Forge 47.4.18, 153 mods. Recommended memory: 8 GB.
 - The karambits use the Karambit Vault models and first-person animations. Vanilla swords keep their normal look. Both resource packs can be switched off in Options → Resource Packs.
 
 ### Quality of life
-- The land around spawn is pre-generated in the background on a new world's first load, so exploring stutters less. `/chunky pause` stops it.
+- The land around spawn is pre-generated in the background on a new world's first load, so exploring stutters less, and a chat line says when it is done. `/chunky pause` stops it.
 - Smoother play: structure searches run in the background, structures generate faster, XP orbs merge, mobs that picked up items still despawn, faster crafting lookups, memory-leak fixes, and the game idles when its window is in the background.
 - Lighter video and sound-physics settings on first launch (render distance 10). Colonies are capped at 150 citizens and raids at 40 raiders, to keep frame rates steady. Your own settings are never overwritten.
 - Pack updates never reset your own game settings.

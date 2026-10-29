@@ -62,6 +62,15 @@ Survival is easier for this (skills charge by hitting things): `/gamemode surviv
   shows **Come to Emberhold**; press it and he appears inside the Blacksmith, at its anvil and facing it (or the Town
   Hall if the pasted hut doesn't count as built). Talk to him there: the button is gone. Fly 200 blocks away and back: he may now stand at another spot. Near him,
   he swings his pickaxe now and then with an anvil sound and sparks.
+- **Looks and holsters:** `/kubejs custom_command tt_sites`, then fly 200 blocks away and back a few times. Each NPC
+  changes what it holds and how it stands. Rhosk, Pell, Tamsin and Ilsabet sometimes carry their big weapon on their
+  back instead: it sits flat between the shoulders and turns with them. Note any weapon that floats, clips into the
+  body or sits too high (`docs/09-story-npcs.md`, Holsters).
+- **Pre-generation:** about a minute after the new world first loads, a grey chat line says the land around spawn
+  is being generated. Leave the game running: a second line, "The land around spawn is ready", follows when Chunky
+  finishes (several minutes or more).
+- **Weapon feel:** while testing weapons, keep `docs/research/2026-10-29-weapon-balance.md` open and note any that
+  feel too strong or weak.
 
 ## 4. Side Paths (5 min)
 - The quest book has a **Side Paths** group with 5 tabs.

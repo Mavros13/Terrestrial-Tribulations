@@ -608,6 +608,13 @@
       "stage": "D"
     },
     {
+      "name": "Amendments",
+      "match": "amendments",
+      "modrinth": "amendments",
+      "curseforge": "amendments",
+      "stage": "D"
+    },
+    {
       "name": "Catalogue",
       "match": "catalogue",
       "modrinth": "",
@@ -731,6 +738,14 @@
       "curseforge": "nullscape",
       "stage": "D",
       "_note": "End overhaul (decided 2026-10-27): Stardust Labs, same team as Terralith and Incendium; pairs with YUNG's Better End Island."
+    },
+    {
+      "name": "Punchy",
+      "match": "punchy",
+      "modrinth": "punchy-fpa",
+      "curseforge": "punchy",
+      "stage": "A",
+      "_note": "Client-only first-person animations; off in Epic Fight battle mode (kubejs/client_scripts/tt_punchy_battle.js). Karambit Vault x Punchy (resource pack) is CurseForge-only and not installed by ModSync."
     }
   ],
   "skip_dependencies": {

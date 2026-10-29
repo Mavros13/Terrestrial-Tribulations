@@ -291,6 +291,25 @@
     "twilightforest:ur_ghast",
     "undergarden:forgotten_guardian"
   ],
+  "npc_trade_items": [
+    "create:andesite_alloy",
+    "create:cogwheel",
+    "create:precision_mechanism",
+    "create:shaft",
+    "irons_spellbooks:arcane_essence",
+    "irons_spellbooks:blank_rune",
+    "irons_spellbooks:rare_ink",
+    "minecraft:amethyst_shard",
+    "minecraft:copper_ingot",
+    "minecraft:emerald",
+    "minecraft:flint",
+    "minecraft:iron_ingot",
+    "minecraft:lapis_lazuli",
+    "tt:bone_shard",
+    "tt:crown_shard_fragment",
+    "tt:old_engine_core",
+    "tt:rustbite_karambit"
+  ],
   "quest_dimensions": [
     "aether:the_aether",
     "deeperdarker:otherside",

@@ -32,6 +32,17 @@ CAST = {
     "wren": (["Wren"], "Wren", "#5BB6E0", "humanoid_slim", "ALEX"),
     "sol": (["Archivist Sol", "Sol"], "Archivist Sol", "#D8C27A", "humanoid", "PROFESSOR_01"),
 }
+# Trade item names as the scripts write them -> item IDs (checked in game by the self-test's npc_trade_items)
+TRADE_ITEMS = {
+    "iron ingot": "minecraft:iron_ingot", "flint": "minecraft:flint", "emerald": "minecraft:emerald",
+    "copper ingot": "minecraft:copper_ingot", "lapis": "minecraft:lapis_lazuli", "amethyst shard": "minecraft:amethyst_shard",
+    "Rustbite Karambit": "tt:rustbite_karambit", "bone shard": "tt:bone_shard", "Old Engine fragment": "tt:old_engine_core",
+    "Crown Shard dust": "tt:crown_shard_fragment",
+    "andesite alloy": "create:andesite_alloy", "shaft": "create:shaft", "cogwheel": "create:cogwheel",
+    "precision mechanism": "create:precision_mechanism",
+    "arcane essence": "irons_spellbooks:arcane_essence", "blank rune": "irons_spellbooks:blank_rune",
+    "ink of the scholar": "irons_spellbooks:rare_ink",
+}
 MAX_BUTTONS = 6  # Easy NPC's dialog screen lays out at most six buttons (DialogScreenLayout); more pile up in one spot
 
 
@@ -66,7 +77,7 @@ def chapter(context):
 
 
 def parse():
-    npcs = {k: {"talks": [], "chat": []} for k in CAST}
+    npcs = {k: {"talks": [], "chat": [], "trades": []} for k in CAST}
     files = sorted(f for f in os.listdir(SRC) if re.match(r"ch\d+-ch\d+-dialogue\.md", f))
     files.sort(key=lambda f: int(re.match(r"ch(\d+)", f).group(1)))
     for f in files:
@@ -82,6 +93,15 @@ def parse():
                 if head.startswith("The ending choice"):
                     talk = {"title": "The Crown Whole", "ch": "Ch12", "lines": []}
                     npcs["maera"]["talks"].append(talk)
+                continue
+            m = re.match(r"\*\*Trades[^*]*:\*\* (.*)", line)
+            if m and owner:
+                for t in m.group(1).split(" · "):
+                    t = re.sub(r"\s*\(.*\)\s*$", "", t.strip())
+                    tm = re.match(r"(.+?) ×(\d+) → (.+?)(?: ×(\d+))?$", t)
+                    assert tm, f"{f}: can't read trade '{t}'"
+                    npcs[owner]["trades"].append((TRADE_ITEMS[tm.group(1)], int(tm.group(2)),
+                                                  TRADE_ITEMS[tm.group(3)], int(tm.group(4) or 1)))
                 continue
             m = re.match(r'\*\*Dialogue: "([^"]+)"\*\*\s*\((.*)\)', line)
             if m and owner:
@@ -130,6 +150,18 @@ def dialog(label, name, texts, buttons, hide_locked=False):
     return "{%sLabel:%s,Name:%s,%sTexts:[%s]}" % (b, s(label), s(name[:32]), o, t)
 
 
+def trading(trades):
+    """Easy NPC BASIC trading: TradingData.TradingDataSet (type, limits, restock) and the vanilla MerchantOffers list
+    under Offers.Recipes (TradingDataCapable / TradingDataSet in Easy NPC's 1.20.1 source)."""
+    if not trades:
+        return ""
+    offers = ",".join(
+        "{buy:{Count:%db,id:%s},maxUses:16,priceMultiplier:0.0f,rewardExp:1b,sell:{Count:%db,id:%s},uses:0,xp:2}"
+        % (n_in, s(i_in), n_out, s(i_out)) for i_in, n_in, i_out, n_out in trades)
+    return ("Offers:{Recipes:{Recipes:[%s]}},TradingData:{TradingDataSet:{MaxUses:16,ResetsEveryMin:20,RewardedXP:2,"
+            "Type:\"BASIC\"}}," % offers)
+
+
 def build(key, data):
     names, display, color, model, variant = CAST[key]
     dialogs, hub = [], []
@@ -151,9 +183,10 @@ def build(key, data):
     if data["chat"]:
         dialogs.append(dialog("chat", "Chat", data["chat"], [button("Back", "chat_b", "default")]))
     # hub pages: talks of chapters the player hasn't reached are hidden (button conditions on the story stage tags)
+    trade_tag = hub[0][2] if hub else None                             # the shop opens with the NPC's first talk
     pages, rest, first = [], list(hub), True
     while first or rest:
-        fixed = 1 + (1 if first and data["chat"] else 0)               # Goodbye / Back, and Chat on the first page
+        fixed = 1 + ((1 if data["chat"] else 0) + (1 if data["trades"] else 0) if first else 0)  # Goodbye/Back, Chat, Trade
         cap = MAX_BUTTONS - fixed
         take = rest[:cap] if len(rest) <= cap else rest[:cap - 1]      # leave room for "More..."
         pages.append(take)
@@ -163,6 +196,9 @@ def build(key, data):
         buttons = [button(n, f"h{p}_{k}", tgt, tag) for k, (n, tgt, tag) in enumerate(page)]
         if p + 1 < len(pages):
             buttons.append(button("More...", f"h{p}_more", f"more{p + 1}", pages[p + 1][0][2]))
+        if p == 0 and data["trades"]:
+            cond = "Conditions:[{Name:%s,Type:\"PLAYER_TAG\"}]," % s(trade_tag) if trade_tag else ""
+            buttons.append("{Actions:[{Type:\"OPEN_TRADING_SCREEN\"}],%sLabel:\"h0_trade\",Name:\"Trade\"}" % cond)
         if p == 0 and data["chat"]:
             buttons.append(button("Chat", "h0_chat", "chat"))
         buttons.append(close_button(f"h{p}_close") if p == 0 else button("Back", f"h{p}_back", "default"))
@@ -174,9 +210,9 @@ def build(key, data):
         s(f"Story NPC generated by tools/gen_npcs.py from design/npcs/. {len(hub)} conversations."), model, s(display), s(variant))
     body = ("data:{CustomName:%s,DialogData:{DialogDataSet:[%s],Type:\"STANDARD\"},EasyNPCVersion:3,Invulnerable:1b,"
             "ObjectiveData:{ObjectiveDataSet:[{Type:\"LOOK_AT_PLAYER\"},{Type:\"LOOK_AT_RESET\"}]},PersistenceRequired:1b,"
-            "SkinData:{Texture:%s,Type:\"RESOURCE_LOCATION\"},VariantType:%s,id:\"easy_npc:%s\"}") % (
+            "SkinData:{Texture:%s,Type:\"RESOURCE_LOCATION\"},%sVariantType:%s,id:\"easy_npc:%s\"}") % (
         s('{"color":"%s","text":"%s"}' % (color, display)), ",\n".join(dialogs),
-        s(f"tt:textures/entity/npc/{key}.png"), s(variant), model)
+        s(f"tt:textures/entity/npc/{key}.png"), trading(data["trades"]), s(variant), model)
     return model, "{\n" + meta + ",\n" + body + "\n}\n", len(hub), len(dialogs)
 
 

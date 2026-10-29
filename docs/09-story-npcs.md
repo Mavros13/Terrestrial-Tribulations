@@ -32,4 +32,4 @@ change the skin, pose or position; conversations live under *Dialog*.
 - Menus follow the story: a chapter's conversations appear once the previous chapter's quest stage is set (`tt_ch<N-1>_done`; Ch1 and Ch2 are always open). For testing, `/kubejs custom_command tt_story` unlocks them all.
 - Each NPC wears its own skin (`tools/gen_npc_skins.py`, painted from the **Look** lines; review sheet `blockbench/previews/npc-skins.png`).
 - A dialog shows at most six buttons, so hubs page with "More..." (2026-10-29 test: Doran's seven buttons piled up in one spot).
-- Not yet: trades (the scripts list them; set them in the editor's *Trading* tab).
+- Shops: Doran, Pell, Ilsabet and the Stranger have a **Trade** button with the trades from their scripts (`**Trades:**` lines, item names mapped in `gen_npcs.py` `TRADE_ITEMS`). It appears with their first conversation; offers restock every 20 minutes. The self-test checks every traded item exists (`npc_trade_items`).

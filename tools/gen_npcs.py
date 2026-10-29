@@ -14,7 +14,7 @@ Each NPC gets a "default" hub dialog (opened on right-click) with one button per
 its chapter, plus "Chat" (the ambient lines). Every script line is its own dialog; reply buttons follow the script's
 arrows, and lines without replies get a "..." button to the next line. Trailing *(mechanics notes)* are left out:
 rewards stay in the quest book, so talking never hands out items twice."""
-import os, re
+import hashlib, os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "design", "npcs")
@@ -49,6 +49,17 @@ TRADE_ITEMS = {
     "diamond": "minecraft:diamond", "name tag": "minecraft:name_tag", "ender pearl": "minecraft:ender_pearl",
     "netherite scrap": "minecraft:netherite_scrap", "totem of undying": "minecraft:totem_of_undying",
 }
+# "Talk to ..." quests that a conversation completes (owner, 2026-10-29: tick them for the player). The button that
+# ends the talk runs FTB Quests' change_progress on the quest's check task (not the quest), so dependencies and
+# reward claiming still work as usual: an early talk only fills the checkbox.
+TALK_QUESTS = {
+    ("maera", "First Meeting"): "c1_smoke", ("maera", "The Voice"): "c4_voice", ("maera", "The Crown Whole"): "c12_choice",
+    ("doran", "The King's Fire"): "c6_crown", ("doran", "One Blade"): "c11_blade",
+    ("stranger", "A Kind Word"): "c6_stranger", ("stranger", "A Better Offer"): "c8_reveal",
+    ("sol", "Seven Pieces"): "c7_sol", ("pell", "Choirbreaker"): "c8_breaker",
+}
+GREET_QUESTS = {"rhosk": "c2_rhosk"}  # no Ch2 talk: his greeting is the intro, so Goodbye completes it
+CHOICE_QUESTS = {"Reforge it.": "c12_reforge", "Let him have it.": "c12_surrender", "Shatter it.": "c12_shatter"}
 MAX_BUTTONS = 6  # Easy NPC's dialog screen lays out at most six buttons (DialogScreenLayout); more pile up in one spot
 
 
@@ -116,9 +127,9 @@ def parse():
                 continue
             m = re.match(r"(\d+)\. \*\*([^*]+):\*\* (.*)", line)
             if m and talk is not None:
-                nxt = re.search(r"→\s*(\d+)\s*$", m.group(3))
+                nxt = re.search(r"→\s*(\d+|end)\s*$", m.group(3))   # "→ end" closes the talk
                 talk["lines"].append({"n": int(m.group(1)), "text": clean(m.group(3)), "opts": [],
-                                      "next": int(nxt.group(1)) if nxt else None})
+                                      "next": (int(nxt.group(1)) if nxt.group(1).isdigit() else "end") if nxt else None})
                 continue
             m = re.match(r'\s+- ▶ "([^"]+)"\s*→\s*(.*)', line)
             if m and talk is not None and talk["lines"]:
@@ -139,13 +150,26 @@ def s(v):
     return '"' + str(v).replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
-def button(name, label, target, tag=None):
+def quest_task(key):
+    """FTB Quests id of a quest's first task, as gen_quests.py writes it."""
+    return hashlib.md5(("tt:" + key + ":task:0").encode()).hexdigest()[:16].upper()
+
+
+def complete(keys):
+    """COMMAND actions run by the NPC (not the player) at permission level 2, which change_progress needs. The preset
+    import clamps both levels to the importer's own (Easy NPC PresetSanitizer), so an op places working NPCs."""
+    return "".join(",{Cmd:%s,PermLevel:2,Type:\"COMMAND\"}" % s(f"/ftbquests change_progress @initiator complete {quest_task(k)}")
+                   for k in keys)
+
+
+def button(name, label, target, tag=None, quests=()):
     cond = "Conditions:[{Name:%s,Type:\"PLAYER_TAG\"}]," % s(tag) if tag else ""
-    return "{Actions:[{Cmd:%s,Type:\"OPEN_NAMED_DIALOG\"}],%sLabel:%s,Name:%s}" % (s(target), cond, s(label), s(name))
+    return "{Actions:[{Cmd:%s,Type:\"OPEN_NAMED_DIALOG\"}%s],%sLabel:%s,Name:%s}" % (
+        s(target), complete(quests), cond, s(label), s(name))
 
 
-def close_button(label):
-    return "{Actions:[{Type:\"CLOSE_DIALOG\"}],Label:%s,Name:\"Goodbye\"}" % s(label)
+def close_button(label, name="Goodbye", quests=()):
+    return "{Actions:[{Type:\"CLOSE_DIALOG\"}%s],Label:%s,Name:%s}" % (complete(quests), s(label), s(name))
 
 
 def dialog(label, name, texts, buttons, hide_locked=False):
@@ -177,14 +201,17 @@ def build(key, data):
         base = f"t{i}"
         hub.append((talk["title"], f"{base}_{talk['lines'][0]['n']}", chapter_tag(talk["ch"])))
         nums = [ln["n"] for ln in talk["lines"]]
+        done = [TALK_QUESTS[(key, talk["title"])]] if (key, talk["title"]) in TALK_QUESTS else []
         for j, ln in enumerate(talk["lines"]):
             buttons = []
-            for k, (reply, tgt) in enumerate(ln["opts"]):
+            for k, (reply, tgt) in enumerate(ln["opts"]):   # a reply that ends the talk completes its quest
                 buttons.append(button(reply, f"{base}_{ln['n']}_b{k}", f"{base}_{tgt}") if tgt in nums
-                               else close_button(f"{base}_{ln['n']}_b{k}").replace('Name:"Goodbye"', "Name:" + s(reply)))
+                               else close_button(f"{base}_{ln['n']}_b{k}", reply,
+                                                 done + ([CHOICE_QUESTS[reply]] if reply in CHOICE_QUESTS else [])))
             if not buttons:
-                nxt = ln["next"] if ln["next"] in nums else (nums[j + 1] if j + 1 < len(nums) else None)
-                buttons.append(button("...", f"{base}_{ln['n']}_b", f"{base}_{nxt}") if nxt else button("Back", f"{base}_{ln['n']}_b", "default"))
+                nxt = ln["next"] if ln["next"] in nums else (nums[j + 1] if j + 1 < len(nums) and ln["next"] != "end" else None)
+                buttons.append(button("...", f"{base}_{ln['n']}_b", f"{base}_{nxt}") if nxt
+                               else button("Back", f"{base}_{ln['n']}_b", "default", quests=done))
             dialogs.append(dialog(f"{base}_{ln['n']}", f"{talk['title']} {ln['n']}", [ln["text"]], buttons))
     if data["chat"]:
         dialogs.append(dialog("chat", "Chat", data["chat"], [button("Back", "chat_b", "default")]))
@@ -207,7 +234,8 @@ def build(key, data):
             buttons.append("{Actions:[{Type:\"OPEN_TRADING_SCREEN\"}],%sLabel:\"h0_trade\",Name:\"Trade\"}" % cond)
         if p == 0 and data["chat"]:
             buttons.append(button("Chat", "h0_chat", "chat"))
-        buttons.append(close_button(f"h{p}_close") if p == 0 else button("Back", f"h{p}_back", "default"))
+        buttons.append(close_button(f"h{p}_close", quests=[GREET_QUESTS[key]] if key in GREET_QUESTS else [])
+                       if p == 0 else button("Back", f"h{p}_back", "default"))
         greet = data["chat"][:3] or ["Yes?"]
         dialogs.append(dialog(label, display if p == 0 else f"{display} {p + 1}", greet if p == 0 else ["What else?"],
                               buttons, hide_locked=True))
@@ -215,7 +243,7 @@ def build(key, data):
             "entityTypeId:\"easy_npc:%s\",name:%s,variantType:%s,version:\"1.0.0\"}") % (
         s(f"Story NPC generated by tools/gen_npcs.py from design/npcs/. {len(hub)} conversations."), model, s(display), s(variant))
     body = ("data:{CustomName:%s,DialogData:{DialogDataSet:[%s],Type:\"STANDARD\"},EasyNPCVersion:3,Invulnerable:1b,"
-            "ObjectiveData:{ObjectiveDataSet:[{Type:\"LOOK_AT_PLAYER\"},{Type:\"LOOK_AT_RESET\"}]},PersistenceRequired:1b,"
+            "ActionData:{ActionPermissionLevel:2},ObjectiveData:{ObjectiveDataSet:[{Type:\"LOOK_AT_PLAYER\"},{Type:\"LOOK_AT_RESET\"}]},PersistenceRequired:1b,"
             "SkinData:{Texture:%s,Type:\"RESOURCE_LOCATION\"},%sVariantType:%s,id:\"easy_npc:%s\"}") % (
         s('{"color":"%s","text":"%s"}' % (color, display)), ",\n".join(dialogs),
         s(f"tt:textures/entity/npc/{key}.png"), trading(data["trades"]), s(variant), model)
@@ -224,6 +252,8 @@ def build(key, data):
 
 def main():
     npcs = parse()
+    missing = [k for k in TALK_QUESTS if k[1] not in [t["title"] for t in npcs[k[0]]["talks"]]]
+    assert not missing, f"TALK_QUESTS names talks that don't exist: {missing}"
     total = 0
     for key, data in npcs.items():
         model, text, talks, n = build(key, data)

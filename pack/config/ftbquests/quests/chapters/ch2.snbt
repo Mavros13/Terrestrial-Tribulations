@@ -50,7 +50,7 @@
 			id: "7F81C70D874F205D"
 			title: "The Thornwatch Visits"
 			subtitle: "Old walls, new walls"
-			description: ["A tall knight in green-and-bronze plate watches your walls go up.", "", "&6Captain Rhosk&r: &o\"The Thornwatch remembers Emberhold's old walls. We'll see whether you deserve new ones.\"", "", "&7(Talk to Captain Rhosk when the story NPCs are placed; tick to continue until then.)"]
+			description: ["A tall knight in green-and-bronze plate watches your walls go up.", "", "&6Captain Rhosk&r: &o\"The Thornwatch remembers Emberhold's old walls. We'll see whether you deserve new ones.\"", "", "&7(Talk to Captain Rhosk: saying goodbye ticks this. No NPC placed yet? Tick it yourself.)"]
 			x: 2.0d
 			y: -2.0d
 			shape: "circle"

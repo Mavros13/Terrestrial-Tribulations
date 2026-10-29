@@ -14,7 +14,7 @@
 			id: "96FA23906773BCFF"
 			title: "A Kind Word"
 			subtitle: "A trader arrives"
-			description: ["A traveller in a grey coat, too clean for the road, sets up a stall in Emberhold.", "", "&6The Stranger&r: &o\"If you ever find more of those Shards, I'd pay handsomely just to study one. Purely academic.\"", "", "&7(Talk to the Stranger when the story NPCs are placed; tick to continue until then.)"]
+			description: ["A traveller in a grey coat, too clean for the road, sets up a stall in Emberhold.", "", "&6The Stranger&r: &o\"If you ever find more of those Shards, I'd pay handsomely just to study one. Purely academic.\"", "", "&7(Talk to the Stranger: saying goodbye ticks this. No NPC placed yet? Tick it yourself.)"]
 			x: 0.0d
 			y: -2.0d
 			shape: "circle"

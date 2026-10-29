@@ -117,7 +117,7 @@ CHAPTERS = [
                  desc=["Following the smoke, you find a ring of tents and frightened faces: the last of the &cEmber Accord&r.",
                        "", "An old woman with ash in her braids studies you. &o\"You walked through the Hollow fields and lived. No one lives.\"",
                        "", "&6Elder Maera&r: &o\"Sit. Eat. Then tell me why the Hollowed turned away from you.\"",
-                       "", "&7(Elder Maera's NPC arrives with the Emberhold build. Tick to continue.)"],
+                       "", "&7(Finishing your talk with Elder Maera ticks this. No NPC placed yet? Tick it yourself.)"],
                  tasks=[t_check()], rewards=[r_item("minecraft:cooked_porkchop", 6), r_xp(100)]),
             dict(key="c1_karambit", title="Teeth for the Night", sub="Maera's gift", main=True, x=10, y=0, deps=["c1_smoke", "c1_iron"],
                  desc=["&6Elder Maera&r unrolls a scrap of leather with a curved blade sketched on it.",

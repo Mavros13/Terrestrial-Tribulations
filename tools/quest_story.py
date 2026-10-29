@@ -18,7 +18,7 @@ def chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage, r_cmd
             d["dep_any"] = True
         return d
 
-    NPC = "&7(Talk to {} when the story NPCs are placed; tick to continue until then.)"
+    NPC = "&7(Talk to {}: saying goodbye ticks this. No NPC placed yet? Tick it yourself.)"
     return [
         {"key": "ch2", "title": "Chapter 2: The First Settlement", "icon": "minecolonies:blockhuttownhall", "quests": [
             q("c2_found", "Plant the Charter", "Emberhold begins", 0, 0, ["c1_finale"], main=True,

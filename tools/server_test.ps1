@@ -138,6 +138,17 @@ try {
   $lines.Add(''); $lines.Add('=== [TT] lines (all logs) ===')
   Get-ChildItem "$server\logs" -Recurse -Filter *.log -ErrorAction SilentlyContinue |
     Select-String -Pattern '\[TT\]' | ForEach-Object { $lines.Add("$($_.Filename): $($_.Line)") }
+  # Everything the server logged after it finished loading: the Done line, the test commands' own feedback (NPC
+  # preset imports, easy_npc list, damage smoke test) and any error they caused. Other mods' load errors can fill
+  # the 300-line cap below before these, so they get their own section.
+  $lines.Add(''); $lines.Add('=== latest.log from "Done" on: test commands and their results ===')
+  if (Test-Path $log) {
+    $after = $false
+    Get-Content $log | ForEach-Object {
+      if (-not $after -and $_ -match 'Done \(') { $after = $true }
+      if ($after -and $_ -notmatch $noise) { $_ }
+    } | Select-Object -First 250 | ForEach-Object { $lines.Add($_) }
+  }
   $lines.Add(''); $lines.Add('=== latest.log: errors and our content ===')
   if (Test-Path $log) {
     Select-String -Path $log -Pattern 'ERROR|Exception|\[TT\]|tt:|kubejs|Failed to load|Done \(' |

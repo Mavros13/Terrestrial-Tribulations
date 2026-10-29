@@ -32,6 +32,7 @@ def main():
     run(sys.executable, os.path.join(ROOT, "tools", "build_npc_viewer.py"))  # 3D review page for the skins
     run(sys.executable, os.path.join(ROOT, "tools", "gen_npcs.py"))  # Easy NPC story presets from design/npcs/
     run(sys.executable, os.path.join(ROOT, "tools", "gen_npc_sites.py"))  # a story structure per NPC (worldgen + maps)
+    run(sys.executable, os.path.join(ROOT, "tools", "build_site_viewer.py"))  # 3D review page for the sites
     run(sys.executable, os.path.join(ROOT, "tools", "gen_branding.py"))  # window title + icon, loading colours
     run(sys.executable, os.path.join(ROOT, "tools", "gen_selftest.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "check_pack.py"))  # stops the build on broken pack files

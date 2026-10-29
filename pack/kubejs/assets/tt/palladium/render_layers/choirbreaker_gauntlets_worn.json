@@ -1,9 +1,0 @@
-{
-  "model_type": "minecraft:humanoid",
-  "model_layer": {
-    "normal": "tt:choirbreaker_gauntlets_worn",
-    "slim": "tt:choirbreaker_gauntlets_worn_slim"
-  },
-  "texture": "tt:textures/models/worn/choirbreaker_gauntlets.png",
-  "render_type": "solid"
-}

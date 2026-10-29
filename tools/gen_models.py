@@ -271,11 +271,17 @@ def scaled_display(s):
 
 
 def worn_display():
-    """Worn weapons (tools/gen_worn_layers.py): in third person a Palladium layer draws them on the arm, so the held
-    model is hidden; in first person (no arm drawn while holding an item) the model sits where the fist would be."""
+    """Worn weapons (owner, 2026-10-29: "wraps around your hand ... like a part of your hand in all POVs"): the held
+    model is placed over the fist and forearm instead of in the grip. Built fist-up (+y = knuckles, -z = back of the
+    hand); vanilla's third-person hand pose (ItemInHandLayer: X -90, Y 180, translate 1/16, 2/16, -10/16) puts the
+    item origin at the front of the hand, so rotation [-90, 180, 0] lays the model along the arm, knuckles past the
+    hand and back plate on the front. Scale is wider than the arm (covers chestplate sleeves, any skin width) and
+    shorter along it. Epic Fight draws held items on its animated hand joint with this same third-person transform,
+    so the gauntlet follows battle-mode animations (a Palladium arm layer did not)."""
     d = scaled_display(1.0)
-    for k in ("thirdperson_righthand", "thirdperson_lefthand"):
-        d[k] = {"rotation": [0, 0, 0], "translation": [0, 0, 0], "scale": [0, 0, 0]}
+    tp = {"rotation": [-90, 180, 0], "translation": [0, -2, -2.95], "scale": [1.5, 0.9, 1.5]}
+    d["thirdperson_righthand"] = dict(tp)
+    d["thirdperson_lefthand"] = dict(tp)
     d["firstperson_righthand"] = {"rotation": [-60, 0, 0], "translation": [1.13, 4.5, -3], "scale": [0.8, 0.8, 0.8]}
     d["firstperson_lefthand"] = {"rotation": [-60, 0, 0], "translation": [1.13, 4.5, -3], "scale": [0.8, 0.8, 0.8]}
     return d

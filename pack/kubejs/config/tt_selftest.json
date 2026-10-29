@@ -49,8 +49,7 @@
     "tt:wroughtnaut_bulwark"
   ],
   "powers": [
-    "tt:cast_test",
-    "tt:choirbreaker_gauntlets_worn"
+    "tt:cast_test"
   ],
   "origins": [
     "tt:arcanist",

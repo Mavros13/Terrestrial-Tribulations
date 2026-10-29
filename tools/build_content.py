@@ -251,12 +251,15 @@ def install_models(weapons):
                     os.remove(o)
             if w.get("model_parent"):
                 # Borrowed 3D model from a resource pack the player installs (e.g. Karambit Vault x Punchy, ARR, so
-                # nothing of it is copied): we only point at its model by resource location.
-                # First person keeps the pack's own transform: it is built for the Punchy mod's hand animation, which
-                # runs outside Epic Fight battle mode (client_scripts/tt_punchy_battle.js switches it off in battle
-                # mode, where Epic Fight draws the arms). Owner, 2026-10-29: "regular is perfect".
-                write(outs[0], json.dumps({"loader": "forge:separate_transforms", "base": {"parent": w["model_parent"]},
-                                           "perspectives": {"gui": flat, "fixed": flat}}, indent=2) + "\n")
+                # nothing of it is copied): we only point at its model by resource location, optionally swapping its
+                # texture variables ("model_textures") to pick another material from the same pack.
+                # Every perspective, the inventory included, is the pack's own (owner, 2026-10-29: the flat icons
+                # "aren't at all what they look like in hand"). First person is built for the Punchy mod's hand
+                # animation, which runs outside Epic Fight battle mode (client_scripts/tt_punchy_battle.js).
+                model = {"parent": w["model_parent"]}
+                if w.get("model_textures"):
+                    model["textures"] = w["model_textures"]
+                write(outs[0], json.dumps(model, indent=2) + "\n")
                 count += 1
             continue
         m = json.load(open(src, encoding="utf-8"))
@@ -275,6 +278,41 @@ def install_models(weapons):
         count += 1
     return count
 
+
+
+# ---------- TT Karambits resource pack ----------
+KARAMBIT_PACK = os.path.join(ROOT, "pack", "resourcepacks", "TT Karambits")
+VANILLA_SWORDS = {"wooden": "Wooden", "stone": "Stone", "iron": "Iron", "golden": "Golden", "diamond": "Diamond",
+                  "netherite": "Netherite"}
+
+
+def make_karambit_pack(weapons):
+    """Karambit Vault x Punchy turns every vanilla sword into a karambit (models at minecraft:item/<tier>_sword, a
+    Punchy compat file for item.SWORD, renamed lang). Owner, 2026-10-29: keep vanilla swords vanilla and give the
+    karambit look and animations to our karambit items only. This pack sits above Karambit Vault
+    (config/defaultoptions-common.toml) and puts back vanilla's own sword models (vanilla's JSON, nothing copied from
+    the ARR pack), sword names and an empty Punchy sword compat; our karambits parent the pack's skins/* models,
+    which share the karambit geometry (checked in the pack, 2026-10-29), and the Punchy animations are tied to our
+    item IDs in kubejs/assets/minecraft/punchy/compat/tt_karambits.json."""
+    if os.path.isdir(KARAMBIT_PACK):
+        shutil.rmtree(KARAMBIT_PACK)
+    write(os.path.join(KARAMBIT_PACK, "pack.mcmeta"), json.dumps({"pack": {
+        "pack_format": 15, "description": "§6Terrestrial Tribulations§7: karambit look for our karambits only"}}, indent=2) + "\n")
+    for tier in VANILLA_SWORDS:
+        write(os.path.join(KARAMBIT_PACK, "assets", "minecraft", "models", "item", f"{tier}_sword.json"),
+              json.dumps({"parent": "minecraft:item/handheld", "textures": {"layer0": f"minecraft:item/{tier}_sword"}}, indent=2) + "\n")
+    write(os.path.join(KARAMBIT_PACK, "assets", "minecraft", "lang", "en_us.json"),
+          json.dumps({f"item.minecraft.{t}_sword": f"{n} Sword" for t, n in VANILLA_SWORDS.items()}, indent=2) + "\n")
+    write(os.path.join(KARAMBIT_PACK, "assets", "minecraft", "punchy", "compat", "karambit.json"),
+          json.dumps({"itemSpecific": {}}, indent=2) + "\n")
+    # Punchy animations from Karambit Vault, for our karambit items only (same entry the pack gives vanilla swords)
+    compat = os.path.join(KJS, "assets", "minecraft", "punchy", "compat", "tt_karambits.json")
+    entry = next(iter(json.load(open(compat, encoding="utf-8"))["itemSpecific"].values()))
+    write(compat, json.dumps({"itemSpecific": {"tt:" + w["id"]: entry for w in weapons if w["family"] == "karambit"}},
+                             indent=2) + "\n")
+    bad = [w["id"] for w in weapons if (w.get("model_parent") or "").startswith("minecraft:item/") and
+           w["model_parent"].split("/")[-1].removesuffix("_sword") in VANILLA_SWORDS]
+    assert not bad, f"{bad}: a vanilla sword model path is vanilla again under TT Karambits; parent a skins/* model"
 
 
 # ---------- scripts ----------
@@ -330,6 +368,7 @@ def main():
         write(os.path.join(KJS, "data", "tt", "capabilities", "weapons", w["id"] + ".json"), json.dumps(cap, indent=2) + "\n")
         write(os.path.join(KJS, "assets", "tt", "item_skins", w["id"] + ".json"), json.dumps(item_skin(w), indent=2) + "\n")
     make_materials()
+    make_karambit_pack(weapons)
     n = install_models(weapons)
     print(f"Generated content for {len(weapons)} weapons ({n} with 3D models).")
 

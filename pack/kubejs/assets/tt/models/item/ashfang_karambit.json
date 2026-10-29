@@ -1,20 +1,3 @@
 {
-  "loader": "forge:separate_transforms",
-  "base": {
-    "parent": "minecraft:item/skins/magma"
-  },
-  "perspectives": {
-    "gui": {
-      "parent": "minecraft:item/handheld",
-      "textures": {
-        "layer0": "tt:item/ashfang_karambit"
-      }
-    },
-    "fixed": {
-      "parent": "minecraft:item/handheld",
-      "textures": {
-        "layer0": "tt:item/ashfang_karambit"
-      }
-    }
-  }
+  "parent": "minecraft:item/skins/magma"
 }

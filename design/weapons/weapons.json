@@ -23,7 +23,7 @@
     },
     {
       "id": "rustbite_karambit",
-      "model_parent": "minecraft:item/iron_sword",
+      "model_parent": "minecraft:item/skins/breeze", "model_textures": {"1": "minecraft:item/karambits_default", "particle": "minecraft:item/karambits_default"},
       "name": "Rustbite Karambit",
       "family": "karambit",
       "ef": "dagger",
@@ -226,7 +226,7 @@
     },
     {
       "id": "frostmaw_fang",
-      "model_parent": "minecraft:item/diamond_sword",
+      "model_parent": "minecraft:item/skins/emerald", "model_textures": {"1": "minecraft:item/karambits_default", "particle": "minecraft:item/karambits_default"},
       "name": "Frostmaw Fang",
       "family": "karambit",
       "ef": "dagger",
@@ -411,7 +411,7 @@
     },
     {
       "id": "crownshard_karambits",
-      "model_parent": "minecraft:item/golden_sword",
+      "model_parent": "minecraft:item/skins/gold_plated",
       "name": "Crownshard Karambits",
       "family": "karambit",
       "ef": "dagger",

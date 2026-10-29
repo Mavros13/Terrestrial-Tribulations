@@ -1,20 +1,3 @@
 {
-  "loader": "forge:separate_transforms",
-  "base": {
-    "parent": "minecraft:item/golden_sword"
-  },
-  "perspectives": {
-    "gui": {
-      "parent": "minecraft:item/handheld",
-      "textures": {
-        "layer0": "tt:item/crownshard_karambits"
-      }
-    },
-    "fixed": {
-      "parent": "minecraft:item/handheld",
-      "textures": {
-        "layer0": "tt:item/crownshard_karambits"
-      }
-    }
-  }
+  "parent": "minecraft:item/skins/gold_plated"
 }

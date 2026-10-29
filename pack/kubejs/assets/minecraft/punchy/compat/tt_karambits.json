@@ -236,6 +236,124 @@
         }
       }
     },
+    "tt:frostmaw_fang": {
+      "disable_sprint_lateral_tilt": true,
+      "disable_mining_animation": true,
+      "customAnimation": [
+        {
+          "type": "idle",
+          "name": "karambit_idle"
+        },
+        {
+          "type": "hand_in",
+          "name": "karambit_hand_in",
+          "customFlags": {
+            "movement_influence": 0,
+            "sync_procedural_arm_animations": true,
+            "walk_and_sprint_force": 0,
+            "remaining_procedural_animations_force": 0
+          }
+        },
+        {
+          "type": "attack",
+          "var_1": "karambit_attack_1",
+          "var_2": "karambit_attack_2",
+          "var_3": "karambit_attack_3",
+          "critical_hit": "karambit_critical_attack",
+          "customFlags": {
+            "movement_influence": 0,
+            "sync_procedural_arm_animations": true,
+            "walk_and_sprint_force": 0,
+            "remaining_procedural_animations_force": 0
+          }
+        },
+        {
+          "type": "inspect",
+          "name": "karambit_inspect",
+          "customFlags": {
+            "movement_influence": 0,
+            "sync_procedural_arm_animations": true,
+            "walk_and_sprint_force": 0,
+            "remaining_procedural_animations_force": 0
+          }
+        },
+        {
+          "type": "triggerable",
+          "name": "karambit_inspect_alt",
+          "key": "Y",
+          "customFlags": {
+            "movement_influence": 0,
+            "sync_procedural_arm_animations": true,
+            "walk_and_sprint_force": 0,
+            "remaining_procedural_animations_force": 0
+          }
+        },
+        {
+          "type": "mining_v2",
+          "start": "karambit_mining_start",
+          "looping": "karambit_mining_loop",
+          "end": "karambit_mining_end",
+          "customFlags": {
+            "movement_influence": 0,
+            "sync_procedural_arm_animations": true,
+            "walk_and_sprint_force": 0,
+            "remaining_procedural_animations_force": 0
+          }
+        }
+      ],
+      "transforms": {
+        "right": {
+          "scale": 1.0902724,
+          "offX": 0.0505836,
+          "offY": -0.09727621,
+          "offZ": 0.062256813,
+          "rotX": -4.5525208,
+          "rotY": -0.3501892,
+          "rotZ": 1.0505829,
+          "pivotX": -0.027237356,
+          "pivotY": 0.14591444,
+          "pivotZ": -0.03891051
+        },
+        "left": {
+          "scale": 1.0902724,
+          "offX": -0.0505836,
+          "offY": -0.09727621,
+          "offZ": 0.062256813,
+          "rotX": -4.5525208,
+          "rotY": -0.35020447,
+          "rotZ": 1.0505829,
+          "pivotX": 0.0038911104,
+          "pivotY": 0.14591444,
+          "pivotZ": -0.03891051
+        }
+      },
+      "armTransforms": {
+        "right": {
+          "scale": 1,
+          "offX": -0.12661374,
+          "offY": -0.050097227,
+          "offZ": -0.22647691,
+          "rotX": -20.172012,
+          "rotY": -6.208023,
+          "rotZ": -12.917404,
+          "pivotX": 0,
+          "pivotY": 0,
+          "pivotZ": 0
+        },
+        "left": {
+          "scale": 1,
+          "offX": 0.12661374,
+          "offY": -0.050097227,
+          "offZ": -0.22647691,
+          "rotX": -20.172012,
+          "rotY": 6.208023,
+          "rotZ": 12.917404,
+          "pivotX": 0,
+          "pivotY": 0,
+          "pivotZ": 0
+        }
+      }
+    },
     "tt:crownshard_karambits": {
       "disable_sprint_lateral_tilt": true,
       "disable_mining_animation": true,

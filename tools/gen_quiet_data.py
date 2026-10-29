@@ -8,6 +8,11 @@ by tools/server_test.ps1). This writes overrides into our KubeJS data pack, whic
   data/corewithstuff/recipes/<id>.json          a Forge "forge:false" condition, so the recipe is skipped quietly
   data/corewithstuff/loot_tables/blocks/<id>.json  an empty block loot table
 If a CoreWithStuff update ever registers these blocks, delete the matching family here.
+
+FSang18's Heroes ships four functions that fail to parse at every start and /reload (2026-10-29 server test:
+block_freeze uses an empty block id, shieldkill a sort option with no value, webs/kill_lead a decimal where an
+integer goes, mjolnir_summon a block that doesn't exist). They never load as they are, so empty versions in
+data/fsang/functions/ change nothing in play and stop the errors. Remove one here if an fsang update fixes it.
 """
 import json
 import os
@@ -15,6 +20,8 @@ import shutil
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "pack", "kubejs", "data", "corewithstuff")
+FSANG = os.path.join(ROOT, "pack", "kubejs", "data", "fsang", "functions")
+FSANG_BROKEN = ["block_freeze", "shieldkill", "webs/kill_lead", "mjolnir_summon"]
 
 COLOURS = ["white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan",
            "purple", "blue", "brown", "green", "red", "black"]
@@ -69,7 +76,13 @@ def main():
                "ingredients": [{"item": "minecraft:barrier"}], "result": {"item": "minecraft:barrier"}})
     for t in loot:
         write(os.path.join(DATA, "loot_tables", "blocks", t + ".json"), {"type": "minecraft:block", "pools": []})
-    print(f"Quiet data: {len(rec)} CoreWithStuff recipes and {len(loot)} loot tables switched off")
+    shutil.rmtree(FSANG, ignore_errors=True)
+    for fn in FSANG_BROKEN:
+        os.makedirs(os.path.dirname(os.path.join(FSANG, fn)), exist_ok=True)
+        with open(os.path.join(FSANG, fn + ".mcfunction"), "w", encoding="utf-8") as f:
+            f.write("# Terrestrial Tribulations: emptied, the original fails to parse (tools/gen_quiet_data.py)\n")
+    print(f"Quiet data: {len(rec)} CoreWithStuff recipes and {len(loot)} loot tables switched off, "
+          f"{len(FSANG_BROKEN)} broken fsang functions emptied")
 
 
 if __name__ == "__main__":

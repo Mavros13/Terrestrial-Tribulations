@@ -26,7 +26,8 @@ function ttPregenWatch(server) {
 ServerEvents.loaded(event => {
   const server = event.server
   if (!ttPregenCfg || !ttPregenCfg.enabled || !Platform.isLoaded('chunky')) return
-  if (!server.persistentData.getBoolean('tt_pregen_done')) ttPregenWatch(server)
+  // Chunky's API only exists once Chunky has started with the server, a moment after this event (2026-10-29 test)
+  if (!server.persistentData.getBoolean('tt_pregen_done')) server.scheduleInTicks(100, () => ttPregenWatch(server))
   if (server.persistentData.getBoolean('tt_pregen_started')) return
   const radius = Math.max(128, Math.floor(ttPregenCfg.radius || 768))
   server.scheduleInTicks(20 * Math.max(5, Math.floor(ttPregenCfg.delay_seconds || 60)), () => {

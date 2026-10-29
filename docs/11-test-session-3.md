@@ -1,4 +1,4 @@
-# Test session 3: everything since 2026-10-29 morning, before merging (about 40 minutes)
+# Test session 3: everything since 2026-10-29 morning (about 40 minutes)
 
 The desktop test after merging PR #1 into `main` (2026-10-29). Do the steps in order. If something is wrong, write down the step number and what you saw, or take a screenshot, and keep going.
 
@@ -42,7 +42,7 @@ New world: **Creative**, cheats **on**. Then:
 
 ## 4. Side Paths (5 min)
 - The quest book has a **Side Paths** group with 5 tabs.
-- Open **Cogwright Workshop**: the first quest needs Andesite Alloy. Give yourself 16 (`/give @p create:andesite_alloy 16`) and it completes.
+- Open **Cogwright Workshop**: its first quest opens after Pell's story quest, so mark that done first: `/ftbquests change_progress @p complete 14680D94DDB8FE4E` (The Ticking Hand). Then give yourself 16 Andesite Alloy (`/give @p create:andesite_alloy 16`): the quest completes.
 
 ## 5. Pre-generation (3 min)
 - About a minute after the world first loads, a grey chat line says it's pre-generating around spawn. Play goes on, maybe with a little stutter.

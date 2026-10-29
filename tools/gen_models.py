@@ -270,6 +270,15 @@ def scaled_display(s):
     return d
 
 
+def bow_display(s=1.0):
+    """Bows: held like other weapons, but smaller in first person, where vanilla's draw pose pulls the bow to the
+    middle of the screen (owner, 2026-10-29 desktop test: the Rootstring Bow covered the screen)."""
+    d = scaled_display(s)
+    for k in ("firstperson_righthand", "firstperson_lefthand"):
+        d[k]["scale"] = [round(v * 0.65, 3) for v in d[k]["scale"]]
+    return d
+
+
 def worn_display():
     """Worn weapons (owner, 2026-10-29: "wraps around your hand ... like a part of your hand in all POVs"): the held
     model is placed over the fist and forearm instead of in the grip. Built fist-up (+y = knuckles, -z = back of the
@@ -404,7 +413,7 @@ def rootstring_bow(m, p, s, a):
         m.c(f"vine_{i}", y, y + 0.7, 1.6, 1.6, vine, dx=-0.15 * (i % 2))
     (tx, ty), (bx, by) = tips
     m.box("string", [tx - 0.1, by, 7.9], [tx + 0.1, ty, 8.1], moss)
-    return DISPLAY
+    return bow_display()
 
 
 def thornwatch_halberd(m, p, s, a):
@@ -705,7 +714,7 @@ def abyssal_longbow(m, p, s, a):
         m.c(f"tip_{side}", ty - 0.6, ty + 0.6, 1.0, 1.0, pearl, dx=tx - 8)
     (tx, ty), (bx, by) = tips
     m.box("string", [tx - 0.1, by, 7.9], [tx + 0.1, ty, 8.1], pearl)
-    return DISPLAY
+    return bow_display()
 
 
 def thornecutter(m, p, s, a):

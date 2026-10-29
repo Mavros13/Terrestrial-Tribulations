@@ -77,25 +77,39 @@ def paint_base(s, k):
     # head: skin, hair on top/back/sides down to hair_len rows, face on the front
     hl = k.get("hair_len", 2)
 
+    def strand(x, y):
+        """Hair with strands: every third column a shade darker, scattered highlights."""
+        c = hexc(hair)
+        if (x + (y // 3)) % 3 == 0:
+            return shade(c, 0.82)
+        if (x * 5 + y * 3) % 11 == 0:
+            return shade(c, 1.18)
+        return c
+
     def head(face, x, y, w, h):
         if face == "top":
-            return hair or skin
+            return strand(x, y) if hair else skin
         if face == "bottom":
             return shade(hexc(skin), 0.8)
         if hair and face == "back" and y < k.get("hair_back", 6):
-            return hair
+            return strand(x, y)
         if hair and face in ("left", "right") and (y < hl + 1 or (y < k.get("hair_back", 6) and
                                                                     ((face == "right" and x < 3) or (face == "left" and x > 4)))):
-            return hair
-        if hair and face == "front" and y < hl:
-            return hair
+            return strand(x, y)
+        if hair and face == "front" and (y < hl or (y == hl and x in (0, 7))):
+            return strand(x, y)
         return skin
     s.fill("head", head)
     f = lambda x, y, c: s.px("head", "front", x, y, c, noise=0)
     eye_white, eye = k.get("eye_white", "#EDEDED"), k.get("eyes", "#3B2A1A")
     for x0 in (1, 5):
-        f(x0, 4, eye_white)
-        f(x0 + 1, 4, eye)
+        f(x0, 4, eye_white if x0 == 1 else eye)
+        f(x0 + 1, 4, eye if x0 == 1 else eye_white)
+        f(x0, 5, shade(hexc(skin), 0.93))               # soft shadow under the eyes
+        f(x0 + 1, 5, shade(hexc(skin), 0.93))
+    if k.get("cheeks"):
+        f(1, 5, k["cheeks"])
+        f(6, 5, k["cheeks"])
     f(1, 3, shade(hexc(hair or skin), 0.8))   # brows
     f(2, 3, shade(hexc(hair or skin), 0.8))
     f(5, 3, shade(hexc(hair or skin), 0.8))
@@ -141,6 +155,42 @@ def paint_base(s, k):
     for leg in ("rleg", "lleg"):
         s.fill(leg, lambda face, x, y, w, h: legs(y) if face not in ("top", "bottom")
                else (legs(0) if face == "top" else shade(hexc(legs(11)), 0.7)))
+        boot_top = next((last for last, c in k["legs"] if c == k["legs"][-1][1]), None)
+        top_row = max([last for last, c in k["legs"][:-1]] or [8]) + 1
+        for face in ("right", "front", "left", "back"):
+            for x in range(4):
+                s.px(leg, face, x, 11, shade(hexc(k["legs"][-1][1]), 0.6))      # sole
+                if top_row <= 10:
+                    s.px(leg, face, x, top_row, shade(hexc(k["legs"][-1][1]), 1.22))  # boot cuff
+    for arm in ("rarm", "larm"):
+        if k.get("sleeve", 7) < 10:
+            for x in range(s.side_width(arm, "front")):
+                s.px(arm, "front", x, 11, shade(hexc(k.get("hands", skin) if arm == "rarm" or not k.get("left_hand")
+                                                     else k["left_hand"]), 0.86))
+
+
+def finish(s):
+    """Volume: a soft top-to-bottom gradient on every side face, darker outer columns, and a neck shadow."""
+    img = s.img
+    for part in ("body", "rarm", "larm", "rleg", "lleg"):
+        for overlay in (False, True):
+            for face, (fx, fy, fw, fh) in s.faces(part, overlay).items():
+                if face in ("top", "bottom"):
+                    continue
+                for y in range(fh):
+                    for x in range(fw):
+                        c = img.getpixel((fx + x, fy + y))
+                        if c[3] == 0:
+                            continue
+                        f = 1.05 - 0.12 * y / (fh - 1)
+                        if face in ("front", "back") and x in (0, fw - 1):
+                            f *= 0.9
+                        if face in ("left", "right"):
+                            f *= 0.95
+                        img.putpixel((fx + x, fy + y), shade(c, f))
+    fx, fy, fw, fh = s.faces("body")["front"]
+    for x in range(1, fw - 1):
+        img.putpixel((fx + x, fy), shade(img.getpixel((fx + x, fy)), 0.85))
 
 
 # ---------- the cast ----------
@@ -365,6 +415,126 @@ def sol(s):
         s.px("body", "front", x, 2 + abs(x - 3), "#5A3A20", overlay=True, noise=0)
 
 
+def extras(s, key):
+    """Second pass of signature details, painted after the base look of each NPC."""
+    P = lambda part, face, x, y, c, o=True, n=0.04: s.px(part, face, x, y, c, overlay=o, noise=n)
+    if key == "maera":
+        for x in (0, 7):                                   # brass bands on the braids
+            P("body", "front", x, 2, "#D8A93A", n=0)
+            P("body", "front", x, 5, "#D8A93A", n=0)
+        for leg in ("rleg", "lleg"):                       # embroidered hem
+            for face in ("right", "front", "left", "back"):
+                for x in range(4):
+                    P(leg, face, x, 9, "#C08A2E" if x % 2 else "#8A2028", o=False)
+        P("body", "front", 3, 8, "#FF6A3D", n=0)          # the glowing shard pendant
+        P("body", "front", 4, 8, "#FFB04D", n=0)
+        P("body", "front", 3, 7, "#C9A84A", n=0)
+        P("body", "front", 4, 7, "#C9A84A", n=0)
+    elif key == "doran":
+        for y in range(2):                                 # apron straps over the shoulders
+            P("body", "front", 1, y, "#4A2E18")
+            P("body", "front", 6, y, "#4A2E18")
+        for y in range(12):
+            P("body", "back", 1 + (y * 6 // 11), y, "#4A2E18")
+            P("body", "back", 6 - (y * 6 // 11), y, "#4A2E18")
+        for x, y in ((2, 8), (3, 8), (4, 8), (2, 9), (3, 9), (4, 9)):   # pocket with a hammer handle
+            P("body", "front", x, y, "#5A3820")
+        P("body", "front", 5, 8, "#8A8F96", n=0)
+        P("body", "front", 5, 9, "#6A4A2A", n=0)
+        P("body", "front", 5, 10, "#6A4A2A", n=0)
+        for leg in ("rleg", "lleg"):                       # steel toe caps
+            for x in range(4):
+                P(leg, "front", x, 10, "#8A8F96", o=False)
+        for arm in ("rarm", "larm"):                       # the tattoos glow hot
+            for face in ("front", "right", "left"):
+                for x in range(s.side_width(arm, face)):
+                    if (x + 4) % 3 == 0:
+                        P(arm, face, x, 4, "#FFB347", o=False, n=0.1)
+    elif key == "rhosk":
+        for x, y in ((0, 1), (7, 1), (0, 9), (7, 9), (1, 5), (6, 5)):   # rivets
+            P("body", "front", x, y, "#E0B35A", o=False, n=0)
+        for x in range(8):                                 # sword belt with a bronze buckle
+            P("body", "front", x, 10, "#3A2A1C", o=False)
+        P("body", "front", 3, 10, "#E0B35A", o=False, n=0)
+        P("body", "front", 4, 10, "#E0B35A", o=False, n=0)
+        for face in ("left", "right"):                     # cloak edges hang at the sides
+            for y in range(11):
+                P("body", face, 3 if face == "left" else 0, y, "#24401F")
+        for leg in ("rleg", "lleg"):                       # greave plates
+            for x in range(4):
+                P(leg, "front", x, 7, "#B0813B", o=False)
+    elif key == "pell":
+        for x in range(8):                                 # red scarf
+            P("body", "front", x, 0, "#B03A2E")
+            P("body", "front", x, 1, "#B03A2E" if x < 6 else None)
+        for y in range(2, 6):
+            P("body", "front", 5, y, "#B03A2E")
+        for face in ("left", "right", "back"):
+            for x in range(s.side_width("body", face)):
+                P("body", face, x, 0, "#B03A2E")
+        for x in range(8):                                 # tool belt with a wrench
+            P("body", "front", x, 11, "#5A3A20", o=False)
+        P("body", "front", 1, 10, "#9AA0A6", o=False, n=0)
+        P("body", "front", 1, 11, "#9AA0A6", o=False, n=0)
+        P("larm", "front", 1, 9, "#FFD866", o=False, n=0)  # the brass hand's ticking gear
+    elif key == "tamsin":
+        for face in ("front", "left", "right", "back"):    # leaf crown
+            for x in range(8):
+                if x % 2 == 0:
+                    P("head", face, x, 0, "#5FA83A")
+                elif face == "front" and x in (3, 5):
+                    P("head", face, x, 0, "#F2C14E", n=0)
+        for x, y, c in ((2, 1, "#E86AA0"), (6, 3, "#F2C14E"), (1, 7, "#E86AA0"), (5, 9, "#F2C14E")):
+            P("body", "back", x, y, c, n=0)                # flowers in the moss
+        for x, y in ((0, 0), (7, 1)):
+            P("body", "front", x, y, "#E86AA0", n=0)
+    elif key == "ilsabet":
+        for y in range(8):                                 # long pale hair down her back
+            for x in range(8):
+                if y < 6 or x in (2, 3, 4, 5):
+                    P("body", "back", x, y, "#E9E4D8" if (x + y // 3) % 3 else "#CFC8B8")
+        for x, y in ((1, 3), (6, 3), (2, 6), (5, 6), (1, 9), (6, 9)):   # glowing runes
+            P("body", "front", x, y, "#D8C2FF", o=False, n=0)
+        for leg in ("rleg", "lleg"):
+            P(leg, "front", 1, 4, "#D8C2FF", o=False, n=0)
+            P(leg, "front", 2, 7, "#D8C2FF", o=False, n=0)
+        for arm in ("rarm", "larm"):                       # wide sleeves flare at the wrist
+            for face in ("right", "front", "left", "back"):
+                for x in range(s.side_width(arm, face)):
+                    P(arm, face, x, 9, "#8A63C0")
+    elif key == "stranger":
+        for face in ("front", "left", "right", "back"):    # grey wide-brimmed hat
+            for x in range(8):
+                P("head", face, x, 0, "#5C6066")
+                P("head", face, x, 1, "#2A2C30")           # black band
+        s.fill("head", lambda f, x, y, w, h: "#5C6066", overlay=True, faces=("top",))
+        P("head", "front", 2, 4, "#C9D6E0", o=False, n=0)  # pale eyes that catch the light
+        P("head", "front", 5, 4, "#C9D6E0", o=False, n=0)
+        P("body", "front", 3, 1, "#7A1E2A", o=False, n=0)  # a dark red tie
+        P("body", "front", 3, 2, "#7A1E2A", o=False, n=0)
+        P("body", "front", 4, 2, "#7A1E2A", o=False, n=0)
+    elif key == "wren":
+        for x in range(8):                                 # red scarf
+            P("body", "front", x, 0, "#C0392B")
+        P("body", "front", 6, 1, "#C0392B")
+        P("body", "front", 6, 2, "#A93226")
+        for y in range(9):                                 # satchel strap across the chest
+            P("body", "front", 7 - y * 7 // 8, y, "#6E4A2A")
+        for leg in ("rleg", "lleg"):                       # fur-topped boots
+            for face in ("right", "front", "left", "back"):
+                for x in range(4):
+                    P(leg, face, x, 8, "#E8DCC4")
+    elif key == "sol":
+        for x in range(1, 7):                              # long white beard over the robe
+            for y in range(5 - int(abs(x - 3.5))):
+                P("body", "front", x, y, "#E4E1DA" if (x + y) % 3 else "#CFCBC2")
+        for x, y in ((1, 7), (6, 6), (2, 10), (5, 9)):    # star embroidery
+            P("body", "front", x, y, "#E0C35A", o=False, n=0)
+        for leg in ("rleg", "lleg"):
+            P(leg, "front", 1, 3, "#E0C35A", o=False, n=0)
+            P(leg, "front", 2, 6, "#E0C35A", o=False, n=0)
+
+
 CAST = {"maera": (maera, True), "doran": (doran, False), "rhosk": (rhosk, False), "pell": (pell, False),
         "tamsin": (tamsin, True), "ilsabet": (ilsabet, True), "stranger": (stranger, False), "wren": (wren, True),
         "sol": (sol, False)}
@@ -402,6 +572,8 @@ def main():
     for i, (key, (paint, slim)) in enumerate(CAST.items()):
         s = Skin(slim, key)
         paint(s)
+        extras(s, key)
+        finish(s)
         s.img.save(os.path.join(OUT, key + ".png"))
         sheet.alpha_composite(front_back(s.img, slim), (36 * i, 0))
     os.makedirs(os.path.dirname(PREVIEW), exist_ok=True)

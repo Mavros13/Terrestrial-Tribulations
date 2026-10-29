@@ -101,6 +101,10 @@
       "buildings": [
         "minecolonies:townhall"
       ],
+      "spots": [
+        "minecolonies:blockhuttownhall",
+        "minecraft:lectern"
+      ],
       "name": "Elder Maera",
       "line": "Then I'll see you by the hearth. Somebody has to keep the Town Hall honest."
     },
@@ -108,6 +112,14 @@
       "stage": "tt_emberhold",
       "buildings": [
         "minecolonies:blacksmith"
+      ],
+      "spots": [
+        "minecraft:anvil",
+        "minecraft:chipped_anvil",
+        "minecraft:damaged_anvil",
+        "minecraft:smithing_table",
+        "minecraft:blast_furnace",
+        "minecraft:furnace"
       ],
       "name": "Doran",
       "line": "A real forge with walls round it? I'll pack the anvil."
@@ -119,6 +131,11 @@
         "minecolonies:barrackstower",
         "minecolonies:barracks"
       ],
+      "spots": [
+        "minecraft:target",
+        "minecraft:grindstone",
+        "*_banner"
+      ],
       "name": "Captain Rhosk",
       "line": "Emberhold's walls are mine to watch now. I'll be with the guard."
     },
@@ -127,6 +144,12 @@
       "buildings": [
         "minecolonies:mechanic",
         "minecolonies:sawmill"
+      ],
+      "spots": [
+        "minecraft:crafting_table",
+        "minecraft:smithing_table",
+        "minecraft:stonecutter",
+        "minecraft:anvil"
       ],
       "name": "Pell",
       "line": "A workshop! With a roof! Don't touch anything until I get there."
@@ -137,6 +160,11 @@
         "minecolonies:enchanter",
         "minecolonies:library"
       ],
+      "spots": [
+        "minecraft:enchanting_table",
+        "minecraft:brewing_stand",
+        "minecraft:lectern"
+      ],
       "name": "Ilsabet",
       "line": "The Conclave can spare me. Your town has grown interesting."
     },
@@ -145,6 +173,10 @@
       "buildings": [
         "minecolonies:townhall"
       ],
+      "spots": [
+        "*_door",
+        "*_fence_gate"
+      ],
       "name": "Wren",
       "line": "I'll keep an eye on the gate. Somebody should, between trips."
     },
@@ -152,6 +184,11 @@
       "stage": "tt_ch7_done",
       "buildings": [
         "minecolonies:library"
+      ],
+      "spots": [
+        "minecraft:lectern",
+        "minecraft:chiseled_bookshelf",
+        "minecraft:bookshelf"
       ],
       "name": "Archivist Sol",
       "line": "If you have shelves, I have books. A library, then."

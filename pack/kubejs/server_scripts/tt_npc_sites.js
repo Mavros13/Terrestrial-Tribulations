@@ -7,7 +7,8 @@
 //   once per world: other copies of the same site stay empty.
 // - Moving in (config "moves"): from an NPC's stage on, the script keeps the player tag tt_invite_open_<npc>, which
 //   shows "Come to Emberhold" in that NPC's menu. The button tags the player tt_invite_<npc>; the script then moves the
-//   same NPC next to the first built building of a listed type in the player's colony (else the Town Hall), once.
+//   same NPC into the first built building of a listed type in the player's colony (else the Town Hall), once, and
+//   stands it beside a fitting block inside (config "spots": anvil, lectern...), facing it; else by the hut block.
 // Uses $TT_TagKey, $TT_Registries, $TT_ResourceLocation and ttSafe from tt_abilities.js, $TT_AABB, ttColony and
 // ttBuildingManager from tt_active_abilities.js (shared scope).
 // DRAFT: untested in-game.
@@ -41,22 +42,60 @@ function ttSiteMarker(level, box, marker) {
   return null
 }
 
-// A free spot (solid floor, two blocks of air) near a building's hut block.
-function ttStandSpot(level, pos) {
-  for (let r = 2; r <= 5; r++)
-    for (let dx = -r; dx <= r; dx++)
-      for (let dz = -r; dz <= r; dz++) {
-        if (Math.abs(dx) != r && Math.abs(dz) != r) continue
-        for (let dy = -1; dy <= 2; dy++) {
-          const x = pos.x + dx, y = pos.y + dy, z = pos.z + dz
-          if (String(level.getBlock(x, y - 1, z).id) != 'minecraft:air' && String(level.getBlock(x, y, z).id) == 'minecraft:air'
-            && String(level.getBlock(x, y + 1, z).id) == 'minecraft:air') return { x: x, y: y, z: z }
-        }
-      }
-  return { x: pos.x, y: pos.y + 1, z: pos.z }
+function ttFree(level, x, y, z) {
+  return String(level.getBlock(x, y - 1, z).id) != 'minecraft:air' && String(level.getBlock(x, y, z).id) == 'minecraft:air'
+    && String(level.getBlock(x, y + 1, z).id) == 'minecraft:air'
 }
 
-// Where an NPC moves to: the first built building of one of its types, else the Town Hall.
+// A free tile (solid floor, two blocks of air) beside a block, and the yaw that faces the block from it.
+function ttBeside(level, pos) {
+  const sides = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+  for (let dy = 0; dy >= -1; dy--)
+    for (let i = 0; i < 4; i++) {
+      const x = pos.x + sides[i][0], y = pos.y + dy, z = pos.z + sides[i][1]
+      if (ttFree(level, x, y, z)) return { x: x, y: y, z: z, yaw: Math.atan2(sides[i][0], -sides[i][1]) * 180 / Math.PI }
+    }
+  return null
+}
+
+function ttSpotMatch(id, spot) {
+  return spot.charAt(0) == '*' ? id.endsWith(spot.substring(1)) : id == spot
+}
+
+// Where an NPC stands inside a building: beside the first of its spot blocks found within the walls (earlier spots
+// win), else beside the hut block, else anywhere free near the building's position.
+function ttBuildingSpot(level, building, spots) {
+  const pos = building.getPosition()
+  let lo = pos, hi = pos
+  try { let c = building.getCorners(); lo = c.getA(); hi = c.getB() } catch (e) { }
+  const x0 = Math.min(lo.x, hi.x), x1 = Math.max(lo.x, hi.x), z0 = Math.min(lo.z, hi.z), z1 = Math.max(lo.z, hi.z)
+  const y0 = Math.min(lo.y, hi.y), y1 = Math.max(lo.y, hi.y)
+  let best = null, bestRank = spots.length
+  for (let y = y0; y <= y1 && bestRank > 0; y++)
+    for (let x = x0; x <= x1 && bestRank > 0; x++)
+      for (let z = z0; z <= z1 && bestRank > 0; z++) {
+        const id = String(level.getBlock(x, y, z).id)
+        if (id == 'minecraft:air') continue
+        for (let i = 0; i < bestRank; i++) {
+          if (ttSpotMatch(id, spots[i])) {
+            const at = ttBeside(level, { x: x, y: y, z: z })
+            if (at) { best = at; bestRank = i }
+            break
+          }
+        }
+      }
+  if (best) return best
+  const hut = ttBeside(level, pos)
+  if (hut) return hut
+  for (let r = 2; r <= 5; r++)
+    for (let dx = -r; dx <= r; dx++)
+      for (let dz = -r; dz <= r; dz++)
+        for (let dy = -1; dy <= 2; dy++)
+          if (ttFree(level, pos.x + dx, pos.y + dy, pos.z + dz)) return { x: pos.x + dx, y: pos.y + dy, z: pos.z + dz, yaw: 0 }
+  return { x: pos.x, y: pos.y + 1, z: pos.z, yaw: 0 }
+}
+
+// The building an NPC moves into: the first built one of its types, else the Town Hall.
 function ttMoveTarget(colony, types) {
   const mgr = ttBuildingManager(colony)
   let best = null
@@ -64,30 +103,33 @@ function ttMoveTarget(colony, types) {
     if (best || b.getBuildingLevel() < 1) return
     if (types.indexOf(String(b.getBuildingType().getRegistryName())) >= 0) best = b
   })
-  const hall = mgr.getTownHall()
-  return best ? best.getPosition() : hall ? hall.getPosition() : null
+  return best || mgr.getTownHall()
 }
 
 function ttMoveNpc(server, p, npc, mv) {
   const spd = server.persistentData
   if (spd.getBoolean('tt_npc_moved_' + npc)) return
   const colony = ttColony(p)
-  const target = colony ? ttMoveTarget(colony, mv.buildings) : null
-  if (!target) { p.tell(Text.gold(`${mv.name}: "Emberhold first. Plant the charter, raise a Town Hall, then ask me."`)); return }
+  const building = colony ? ttMoveTarget(colony, mv.buildings) : null
+  if (!building) { p.tell(Text.gold(`${mv.name}: "Emberhold first. Plant the charter, raise a Town Hall, then ask me."`)); return }
   const box = new $TT_AABB(p.x - 16, p.y - 8, p.z - 16, p.x + 16, p.y + 8, p.z + 16)
   let found = null
   p.level.getEntitiesWithin(box).forEach(e => {
     if (!found && String(e.type).startsWith('easy_npc:') && e.customName && String(e.customName.string) == mv.name) found = e
   })
   if (!found) return
-  const level = p.level, spot = ttStandSpot(level, target)
+  const level = p.level, hub = building.getPosition()
   spd.putBoolean('tt_npc_moved_' + npc, true)
   p.tell(Text.of(`${mv.name}: "${mv.line}"`).gold())
-  // keep the destination chunk loaded while the NPC arrives (the colony may be far away)
-  server.runCommandSilent(`execute in minecraft:overworld run forceload add ${spot.x} ${spot.z}`)
-  server.scheduleInTicks(5, () => ttSafe('npc_move', () => found.teleportTo(spot.x + 0.5, spot.y, spot.z + 0.5)))
-  server.scheduleInTicks(200, () => server.runCommandSilent(`execute in minecraft:overworld run forceload remove ${spot.x} ${spot.z}`))
-  console.info(`[TT] ${npc} moves to Emberhold at ${spot.x} ${spot.y} ${spot.z}`)
+  // load the building's chunk (the colony may be far away), then pick the spot and move the NPC there
+  server.runCommandSilent(`execute in minecraft:overworld run forceload add ${hub.x} ${hub.z}`)
+  server.scheduleInTicks(5, () => ttSafe('npc_move', () => {
+    const spot = ttBuildingSpot(level, building, mv.spots)
+    found.teleportTo(spot.x + 0.5, spot.y, spot.z + 0.5)
+    found.setYRot(spot.yaw); found.setYHeadRot(spot.yaw); found.setYBodyRot(spot.yaw)
+    console.info(`[TT] ${npc} moved into Emberhold at ${spot.x} ${spot.y} ${spot.z}`)
+  }))
+  server.scheduleInTicks(200, () => server.runCommandSilent(`execute in minecraft:overworld run forceload remove ${hub.x} ${hub.z}`))
 }
 
 PlayerEvents.tick(event => {

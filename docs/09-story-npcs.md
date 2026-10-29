@@ -34,15 +34,18 @@ From the chapter below, the NPC's menu shows **Come to Emberhold** (`MOVES` in `
 that same NPC (never a copy) next to the first **built** MineColonies building of its type in the player's colony, or
 next to the Town Hall if there is none yet. The button disappears afterwards. Their site stays behind, empty.
 
-| NPC | Invite opens with | Moves to |
-|---|---|---|
-| Elder Maera | `tt_emberhold` (Plant the Charter) | Town Hall |
-| Doran | `tt_emberhold` | Blacksmith's Hut |
-| Captain Rhosk | `tt_ch2_done` | Guard Tower, Barracks Tower or Barracks |
-| Pell | `tt_ch3_done` | Mechanic's Hut or Sawmill |
-| Ilsabet | `tt_ch5_done` | Enchanter's Tower or Library |
-| Wren | `tt_ch6_done` | Town Hall (the gate) |
-| Archivist Sol | `tt_ch7_done` | Library |
+Inside the building they stand beside a block that fits them, facing it. The script searches the building's walls
+for the first block on their list. If none is there (MineColonies styles differ), they stand at the building's hut block.
+
+| NPC | Invite opens with | Moves to | Stands at |
+|---|---|---|---|
+| Elder Maera | `tt_emberhold` (Plant the Charter) | Town Hall | the Town Hall block, or a lectern |
+| Doran | `tt_emberhold` | Blacksmith's Hut | an anvil, then smithing table, blast furnace, furnace |
+| Captain Rhosk | `tt_ch2_done` | Guard Tower, Barracks Tower or Barracks | a target, a grindstone, a banner |
+| Pell | `tt_ch3_done` | Mechanic's Hut or Sawmill | a crafting table, smithing table, stonecutter, anvil |
+| Ilsabet | `tt_ch5_done` | Enchanter's Tower or Library | an enchanting table, brewing stand, lectern |
+| Wren | `tt_ch6_done` | Town Hall | a door or fence gate (the way in) |
+| Archivist Sol | `tt_ch7_done` | Library | a lectern, then a bookshelf |
 
 Tamsin never comes into the colony, and the Stranger keeps his caravan. Inviting someone before you have a Town Hall
 gets a line telling you to plant the charter first.

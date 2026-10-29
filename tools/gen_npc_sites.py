@@ -780,8 +780,9 @@ def main():
             "title": title, "stage": stage, "locked": locked,
             "npcs": {npc: {"marker": "minecraft:" + block, "preset": f"tt:easy_npc/preset/{CAST[npc][3]}/{npc}.npc.snbt"}
                      for npc, block in markers.items()}}
-    cfg["moves"] = {npc: {"stage": st, "buildings": ["minecolonies:" + b for b in blds], "name": CAST[npc][1], "line": line}
-                    for npc, (st, blds, line) in MOVES.items()}
+    cfg["moves"] = {npc: {"stage": st, "buildings": ["minecolonies:" + b for b in blds], "spots": spots,
+                          "name": CAST[npc][1], "line": line}
+                    for npc, (st, blds, spots, line) in MOVES.items()}
     write(os.path.join(DATA, "tags", "worldgen", "structure", "npc_sites.json"), {"values": [f"tt:npc/{s}" for s in SITES]})
     write(CFG, cfg)
     print(f"NPC sites: {len(SITES)} structures ({sum(len(v['npcs']) for v in cfg['sites'].values())} NPCs), "

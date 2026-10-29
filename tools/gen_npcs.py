@@ -59,17 +59,27 @@ TALK_QUESTS = {
     ("sol", "Seven Pieces"): "c7_sol", ("pell", "Choirbreaker"): "c8_breaker",
 }
 # Moving into Emberhold (owner, 2026-10-29: "invite them" over automatic moves). From the stage on, the NPC's menu shows
-# "Come to Emberhold"; pressing it moves that same NPC (no copy) next to the first built MineColonies building of a
-# listed type in the player's colony, else the Town Hall (server_scripts/tt_npc_sites.js). Tamsin never comes into the
+# "Come to Emberhold"; pressing it moves that same NPC (no copy) into the first built MineColonies building of a
+# listed type in the player's colony, else the Town Hall (server_scripts/tt_npc_sites.js). Inside, they stand at the
+# first "spot" block found within the building's walls (earlier in the list wins; "*_door" matches by suffix), facing
+# it, so Doran works the anvil and Sol reads at the lectern; without one, at the building's hut block. Tamsin never comes into the
 # colony and the Stranger keeps his caravan, as the scripts say. Building IDs: MineColonies ModBuildings (1.20.1).
 MOVES = {
-    "maera": ("tt_emberhold", ["townhall"], "Then I'll see you by the hearth. Somebody has to keep the Town Hall honest."),
-    "doran": ("tt_emberhold", ["blacksmith"], "A real forge with walls round it? I'll pack the anvil."),
-    "rhosk": ("tt_ch2_done", ["guardtower", "barrackstower", "barracks"], "Emberhold's walls are mine to watch now. I'll be with the guard."),
-    "pell": ("tt_ch3_done", ["mechanic", "sawmill"], "A workshop! With a roof! Don't touch anything until I get there."),
-    "ilsabet": ("tt_ch5_done", ["enchanter", "library"], "The Conclave can spare me. Your town has grown interesting."),
-    "wren": ("tt_ch6_done", ["townhall"], "I'll keep an eye on the gate. Somebody should, between trips."),
-    "sol": ("tt_ch7_done", ["library"], "If you have shelves, I have books. A library, then."),
+    "maera": ("tt_emberhold", ["townhall"], ["minecolonies:blockhuttownhall", "minecraft:lectern"],
+              "Then I'll see you by the hearth. Somebody has to keep the Town Hall honest."),
+    "doran": ("tt_emberhold", ["blacksmith"], ["minecraft:anvil", "minecraft:chipped_anvil", "minecraft:damaged_anvil",
+              "minecraft:smithing_table", "minecraft:blast_furnace", "minecraft:furnace"],
+              "A real forge with walls round it? I'll pack the anvil."),
+    "rhosk": ("tt_ch2_done", ["guardtower", "barrackstower", "barracks"], ["minecraft:target", "minecraft:grindstone",
+              "*_banner"], "Emberhold's walls are mine to watch now. I'll be with the guard."),
+    "pell": ("tt_ch3_done", ["mechanic", "sawmill"], ["minecraft:crafting_table", "minecraft:smithing_table",
+             "minecraft:stonecutter", "minecraft:anvil"], "A workshop! With a roof! Don't touch anything until I get there."),
+    "ilsabet": ("tt_ch5_done", ["enchanter", "library"], ["minecraft:enchanting_table", "minecraft:brewing_stand",
+                "minecraft:lectern"], "The Conclave can spare me. Your town has grown interesting."),
+    "wren": ("tt_ch6_done", ["townhall"], ["*_door", "*_fence_gate"],
+             "I'll keep an eye on the gate. Somebody should, between trips."),
+    "sol": ("tt_ch7_done", ["library"], ["minecraft:lectern", "minecraft:chiseled_bookshelf", "minecraft:bookshelf"],
+            "If you have shelves, I have books. A library, then."),
 }
 GREET_QUESTS = {"rhosk": "c2_rhosk"}  # no Ch2 talk: his greeting is the intro, so Goodbye completes it
 CHOICE_QUESTS = {"Reforge it.": "c12_reforge", "Let him have it.": "c12_surrender", "Shatter it.": "c12_shatter"}

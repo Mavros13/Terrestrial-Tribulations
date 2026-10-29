@@ -4,7 +4,7 @@ Player-facing changes for each release of Terrestrial Tribulations. The release 
 
 ## 0.9.0 (first public beta, not released yet)
 
-Minecraft 1.20.1, Forge 47.4.18, 143 mods. Recommended memory: 8 GB.
+Minecraft 1.20.1, Forge 47.4.18, 153 mods. Recommended memory: 8 GB.
 
 ### Story
 - **The main campaign, Chapters 1–12**, in the quest book: from the Hollow fields to founding Emberhold, the Shattered Realms, the Iron Choir and the fight for the Crown. It has three endings.
@@ -25,4 +25,6 @@ Minecraft 1.20.1, Forge 47.4.18, 143 mods. Recommended memory: 8 GB.
 
 ### Quality of life
 - The land around spawn is pre-generated in the background on a new world's first load, so exploring stutters less. `/chunky pause` stops it.
+- Smoother play: structure searches run in the background, structures generate faster, XP orbs merge, mobs that picked up items still despawn, faster crafting lookups, memory-leak fixes, and the game idles when its window is in the background.
+- Lighter video settings on first launch (render distance 10). Your own settings are never overwritten.
 - Pack updates never reset your own game settings.

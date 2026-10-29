@@ -35,12 +35,12 @@ Story quests (Ch1–12 + Side Paths), NPC dialogue, shops, boss lore, gates, the
 - **Profiling:** Spark.
 - **Our own scripts are light:** two server per-tick handlers (one returns at once unless a Gale Vault is active, one runs once a second) and one client tick toggle. Everything else is event-driven.
 
-### Plan: add these (each must be checked for a Forge 1.20.1 build and against the current mods before adding)
+### Added 2026-10-29 (Forge 1.20.1 builds checked on Modrinth and CurseForge; both mod lists, stage D)
+New libraries: Resourceful Config (for Structure Layout Optimizer) and Almanac Lib (for Let Me Despawn). FastSuite uses Placebo, already in. AllTheLeaks is CurseForge-only. **Noisium was dropped**: archived on CurseForge with no files, so it can't go in the CurseForge pack.
 | Mod | Helps with | Side |
 |---|---|---|
 | **Async Locator** | Moves structure searches (Eyes of Ender, explorer maps, dolphins, villager maps) off the main thread. These cause the worst freezes in structure-heavy packs. | Server |
 | **Structure Layout Optimizer** | Faster jigsaw structure generation (YUNG's, When Dungeons Arise, CTOV, Dungeons and Taverns), so less chunk-load stutter. | Server |
-| **Noisium** | Faster terrain generation, so new chunks load sooner. | Server |
 | **Clumps** | Merges XP orbs. Big win at mob farms, boss deaths and MineColonies. | Both |
 | **Let Me Despawn** | Mobs that picked up items still despawn, so mob counts don't creep up over a session. | Server |
 | **FastWorkbench / FastFurnace** (FastSuite) | Caches recipe lookups. With Create, Mekanism and many others there are thousands of recipes. Uses Placebo, already in the pack. | Both |
@@ -49,7 +49,7 @@ Story quests (Ch1–12 + Side Paths), NPC dialogue, shops, boss lore, gates, the
 | **Smooth Boot (Reloaded)** | Lower thread priority during startup, so the PC stays usable while it loads. | Both |
 
 ### Settings (no new mods)
-- **Default video settings for new players**, through Default Options' `config/defaultoptions/options.txt`. It only applies when a player has no `options.txt`, so updates never overwrite anyone's choices.
+- **Done: default video settings for new players**, through Default Options' `config/defaultoptions/options.txt`. It only applies when a player has no `options.txt`, so updates never overwrite anyone's choices.
   - Render distance 10, simulation distance 6.
   - Entity distance 75%, particles Decreased.
   - Clouds Fast, mipmaps 2.

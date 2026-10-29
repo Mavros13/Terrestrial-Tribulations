@@ -270,6 +270,17 @@ def scaled_display(s):
     return d
 
 
+def worn_display():
+    """Worn weapons (tools/gen_worn_layers.py): in third person a Palladium layer draws them on the arm, so the held
+    model is hidden; in first person (no arm drawn while holding an item) the model sits where the fist would be."""
+    d = scaled_display(1.0)
+    for k in ("thirdperson_righthand", "thirdperson_lefthand"):
+        d[k] = {"rotation": [0, 0, 0], "translation": [0, 0, 0], "scale": [0, 0, 0]}
+    d["firstperson_righthand"] = {"rotation": [-60, 0, 0], "translation": [1.13, 4.5, -3], "scale": [0.8, 0.8, 0.8]}
+    d["firstperson_lefthand"] = {"rotation": [-60, 0, 0], "translation": [1.13, 4.5, -3], "scale": [0.8, 0.8, 0.8]}
+    return d
+
+
 # ---------- the weapons ----------
 STEEL = "#B8C0C8"
 DARK_STEEL = "#4A4F57"
@@ -646,7 +657,7 @@ def choirbreaker_gauntlets(m, p, s, a):
         m.c(f"finger_{i}", 3.6, 6.0, 0.9, 1.3, black, dx=x, dz=2.2)    # fingers curled into a fist
         m.c(f"glow_knuckle_{i}", 5.6, 6.0, 0.6, 0.2, red, dx=x, dz=-1.75)
     m.c("thumb", 2.4, 4.4, 1.0, 2.6, chrome, dx=2.6, dz=0.8)
-    return scaled_display(1.2)
+    return worn_display()
 
 
 def harbingers_railblade(m, p, s, a):

@@ -1,0 +1,19 @@
+{
+  "name": {
+    "text": "Choirbreaker Gauntlets (worn)"
+  },
+  "icon": "tt:choirbreaker_gauntlets",
+  "hidden": true,
+  "abilities": {
+    "layer": {
+      "type": "palladium:render_layer",
+      "render_layer": "tt:choirbreaker_gauntlets_worn",
+      "hidden": true
+    },
+    "glow": {
+      "type": "palladium:render_layer",
+      "render_layer": "tt:choirbreaker_gauntlets_worn_glow",
+      "hidden": true
+    }
+  }
+}

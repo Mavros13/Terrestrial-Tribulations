@@ -17,13 +17,12 @@ The owner asked for a list of everything still to build or sort, and for a focus
 ### Not built yet
 | Item | What it is | Size |
 |---|---|---|
-| **NPC placement** | The 9 story NPCs are presets that you place with a command. Players won't find them on their own. Options: spawn each NPC near the player when its chapter starts (KubeJS), or build them into MineColonies Town Hall styles. | Medium. Needs a choice. |
 | **Gods and Heroes** | The Chapter 7, 8 and 10 hero quests grant its origins. It's All Rights Reserved and Modrinth-only, so it isn't in the CurseForge pack. Players must add it themselves, or those hero rewards need a fallback. | Small to decide. Needs Oscar. |
 | **Cast system** (tt_bridge, `design/bridge/cast-system.md`) | Full-body cast animations for spells and powers. Designed, not built (needs MCreator/Java). Optional: everything works without it. | Large. Optional. |
 | **Hand-tuned models** | Only for weapons that look wrong after the desktop check. | Per weapon |
 | **CurseForge publishing** | Make the pack public: project page, icon (`docs/branding/icon.png`), description. Needs Oscar's account. | Small. Needs Oscar. |
 
-Story quests (Ch1–12 + Side Paths), NPC dialogue, shops, boss lore, gates, the skill tree, origins and all 23 weapon models and abilities are written.
+Story quests (Ch1–12 + Side Paths), NPC dialogue, NPC sites (own structures, locked by chapter, `docs/09-story-npcs.md`), shops, boss lore, gates, the skill tree, origins and all 23 weapon models and abilities are written.
 
 ## 2. Performance
 

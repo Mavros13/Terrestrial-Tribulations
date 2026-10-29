@@ -52,6 +52,12 @@ Survival is easier for this (skills charge by hitting things): `/gamemode surviv
 - Open **Doran's** shop (Trade): the offers are there, and buying one works.
 - Choose "Not for sale." with the Stranger: the talk ends there, with no "That's all I ask." line after it.
 
+### 3b. NPC sites (5 min, use a **new world**)
+- Within a few seconds of the first load, a small camp stands about 24 blocks east of spawn, with **Elder Maera** and **Doran** in it once you walk in.
+- In survival, `/place structure tt:npc/thornwatch_outpost ~10 ~ ~` then walk into it: you're put back outside with a gold line.
+- `/kubejs custom_command tt_story` (gives every stage), walk in again: **Captain Rhosk** appears on the outpost. Placing a second outpost and walking in gives no second Rhosk.
+- Complete "Plant the Charter" (`c2_found`) in a fresh survival world: an explorer map to the outpost lands in your inventory.
+
 ## 4. Side Paths (5 min)
 - The quest book has a **Side Paths** group with 5 tabs.
 - Open **Cogwright Workshop**: its first quest opens after Pell's story quest, so mark that done first: `/ftbquests change_progress @p complete 14680D94DDB8FE4E` (The Ticking Hand). Then give yourself 16 Andesite Alloy (`/give @p create:andesite_alloy 16`): the quest completes.

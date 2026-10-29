@@ -95,7 +95,9 @@
 			]
 			rewards: [
 				{ id: "1FA64A7ADE005F87", type: "xp", xp: 500 },
-				{ id: "6C38BFCB398DC028", type: "command", command: "/kubejs stages add @p tt_ch5_done", elevate_perms: true, silent: true }
+				{ id: "6C38BFCB398DC028", type: "command", command: "/kubejs stages add @p tt_ch5_done", elevate_perms: true, silent: true },
+				{ id: "24E17952F6BA186B", type: "command", command: "/kubejs stages add @p tt_meet_stranger", elevate_perms: true, silent: true },
+				{ id: "3F83BC6A40397A50", type: "command", command: "/loot give @p loot tt:npc_maps/stranger_caravan", elevate_perms: true, silent: true }
 			]
 		}
 	]

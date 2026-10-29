@@ -413,6 +413,16 @@
     "twilightforest:twilight_forest",
     "undergarden:undergarden"
   ],
+  "npc_sites": [
+    "tt:npc/conclave_tower",
+    "tt:npc/pell_ruin",
+    "tt:npc/refugee_camp",
+    "tt:npc/sol_archive",
+    "tt:npc/stranger_caravan",
+    "tt:npc/tamsin_grove",
+    "tt:npc/thornwatch_outpost",
+    "tt:npc/wren_lookout"
+  ],
   "lore_entities": [
     "bosses_of_mass_destruction:lich",
     "cataclysm:ancient_remnant",

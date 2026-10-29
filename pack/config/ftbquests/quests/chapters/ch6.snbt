@@ -14,7 +14,7 @@
 			id: "96FA23906773BCFF"
 			title: "A Kind Word"
 			subtitle: "A trader arrives"
-			description: ["A traveller in a grey coat, too clean for the road, sets up a stall in Emberhold.", "", "&6The Stranger&r: &o\"If you ever find more of those Shards, I'd pay handsomely just to study one. Purely academic.\"", "", "&7(Talk to the Stranger: saying goodbye ticks this. No NPC placed yet? Tick it yourself.)"]
+			description: ["A traveller in a grey coat, too clean for the road, sets up a stall in Emberhold.", "", "&6The Stranger&r: &o\"If you ever find more of those Shards, I'd pay handsomely just to study one. Purely academic.\"", "", "&7(Talk to the Stranger: saying goodbye ticks this. Each story NPC lives at their own site; the quest that introduces them gives you a map.)"]
 			x: 0.0d
 			y: -2.0d
 			shape: "circle"
@@ -41,7 +41,9 @@
 			]
 			rewards: [
 				{ id: "1261642E71337636", type: "item", item: { Count: 8b, id: "minecraft:gold_ingot" } },
-				{ id: "7C6773647A0E18C2", type: "xp", xp: 300 }
+				{ id: "7C6773647A0E18C2", type: "xp", xp: 300 },
+				{ id: "49CCEA33DA40ED2E", type: "command", command: "/kubejs stages add @p tt_meet_wren", elevate_perms: true, silent: true },
+				{ id: "B46E7F66BE45EECC", type: "command", command: "/loot give @p loot tt:npc_maps/wren_lookout", elevate_perms: true, silent: true }
 			]
 		},
 		{
@@ -112,7 +114,9 @@
 			rewards: [
 				{ id: "A0738D5E3866FA46", type: "xp", xp: 500 },
 				{ id: "67F9A44B8F70863C", type: "command", command: "/kubejs stages add @p tt_ch6_done", elevate_perms: true, silent: true },
-				{ id: "2F3D7F5D3C276095", type: "command", command: "/kubejs stages add @p tt_ch7_realms", elevate_perms: true, silent: true }
+				{ id: "2F3D7F5D3C276095", type: "command", command: "/kubejs stages add @p tt_ch7_realms", elevate_perms: true, silent: true },
+				{ id: "CFB45C6BC0825AD5", type: "command", command: "/kubejs stages add @p tt_meet_sol", elevate_perms: true, silent: true },
+				{ id: "3508CE39EA6C5C72", type: "command", command: "/loot give @p loot tt:npc_maps/sol_archive", elevate_perms: true, silent: true }
 			]
 		}
 	]

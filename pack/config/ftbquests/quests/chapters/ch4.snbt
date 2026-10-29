@@ -79,7 +79,9 @@
 			rewards: [
 				{ id: "486F86C7BED4EFF7", type: "item", item: { Count: 1b, id: "tt:hollowbane_tachi" } },
 				{ id: "3BF2BA230B3B9CB2", type: "xp", xp: 600 },
-				{ id: "55AB57AE273F81DD", type: "command", command: "/kubejs stages add @p tt_ch4_done", elevate_perms: true, silent: true }
+				{ id: "55AB57AE273F81DD", type: "command", command: "/kubejs stages add @p tt_ch4_done", elevate_perms: true, silent: true },
+				{ id: "5EE3D986F9468525", type: "command", command: "/kubejs stages add @p tt_meet_ilsabet", elevate_perms: true, silent: true },
+				{ id: "67E4124F2BA888E5", type: "command", command: "/loot give @p loot tt:npc_maps/conclave_tower", elevate_perms: true, silent: true }
 			]
 		}
 	]

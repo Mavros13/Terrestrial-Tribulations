@@ -1031,6 +1031,15 @@
       "file": "corewithstuff-v1.6.jar",
       "stage": "C",
       "dependency": true
+    },
+    {
+      "name": "Karambit Vault x Punchy",
+      "projectID": 1749755,
+      "fileID": 9220392,
+      "file": "Karambit Vault x Punchy.zip",
+      "stage": "A",
+      "side": "client",
+      "type": "resourcepack"
     }
   ]
 }

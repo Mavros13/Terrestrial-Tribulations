@@ -1,0 +1,1 @@
+resourcePacks:["vanilla","mod_resources","file/Karambit Vault x Punchy.zip"]

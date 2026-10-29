@@ -155,7 +155,11 @@ CHAPTERS = [
 
 from quest_story import chapters as story_chapters  # Chapters 2-12 (main story)
 
-CHAPTERS = CHAPTERS[:2] + story_chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage, r_cmd) + CHAPTERS[2:]
+from quest_side import chapters as side_chapters    # optional tech, magic, city and world tabs
+
+CHAPTERS = (CHAPTERS[:2] + story_chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage, r_cmd) + CHAPTERS[2:]
+            + side_chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp))
+GROUPS = {"side": "Side Paths"}  # chapter group key -> title; chapters without "group" stay ungrouped
 
 
 def quest_snbt(q):
@@ -178,8 +182,9 @@ def main():
                 '\tdefault_reward_team: false\n\tdefault_consume_items: false\n\tdefault_quest_shape: "circle"\n'
                 '\tdrop_book_on_death: false\n\tpause_game: false\n\tprogression_mode: "linear"\n\tdetection_delay: 20\n}\n')
     with open(os.path.join(OUT, "chapter_groups.snbt"), "w") as f:
-        f.write("{\n\tchapter_groups: [ ]\n}\n")
-    lang = []
+        f.write("{\n\tchapter_groups: [\n" + ",\n".join(f'\t\t{{ id: "{qid("group:" + g)}", title: {s(n)} }}' for g, n in GROUPS.items())
+                + "\n\t]\n}\n")
+    lang = [f'\tchapter_group.{qid("group:" + g)}.title: {s(n)}' for g, n in GROUPS.items()]
     all_keys = {q["key"] for c in CHAPTERS for q in c["quests"]}
     for i, c in enumerate(CHAPTERS):
         for q in c["quests"]:
@@ -191,7 +196,7 @@ def main():
         lang.append(f'\tchapter.{qid("chapter:" + c["key"])}.title: {s(c["title"])}')
         body = ",\n".join(quest_snbt(q) for q in c["quests"])
         with open(os.path.join(OUT, "chapters", c["key"] + ".snbt"), "w") as f:
-            f.write(f'{{\n\tid: "{qid("chapter:" + c["key"])}"\n\tgroup: ""\n\torder_index: {i}\n\tfilename: "{c["key"]}"\n'
+            f.write(f'{{\n\tid: "{qid("chapter:" + c["key"])}"\n\tgroup: "{qid("group:" + c["group"]) if c.get("group") else ""}"\n\torder_index: {i}\n\tfilename: "{c["key"]}"\n'
                     f'\ttitle: {s(c["title"])}\n\ticon: {item(c["icon"])}\n\tdefault_quest_shape: ""\n\tdefault_hide_dependency_lines: false\n'
                     f'\tquest_links: [ ]\n\timages: [ ]\n\tquests: [\n{body}\n\t]\n}}\n')
     # circular dependency check

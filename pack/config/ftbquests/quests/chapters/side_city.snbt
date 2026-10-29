@@ -1,0 +1,147 @@
+{
+	id: "F7AFC313D174A829"
+	group: "9DAB9DE842B66190"
+	order_index: 17
+	filename: "side_city"
+	title: "Emberhold Builders"
+	icon: { Count: 1b, id: "minecolonies:blockhutbuilder" }
+	default_quest_shape: ""
+	default_hide_dependency_lines: false
+	quest_links: [ ]
+	images: [ ]
+	quests: [
+		{
+			id: "646C414566D3FF9A"
+			title: "Bread for Forty"
+			subtitle: "Farmer"
+			description: ["&6Elder Maera&r: &o\"Walls are fine. Food is better.\"", "", "Place a &eFarmer's Hut&r."]
+			x: 0.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["3AD0FF0B654D9820"]
+			tasks: [
+				{ id: "0F901CA25B2CA98C", type: "item", item: { Count: 1b, id: "minecolonies:blockhutfarmer" } }
+			]
+			rewards: [
+				{ id: "950672888A070EF2", type: "item", item: { Count: 32b, id: "minecraft:wheat_seeds" } },
+				{ id: "FCBD5500586A4AB5", type: "xp", xp: 60 }
+			]
+		},
+		{
+			id: "DF53DFC49537C40C"
+			title: "Timber"
+			subtitle: "Forester"
+			description: ["A &eForester's Hut&r keeps the builders in planks."]
+			x: 2.0d
+			y: -1.0d
+			shape: "circle"
+			dependencies: ["646C414566D3FF9A"]
+			tasks: [
+				{ id: "3A31EB586FA38491", type: "item", item: { Count: 1b, id: "minecolonies:blockhutlumberjack" } }
+			]
+			rewards: [
+				{ id: "407F4C5FEDCA697B", type: "xp", xp: 60 }
+			]
+		},
+		{
+			id: "6D3AB03733D06D3B"
+			title: "Stone and Ore"
+			subtitle: "Miner"
+			description: ["A &eMiner's Hut&r digs a shaft under Emberhold and brings up stone and ore."]
+			x: 2.0d
+			y: 1.0d
+			shape: "circle"
+			dependencies: ["646C414566D3FF9A"]
+			tasks: [
+				{ id: "74181BCC3FC184B6", type: "item", item: { Count: 1b, id: "minecolonies:blockhutminer" } }
+			]
+			rewards: [
+				{ id: "DA36EFADF253CA72", type: "xp", xp: 60 }
+			]
+		},
+		{
+			id: "B8D25DBE75A66957"
+			title: "Everything in Its Place"
+			subtitle: "Warehouse and Courier"
+			description: ["A &eWarehouse&r and a &eCourier's Hut&r let colonists fetch what they need without you running errands."]
+			x: 4.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["DF53DFC49537C40C", "6D3AB03733D06D3B"]
+			tasks: [
+				{ id: "6F7D83FB71732C29", type: "item", item: { Count: 1b, id: "minecolonies:blockhutwarehouse" } },
+				{ id: "7B2DF51BA30DF1A2", type: "item", item: { Count: 1b, id: "minecolonies:blockhutdeliveryman" } }
+			]
+			rewards: [
+				{ id: "7DB7F161C25339B9", type: "xp", xp: 120 }
+			]
+		},
+		{
+			id: "6D41591A0650A521"
+			title: "Hot Meals"
+			subtitle: "Restaurant"
+			description: ["Fed colonists work harder. Build a &eRestaurant&r (Cook's Hut)."]
+			x: 6.0d
+			y: -1.0d
+			shape: "circle"
+			dependencies: ["B8D25DBE75A66957"]
+			tasks: [
+				{ id: "BB30054148CBBBD1", type: "item", item: { Count: 1b, id: "minecolonies:blockhutcook" } }
+			]
+			rewards: [
+				{ id: "8F456E6987877C08", type: "xp", xp: 100 }
+			]
+		},
+		{
+			id: "FF1BDE60C6AF6BB6"
+			title: "Doran's Apprentices"
+			subtitle: "Blacksmith"
+			description: ["&6Doran&r: &o\"Give me a forge and two apprentices and I'll stop doing everything myself.\"", "", "Place a &eBlacksmith's Hut&r."]
+			x: 6.0d
+			y: 1.0d
+			shape: "circle"
+			dependencies: ["B8D25DBE75A66957"]
+			tasks: [
+				{ id: "CA8EFBC970C773BF", type: "item", item: { Count: 1b, id: "minecolonies:blockhutblacksmith" } }
+			]
+			rewards: [
+				{ id: "73C25722AD48AF5A", type: "xp", xp: 100 }
+			]
+		},
+		{
+			id: "F0BF891E9975757E"
+			title: "Learning"
+			subtitle: "University"
+			description: ["A &eUniversity&r researches upgrades for the whole colony: better tools, more citizens, stronger guards."]
+			x: 8.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["6D41591A0650A521", "FF1BDE60C6AF6BB6"]
+			tasks: [
+				{ id: "77E16F1B99EF5695", type: "item", item: { Count: 1b, id: "minecolonies:blockhutuniversity" } }
+			]
+			rewards: [
+				{ id: "029EFB6EB1447700", type: "xp", xp: 200 }
+			]
+		},
+		{
+			id: "4E6DE3C03479867F"
+			title: "Newcomers Welcome"
+			subtitle: "Tavern"
+			description: ["Travellers stop at a &eTavern&r and some of them stay. Emberhold grows faster."]
+			x: 10.0d
+			y: 0.0d
+			shape: "circle"
+			dependencies: ["F0BF891E9975757E"]
+			tasks: [
+				{ id: "F4FD0A1635B6F73B", type: "item", item: { Count: 1b, id: "minecolonies:blockhuttavern" } }
+			]
+			rewards: [
+				{ id: "74BBD7BC637580FF", type: "xp", xp: 200 }
+			]
+		}
+	]
+}

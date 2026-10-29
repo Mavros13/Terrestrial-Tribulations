@@ -1,0 +1,163 @@
+{
+	id: "6F56538A7F71E564"
+	group: "9DAB9DE842B66190"
+	order_index: 18
+	filename: "side_world"
+	title: "Wayfarer's Guide"
+	icon: { Count: 1b, id: "minecraft:compass" }
+	default_quest_shape: ""
+	default_hide_dependency_lines: false
+	quest_links: [ ]
+	images: [ ]
+	quests: [
+		{
+			id: "A01E3E403705D513"
+			title: "Carry More"
+			subtitle: "Backpacks"
+			description: ["&6Wren&r: &o\"Scouts carry everything. Get a bag.\"", "", "Craft a &eBackpack&r (Sophisticated Backpacks)."]
+			x: 0.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["6D74F5A8B48B697A"]
+			tasks: [
+				{ id: "1DA55438FA08973F", type: "item", item: { Count: 1b, id: "sophisticatedbackpacks:backpack" } }
+			]
+			rewards: [
+				{ id: "3336FD203DFD6D39", type: "xp", xp: 40 }
+			]
+		},
+		{
+			id: "B70F4E5BA38FB8BD"
+			title: "A Better Bag"
+			subtitle: "Backpack upgrades"
+			description: ["Upgrade it to an &eIron Backpack&r. Upgrades like pickup and magnet slot into it."]
+			x: 2.0d
+			y: -1.0d
+			shape: "circle"
+			dependencies: ["A01E3E403705D513"]
+			tasks: [
+				{ id: "AF5E4711499F62D1", type: "item", item: { Count: 1b, id: "sophisticatedbackpacks:iron_backpack" } }
+			]
+			rewards: [
+				{ id: "20A442FB5641BCE4", type: "xp", xp: 60 }
+			]
+		},
+		{
+			id: "76CCF849F572D1A5"
+			title: "Know the Land"
+			subtitle: "Xaero's maps"
+			description: ["Press &eM&r for the world map and &eY&r for waypoints on the minimap. Mark Emberhold first."]
+			x: 2.0d
+			y: 1.0d
+			shape: "circle"
+			dependencies: ["A01E3E403705D513"]
+			tasks: [
+				{ id: "F004A986395FB808", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "EFE57D7DF77769A1", type: "item", item: { Count: 1b, id: "minecraft:compass" } },
+				{ id: "BD9099CC28503B43", type: "xp", xp: 30 }
+			]
+		},
+		{
+			id: "9E706E8F5ADC6F87"
+			title: "Many Blocks at Once"
+			subtitle: "FTB Ultimine"
+			description: ["Hold the &eUltimine key&r (default &e`&r, the grave accent) while mining to break a whole vein."]
+			x: 4.0d
+			y: 1.0d
+			shape: "circle"
+			dependencies: ["76CCF849F572D1A5"]
+			tasks: [
+				{ id: "48549ABDCEF324FD", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "BD82382E6E6D34E3", type: "xp", xp: 30 }
+			]
+		},
+		{
+			id: "A327C926A9E0DA7F"
+			title: "Builder's Shortcut"
+			subtitle: "Construction Wand"
+			description: ["A &eConstruction Wand&r extends a whole face of blocks at once. Emberhold's walls won't build themselves."]
+			x: 4.0d
+			y: -1.0d
+			shape: "circle"
+			dependencies: ["B70F4E5BA38FB8BD"]
+			tasks: [
+				{ id: "3F5D7B0815B2F18B", type: "item", item: { Count: 1b, id: "constructionwand:iron_wand" } }
+			]
+			rewards: [
+				{ id: "2A1EFCF3122E5E43", type: "xp", xp: 60 }
+			]
+		},
+		{
+			id: "0CCD50EFD50213DD"
+			title: "Under the Hills"
+			subtitle: "Dungeons and ruins"
+			description: ["The old world is full of ruins: YUNG's dungeons, When Dungeons Arise towers, Dungeons and Taverns.", "", "Clear one: defeat &e10 Skeletons&r and &e10 Zombies&r among its guardians."]
+			x: 6.0d
+			y: 0.0d
+			shape: "gear"
+			size: 1.5d
+			dependencies: ["9E706E8F5ADC6F87", "A327C926A9E0DA7F"]
+			tasks: [
+				{ id: "6B6CD5B85ACE335D", type: "kill", entity: "minecraft:skeleton", value: 10L },
+				{ id: "F846E1B5883D81CA", type: "kill", entity: "minecraft:zombie", value: 10L }
+			]
+			rewards: [
+				{ id: "6367BD61EEDC42F6", type: "item", item: { Count: 1b, id: "minecraft:golden_apple" } },
+				{ id: "FB8BD3310CE26F53", type: "xp", xp: 150 }
+			]
+		},
+		{
+			id: "9C67533140185CE8"
+			title: "Strange Trinkets"
+			subtitle: "Artifacts and Relicera"
+			description: ["Chests in ruins sometimes hold &eArtifacts&r: odd trinkets for your Curios slots. Mimics bite."]
+			x: 8.0d
+			y: -1.0d
+			shape: "circle"
+			dependencies: ["0CCD50EFD50213DD"]
+			tasks: [
+				{ id: "ECC156AD15EED080", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "05FE2730D84ADE38", type: "xp", xp: 100 }
+			]
+		},
+		{
+			id: "46850E4B39894F70"
+			title: "The Deep Places"
+			subtitle: "Alex's Caves"
+			description: ["Some caves are whole biomes: magnetic, toxic, primordial. Bring torches. Bring more torches."]
+			x: 8.0d
+			y: 1.0d
+			shape: "circle"
+			dependencies: ["0CCD50EFD50213DD"]
+			tasks: [
+				{ id: "839F6183BD25F83C", type: "checkmark" }
+			]
+			rewards: [
+				{ id: "2D169F2E57B3C09D", type: "xp", xp: 100 }
+			]
+		},
+		{
+			id: "3AF4D6C56834D105"
+			title: "Darker Still"
+			subtitle: "The Warden's halls"
+			description: ["Below the deep dark lies the &eOtherside&r. It opens with the story (Chapter 7); for now, listen for the Warden."]
+			x: 10.0d
+			y: 0.0d
+			shape: "circle"
+			dependencies: ["46850E4B39894F70"]
+			tasks: [
+				{ id: "849916BA89059682", type: "kill", entity: "minecraft:warden", value: 1L }
+			]
+			rewards: [
+				{ id: "3CC538B7EFED1F99", type: "xp", xp: 500 }
+			]
+		}
+	]
+}

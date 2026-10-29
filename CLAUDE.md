@@ -12,7 +12,7 @@
 - Combat: Epic Fight (+ Impactful, NeonSword). Talents: **Passive Skill Tree** (not Pufferfish). Origins (Forge) with Heritage + Fate layers.
 - Capital city: MineColonies (Town Hall level = city stage) + Easy NPC for story characters.
 - Quarry, power and pipes: Mekanism (Digital Miner). Every weapon has a unique colour scheme and a unique ability.
-- **Quest book:** the owner asked for the story to be built (2026-10-28), so the **main story, Chapters 1–12, is in** (`tools/quest_story.py`, 74 quests in all). The optional side tabs (tech, magic, world tutorials) still wait until the mod list is final. Every quest item, kill-task entity and dimension is checked on the test server by `tt_selftest.js`.
+- **Quest book:** the owner asked for the story to be built (2026-10-28), so the **main story, Chapters 1–12, is in** (`tools/quest_story.py`). Since 2026-10-29 the optional **Side Paths** group is in too (`tools/quest_side.py`, 53 quests: Cogwright Workshop = Create, The Deep Engines = Mekanism + AE2, Lumen Conclave Studies = Iron's Spells + Ars + Apotheosis, Emberhold Builders = MineColonies, Wayfarer's Guide); each tab opens off the story quest that introduces its faction. Every quest item, kill-task entity and dimension is checked on the test server by `tt_selftest.js`.
 - Tools: MCreator only for the small `tt_bridge` mod (`design/bridge/`; weapon abilities no longer need it); Blockbench for weapon models (briefs and pipeline: `blockbench/specs/weapons.md`; drop exports in `blockbench/exports/weapons/` and the build installs them).
 
 ## How the repo works

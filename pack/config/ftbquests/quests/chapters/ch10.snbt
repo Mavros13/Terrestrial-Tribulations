@@ -14,7 +14,7 @@
 			id: "570DF86AD9B78C47"
 			title: "The Mythic Crucible"
 			subtitle: "Ysolde's trials"
-			description: ["&6Ilsabet&r: &o\"She didn't hide the final Shards in realms. She hid them in trials.\"", "", "Crucible tier I: defeat the &cEnder Guardian&r (L_Ender's Cataclysm)."]
+			description: ["&6Ilsabet&r: &o\"She didn't hide the final Shards in realms. She hid them in trials.\"", "", "&7The End is what's left of the &dConvergence&7, the ley-lattice the Crown held together. It opens to you now.", "", "Crucible tier I: defeat the &cEnder Guardian&r in The End (L_Ender's Cataclysm)."]
 			x: 0.0d
 			y: 0.0d
 			shape: "gear"

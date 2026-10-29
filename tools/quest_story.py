@@ -229,7 +229,8 @@ def chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage, r_cmd
         {"key": "ch10", "title": "Chapter 10: The Mythic Crucible", "icon": "tt:crownshard_karambits", "quests": [
             q("c10_crucible", "The Mythic Crucible", "Ysolde's trials", 0, 0, ["c9_siege"], main=True,
               desc=["&6Ilsabet&r: &o\"She didn't hide the final Shards in realms. She hid them in trials.\"",
-                    "", "Crucible tier I: defeat the &cEnder Guardian&r (L_Ender's Cataclysm)."],
+                    "", "&7The End is what's left of the &dConvergence&7, the ley-lattice the Crown held together. It opens to you now.",
+                    "", "Crucible tier I: defeat the &cEnder Guardian&r in The End (L_Ender's Cataclysm)."],
               tasks=[t_kill("cataclysm:ender_guardian", 1)], rewards=[r_item("tt:crown_shard_fragment", 3), r_xp(3000), r_stage("tt_ch10_echoes")]),
             q("c10_t2", "Crucible Tier II", "Maledictus", 2, 0, ["c10_crucible"], main=True,
               desc=["Defeat &cMaledictus&r (L_Ender's Cataclysm). The sixth Shard lies beyond it."],
@@ -252,7 +253,7 @@ def chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage, r_cmd
               tasks=[t_check()], rewards=[r_item("tt:thornecutter"), r_xp(2000)]),
             q("c11_end", "The Bound Beast", "Malric's leash", 2, 0, ["c11_blade"], main=True,
               desc=["&5Malric&r: &o\"Little splinter of my Crown. Did you think you found them? They found you, for me.\"",
-                    "", "Enter &eThe End&r and slay the &cEnder Dragon&r, the Regent's bound beast."],
+                    "", "Enter the heart of the Convergence, &eThe End&r, and slay the &cEnder Dragon&r, the Regent's bound beast."],
               tasks=[t_dim("minecraft:the_end"), t_kill("minecraft:ender_dragon", 1)], rewards=[r_xp(5000)]),
             q("c11_regent", "The Hollow Regent", "Malric Thorne", 4, 0, ["c11_end"], main=True,
               desc=["&5Malric&r: &o\"One will, one Crown, and all of it ends. Stop fighting what you are.\"",

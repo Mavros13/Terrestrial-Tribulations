@@ -27,6 +27,13 @@
           "blue_skies:everdawn",
           "deeperdarker:otherside"
         ]
+      },
+      {
+        "stage": "tt_ch9_done",
+        "message": "The End won't open. What's left of the Convergence answers only to a Shard-Born who has held Emberhold's walls (Chapter 10).",
+        "dimensions": [
+          "minecraft:the_end"
+        ]
       }
     ]
   }

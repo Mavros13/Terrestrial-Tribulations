@@ -35,7 +35,9 @@ Placement: inside the Emberhold colony (MineColonies) from Chapter 2. During Cha
 ## Doran: blacksmith
 **Look:** broad, soot-blackened, leather apron, ember-orange forearm tattoos. **Voice:** blunt, few words, secretly sentimental.
 **Role:** Ch2 weapon smith. Forges the Ashfang Karambit. Later the weapon-upgrade NPC.
-**Trades (Easy NPC trading):** iron ingot ×3 → Rustbite Karambit · flint ×8 → bone shard ×4 · emerald ×2 → iron ingot ×3
+**Trades (Easy NPC trading):** iron ingot ×3 → Rustbite Karambit · flint ×8 → bone shard ×4 · emerald ×2 → iron ingot ×3 · coal ×15 → emerald ×1 · emerald ×1 → arrow ×16 · emerald ×3 → shield ×1 · emerald ×4 → grindstone ×1
+
+*Shop balance: open from Ch1, so only early-game goods. Doran buys coal, so a new player can earn emeralds; nothing here replaces a quest reward.*
 
 **Dialogue: "Fangs"** (Ch2, after the outpost defence)
 1. **Doran:** That thing that led the pack. You kept its teeth?

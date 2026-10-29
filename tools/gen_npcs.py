@@ -42,6 +42,12 @@ TRADE_ITEMS = {
     "precision mechanism": "create:precision_mechanism",
     "arcane essence": "irons_spellbooks:arcane_essence", "blank rune": "irons_spellbooks:blank_rune",
     "ink of the scholar": "irons_spellbooks:rare_ink",
+    "coal": "minecraft:coal", "arrow": "minecraft:arrow", "shield": "minecraft:shield", "grindstone": "minecraft:grindstone",
+    "large cogwheel": "create:large_cogwheel", "water wheel": "create:water_wheel", "engineer's goggles": "create:goggles",
+    "mechanical press": "create:mechanical_press", "paper": "minecraft:paper",
+    "common ink": "irons_spellbooks:common_ink", "uncommon ink": "irons_spellbooks:uncommon_ink",
+    "diamond": "minecraft:diamond", "name tag": "minecraft:name_tag", "ender pearl": "minecraft:ender_pearl",
+    "netherite scrap": "minecraft:netherite_scrap", "totem of undying": "minecraft:totem_of_undying",
 }
 MAX_BUTTONS = 6  # Easy NPC's dialog screen lays out at most six buttons (DialogScreenLayout); more pile up in one spot
 

@@ -6,7 +6,9 @@ Story beats (`docs/00-kickoff.md`, `design/story/boss-roles.md`): **Ch5 Kingdoms
 ## Ilsabet: Lumen Conclave enchanter (Ch5 on)
 **Look:** tall, pale, silver circlet, robes that shift from violet to white in the light, ink-stained fingers. **Voice:** precise, a little cold, curious about the player the way a scholar is curious about a specimen.
 **Role:** Conclave faction lead; gives the Prism Ward Staff; later the enchanting and spell-upgrade NPC. Placement: the Conclave tower in Emberhold (Town stage).
-**Trades:** lapis ×12 → arcane essence ×4 · amethyst shard ×8 → blank rune ×2 · Crown Shard dust ×1 → ink of the scholar ×1
+**Trades:** lapis ×12 → arcane essence ×4 · amethyst shard ×8 → blank rune ×2 · Crown Shard dust ×1 → ink of the scholar ×1 · paper ×24 → emerald ×1 · emerald ×4 → common ink ×1 · emerald ×10 → uncommon ink ×1
+
+*Shop balance: open from Ch5 with the Conclave line. Common and uncommon ink only; rare ink costs a Crown Shard fragment, a real story price. No epic or legendary ink.*
 
 **Dialogue: "A Specimen"** (Ch5, *The Conclave's Offer*)
 1. **Ilsabet:** So you're the Shard-Born. I expected you to glow.
@@ -62,7 +64,9 @@ Story beats (`docs/00-kickoff.md`, `design/story/boss-roles.md`): **Ch5 Kingdoms
 ## The Stranger: arrives in Ch6 (secretly Iron Choir; revealed in Ch8)
 **Look:** a traveller in a grey coat, too clean for the road, gloves never off, polite smile. **Voice:** warm, flattering, asks more than it answers. Never says where it's from.
 **Role:** merchant of rare Old Engine parts; quietly gathers information about the player and the Shards. Players who read closely should be suspicious; nothing in Ch6 confirms it.
-**Trades:** emerald ×6 → Old Engine fragment ×1 · emerald ×12 → precision mechanism ×2 · Crown Shard dust ×1 → emerald ×20 (*a very generous price, which is the point*)
+**Trades:** emerald ×6 → Old Engine fragment ×1 · emerald ×12 → precision mechanism ×2 · Crown Shard dust ×1 → emerald ×20 (*a very generous price, which is the point*) · diamond ×1 → emerald ×6 · emerald ×4 → name tag ×1 · emerald ×8 → ender pearl ×2 · emerald ×24 → netherite scrap ×1 · emerald ×32 → totem of undying ×1
+
+*Shop balance: open from Ch6. Rare finds at steep prices: he overpays for what you bring and overcharges for what he sells, which fits a collector who wants the Shards. The totem is the one late-game item, priced so it costs most of a Ch6 player's emeralds.*
 
 **Dialogue: "A Kind Word"** (Ch6, first meeting)
 1. **The Stranger:** The Shard-Born of Emberhold! I've heard so much. All good, of course.

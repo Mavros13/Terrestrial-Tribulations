@@ -6,7 +6,9 @@ Story beats from `docs/00-kickoff.md`: **Ch3 Echoes of the Old World** (ruins, O
 ## Pell: Cogwright Guild tinker (Ch3 to Ch5)
 **Look:** wiry, goggles pushed up into frizzy copper hair, a coat with more pockets than coat, brass prosthetic left hand that ticks. **Voice:** fast, delighted, forgets to finish sentences.
 **Role:** introduces Create in Ch3; gives the Cogwright Breaker line (Ch3–5); later the tech-tier NPC. Placement: a tent full of scrap beside the first ruin, moving into Emberhold once a workshop is built.
-**Trades:** andesite alloy ×8 → shaft ×16 · copper ingot ×6 → cogwheel ×8 · Old Engine fragment ×1 → emerald ×4
+**Trades:** andesite alloy ×8 → shaft ×16 · copper ingot ×6 → cogwheel ×8 · Old Engine fragment ×1 → emerald ×4 · copper ingot ×12 → emerald ×1 · emerald ×2 → large cogwheel ×2 · emerald ×3 → water wheel ×1 · emerald ×5 → engineer's goggles ×1 · emerald ×8 → mechanical press ×1
+
+*Shop balance: open from Ch3, when Create starts. Parts that save grinding, priced above crafting cost; the press is the Ch3–4 milestone, so it stays expensive. No brass-tier parts (Ch5+ quests).*
 
 **Dialogue: "The Ticking Hand"** (Ch3 opener, *Echoes of the Old World*)
 1. **Pell:** Don't touch that! It's... oh. You're not a Hollow. Good. Sorry. Hello.

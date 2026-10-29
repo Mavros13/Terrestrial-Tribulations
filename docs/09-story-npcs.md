@@ -29,4 +29,7 @@ change the skin, pose or position; conversations live under *Dialog*.
 ## Notes
 - Talking never gives items: rewards stay in the quest book. The quests that say "Talk to …" are still ticked by hand.
 - To change a line, edit `design/npcs/*.md` and rebuild; placed NPCs keep their old dialog until re-imported.
-- Not yet: trades (the scripts list them; set them in the editor's *Trading* tab), quest-aware menus.
+- Menus follow the story: a chapter's conversations appear once the previous chapter's quest stage is set (`tt_ch<N-1>_done`; Ch1 and Ch2 are always open). For testing, `/kubejs custom_command tt_story` unlocks them all.
+- Each NPC wears its own skin (`tools/gen_npc_skins.py`, painted from the **Look** lines; review sheet `blockbench/previews/npc-skins.png`).
+- A dialog shows at most six buttons, so hubs page with "More..." (2026-10-29 test: Doran's seven buttons piled up in one spot).
+- Not yet: trades (the scripts list them; set them in the editor's *Trading* tab).

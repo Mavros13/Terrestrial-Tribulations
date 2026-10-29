@@ -5,6 +5,9 @@ Format checked against Easy NPC's 1.20.1 source (MarkusBordihn/BOs-Easy-NPC, def
 core/Common/src/main/resources/data/easy_npc/default_preset/, DataPresetDataFiles.java): data-pack presets live in
 data/<namespace>/easy_npc/preset/ (since 6.x), are SNBT with PresetMetadata + data (the entity NBT), and dialogs are
 DialogData.DialogDataSet entries (Label <= 32 chars, Texts picked at random, Buttons with OPEN_NAMED_DIALOG actions).
+Skins: our own textures from tools/gen_npc_skins.py (SkinData Type RESOURCE_LOCATION, Easy NPC 7.8+); the variant
+stays as a fallback. Hub buttons carry PLAYER_TAG conditions on the story stages (KubeJS stages are player tags) and
+the hub hides locked buttons (dialog Options ButtonConditionMode HIDE); at most six buttons fit on one dialog.
 Place one in the world with:  /easy_npc preset import_new data tt:easy_npc/preset/<model>/<npc>.npc.snbt ~ ~ ~
 
 Each NPC gets a "default" hub dialog (opened on right-click) with one button per scripted conversation, labelled with
@@ -29,7 +32,14 @@ CAST = {
     "wren": (["Wren"], "Wren", "#5BB6E0", "humanoid_slim", "ALEX"),
     "sol": (["Archivist Sol", "Sol"], "Archivist Sol", "#D8C27A", "humanoid", "PROFESSOR_01"),
 }
-MAX_HUB = 5  # conversation buttons per hub page; the rest go behind "More..."
+MAX_BUTTONS = 6  # Easy NPC's dialog screen lays out at most six buttons (DialogScreenLayout); more pile up in one spot
+
+
+def chapter_tag(ch):
+    """Player tag that unlocks a chapter's conversations: the previous chapter's quest stage (KubeJS stages are
+    vanilla player tags without Game Stages). Ch1 and Ch2 are open from the start (there is no tt_ch1_done)."""
+    n = int(ch[2:]) if ch.startswith("Ch") and ch[2:].isdigit() else 0
+    return f"tt_ch{n - 1}_done" if n >= 3 else None
 
 
 def who(text):
@@ -103,18 +113,21 @@ def s(v):
     return '"' + str(v).replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
-def button(name, label, target):
-    return "{Actions:[{Cmd:%s,Type:\"OPEN_NAMED_DIALOG\"}],Label:%s,Name:%s}" % (s(target), s(label), s(name))
+def button(name, label, target, tag=None):
+    cond = "Conditions:[{Name:%s,Type:\"PLAYER_TAG\"}]," % s(tag) if tag else ""
+    return "{Actions:[{Cmd:%s,Type:\"OPEN_NAMED_DIALOG\"}],%sLabel:%s,Name:%s}" % (s(target), cond, s(label), s(name))
 
 
 def close_button(label):
     return "{Actions:[{Type:\"CLOSE_DIALOG\"}],Label:%s,Name:\"Goodbye\"}" % s(label)
 
 
-def dialog(label, name, texts, buttons):
+def dialog(label, name, texts, buttons, hide_locked=False):
+    assert len(buttons) <= MAX_BUTTONS, f"{label}: {len(buttons)} buttons, Easy NPC shows at most {MAX_BUTTONS}"
     b = f"Buttons:[{','.join(buttons)}]," if buttons else ""
+    o = "Options:{ButtonConditionMode:\"HIDE\"}," if hide_locked else ""
     t = ",".join("{Text:%s}" % s(x) for x in texts)
-    return "{%sLabel:%s,Name:%s,Texts:[%s]}" % (b, s(label), s(name[:32]), t)
+    return "{%sLabel:%s,Name:%s,%sTexts:[%s]}" % (b, s(label), s(name[:32]), o, t)
 
 
 def build(key, data):
@@ -124,7 +137,7 @@ def build(key, data):
         if not talk["lines"]:
             continue
         base = f"t{i}"
-        hub.append((f"{talk['ch']} · {talk['title']}".strip(" ·"), f"{base}_{talk['lines'][0]['n']}"))
+        hub.append((talk["title"], f"{base}_{talk['lines'][0]['n']}", chapter_tag(talk["ch"])))
         nums = [ln["n"] for ln in talk["lines"]]
         for j, ln in enumerate(talk["lines"]):
             buttons = []
@@ -137,25 +150,33 @@ def build(key, data):
             dialogs.append(dialog(f"{base}_{ln['n']}", f"{talk['title']} {ln['n']}", [ln["text"]], buttons))
     if data["chat"]:
         dialogs.append(dialog("chat", "Chat", data["chat"], [button("Back", "chat_b", "default")]))
-    # hub pages
-    pages = [hub[i:i + MAX_HUB] for i in range(0, len(hub), MAX_HUB)] or [[]]
+    # hub pages: talks of chapters the player hasn't reached are hidden (button conditions on the story stage tags)
+    pages, rest, first = [], list(hub), True
+    while first or rest:
+        fixed = 1 + (1 if first and data["chat"] else 0)               # Goodbye / Back, and Chat on the first page
+        cap = MAX_BUTTONS - fixed
+        take = rest[:cap] if len(rest) <= cap else rest[:cap - 1]      # leave room for "More..."
+        pages.append(take)
+        rest, first = rest[len(take):], False
     for p, page in enumerate(pages):
         label = "default" if p == 0 else f"more{p}"
-        buttons = [button(n, f"h{p}_{k}", tgt) for k, (n, tgt) in enumerate(page)]
+        buttons = [button(n, f"h{p}_{k}", tgt, tag) for k, (n, tgt, tag) in enumerate(page)]
         if p + 1 < len(pages):
-            buttons.append(button("More...", f"h{p}_more", f"more{p + 1}"))
+            buttons.append(button("More...", f"h{p}_more", f"more{p + 1}", pages[p + 1][0][2]))
         if p == 0 and data["chat"]:
             buttons.append(button("Chat", "h0_chat", "chat"))
-        buttons.append(close_button(f"h{p}_close"))
+        buttons.append(close_button(f"h{p}_close") if p == 0 else button("Back", f"h{p}_back", "default"))
         greet = data["chat"][:3] or ["Yes?"]
-        dialogs.append(dialog(label, display if p == 0 else f"{display} {p + 1}", greet if p == 0 else ["What else?"], buttons))
+        dialogs.append(dialog(label, display if p == 0 else f"{display} {p + 1}", greet if p == 0 else ["What else?"],
+                              buttons, hide_locked=True))
     meta = ("PresetMetadata:{author:\"Terrestrial Tribulations\",category:\"Story\",description:%s,"
             "entityTypeId:\"easy_npc:%s\",name:%s,variantType:%s,version:\"1.0.0\"}") % (
         s(f"Story NPC generated by tools/gen_npcs.py from design/npcs/. {len(hub)} conversations."), model, s(display), s(variant))
     body = ("data:{CustomName:%s,DialogData:{DialogDataSet:[%s],Type:\"STANDARD\"},EasyNPCVersion:3,Invulnerable:1b,"
             "ObjectiveData:{ObjectiveDataSet:[{Type:\"LOOK_AT_PLAYER\"},{Type:\"LOOK_AT_RESET\"}]},PersistenceRequired:1b,"
-            "VariantType:%s,id:\"easy_npc:%s\"}") % (
-        s('{"color":"%s","text":"%s"}' % (color, display)), ",\n".join(dialogs), s(variant), model)
+            "SkinData:{Texture:%s,Type:\"RESOURCE_LOCATION\"},VariantType:%s,id:\"easy_npc:%s\"}") % (
+        s('{"color":"%s","text":"%s"}' % (color, display)), ",\n".join(dialogs),
+        s(f"tt:textures/entity/npc/{key}.png"), s(variant), model)
     return model, "{\n" + meta + ",\n" + body + "\n}\n", len(hub), len(dialogs)
 
 

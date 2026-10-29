@@ -28,6 +28,7 @@ def main():
     run(sys.executable, os.path.join(ROOT, "tools", "gen_origins.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "gen_skilltree.py"))  # after build_content: merges into lang
     run(sys.executable, os.path.join(ROOT, "tools", "gen_animations.py"))
+    run(sys.executable, os.path.join(ROOT, "tools", "gen_npc_skins.py"))  # story NPC skins (Easy NPC textures)
     run(sys.executable, os.path.join(ROOT, "tools", "gen_npcs.py"))  # Easy NPC story presets from design/npcs/
     run(sys.executable, os.path.join(ROOT, "tools", "gen_selftest.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "check_pack.py"))  # stops the build on broken pack files

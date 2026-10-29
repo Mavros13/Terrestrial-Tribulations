@@ -197,6 +197,12 @@ class Model:
         return self.mats.index(m)
 
     def box(self, name, frm, to, m, rot=None):
+        # Shapes are written with blades, axe heads and hooks on +X; in game that side faces back toward the
+        # holder (Oscar, 2026-10-29 test: cleaver and halberd "backwards"), so every element is mirrored to -X.
+        frm, to = [16 - to[0], frm[1], frm[2]], [16 - frm[0], to[1], to[2]]
+        if rot:
+            axis, angle, origin = rot
+            rot = (axis, angle if axis == "x" else -angle, [16 - origin[0], origin[1], origin[2]])
         frm = [round(v, 3) for v in frm]
         to = [round(v, 3) for v in to]
         for v in frm + to:

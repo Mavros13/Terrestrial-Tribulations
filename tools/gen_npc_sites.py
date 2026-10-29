@@ -783,8 +783,8 @@ def main():
     cfg["moves"] = {npc: {"stage": st, "buildings": ["minecolonies:" + b for b in blds], "spots": spots,
                           "name": CAST[npc][1], "line": line}
                     for npc, (st, blds, spots, line) in MOVES.items()}
-    cfg["work"] = {CAST[npc][1]: {"swing": bool(sw), "sound": snd, "particle": prt}
-                   for npc, (_item, sw, snd, prt) in WORK.items() if sw or snd or prt}
+    cfg["work"] = {CAST[npc][1]: {"swing": bool(w.get("swing")), "sound": w.get("sound"), "particle": w.get("particle")}
+                   for npc, w in WORK.items() if w.get("swing") or w.get("sound") or w.get("particle")}
     write(os.path.join(DATA, "tags", "worldgen", "structure", "npc_sites.json"), {"values": [f"tt:npc/{s}" for s in SITES]})
     write(CFG, cfg)
     print(f"NPC sites: {len(SITES)} structures ({sum(len(v['npcs']) for v in cfg['sites'].values())} NPCs), "

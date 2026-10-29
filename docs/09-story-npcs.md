@@ -54,11 +54,24 @@ Tamsin never comes into the colony, and the Stranger keeps his caravan.
 
 ## Looking busy (2026-10-29)
 Easy NPC 1.20.1 has poses and its own limb and head motion, but no keyframe animations for its NPCs (checked against
-its wiki and changelogs; animation libraries like playerAnimator only drive players). So each NPC holds a tool of
-their trade (`WORK` in `tools/gen_npcs.py`) and, while a player is within 20 blocks, works every few seconds: an arm
-swing plus a sound and a few particles at their hands. Doran hammers with sparks at the anvil, Rhosk drills sword
-swings, Ilsabet chimes amethyst, Sol turns pages, Tamsin tends a sapling. They still turn to look at you. Inviting someone before you have a Town Hall
-gets a line telling you to plant the charter first.
+its wiki and changelogs; animation libraries like playerAnimator only drive players). So, from `WORK` in
+`tools/gen_npcs.py`:
+
+| NPC | Hands (main / off) | Busy with |
+|---|---|---|
+| Elder Maera | paper | hands behind her back (pose), pages rustle |
+| Doran | pickaxe / Ashfang Karambit (the blade he's forging) | hammering: anvil clang and sparks |
+| Captain Rhosk | Thornwatch Halberd / shield | drill swings |
+| Pell | Cogwright Breaker / Create wrench | hammering, copper clanks and smoke |
+| Tamsin | Rootstring Bow / oak sapling | holds the sapling out (pose), leaves rustle |
+| Ilsabet | Prism Ward Staff / amethyst shard | staff flicks, amethyst chimes, enchant sparkles |
+| The Stranger | emerald / Sculkheart Dagger (a hint before Chapter 8) | offers the emerald (pose) |
+| Wren | spyglass / Rustbite Karambit (the Ember scouts' blade) | spyglass to her eye (pose) |
+| Archivist Sol | book | reading, head bowed (pose), pages turn |
+
+The work loop runs while a player is within 20 blocks: every few seconds an arm swing (for those without a pose),
+a sound and a few particles at their hands. Poses are Easy NPC custom poses (`ModelData`, `Pose:"CUSTOM"`), still
+stances that can be changed in the Easy NPC editor.
 
 ## Placing one by hand (cheats on, stand where it should go)
 

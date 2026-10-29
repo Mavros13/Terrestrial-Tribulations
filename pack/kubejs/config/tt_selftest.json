@@ -397,7 +397,6 @@
     "minecraft:grindstone",
     "minecraft:iron_ingot",
     "minecraft:iron_pickaxe",
-    "minecraft:iron_sword",
     "minecraft:lapis_lazuli",
     "minecraft:name_tag",
     "minecraft:netherite_scrap",
@@ -406,10 +405,16 @@
     "minecraft:shield",
     "minecraft:spyglass",
     "minecraft:totem_of_undying",
+    "tt:ashfang_karambit",
     "tt:bone_shard",
+    "tt:cogwright_breaker",
     "tt:crown_shard_fragment",
     "tt:old_engine_core",
-    "tt:rustbite_karambit"
+    "tt:prism_ward_staff",
+    "tt:rootstring_bow",
+    "tt:rustbite_karambit",
+    "tt:sculkheart_dagger",
+    "tt:thornwatch_halberd"
   ],
   "quest_dimensions": [
     "aether:the_aether",

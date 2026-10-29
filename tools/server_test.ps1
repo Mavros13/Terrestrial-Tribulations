@@ -164,6 +164,19 @@ try {
       if ($after -and $_ -match $keep -and $_ -notmatch $noise -and $_ -notmatch $reloadNoise -and $_ -notmatch '^\s') { $_ }
     } | Select-Object -First 1200 | ForEach-Object { $lines.Add($_) }
   }
+  # Third-party data that fails to load, by ID, so it can be switched off with a data pack override
+  $lines.Add(''); $lines.Add('=== corewithstuff: failed recipes and loot tables (distinct IDs) ===')
+  if (Test-Path $log) {
+    Select-String -Path $log -Pattern 'corewithstuff:[a-z0-9_/.\-]+' -AllMatches |
+      Where-Object { $_.Line -match 'recipe|loot|Couldn''t parse|Failed to' } |
+      ForEach-Object { $kind = if ($_.Line -match 'loot') { 'loot' } else { 'recipe' }; foreach ($m in $_.Matches) { "$kind $($m.Value)" } } |
+      Sort-Object -Unique | ForEach-Object { $lines.Add($_) }
+    $lines.Add(''); $lines.Add('--- sample lines ---')
+    Select-String -Path $log -Pattern 'corewithstuff' | Select-Object -First 3 | ForEach-Object { $lines.Add($_.Line) }
+    $lines.Add(''); $lines.Add('--- empty block id command, with context ---')
+    Select-String -Path $log -Pattern "Unknown block type 'minecraft:'" -Context 3,1 | Select-Object -First 2 | ForEach-Object {
+      $_.Context.PreContext | ForEach-Object { $lines.Add($_) }; $lines.Add($_.Line); $_.Context.PostContext | ForEach-Object { $lines.Add($_) } }
+  }
   $lines.Add(''); $lines.Add('=== latest.log: errors and our content ===')
   if (Test-Path $log) {
     Select-String -Path $log -Pattern 'ERROR|Exception|\[TT\]|tt:|kubejs|Failed to load|Done \(' |

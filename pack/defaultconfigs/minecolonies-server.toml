@@ -1,0 +1,12 @@
+# Terrestrial Tribulations: MineColonies defaults for new worlds (Forge copies defaultconfigs/ into a world's
+# serverconfig/ only when the world has none, so existing worlds keep their settings). Only the keys we change are
+# listed; MineColonies fills in the rest. Keys checked against ldtteam/minecolonies version/1.20 ServerConfiguration.
+# Why: colonies are the pack's biggest steady load; fewer citizens and smaller raids keep FPS and TPS steady.
+
+[gameplay]
+	# default 250
+	maxcitizenpercolony = 150
+
+[combat]
+	# default 80: an 80-raider horde is a big frame-time spike
+	maxRaiders = 40

@@ -53,11 +53,11 @@ New libraries: Resourceful Config (for Structure Layout Optimizer) and Almanac L
   - Entity distance 75%, particles Decreased.
   - Clouds Fast, mipmaps 2.
 - **Heavy client mods, tuned rather than removed:**
-  - Sound Physics Remastered: lower ray count.
-  - Wakes Reforged: lower quality.
+  - **Done: Sound Physics Remastered** first-run defaults at 16 rays and 3 bounces, down from 32 and 4 (`config/defaultoptions/extra/`, so they only apply when a player has no config yet).
+  - Wakes Reforged: left at its defaults. Its 1.4.1 source isn't public, so its config keys can't be checked, and the defaults are already cheap (only boats draw splash planes).
   - Shaders (Oculus) off by default.
   - FancyMenu and Legendary Tooltips: check their GUI cost with Spark.
-- **MineColonies:** cap citizens per colony and use its pathfinding thread setting, since colonies are the biggest steady load.
+- **Done: MineColonies** defaults for new worlds (`defaultconfigs/minecolonies-server.toml`): at most 150 citizens per colony (default 250) and raids of at most 40 (default 80). Its 1.20 build has no pathfinding-thread setting.
 - **Mob caps:** Champions and Botz Mob Leveling make each mob costlier, so keep vanilla spawn caps (no mod raising them) and check mob counts with Spark.
 - **Done: Java arguments.** Recommended G1 settings for 8 GB are in `docs/05-test-build-1-install.md` step 4.
 

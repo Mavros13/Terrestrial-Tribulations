@@ -740,6 +740,14 @@
       "_note": "End overhaul (decided 2026-10-27): Stardust Labs, same team as Terralith and Incendium; pairs with YUNG's Better End Island."
     },
     {
+      "name": "Default Options",
+      "match": "defaultoptions",
+      "modrinth": "default-options",
+      "curseforge": "default-options",
+      "stage": "A",
+      "_note": "Turns Karambit Vault x Punchy on once per player (config/defaultoptions-common.toml) without overwriting their own settings on pack updates. Needs Balm (pulled in by ModSync)."
+    },
+    {
       "name": "Punchy",
       "match": "punchy",
       "modrinth": "punchy-fpa",

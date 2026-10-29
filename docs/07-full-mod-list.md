@@ -77,6 +77,7 @@ Stages in `pack/tt-sync/mods.json`: **A/B/C = Test Build 1**, **D = Test Build 2
 | Goner's Armor Trims | 🔎 1.0.4 | ⚠️ Replaces "More Armor Trims", which has no Forge 1.20.1 build I could find |
 | Cosmetic Armor Reworked | ❔ | Armour transmog |
 | Karambit Vault x Punchy (resource pack) | 🔎 | ⚠️ Punchy animations are Fabric-only. Our own karambits need our own models (or the author's permission) |
+| Default Options (+ Balm) | ✅ 18.0.5 | Switches Karambit Vault x Punchy on once per player without shipping `options.txt` (2026-10-29) |
 
 ## World generation and structures
 | Mod | Status | Notes |

@@ -149,9 +149,9 @@ if (ttSites) Object.keys(ttSites.moves || {}).forEach(npc => { ttMovedByName[ttS
 // Holstered weapons: no Forge 1.20.1 mod draws back or belt items on NPCs, so a vanilla item_display of the weapon
 // (its own model and texture) stands at the NPC, turned with its body, offset onto the back or the belt. Display
 // rotation is the entity yaw, so local +z is the NPC's front: the back is -z, the belt is to the side.
-const TT_HOLSTER = {
-  back: '{translation:[0.0f,1.25f,-0.24f],left_rotation:[0.0f,0.0f,0.3827f,0.9239f],scale:[0.9f,0.9f,0.9f],right_rotation:[0.0f,0.0f,0.0f,1.0f]}',
-  belt: '{translation:[0.3f,0.78f,0.02f],left_rotation:[0.0f,0.7071f,0.0f,0.7071f],scale:[0.6f,0.6f,0.6f],right_rotation:[0.0f,0.0f,-0.866f,0.5f]}'
+function ttHolsterNbt(h) {  // config "holsters" (gen_npcs.py HOLSTERS) -> item_display transformation SNBT
+  const f = a => '[' + a.map(v => v + 'f').join(',') + ']'
+  return `{translation:${f(h.translation)},left_rotation:${f(h.left_rotation)},scale:${f(h.scale)},right_rotation:${f(h.right_rotation)}}`
 }
 function ttHolsterTag(e) { return 'tt_holster_' + String(e.customName.string).toLowerCase().replace(/[^a-z]/g, '') }
 
@@ -174,7 +174,7 @@ function ttApplyLook(server, e, look) {
   if (look.holster)
     server.runCommandSilent(`execute in ${e.level.dimension} run summon minecraft:item_display ${e.x} ${e.y} ${e.z} ` +
       `{Tags:["tt_holster","${tag}"],Rotation:[${e.yBodyRot}f,0.0f],item:{id:"${look.holster.item}",Count:1b},` +
-      `item_display:"fixed",transformation:${TT_HOLSTER[look.holster.at]}}`)
+      `item_display:"fixed",transformation:${ttHolsterNbt(ttSites.holsters[look.holster.at])}}`)
 }
 
 EntityEvents.spawned(event => {

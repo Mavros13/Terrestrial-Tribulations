@@ -25,7 +25,7 @@ Data folders are 1.20.1 names: structures/, loot_tables/ (both singular from 1.2
 import gzip, io, json, os, struct, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gen_npcs import CAST, MOVES, WORK, LOOKS
+from gen_npcs import CAST, MOVES, WORK, LOOKS, HOLSTERS
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "pack", "kubejs", "data", "tt")
@@ -784,6 +784,7 @@ def main():
                           "name": CAST[npc][1], "line": line}
                     for npc, (st, blds, spots, line) in MOVES.items()}
     cfg["work"] = {CAST[npc][1]: {"sound": w.get("sound"), "particle": w.get("particle")} for npc, w in WORK.items()}
+    cfg["holsters"] = HOLSTERS
     # every part listed, so switching looks resets the parts the previous pose had turned
     parts = ["Head", "Body", "RightArm", "LeftArm", "RightLeg", "LeftLeg"]
     cfg["looks"] = {CAST[npc][1]: [{"main": lk[0] or "", "off": lk[1] or "",

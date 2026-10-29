@@ -98,6 +98,15 @@ BEHIND = {"RightArm": (0.25, 0.0, 0.1), "LeftArm": (0.25, 0.0, -0.1)}
 AT_REST = {"RightArm": (-0.3, 0.0, 0.05)}
 READING = {"Head": (0.35, 0.0, 0.0), "RightArm": (-0.7, 0.25, 0.0), "LeftArm": (-0.6, -0.25, 0.0)}
 INSPECT = {"Head": (0.3, 0.0, 0.0), "RightArm": (-0.95, -0.2, 0.0)}
+# Where a holstered weapon sits: an item_display transformation (vanilla Display.ItemDisplay, "fixed" item context).
+# Display space: origin at the NPC's feet, turned with its body, +z = its front, so the back is -z. Quaternions x,y,z,w.
+# Preview: blockbench/previews/npc-holsters.html (tools/build_holster_preview.py).
+HOLSTERS = {
+    "back": {"translation": [0.0, 1.05, -0.2], "left_rotation": [0.0, 0.0, 0.0, 1.0], "scale": [0.8, 0.8, 0.8],
+             "right_rotation": [0.0, 0.0, 0.0, 1.0]},
+    "belt": {"translation": [0.2, 0.72, -0.16], "left_rotation": [0.0, 0.3827, 0.0, 0.9239], "scale": [0.55, 0.55, 0.55],
+             "right_rotation": [0.0, 0.0, 0.7071, 0.7071]},
+}
 LOOKS = {  # (main hand, off hand, pose, holster: ("back" | "belt", item) or None)
     "maera": [("minecraft:paper", None, BEHIND), (None, None, BEHIND), ("minecraft:map", None, READING)],
     "doran": [("minecraft:iron_pickaxe", "tt:ashfang_karambit", None), ("tt:ashfang_karambit", None, INSPECT),

@@ -224,6 +224,56 @@
       "particle": "minecraft:enchant"
     }
   },
+  "holsters": {
+    "back": {
+      "translation": [
+        0.0,
+        1.05,
+        -0.2
+      ],
+      "left_rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "right_rotation": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    "belt": {
+      "translation": [
+        0.2,
+        0.72,
+        -0.16
+      ],
+      "left_rotation": [
+        0.0,
+        0.3827,
+        0.0,
+        0.9239
+      ],
+      "scale": [
+        0.55,
+        0.55,
+        0.55
+      ],
+      "right_rotation": [
+        0.0,
+        0.0,
+        0.7071,
+        0.7071
+      ]
+    }
+  },
   "looks": {
     "Elder Maera": [
       {

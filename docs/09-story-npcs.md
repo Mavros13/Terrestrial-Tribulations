@@ -73,7 +73,7 @@ their arm while working). **Each time an NPC loads in, it takes one at random.**
 Weapons come from our roster and match the story (the Stranger's dagger hints at his Chapter 8 reveal).
 **Holsters:** no Forge 1.20.1 mod draws back or belt items on NPCs (Stowed is NeoForge; BackSlot and Combat
 Amenities are Fabric; all are player-only). So off-duty looks pin a vanilla `item_display` of the weapon (its own
-model and texture) to the NPC's back or belt (tags `tt_holster`, `tt_holster_<name>`). The script turns it with the
+model and texture) to the NPC's back or belt (tags `tt_holster`, `tt_holster_<name>`; placement in `HOLSTERS`, preview `blockbench/previews/npc-holsters.html`). The script turns it with the
 NPC's body once a second while a player is near, and replaces it whenever the NPC takes a new look. While a player is within 20 blocks, every few seconds they also make a sound and a few particles
 at their hands (`WORK`).
 

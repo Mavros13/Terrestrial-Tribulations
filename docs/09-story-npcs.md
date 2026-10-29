@@ -47,7 +47,17 @@ for the first block on their list. If none is there (MineColonies styles differ)
 | Wren | `tt_ch6_done` | Town Hall | a door or fence gate (the way in) |
 | Archivist Sol | `tt_ch7_done` | Library | a lectern, then a bookshelf |
 
-Tamsin never comes into the colony, and the Stranger keeps his caravan. Inviting someone before you have a Town Hall
+Every free tile beside those blocks is remembered, and **each time the NPC's chunk loads they start on a random one**:
+Doran is at the anvil one day and the blast furnace the next, Maera on a different side of the Town Hall block.
+
+Tamsin never comes into the colony, and the Stranger keeps his caravan.
+
+## Looking busy (2026-10-29)
+Easy NPC 1.20.1 has poses and its own limb and head motion, but no keyframe animations for its NPCs (checked against
+its wiki and changelogs; animation libraries like playerAnimator only drive players). So each NPC holds a tool of
+their trade (`WORK` in `tools/gen_npcs.py`) and, while a player is within 20 blocks, works every few seconds: an arm
+swing plus a sound and a few particles at their hands. Doran hammers with sparks at the anvil, Rhosk drills sword
+swings, Ilsabet chimes amethyst, Sol turns pages, Tamsin tends a sapling. They still turn to look at you. Inviting someone before you have a Town Hall
 gets a line telling you to plant the charter first.
 
 ## Placing one by hand (cheats on, stand where it should go)

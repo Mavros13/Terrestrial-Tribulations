@@ -60,7 +60,8 @@ Survival is easier for this (skills charge by hitting things): `/gamemode surviv
 - **Moving in:** in creative, place a Town Hall and paste a Blacksmith's Hut with the build tool's Paste button.
   `/kubejs custom_command tt_story`, then `/kubejs custom_command tt_sites` and walk into the camp. Doran's menu
   shows **Come to Emberhold**; press it and he appears inside the Blacksmith, at its anvil and facing it (or the Town
-  Hall if the pasted hut doesn't count as built). Talk to him there: the button is gone.
+  Hall if the pasted hut doesn't count as built). Talk to him there: the button is gone. Fly 200 blocks away and back: he may now stand at another spot. Near him,
+  he swings his pickaxe now and then with an anvil sound and sparks.
 
 ## 4. Side Paths (5 min)
 - The quest book has a **Side Paths** group with 5 tabs.

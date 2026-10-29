@@ -9,6 +9,8 @@
 //   shows "Come to Emberhold" in that NPC's menu. The button tags the player tt_invite_<npc>; the script then moves the
 //   same NPC into the first built building of a listed type in the player's colony (else the Town Hall), once, and
 //   stands it beside a fitting block inside (config "spots": anvil, lectern...), facing it; else by the hut block.
+//   Every free tile beside those blocks is stored, and each time the NPC's chunk loads it starts on a random one.
+// - Looking busy: story NPCs hold a tool of their trade and now and then work (swing, sound, particles; "work").
 // Uses $TT_TagKey, $TT_Registries, $TT_ResourceLocation and ttSafe from tt_abilities.js, $TT_AABB, ttColony and
 // ttBuildingManager from tt_active_abilities.js (shared scope).
 // DRAFT: untested in-game.
@@ -62,37 +64,41 @@ function ttSpotMatch(id, spot) {
   return spot.charAt(0) == '*' ? id.endsWith(spot.substring(1)) : id == spot
 }
 
-// Where an NPC stands inside a building: beside the first of its spot blocks found within the walls (earlier spots
-// win), else beside the hut block, else anywhere free near the building's position.
-function ttBuildingSpot(level, building, spots) {
+// Every tile an NPC could stand on inside a building: each free side of every spot block within the walls (anvil,
+// smithing table, blast furnace...), else of the hut block; at most 16, each with the yaw that faces its block.
+function ttBuildingSpots(level, building, spots) {
   const pos = building.getPosition()
   let lo = pos, hi = pos
   try { let c = building.getCorners(); lo = c.getA(); hi = c.getB() } catch (e) { }
   const x0 = Math.min(lo.x, hi.x), x1 = Math.max(lo.x, hi.x), z0 = Math.min(lo.z, hi.z), z1 = Math.max(lo.z, hi.z)
   const y0 = Math.min(lo.y, hi.y), y1 = Math.max(lo.y, hi.y)
-  let best = null, bestRank = spots.length
-  for (let y = y0; y <= y1 && bestRank > 0; y++)
-    for (let x = x0; x <= x1 && bestRank > 0; x++)
-      for (let z = z0; z <= z1 && bestRank > 0; z++) {
-        const id = String(level.getBlock(x, y, z).id)
-        if (id == 'minecraft:air') continue
-        for (let i = 0; i < bestRank; i++) {
-          if (ttSpotMatch(id, spots[i])) {
-            const at = ttBeside(level, { x: x, y: y, z: z })
-            if (at) { best = at; bestRank = i }
-            break
-          }
-        }
+  const out = []
+  const sides = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+  const addAround = (bx, by, bz) => {
+    for (let i = 0; i < 4 && out.length < 16; i++)
+      for (let dy = 0; dy >= -1; dy--) {
+        const x = bx + sides[i][0], y = by + dy, z = bz + sides[i][1]
+        if (ttFree(level, x, y, z)) { out.push({ x: x, y: y, z: z, yaw: Math.atan2(sides[i][0], -sides[i][1]) * 180 / Math.PI }); break }
       }
-  if (best) return best
-  const hut = ttBeside(level, pos)
-  if (hut) return hut
-  for (let r = 2; r <= 5; r++)
-    for (let dx = -r; dx <= r; dx++)
-      for (let dz = -r; dz <= r; dz++)
-        for (let dy = -1; dy <= 2; dy++)
-          if (ttFree(level, pos.x + dx, pos.y + dy, pos.z + dz)) return { x: pos.x + dx, y: pos.y + dy, z: pos.z + dz, yaw: 0 }
-  return { x: pos.x, y: pos.y + 1, z: pos.z, yaw: 0 }
+  }
+  for (let y = y0; y <= y1 && out.length < 16; y++)
+    for (let x = x0; x <= x1 && out.length < 16; x++)
+      for (let z = z0; z <= z1 && out.length < 16; z++) {
+        const id = String(level.getBlock(x, y, z).id)
+        if (id != 'minecraft:air' && spots.some(sp => ttSpotMatch(id, sp))) addAround(x, y, z)
+      }
+  if (!out.length) addAround(pos.x, pos.y, pos.z)
+  if (!out.length) out.push({ x: pos.x, y: pos.y + 1, z: pos.z, yaw: 0 })
+  return out
+}
+
+// Put an NPC on one of its stored spots at random (still free), facing its block.
+function ttPlaceAtRandomSpot(level, e, spots) {
+  const free = spots.filter(sp => ttFree(level, sp.x, sp.y, sp.z))
+  if (!free.length) return
+  const sp = free[Math.floor(Math.random() * free.length)]
+  e.teleportTo(sp.x + 0.5, sp.y, sp.z + 0.5)
+  e.setYRot(sp.yaw); e.setYHeadRot(sp.yaw); e.setYBodyRot(sp.yaw)
 }
 
 // The building an NPC moves into: the first built one of its types, else the Town Hall.
@@ -124,17 +130,54 @@ function ttMoveNpc(server, p, npc, mv) {
   // load the building's chunk (the colony may be far away), then pick the spot and move the NPC there
   server.runCommandSilent(`execute in minecraft:overworld run forceload add ${hub.x} ${hub.z}`)
   server.scheduleInTicks(5, () => ttSafe('npc_move', () => {
-    const spot = ttBuildingSpot(level, building, mv.spots)
-    found.teleportTo(spot.x + 0.5, spot.y, spot.z + 0.5)
-    found.setYRot(spot.yaw); found.setYHeadRot(spot.yaw); found.setYBodyRot(spot.yaw)
-    console.info(`[TT] ${npc} moved into Emberhold at ${spot.x} ${spot.y} ${spot.z}`)
+    const spots = ttBuildingSpots(level, building, mv.spots)
+    spd.putString('tt_npc_spots_' + npc, JSON.stringify(spots))  // used again each time the NPC's chunk loads
+    ttPlaceAtRandomSpot(level, found, spots)
+    console.info(`[TT] ${npc} moved into Emberhold (${spots.length} spots)`)
   }))
   server.scheduleInTicks(200, () => server.runCommandSilent(`execute in minecraft:overworld run forceload remove ${hub.x} ${hub.z}`))
+}
+
+// Each time a moved NPC's chunk loads, it starts at a different one of its spots (Doran at the anvil one day, the
+// blast furnace the next). Done a second later, once the chunk around it is ready.
+const ttMovedByName = {}
+if (ttSites) Object.keys(ttSites.moves || {}).forEach(npc => { ttMovedByName[ttSites.moves[npc].name] = npc })
+EntityEvents.spawned(event => {
+  const e = event.entity
+  if (!ttSites || !String(e.type).startsWith('easy_npc:') || !e.customName) return
+  const npc = ttMovedByName[String(e.customName.string)]
+  if (!npc) return
+  const server = event.server, spd = server.persistentData
+  if (!spd.getBoolean('tt_npc_moved_' + npc) || !spd.contains('tt_npc_spots_' + npc)) return
+  server.scheduleInTicks(20, () => ttSafe('npc_spot', () => {
+    if (e.isAlive()) ttPlaceAtRandomSpot(e.level, e, JSON.parse(String(spd.getString('tt_npc_spots_' + npc))))
+  }))
+})
+
+// Looking busy: every 3 s, each story NPC within 20 blocks of a player may work for a moment (arm swing, sound,
+// particles at the hands; config "work"). An NPC works at most once per 3 s however many players are near.
+let $TT_Hand = null
+try { $TT_Hand = Java.loadClass('net.minecraft.world.InteractionHand') } catch (e) { }
+function ttWork(server, p) {
+  const box = new $TT_AABB(p.x - 20, p.y - 8, p.z - 20, p.x + 20, p.y + 8, p.z + 20)
+  const now = p.level.gameTime
+  p.level.getEntitiesWithin(box).forEach(e => {
+    if (!String(e.type).startsWith('easy_npc:') || !e.customName) return
+    const w = ttSites.work[String(e.customName.string)]
+    if (!w || e.persistentData.getLong('tt_work') > now || Math.random() < 0.4) return
+    e.persistentData.putLong('tt_work', now + 50)
+    if (w.swing && $TT_Hand) e.swing($TT_Hand.MAIN_HAND, true)
+    const yaw = e.yRot * Math.PI / 180
+    const hx = e.x - Math.sin(yaw) * 0.6, hz = e.z + Math.cos(yaw) * 0.6, hy = e.y + 1.1
+    if (w.sound) server.runCommandSilent(`execute in minecraft:overworld positioned ${hx} ${hy} ${hz} run playsound ${w.sound} neutral @a[distance=..16] ~ ~ ~ 0.35 ${0.9 + Math.random() * 0.2}`)
+    if (w.particle) server.runCommandSilent(`execute in minecraft:overworld run particle ${w.particle} ${hx} ${hy} ${hz} 0.15 0.1 0.15 0.02 4`)
+  })
 }
 
 PlayerEvents.tick(event => {
   const p = event.player
   if (!ttSites || p.level.gameTime % 20 != 7 || String(p.level.dimension) != 'minecraft:overworld') return
+  if (ttSites.work && p.level.gameTime % 60 == 7) ttSafe('npc_work', () => ttWork(event.server, p))
   ttSafe('npc_moves', () => {
     const spd = event.server.persistentData
     Object.keys(ttSites.moves || {}).forEach(npc => {

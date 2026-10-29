@@ -193,5 +193,42 @@
       "name": "Archivist Sol",
       "line": "If you have shelves, I have books. A library, then."
     }
+  },
+  "work": {
+    "Elder Maera": {
+      "swing": false,
+      "sound": "minecraft:item.book.page_turn",
+      "particle": null
+    },
+    "Doran": {
+      "swing": true,
+      "sound": "minecraft:block.anvil.use",
+      "particle": "minecraft:lava"
+    },
+    "Captain Rhosk": {
+      "swing": true,
+      "sound": "minecraft:entity.player.attack.sweep",
+      "particle": "minecraft:sweep_attack"
+    },
+    "Pell": {
+      "swing": true,
+      "sound": "minecraft:block.copper.hit",
+      "particle": "minecraft:smoke"
+    },
+    "Tamsin Rootwarden": {
+      "swing": false,
+      "sound": "minecraft:block.azalea_leaves.place",
+      "particle": "minecraft:happy_villager"
+    },
+    "Ilsabet": {
+      "swing": true,
+      "sound": "minecraft:block.amethyst_block.chime",
+      "particle": "minecraft:enchant"
+    },
+    "Archivist Sol": {
+      "swing": false,
+      "sound": "minecraft:item.book.page_turn",
+      "particle": "minecraft:enchant"
+    }
   }
 }

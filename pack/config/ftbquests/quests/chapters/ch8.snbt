@@ -30,8 +30,8 @@
 		{
 			id: "905DD8B9F622A362"
 			title: "The War-Engine"
-			subtitle: "Netherite Monstrosity"
-			description: ["The Choir's prototype war-engine strides out of the Nether.", "", "Defeat the &cNetherite Monstrosity&r (L_Ender's Cataclysm)."]
+			subtitle: "The Choir War-Engine"
+			description: ["The Choir's prototype war-engine strides out of the Nether.", "", "Defeat &cThe Choir War-Engine&r (&8L_Ender's Cataclysm&r)."]
 			x: 2.0d
 			y: 0.0d
 			shape: "gear"

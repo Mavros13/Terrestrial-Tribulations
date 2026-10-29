@@ -110,7 +110,7 @@
 			id: "E903F9889557032D"
 			title: "Echo of the Sundering"
 			subtitle: "Postgame"
-			description: ["&8The Crown is gone, but the Sundering still echoes. Something answers it.", "", "Summon and defeat the &8Wither&r, the Echo of the Sundering.", "", "&7Postgame. Pell is already charting the Infinite Crucible."]
+			description: ["&8The Crown is gone, but the Sundering still echoes. Something answers it.", "", "Summon and defeat the &8Echo of the Sundering&r (a Wither).", "", "&7Postgame. Pell is already charting the Infinite Crucible."]
 			x: 6.0d
 			y: 0.0d
 			shape: "circle"

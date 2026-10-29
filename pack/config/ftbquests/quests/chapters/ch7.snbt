@@ -47,7 +47,7 @@
 			id: "E4C97E03373AE9DF"
 			title: "Serpent, Lich, Hydra"
 			subtitle: "The warden chain"
-			description: ["The dusk-forest's keepers guard each other. Defeat the &cNaga&r, the &cTwilight Lich&r and the &cHydra&r."]
+			description: ["The dusk-forest's keepers guard each other. Defeat &cThe Coiled Serpent&r, &cThe Dusk Lich&r and &cThe Mire Hydra&r."]
 			x: 4.0d
 			y: -3.0d
 			shape: "circle"
@@ -66,7 +66,7 @@
 			id: "F6F85624D50613A2"
 			title: "Something Weeping in a Tower"
 			subtitle: "Twilight Shard"
-			description: ["At the top of the dark tower, the &cUr-Ghast&r weeps over the first realm Shard."]
+			description: ["At the top of the dark tower, &cThe Weeping Ghast&r guards the first realm Shard."]
 			x: 6.0d
 			y: -3.0d
 			shape: "circle"
@@ -100,7 +100,7 @@
 			id: "2EC0D0CC1F95F087"
 			title: "The Valkyrie Trial"
 			subtitle: "Aether Shard"
-			description: ["Defeat the &cSlider&r, the &cValkyrie Queen&r and the &cSun Spirit&r."]
+			description: ["Defeat &cThe Trial Stone&r, &cThe Valkyrie Queen&r and &cThe Sun Spirit&r."]
 			x: 4.0d
 			y: -1.0d
 			shape: "circle"
@@ -120,7 +120,7 @@
 			id: "D989F794EDC2E8EF"
 			title: "Below the Roots"
 			subtitle: "Undergarden Shard"
-			description: ["&6Sol&r: &o\"A guardian that has forgotten everything except the vault.\"", "", "Enter the &eUndergarden&r and defeat the &cForgotten Guardian&r."]
+			description: ["&6Sol&r: &o\"A guardian that has forgotten everything except the vault.\"", "", "Enter the &eUndergarden&r and defeat &cThe Forgotten Guardian&r."]
 			x: 2.0d
 			y: 1.0d
 			shape: "circle"
@@ -139,7 +139,7 @@
 			id: "6AC21D2910863A64"
 			title: "It Hears Heartbeats"
 			subtitle: "Otherside Shard"
-			description: ["&6Sol&r: &o\"Whatever you do down there, do it quietly.\"", "", "Enter &eThe Otherside&r (Deeper and Darker) and defeat a &cWarden&r."]
+			description: ["&6Sol&r: &o\"Whatever you do down there, do it quietly.\"", "", "Enter &eThe Otherside&r (Deeper and Darker) and defeat a &cSculk Warden&r."]
 			x: 2.0d
 			y: 3.0d
 			shape: "circle"

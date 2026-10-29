@@ -103,11 +103,14 @@ try {
     # Smoke test: mobs take every common damage type while our hurt handlers listen, then the world ticks a while
     foreach ($c in @('forceload add -16 -16 16 16', 'summon minecraft:zombie 0 100 0 {NoAI:1b,PersistenceRequired:1b}',
         'summon minecraft:skeleton 3 100 0 {NoAI:1b,PersistenceRequired:1b}', 'summon minecraft:villager 0 100 3 {NoAI:1b}',
+        'say [TT] damage test: start',
         'damage @e[type=minecraft:zombie,limit=1] 2 minecraft:arrow', 'damage @e[type=minecraft:zombie,limit=1] 2 minecraft:magic',
         'damage @e[type=minecraft:zombie,limit=1] 2 minecraft:generic', 'damage @e[type=minecraft:villager,limit=1] 2 minecraft:mob_attack by @e[type=minecraft:skeleton,limit=1]',
         'damage @e[type=minecraft:skeleton,limit=1] 50 minecraft:out_of_world',
         'summon minecraft:wither 0 100 -4 {NoAI:1b,Invul:0}', 'damage @e[type=minecraft:wither,limit=1] 5 minecraft:generic',
         'kill @e[type=minecraft:wither]',
+        'execute if entity @e[type=minecraft:zombie] if entity @e[type=minecraft:villager] run say [TT] damage test: done, mobs took every damage type',
+        'execute unless entity @e[type=minecraft:wither] run say [TT] damage test: wither removed',
         # Story NPC presets (tools/gen_npcs.py): each should import as a new Easy NPC
         'easy_npc preset import_new data tt:easy_npc/preset/humanoid_slim/maera.npc.snbt 0 100 8',
         'easy_npc preset import_new data tt:easy_npc/preset/humanoid/doran.npc.snbt 2 100 8',
@@ -125,7 +128,7 @@ try {
         'place structure tt:npc/tamsin_grove 100 100 0', 'place structure tt:npc/conclave_tower 130 100 0',
         'place structure tt:npc/stranger_caravan 160 100 0', 'place structure tt:npc/wren_lookout 190 100 0',
         'place structure tt:npc/sol_archive 220 100 0', 'place structure tt:npc/refugee_camp 250 100 0',
-        'time add 6000')) {
+        'time add 6000', 'chunky progress')) {
       $p.StandardInput.WriteLine($c); Start-Sleep 2
     }
     Start-Sleep 60
@@ -155,7 +158,7 @@ try {
     $after = $false
     # Only what our commands and scripts produce: command feedback (MinecraftServer), our [TT] lines, Easy NPC,
     # KubeJS and structure placement. A whitelist, because other mods' reload errors span many line shapes.
-    $keep = 'MinecraftServer\]|\[TT\]|easy_?npc|EasyNPC|KubeJS|kubejs|tt:|Done \(|place|structure|Stopping'
+    $keep = 'MinecraftServer\]|\[TT\]|easy_?npc|EasyNPC|KubeJS|kubejs|tt:|Done \(|place|structure|Stopping|[Cc]hunky'
     Get-Content $log | ForEach-Object {
       if (-not $after -and $_ -match 'Done \(') { $after = $true }
       if ($after -and $_ -match $keep -and $_ -notmatch $noise -and $_ -notmatch $reloadNoise -and $_ -notmatch '^\s') { $_ }

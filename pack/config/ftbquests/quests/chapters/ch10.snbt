@@ -14,7 +14,7 @@
 			id: "570DF86AD9B78C47"
 			title: "The Mythic Crucible"
 			subtitle: "Ysolde's trials"
-			description: ["&6Ilsabet&r: &o\"She didn't hide the final Shards in realms. She hid them in trials.\"", "", "&7The End is what's left of the &dConvergence&7, the ley-lattice the Crown held together. It opens to you now.", "", "Crucible tier I: defeat the &cEnder Guardian&r in The End (L_Ender's Cataclysm)."]
+			description: ["&6Ilsabet&r: &o\"She didn't hide the final Shards in realms. She hid them in trials.\"", "", "&7The End is what's left of the &dConvergence&7, the ley-lattice the Crown held together. It opens to you now.", "", "Crucible tier I: defeat &cThe Ender Guardian&r in The End (&8L_Ender's Cataclysm&r)."]
 			x: 0.0d
 			y: 0.0d
 			shape: "gear"
@@ -33,7 +33,7 @@
 			id: "7888F55871AA6AE2"
 			title: "Crucible Tier II"
 			subtitle: "Maledictus"
-			description: ["Defeat &cMaledictus&r (L_Ender's Cataclysm). The sixth Shard lies beyond it."]
+			description: ["Defeat &cMaledictus&r (&8L_Ender's Cataclysm&r). The sixth Shard lies beyond it."]
 			x: 2.0d
 			y: 0.0d
 			shape: "gear"
@@ -51,7 +51,7 @@
 			id: "4DFC17C235A40F78"
 			title: "Crucible Tier III"
 			subtitle: "The Ancient Remnant"
-			description: ["Defeat the &cAncient Remnant&r (L_Ender's Cataclysm). The seventh Shard lies beyond it."]
+			description: ["Defeat &cThe Ancient Remnant&r (&8L_Ender's Cataclysm&r). The seventh Shard lies beyond it."]
 			x: 4.0d
 			y: 0.0d
 			shape: "gear"

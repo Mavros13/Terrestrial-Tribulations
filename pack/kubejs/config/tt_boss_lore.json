@@ -1,44 +1,180 @@
 {
-  "_comment": "Hand-written. Story names and lines for existing bosses (design/story/boss-roles.md, design/npcs/*-dialogue.md). Read by server_scripts/tt_boss_lore.js. name: boss-bar name; color: a KubeJS Text colour; intro: said once when the boss first appears; phases: said once when its health drops below 'at' (fraction); death: said when it falls. Lines go to players within 96 blocks.",
+  "_comment": "Hand-written. Story names and lines for existing bosses (design/story/boss-roles.md, design/npcs/*-dialogue.md). Read by server_scripts/tt_boss_lore.js. name: boss-bar name (set as the boss's custom name); short: the name shown everywhere else (entity name via lang override: death messages, Jade, quest kill tasks), defaults to name; warden-like bosses with no lines just get the name; color: a KubeJS Text colour; intro: said once when the boss first appears; phases: said once when its health drops below 'at' (fraction); death: said when it falls. Lines go to players within 96 blocks.",
   "bosses": {
-    "mowziesmobs:ferrous_wroughtnaut": { "name": "The Armoury Warden", "color": "gray",
-      "intro": "&7The sealed armoury's guardian wakes. Its axe remembers the Thornwatch." },
-    "mowziesmobs:umvuthi": { "name": "Your Hollow Self", "color": "darkGray",
+    "mowziesmobs:ferrous_wroughtnaut": {
+      "name": "The Armoury Warden",
+      "color": "gray",
+      "intro": "&7The sealed armoury's guardian wakes. Its axe remembers the Thornwatch."
+    },
+    "mowziesmobs:umvuthi": {
+      "name": "Your Hollow Self",
+      "color": "darkGray",
       "intro": "&8It wears your stance. It fights with your hands.",
-      "death": "&8The Hollow face cracks. What's left of it looks almost relieved." },
-    "bosses_of_mass_destruction:lich": { "name": "The Night Lich, Hollow General", "color": "darkAqua",
+      "death": "&8The Hollow face cracks. What's left of it looks almost relieved."
+    },
+    "bosses_of_mass_destruction:lich": {
+      "name": "The Night Lich, Hollow General",
+      "color": "darkAqua",
       "intro": "&3A crown of bone. A voice like a tomb. The siege has a commander.",
-      "death": "&3The Night Lich: &o\"He... is... waiting... Shard-Born.\"" },
-    "cataclysm:ignis": { "name": "Ignis, the Burning King", "color": "gold",
-      "intro": "&6The Burning King rises from his throne of slag." },
-    "mowziesmobs:frostmaw": { "name": "Frostmaw", "color": "aqua",
-      "intro": "&bBig. White. Tusks like &othis&r&b. Wren drew it smaller than it is." },
-    "cataclysm:netherite_monstrosity": { "name": "The Choir War-Engine", "color": "darkRed",
+      "death": "&3The Night Lich: &o\"He... is... waiting... Shard-Born.\"",
+      "short": "The Night Lich"
+    },
+    "cataclysm:ignis": {
+      "name": "Ignis, the Burning King",
+      "color": "gold",
+      "intro": "&6The Burning King rises from his throne of slag."
+    },
+    "mowziesmobs:frostmaw": {
+      "name": "Frostmaw",
+      "color": "aqua",
+      "intro": "&bBig. White. Tusks like &othis&r&b. Wren drew it smaller than it is."
+    },
+    "cataclysm:netherite_monstrosity": {
+      "name": "The Choir War-Engine",
+      "color": "darkRed",
       "intro": "&4The Stranger: &o\"Do try to survive it. I've grown fond of you.\"",
-      "death": "&4The war-engine collapses. Something in its chest is still humming. Pell will want that." },
-    "cataclysm:the_harbinger": { "name": "The Choir Herald", "color": "red",
+      "death": "&4The war-engine collapses. Something in its chest is still humming. Pell will want that."
+    },
+    "cataclysm:the_harbinger": {
+      "name": "The Choir Herald",
+      "color": "red",
       "intro": "&cIt sings while it kills.",
-      "phases": [{ "at": 0.5, "line": "&cThe Herald's song changes key. Its rail core is charging." }],
-      "death": "&cThe song stops. Its rail core is intact." },
-    "cataclysm:the_leviathan": { "name": "The Leviathan of the Sunken City", "color": "darkBlue",
-      "intro": "&1The Choir woke it. It is not sleeping anymore." },
-    "cataclysm:ender_guardian": { "name": "Crucible Trial I: The Ender Guardian", "color": "lightPurple",
-      "intro": "&dIlsabet: &o\"Each tier opens the next. Try not to be unworthy.\"" },
-    "cataclysm:maledictus": { "name": "Crucible Trial II: Maledictus", "color": "darkGreen",
-      "intro": "&2The second trial. It was made to be unbeatable by anyone unworthy." },
-    "cataclysm:ancient_remnant": { "name": "Crucible Trial III: The Ancient Remnant", "color": "yellow",
-      "intro": "&eThe last trial. The last Shard is in its keeping." },
-    "minecraft:ender_dragon": { "name": "Malric's Bound Beast", "color": "darkPurple",
+      "phases": [
+        {
+          "at": 0.5,
+          "line": "&cThe Herald's song changes key. Its rail core is charging."
+        }
+      ],
+      "death": "&cThe song stops. Its rail core is intact."
+    },
+    "cataclysm:the_leviathan": {
+      "name": "The Leviathan of the Sunken City",
+      "color": "darkBlue",
+      "intro": "&1The Choir woke it. It is not sleeping anymore."
+    },
+    "cataclysm:ender_guardian": {
+      "name": "Crucible Trial I: The Ender Guardian",
+      "color": "lightPurple",
+      "intro": "&dIlsabet: &o\"Each tier opens the next. Try not to be unworthy.\"",
+      "short": "The Ender Guardian"
+    },
+    "cataclysm:maledictus": {
+      "name": "Crucible Trial II: Maledictus",
+      "color": "darkGreen",
+      "intro": "&2The second trial. It was made to be unbeatable by anyone unworthy.",
+      "short": "Maledictus"
+    },
+    "cataclysm:ancient_remnant": {
+      "name": "Crucible Trial III: The Ancient Remnant",
+      "color": "yellow",
+      "intro": "&eThe last trial. The last Shard is in its keeping.",
+      "short": "The Ancient Remnant"
+    },
+    "minecraft:ender_dragon": {
+      "name": "Malric's Bound Beast",
+      "color": "darkPurple",
       "intro": "&5Malric: &o\"Shard-Born. Little splinter of my Crown. Did you think you found them? They found you, for me.\"",
-      "death": "&5Malric: &o\"You cut the leash. It doesn't matter. I don't need the beast. I need you to finish what Ysolde started.\"" },
-    "cataclysm:scylla": { "name": "Malric, the Hollow Regent", "color": "darkPurple",
+      "death": "&5Malric: &o\"You cut the leash. It doesn't matter. I don't need the beast. I need you to finish what Ysolde started.\""
+    },
+    "cataclysm:scylla": {
+      "name": "Malric, the Hollow Regent",
+      "color": "darkPurple",
       "intro": "&5Malric: &o\"So. You finally came home to me.\"",
       "phases": [
-        { "at": 0.66, "line": "&5Malric: &o\"Look at your world. Ash, Hollowed, cults in stolen armour. One will, one Crown, and all of it ends.\"" },
-        { "at": 0.33, "line": "&5Malric: &o\"You were made from the Crown. You are order. Stop fighting what you are.\"" }
+        {
+          "at": 0.66,
+          "line": "&5Malric: &o\"Look at your world. Ash, Hollowed, cults in stolen armour. One will, one Crown, and all of it ends.\""
+        },
+        {
+          "at": 0.33,
+          "line": "&5Malric: &o\"You were made from the Crown. You are order. Stop fighting what you are.\""
+        }
       ],
-      "death": "&5Malric: &o\"Then choose. You'll find it's harder than killing me.\"" },
-    "minecraft:wither": { "name": "Echo of the Sundering", "color": "darkGray",
-      "intro": "&8The Crown is gone, but the Sundering still echoes. Something answers it." }
+      "death": "&5Malric: &o\"Then choose. You'll find it's harder than killing me.\"",
+      "short": "Malric"
+    },
+    "minecraft:wither": {
+      "name": "Echo of the Sundering",
+      "color": "darkGray",
+      "intro": "&8The Crown is gone, but the Sundering still echoes. Something answers it."
+    },
+    "twilightforest:naga": {
+      "name": "The Coiled Serpent, First Warden",
+      "color": "darkGreen",
+      "short": "The Coiled Serpent",
+      "intro": "&2The Coiled Serpent hisses. &7The first warden of the dusk-forest wakes.",
+      "death": "&2The serpent goes still. &7Somewhere deeper in the forest, the second warden stirs."
+    },
+    "twilightforest:lich": {
+      "name": "The Dusk Lich, Second Warden",
+      "color": "gold",
+      "short": "The Dusk Lich",
+      "intro": "&6The Dusk Lich: &o\"Another Shard-Born. The Regent sends his regards.\"",
+      "death": "&6The Dusk Lich: &o\"The Hydra... will not be... so polite.\""
+    },
+    "twilightforest:hydra": {
+      "name": "The Mire Hydra, Third Warden",
+      "color": "darkRed",
+      "short": "The Mire Hydra",
+      "intro": "&4Three heads rise out of the fire swamp. &7The third warden will not let you pass.",
+      "death": "&4The Mire Hydra collapses into the swamp. &7Its trophies are yours."
+    },
+    "twilightforest:ur_ghast": {
+      "name": "The Weeping Ghast, Keeper of the Twilight Shard",
+      "color": "red",
+      "short": "The Weeping Ghast",
+      "intro": "&cThe Weeping Ghast howls. &7It has guarded the Twilight Shard so long it forgot why.",
+      "death": "&cThe weeping stops. &7The Twilight Shard is free."
+    },
+    "aether:slider": {
+      "name": "The Trial Stone",
+      "color": "gray",
+      "intro": "&7The stone grinds awake. &oThe Valkyries' first trial has begun.",
+      "death": "&7The Trial Stone cracks apart. The Valkyries are watching."
+    },
+    "aether:valkyrie_queen": {
+      "name": "The Valkyrie Queen, Judge of the Trial",
+      "color": "yellow",
+      "short": "The Valkyrie Queen",
+      "death": "&eThe Valkyrie Queen: &o\"You fell well. The Sun Spirit will not be so kind.\""
+    },
+    "aether:sun_spirit": {
+      "name": "The Sun Spirit, Keeper of the Aether Shard",
+      "color": "gold",
+      "short": "The Sun Spirit",
+      "death": "&6The Sun Spirit's fire gutters out. &7The Aether Shard lies in the ashes."
+    },
+    "undergarden:forgotten_guardian": {
+      "name": "The Forgotten Guardian, Keeper of the Undergarden Shard",
+      "color": "darkAqua",
+      "short": "The Forgotten Guardian",
+      "intro": "&3The Forgotten Guardian stirs. &7It still remembers its last order: let no one take the Shard.",
+      "death": "&3The Guardian falls silent at last. &7The Undergarden Shard is yours."
+    },
+    "minecraft:warden": {
+      "name": "The Sculk Warden",
+      "color": "darkAqua"
+    },
+    "bosses_of_mass_destruction:obsidilith": {
+      "name": "Old Engine Sentry: Obsidilith",
+      "color": "darkPurple",
+      "short": "The Obsidilith Sentry",
+      "intro": "&5The Old Engine sentry hums awake. &7Choir sigils glow along its sides.",
+      "death": "&5The sentry's hum dies. &7One Choir stronghold is open."
+    },
+    "bosses_of_mass_destruction:gauntlet": {
+      "name": "Old Engine Sentry: The Gauntlet",
+      "color": "darkGray",
+      "short": "The Gauntlet Sentry",
+      "intro": "&8The Gauntlet's eye opens. &7The Choir rewired it to hunt Shard-Born.",
+      "death": "&8The Gauntlet's eye goes dark."
+    },
+    "bosses_of_mass_destruction:void_blossom": {
+      "name": "Crucible Affix: The Void Blossom",
+      "color": "lightPurple",
+      "short": "The Void Blossom",
+      "intro": "&dThe Crucible blooms. &7Something hungry grows out of the Void.",
+      "death": "&dThe Void Blossom withers."
+    }
   }
 }

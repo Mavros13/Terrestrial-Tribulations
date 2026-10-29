@@ -11,7 +11,7 @@ Minecraft 1.20.1, Forge 47.4.18, 143 mods. Recommended memory: 8 GB.
 - **Nine story NPCs** with their own skins and branching conversations: Elder Maera, Doran, Captain Rhosk, Pell, Tamsin, Ilsabet, the Stranger, Wren and Archivist Sol. Later chapters' talks unlock as you progress, and finishing a talk ticks off its quest.
 - **Shops** run by Doran, Pell, Ilsabet and the Stranger, priced for the chapter you meet them in.
 - **14 existing bosses take story roles.** Each has a story name on its boss bar and speaks lines when you fight it.
-- Story gates: the realm dimensions (Aether, Twilight Forest, Undergarden, Blue Skies, Otherside) open in Chapter 7. Hero suits and powers arrive with their chapters.
+- Story gates: the realm dimensions (Aether, Twilight Forest, Undergarden, Blue Skies, Otherside) open in Chapter 7, and The End, the last of the Convergence, opens in Chapter 10. Hero suits and powers arrive with their chapters.
 
 ### Side Paths (optional quest tabs)
 - **Cogwright Workshop** (Create), **The Deep Engines** (Mekanism and AE2), **Lumen Conclave Studies** (Iron's Spells, Ars Nouveau, Apotheosis), **Emberhold Builders** (MineColonies) and **Wayfarer's Guide** (exploring and tools). Each tab opens when the story introduces its faction.

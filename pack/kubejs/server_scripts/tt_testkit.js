@@ -3,7 +3,9 @@
 //   /kubejs custom_command tt_kit    every tt weapon + arrows, unlocks the hero and realm stages, daytime
 //   /kubejs custom_command tt_npcs   places the 9 story NPCs in a row in front of you (docs/09-story-npcs.md),
 //                                    replacing story NPCs already within 64 blocks
-//   /kubejs custom_command tt_story  unlocks every chapter's NPC conversations (adds the tt_ch2..12_done stages) and opens every NPC site (tt_meet_*)
+//   /kubejs custom_command tt_story  unlocks every chapter's NPC conversations (adds the tt_ch2..12_done stages), opens every
+//                                    NPC site (tt_meet_*) and every "Come to Emberhold" move (tt_emberhold)
+//   /kubejs custom_command tt_sites  places the 8 NPC sites in a row east of you, 28 blocks apart (walk in to meet each NPC)
 //   /kubejs custom_command tt_mobs   6 zombies and 2 skeletons around you, for weapon and ability tests
 //   /kubejs custom_command tt_boss   the Wither (boss lore test: "Echo of the Sundering")
 //   /kubejs custom_command tt_clear  removes the test mobs and bosses within 64 blocks
@@ -54,6 +56,13 @@ ServerEvents.customCommand('tt_boss', event => ttKitRun(event, 'tt_boss', (p, ru
 ServerEvents.customCommand('tt_story', event => ttKitRun(event, 'tt_story', (p, run) => {
   for (let n = 2; n <= 12; n++) p.stages.add('tt_ch' + n + '_done')
   ;['rhosk', 'pell', 'tamsin', 'ilsabet', 'stranger', 'wren', 'sol'].forEach(n => p.stages.add('tt_meet_' + n))
+  p.stages.add('tt_emberhold')
+}))
+
+ServerEvents.customCommand('tt_sites', event => ttKitRun(event, 'tt_sites', (p, run) => {
+  ;['refugee_camp', 'thornwatch_outpost', 'pell_ruin', 'tamsin_grove', 'conclave_tower', 'stranger_caravan',
+    'wren_lookout', 'sol_archive'].forEach((id, i) =>
+    run(`execute in minecraft:overworld run place structure tt:npc/${id} ${Math.floor(p.x) + 24 + i * 28} ${Math.floor(p.y)} ${Math.floor(p.z)}`))
 }))
 
 ServerEvents.customCommand('tt_clear', event => ttKitRun(event, 'tt_clear', (p, run) => {

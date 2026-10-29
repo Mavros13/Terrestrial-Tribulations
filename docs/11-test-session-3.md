@@ -57,6 +57,10 @@ Survival is easier for this (skills charge by hitting things): `/gamemode surviv
 - In survival, `/place structure tt:npc/thornwatch_outpost ~10 ~ ~` then walk into it: you're put back outside with a gold line.
 - `/kubejs custom_command tt_story` (gives every stage), walk in again: **Captain Rhosk** appears on the outpost. Placing a second outpost and walking in gives no second Rhosk.
 - Complete "Plant the Charter" (`c2_found`) in a fresh survival world: an explorer map to the outpost lands in your inventory.
+- **Moving in:** in creative, place a Town Hall and paste a Blacksmith's Hut with the build tool's Paste button.
+  `/kubejs custom_command tt_story`, then `/kubejs custom_command tt_sites` and walk into the camp. Doran's menu
+  shows **Come to Emberhold**; press it and he appears beside the Blacksmith (or the Town Hall if the pasted hut
+  doesn't count as built). Talk to him there: the button is gone.
 
 ## 4. Side Paths (5 min)
 - The quest book has a **Side Paths** group with 5 tabs.

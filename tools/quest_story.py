@@ -25,7 +25,7 @@ def chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage, r_cmd
               desc=["&6Elder Maera&r: &o\"Plant this where you mean to stay. We'll follow.\"",
                     "", "Choose good ground (water, stone, wood) and place a &eTown Hall&r (MineColonies) to found &6Emberhold&r.",
                     "", "&7City stage 1: Outpost."],
-              tasks=[t_item("minecolonies:blockhuttownhall")], rewards=[r_item("minecraft:oak_log", 32), r_xp(150)]),
+              tasks=[t_item("minecolonies:blockhuttownhall")], rewards=[r_item("minecraft:oak_log", 32), r_xp(150), r_stage("tt_emberhold")]),
             q("c2_builder", "Hands to Build", "The first colonists", 2, 0, ["c2_found"], main=True,
               desc=["A colony is people. Place a &eBuilder's Hut&r and let your first colonists raise the walls.",
                     "", "&7MineColonies' Builder builds and upgrades every other hut."],

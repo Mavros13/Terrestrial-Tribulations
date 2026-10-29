@@ -94,5 +94,67 @@
         }
       }
     }
+  },
+  "moves": {
+    "maera": {
+      "stage": "tt_emberhold",
+      "buildings": [
+        "minecolonies:townhall"
+      ],
+      "name": "Elder Maera",
+      "line": "Then I'll see you by the hearth. Somebody has to keep the Town Hall honest."
+    },
+    "doran": {
+      "stage": "tt_emberhold",
+      "buildings": [
+        "minecolonies:blacksmith"
+      ],
+      "name": "Doran",
+      "line": "A real forge with walls round it? I'll pack the anvil."
+    },
+    "rhosk": {
+      "stage": "tt_ch2_done",
+      "buildings": [
+        "minecolonies:guardtower",
+        "minecolonies:barrackstower",
+        "minecolonies:barracks"
+      ],
+      "name": "Captain Rhosk",
+      "line": "Emberhold's walls are mine to watch now. I'll be with the guard."
+    },
+    "pell": {
+      "stage": "tt_ch3_done",
+      "buildings": [
+        "minecolonies:mechanic",
+        "minecolonies:sawmill"
+      ],
+      "name": "Pell",
+      "line": "A workshop! With a roof! Don't touch anything until I get there."
+    },
+    "ilsabet": {
+      "stage": "tt_ch5_done",
+      "buildings": [
+        "minecolonies:enchanter",
+        "minecolonies:library"
+      ],
+      "name": "Ilsabet",
+      "line": "The Conclave can spare me. Your town has grown interesting."
+    },
+    "wren": {
+      "stage": "tt_ch6_done",
+      "buildings": [
+        "minecolonies:townhall"
+      ],
+      "name": "Wren",
+      "line": "I'll keep an eye on the gate. Somebody should, between trips."
+    },
+    "sol": {
+      "stage": "tt_ch7_done",
+      "buildings": [
+        "minecolonies:library"
+      ],
+      "name": "Archivist Sol",
+      "line": "If you have shelves, I have books. A library, then."
+    }
   }
 }

@@ -5,7 +5,11 @@
 //   before that NPC's first talk): walking in without it puts you back where you stood outside, with a line.
 // - The first time a player who may enter walks in, the site's NPC appears on its marker block (Easy NPC preset import),
 //   once per world: other copies of the same site stay empty.
-// Uses $TT_TagKey, $TT_Registries, $TT_ResourceLocation and ttSafe from tt_abilities.js (shared scope).
+// - Moving in (config "moves"): from an NPC's stage on, the script keeps the player tag tt_invite_open_<npc>, which
+//   shows "Come to Emberhold" in that NPC's menu. The button tags the player tt_invite_<npc>; the script then moves the
+//   same NPC next to the first built building of a listed type in the player's colony (else the Town Hall), once.
+// Uses $TT_TagKey, $TT_Registries, $TT_ResourceLocation and ttSafe from tt_abilities.js, $TT_AABB, ttColony and
+// ttBuildingManager from tt_active_abilities.js (shared scope).
 // DRAFT: untested in-game.
 
 let ttSites = null
@@ -37,9 +41,70 @@ function ttSiteMarker(level, box, marker) {
   return null
 }
 
+// A free spot (solid floor, two blocks of air) near a building's hut block.
+function ttStandSpot(level, pos) {
+  for (let r = 2; r <= 5; r++)
+    for (let dx = -r; dx <= r; dx++)
+      for (let dz = -r; dz <= r; dz++) {
+        if (Math.abs(dx) != r && Math.abs(dz) != r) continue
+        for (let dy = -1; dy <= 2; dy++) {
+          const x = pos.x + dx, y = pos.y + dy, z = pos.z + dz
+          if (String(level.getBlock(x, y - 1, z).id) != 'minecraft:air' && String(level.getBlock(x, y, z).id) == 'minecraft:air'
+            && String(level.getBlock(x, y + 1, z).id) == 'minecraft:air') return { x: x, y: y, z: z }
+        }
+      }
+  return { x: pos.x, y: pos.y + 1, z: pos.z }
+}
+
+// Where an NPC moves to: the first built building of one of its types, else the Town Hall.
+function ttMoveTarget(colony, types) {
+  const mgr = ttBuildingManager(colony)
+  let best = null
+  mgr.getBuildings().values().forEach(b => {
+    if (best || b.getBuildingLevel() < 1) return
+    if (types.indexOf(String(b.getBuildingType().getRegistryName())) >= 0) best = b
+  })
+  const hall = mgr.getTownHall()
+  return best ? best.getPosition() : hall ? hall.getPosition() : null
+}
+
+function ttMoveNpc(server, p, npc, mv) {
+  const spd = server.persistentData
+  if (spd.getBoolean('tt_npc_moved_' + npc)) return
+  const colony = ttColony(p)
+  const target = colony ? ttMoveTarget(colony, mv.buildings) : null
+  if (!target) { p.tell(Text.gold(`${mv.name}: "Emberhold first. Plant the charter, raise a Town Hall, then ask me."`)); return }
+  const box = new $TT_AABB(p.x - 16, p.y - 8, p.z - 16, p.x + 16, p.y + 8, p.z + 16)
+  let found = null
+  p.level.getEntitiesWithin(box).forEach(e => {
+    if (!found && String(e.type).startsWith('easy_npc:') && e.customName && String(e.customName.string) == mv.name) found = e
+  })
+  if (!found) return
+  const level = p.level, spot = ttStandSpot(level, target)
+  spd.putBoolean('tt_npc_moved_' + npc, true)
+  p.tell(Text.of(`${mv.name}: "${mv.line}"`).gold())
+  // keep the destination chunk loaded while the NPC arrives (the colony may be far away)
+  server.runCommandSilent(`execute in minecraft:overworld run forceload add ${spot.x} ${spot.z}`)
+  server.scheduleInTicks(5, () => ttSafe('npc_move', () => found.teleportTo(spot.x + 0.5, spot.y, spot.z + 0.5)))
+  server.scheduleInTicks(200, () => server.runCommandSilent(`execute in minecraft:overworld run forceload remove ${spot.x} ${spot.z}`))
+  console.info(`[TT] ${npc} moves to Emberhold at ${spot.x} ${spot.y} ${spot.z}`)
+}
+
 PlayerEvents.tick(event => {
   const p = event.player
   if (!ttSites || p.level.gameTime % 20 != 7 || String(p.level.dimension) != 'minecraft:overworld') return
+  ttSafe('npc_moves', () => {
+    const spd = event.server.persistentData
+    Object.keys(ttSites.moves || {}).forEach(npc => {
+      const mv = ttSites.moves[npc]
+      const open = p.stages.has(mv.stage) && spd.getBoolean('tt_npc_placed_' + npc) && !spd.getBoolean('tt_npc_moved_' + npc)
+      if (open != p.stages.has('tt_invite_open_' + npc)) open ? p.stages.add('tt_invite_open_' + npc) : p.stages.remove('tt_invite_open_' + npc)
+      if (p.tags.contains('tt_invite_' + npc)) {
+        p.removeTag('tt_invite_' + npc)
+        ttMoveNpc(event.server, p, npc, mv)
+      }
+    })
+  })
   ttSafe('npc_sites', () => {
     const level = p.level
     const pd = p.persistentData

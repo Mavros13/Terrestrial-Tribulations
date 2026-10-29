@@ -26,8 +26,9 @@
 			rewards: [
 				{ id: "4DC62C4388217CCF", type: "item", item: { Count: 32b, id: "minecraft:oak_log" } },
 				{ id: "BA6666BAB6AFEE58", type: "xp", xp: 150 },
-				{ id: "81A26DF539624E88", type: "command", command: "/kubejs stages add @p tt_meet_rhosk", elevate_perms: true, silent: true },
-				{ id: "FFDC98216823D635", type: "command", command: "/loot give @p loot tt:npc_maps/thornwatch_outpost", elevate_perms: true, silent: true }
+				{ id: "81A26DF539624E88", type: "command", command: "/kubejs stages add @p tt_emberhold", elevate_perms: true, silent: true },
+				{ id: "FFDC98216823D635", type: "command", command: "/kubejs stages add @p tt_meet_rhosk", elevate_perms: true, silent: true },
+				{ id: "47208A2160749CB2", type: "command", command: "/loot give @p loot tt:npc_maps/thornwatch_outpost", elevate_perms: true, silent: true }
 			]
 		},
 		{

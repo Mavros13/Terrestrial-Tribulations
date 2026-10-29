@@ -25,7 +25,7 @@ Data folders are 1.20.1 names: structures/, loot_tables/ (both singular from 1.2
 import gzip, io, json, os, struct, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gen_npcs import CAST
+from gen_npcs import CAST, MOVES
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "pack", "kubejs", "data", "tt")
@@ -780,6 +780,8 @@ def main():
             "title": title, "stage": stage, "locked": locked,
             "npcs": {npc: {"marker": "minecraft:" + block, "preset": f"tt:easy_npc/preset/{CAST[npc][3]}/{npc}.npc.snbt"}
                      for npc, block in markers.items()}}
+    cfg["moves"] = {npc: {"stage": st, "buildings": ["minecolonies:" + b for b in blds], "name": CAST[npc][1], "line": line}
+                    for npc, (st, blds, line) in MOVES.items()}
     write(os.path.join(DATA, "tags", "worldgen", "structure", "npc_sites.json"), {"values": [f"tt:npc/{s}" for s in SITES]})
     write(CFG, cfg)
     print(f"NPC sites: {len(SITES)} structures ({sum(len(v['npcs']) for v in cfg['sites'].values())} NPCs), "

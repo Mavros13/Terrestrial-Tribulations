@@ -9,7 +9,7 @@ Minecraft 1.20.1, Forge 47.4.18, 153 mods. Recommended memory: 8 GB.
 ### Story
 - **The main campaign, Chapters 1–12**, in the quest book: from the Hollow fields to founding Emberhold, the Shattered Realms, the Iron Choir and the fight for the Crown. It has three endings.
 - **Nine story NPCs** with their own skins and branching conversations: Elder Maera, Doran, Captain Rhosk, Pell, Tamsin, Ilsabet, the Stranger, Wren and Archivist Sol. Later chapters' talks unlock as you progress, and finishing a talk ticks off its quest.
-- **Every story NPC lives somewhere:** Elder Maera and Doran wait at a refugee camp beside spawn, and the others have their own outposts, ruins, groves and towers out in the world. Each site stays closed until its chapter, and the quest that sends you there gives you a map.
+- **Every story NPC lives somewhere:** Elder Maera and Doran wait at a refugee camp beside spawn, and the others have their own outposts, ruins, groves and towers out in the world. Each site stays closed until its chapter, and the quest that sends you there gives you a map. Later, most of them will move into Emberhold when you invite them, settling by the matching building (Doran by the Blacksmith, Sol by the Library, and so on).
 - **Shops** run by Doran, Pell, Ilsabet and the Stranger, priced for the chapter you meet them in.
 - **14 existing bosses take story roles.** Each has a story name on its boss bar and speaks lines when you fight it.
 - Story gates: the realm dimensions (Aether, Twilight Forest, Undergarden, Blue Skies, Otherside) open in Chapter 7, and The End, the last of the Convergence, opens in Chapter 10. Hero suits and powers arrive with their chapters.

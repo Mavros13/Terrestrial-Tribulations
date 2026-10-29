@@ -58,6 +58,19 @@ TALK_QUESTS = {
     ("stranger", "A Kind Word"): "c6_stranger", ("stranger", "A Better Offer"): "c8_reveal",
     ("sol", "Seven Pieces"): "c7_sol", ("pell", "Choirbreaker"): "c8_breaker",
 }
+# Moving into Emberhold (owner, 2026-10-29: "invite them" over automatic moves). From the stage on, the NPC's menu shows
+# "Come to Emberhold"; pressing it moves that same NPC (no copy) next to the first built MineColonies building of a
+# listed type in the player's colony, else the Town Hall (server_scripts/tt_npc_sites.js). Tamsin never comes into the
+# colony and the Stranger keeps his caravan, as the scripts say. Building IDs: MineColonies ModBuildings (1.20.1).
+MOVES = {
+    "maera": ("tt_emberhold", ["townhall"], "Then I'll see you by the hearth. Somebody has to keep the Town Hall honest."),
+    "doran": ("tt_emberhold", ["blacksmith"], "A real forge with walls round it? I'll pack the anvil."),
+    "rhosk": ("tt_ch2_done", ["guardtower", "barrackstower", "barracks"], "Emberhold's walls are mine to watch now. I'll be with the guard."),
+    "pell": ("tt_ch3_done", ["mechanic", "sawmill"], "A workshop! With a roof! Don't touch anything until I get there."),
+    "ilsabet": ("tt_ch5_done", ["enchanter", "library"], "The Conclave can spare me. Your town has grown interesting."),
+    "wren": ("tt_ch6_done", ["townhall"], "I'll keep an eye on the gate. Somebody should, between trips."),
+    "sol": ("tt_ch7_done", ["library"], "If you have shelves, I have books. A library, then."),
+}
 GREET_QUESTS = {"rhosk": "c2_rhosk"}  # no Ch2 talk: his greeting is the intro, so Goodbye completes it
 CHOICE_QUESTS = {"Reforge it.": "c12_reforge", "Let him have it.": "c12_surrender", "Shatter it.": "c12_shatter"}
 MAX_BUTTONS = 6  # Easy NPC's dialog screen lays out at most six buttons (DialogScreenLayout); more pile up in one spot
@@ -219,7 +232,8 @@ def build(key, data):
     trade_tag = hub[0][2] if hub else None                             # the shop opens with the NPC's first talk
     pages, rest, first = [], list(hub), True
     while first or rest:
-        fixed = 1 + ((1 if data["chat"] else 0) + (1 if data["trades"] else 0) if first else 0)  # Goodbye/Back, Chat, Trade
+        fixed = 1 + ((1 if data["chat"] else 0) + (1 if data["trades"] else 0) + (1 if key in MOVES else 0)
+                     if first else 0)                                  # Goodbye/Back, Chat, Trade, Come to Emberhold
         cap = MAX_BUTTONS - fixed
         take = rest[:cap] if len(rest) <= cap else rest[:cap - 1]      # leave room for "More..."
         pages.append(take)
@@ -234,6 +248,10 @@ def build(key, data):
             buttons.append("{Actions:[{Type:\"OPEN_TRADING_SCREEN\"}],%sLabel:\"h0_trade\",Name:\"Trade\"}" % cond)
         if p == 0 and data["chat"]:
             buttons.append(button("Chat", "h0_chat", "chat"))
+        if p == 0 and key in MOVES:  # shown while the script keeps the player's tt_invite_open_<npc> tag set
+            buttons.append("{Actions:[{Cmd:%s,PermLevel:2,Type:\"COMMAND\"},{Type:\"CLOSE_DIALOG\"}],"
+                           "Conditions:[{Name:%s,Type:\"PLAYER_TAG\"}],Label:\"h0_move\",Name:\"Come to Emberhold\"}"
+                           % (s(f"/tag @initiator add tt_invite_{key}"), s(f"tt_invite_open_{key}")))
         buttons.append(close_button(f"h{p}_close", quests=[GREET_QUESTS[key]] if key in GREET_QUESTS else [])
                        if p == 0 else button("Back", f"h{p}_back", "default"))
         greet = data["chat"][:3] or ["Yes?"]

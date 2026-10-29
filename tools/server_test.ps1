@@ -158,8 +158,8 @@ try {
     $keep = 'MinecraftServer\]|\[TT\]|easy_?npc|EasyNPC|KubeJS|kubejs|tt:|Done \(|place|structure|Stopping'
     Get-Content $log | ForEach-Object {
       if (-not $after -and $_ -match 'Done \(') { $after = $true }
-      if ($after -and $_ -match $keep -and $_ -notmatch $noise -and $_ -notmatch $reloadNoise) { $_ }
-    } | Select-Object -First 400 | ForEach-Object { $lines.Add($_) }
+      if ($after -and $_ -match $keep -and $_ -notmatch $noise -and $_ -notmatch $reloadNoise -and $_ -notmatch '^\s') { $_ }
+    } | Select-Object -First 1200 | ForEach-Object { $lines.Add($_) }
   }
   $lines.Add(''); $lines.Add('=== latest.log: errors and our content ===')
   if (Test-Path $log) {

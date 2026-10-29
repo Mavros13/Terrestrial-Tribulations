@@ -777,21 +777,30 @@ def main():
                      "zoom": 2, "search_radius": 100, "skip_existing_chunks": False},
                     {"function": "minecraft:set_name", "name": {"text": title, "color": "gold", "italic": False}}]}]}]})
         cfg["sites"][f"tt:npc/{sid}"] = {
-            "title": title, "stage": stage, "locked": locked,
+            **{k: v for k, v in (("title", title), ("stage", stage), ("locked", locked)) if v is not None},
             "npcs": {npc: {"marker": "minecraft:" + block, "preset": f"tt:easy_npc/preset/{CAST[npc][3]}/{npc}.npc.snbt"}
                      for npc, block in markers.items()}}
     cfg["moves"] = {npc: {"stage": st, "buildings": ["minecolonies:" + b for b in blds], "spots": spots,
                           "name": CAST[npc][1], "line": line}
                     for npc, (st, blds, spots, line) in MOVES.items()}
-    cfg["work"] = {CAST[npc][1]: {"sound": w.get("sound"), "particle": w.get("particle")} for npc, w in WORK.items()}
+    # No JSON nulls anywhere in this config: KubeJS reads it as a Java map, and Rhino throws on a null value
+    # (2026-10-29 server test: NullPointerException in NativeJavaMap.get after every NPC import). Leave keys out.
+    cfg["work"] = {CAST[npc][1]: {k: w[k] for k in ("sound", "particle") if w.get(k)} for npc, w in WORK.items()}
     cfg["holsters"] = HOLSTERS
     # every part listed, so switching looks resets the parts the previous pose had turned
     parts = ["Head", "Body", "RightArm", "LeftArm", "RightLeg", "LeftLeg"]
-    cfg["looks"] = {CAST[npc][1]: [{"main": lk[0] or "", "off": lk[1] or "",
-                                    "pose": {pt: list(lk[2].get(pt, (0.0, 0.0, 0.0))) + [0.0] for pt in parts} if lk[2] else None,
-                                    "holster": {"at": lk[3][0], "item": lk[3][1]} if len(lk) > 3 else None}
-                                   for lk in looks] for npc, looks in LOOKS.items()}
+    def look(lk):
+        out = {"main": lk[0] or "", "off": lk[1] or ""}
+        if lk[2]:
+            out["pose"] = {pt: list(lk[2].get(pt, (0.0, 0.0, 0.0))) + [0.0] for pt in parts}
+        if len(lk) > 3:
+            out["holster"] = {"at": lk[3][0], "item": lk[3][1]}
+        return out
+    cfg["looks"] = {CAST[npc][1]: [look(lk) for lk in looks] for npc, looks in LOOKS.items()}
     write(os.path.join(DATA, "tags", "worldgen", "structure", "npc_sites.json"), {"values": [f"tt:npc/{s}" for s in SITES]})
+    def nulls(v):
+        return v is None or (isinstance(v, dict) and any(nulls(x) for x in v.values())) or (isinstance(v, list) and any(nulls(x) for x in v))
+    assert not nulls(cfg), "tt_npc_sites.json must not contain nulls (Rhino can't read them)"
     write(CFG, cfg)
     print(f"NPC sites: {len(SITES)} structures ({sum(len(v['npcs']) for v in cfg['sites'].values())} NPCs), "
           f"{len(MEET_AFTER)} unlocked by quests")

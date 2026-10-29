@@ -4,7 +4,6 @@
   "sites": {
     "tt:npc/refugee_camp": {
       "title": "Refugee Camp",
-      "stage": null,
       "locked": "",
       "npcs": {
         "maera": {
@@ -196,8 +195,7 @@
   },
   "work": {
     "Elder Maera": {
-      "sound": "minecraft:item.book.page_turn",
-      "particle": null
+      "sound": "minecraft:item.book.page_turn"
     },
     "Doran": {
       "sound": "minecraft:block.anvil.use",
@@ -292,8 +290,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       },
       {
         "main": "",
@@ -335,8 +332,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       },
       {
         "main": "minecraft:map",
@@ -378,16 +374,13 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       }
     ],
     "Doran": [
       {
         "main": "minecraft:iron_pickaxe",
-        "off": "tt:ashfang_karambit",
-        "pose": null,
-        "holster": null
+        "off": "tt:ashfang_karambit"
       },
       {
         "main": "tt:ashfang_karambit",
@@ -429,8 +422,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       },
       {
         "main": "",
@@ -472,16 +464,13 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       }
     ],
     "Captain Rhosk": [
       {
         "main": "tt:thornwatch_halberd",
-        "off": "minecraft:shield",
-        "pose": null,
-        "holster": null
+        "off": "minecraft:shield"
       },
       {
         "main": "tt:thornwatch_halberd",
@@ -523,8 +512,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       },
       {
         "main": "",
@@ -576,9 +564,7 @@
     "Pell": [
       {
         "main": "tt:cogwright_breaker",
-        "off": "create:wrench",
-        "pose": null,
-        "holster": null
+        "off": "create:wrench"
       },
       {
         "main": "create:cogwheel",
@@ -620,8 +606,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       },
       {
         "main": "",
@@ -711,8 +696,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       },
       {
         "main": "tt:rootstring_bow",
@@ -754,8 +738,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       },
       {
         "main": "",
@@ -807,9 +790,7 @@
     "Ilsabet": [
       {
         "main": "tt:prism_ward_staff",
-        "off": "minecraft:amethyst_shard",
-        "pose": null,
-        "holster": null
+        "off": "minecraft:amethyst_shard"
       },
       {
         "main": "tt:prism_ward_staff",
@@ -851,8 +832,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       },
       {
         "main": "minecraft:enchanted_book",
@@ -942,8 +922,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       },
       {
         "main": "",
@@ -985,8 +964,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       },
       {
         "main": "",
@@ -1028,8 +1006,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       }
     ],
     "Wren": [
@@ -1073,8 +1050,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       },
       {
         "main": "tt:rustbite_karambit",
@@ -1116,8 +1092,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       },
       {
         "main": "minecraft:map",
@@ -1159,8 +1134,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       }
     ],
     "Archivist Sol": [
@@ -1204,8 +1178,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       },
       {
         "main": "minecraft:writable_book",
@@ -1247,8 +1220,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       },
       {
         "main": "minecraft:book",
@@ -1290,8 +1262,7 @@
             0.0,
             0.0
           ]
-        },
-        "holster": null
+        }
       }
     ]
   }

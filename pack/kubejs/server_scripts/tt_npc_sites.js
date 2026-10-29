@@ -146,9 +146,9 @@ function ttMoveNpc(server, p, npc, mv) {
 const ttMovedByName = {}
 if (ttSites) Object.keys(ttSites.moves || {}).forEach(npc => { ttMovedByName[ttSites.moves[npc].name] = npc })
 
-// Holstered weapons: no Forge 1.20.1 mod draws back or belt items on NPCs, so a vanilla item_display of the weapon
-// (its own model and texture) stands at the NPC, turned with its body, offset onto the back or the belt. Display
-// rotation is the entity yaw, so local +z is the NPC's front: the back is -z, the belt is to the side.
+// Holstered weapons: no Forge 1.20.1 mod draws back items on NPCs, so a vanilla item_display of the weapon (its own
+// model and texture) stands at the NPC, turned with its body, offset onto its back. Display rotation is the entity
+// yaw, so local +z is the NPC's front and the back is -z.
 function ttHolsterNbt(h) {  // config "holsters" (gen_npcs.py HOLSTERS) -> item_display transformation SNBT
   const f = a => '[' + a.map(v => v + 'f').join(',') + ']'
   return `{translation:${f(h.translation)},left_rotation:${f(h.left_rotation)},scale:${f(h.scale)},right_rotation:${f(h.right_rotation)}}`

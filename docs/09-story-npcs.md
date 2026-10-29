@@ -61,19 +61,19 @@ their arm while working). **Each time an NPC loads in, it takes one at random.**
 | NPC | Working | At rest | Off duty |
 |---|---|---|---|
 | Elder Maera | paper, hands behind her back | hands behind her back | reading a map |
-| Doran | pickaxe + Ashfang Karambit, hammering | inspecting the Ashfang Karambit | arms crossed, karambit on his belt |
+| Doran | pickaxe + Ashfang Karambit, hammering | inspecting the Ashfang Karambit | arms crossed |
 | Captain Rhosk | Thornwatch Halberd + shield, drilling | halberd lowered, shield up | halberd on his back, at attention |
 | Pell | Cogwright Breaker + wrench, hammering | inspecting a cogwheel | arms crossed, Cogwright Breaker on his back |
 | Tamsin | Rootstring Bow, holding out a sapling | bow drawn | bow on her back, sapling behind her |
 | Ilsabet | Prism Ward Staff + amethyst, flicking | staff raised high | reading an enchanted book, staff on her back |
-| The Stranger | offering an emerald, Sculkheart Dagger in the off hand | arms crossed, dagger in hand | hands behind his back, dagger on his belt |
-| Wren | spyglass to her eye, Rustbite Karambit | karambit lowered | reading a map, karambit on her belt |
+| The Stranger | offering an emerald, Sculkheart Dagger in the off hand | arms crossed, dagger in hand | hands behind his back |
+| Wren | spyglass to her eye, Rustbite Karambit | karambit lowered | reading a map |
 | Archivist Sol | reading a book | writing in a book | book behind his back |
 
 Weapons come from our roster and match the story (the Stranger's dagger hints at his Chapter 8 reveal).
-**Holsters:** no Forge 1.20.1 mod draws back or belt items on NPCs (Stowed is NeoForge; BackSlot and Combat
+**Holsters:** no Forge 1.20.1 mod draws back items on NPCs (Stowed is NeoForge; BackSlot and Combat
 Amenities are Fabric; all are player-only). So off-duty looks pin a vanilla `item_display` of the weapon (its own
-model and texture) to the NPC's back or belt (tags `tt_holster`, `tt_holster_<name>`; placement in `HOLSTERS`, preview `blockbench/previews/npc-holsters.html`). The script turns it with the
+model and texture) to the NPC's back (only big weapons: knives looked wrong on the belt; tags `tt_holster`, `tt_holster_<name>`; placement in `HOLSTERS`, preview `blockbench/previews/npc-holsters.html`). The script turns it with the
 NPC's body once a second while a player is near, and replaces it whenever the NPC takes a new look. While a player is within 20 blocks, every few seconds they also make a sound and a few particles
 at their hands (`WORK`).
 

@@ -248,30 +248,6 @@
         0.0,
         1.0
       ]
-    },
-    "belt": {
-      "translation": [
-        0.2,
-        0.72,
-        -0.16
-      ],
-      "left_rotation": [
-        0.0,
-        0.3827,
-        0.0,
-        0.9239
-      ],
-      "scale": [
-        0.55,
-        0.55,
-        0.55
-      ],
-      "right_rotation": [
-        0.0,
-        0.0,
-        0.7071,
-        0.7071
-      ]
     }
   },
   "looks": {
@@ -497,10 +473,7 @@
             0.0
           ]
         },
-        "holster": {
-          "at": "belt",
-          "item": "tt:ashfang_karambit"
-        }
+        "holster": null
       }
     ],
     "Captain Rhosk": [
@@ -1056,10 +1029,7 @@
             0.0
           ]
         },
-        "holster": {
-          "at": "belt",
-          "item": "tt:sculkheart_dagger"
-        }
+        "holster": null
       }
     ],
     "Wren": [
@@ -1190,10 +1160,7 @@
             0.0
           ]
         },
-        "holster": {
-          "at": "belt",
-          "item": "tt:rustbite_karambit"
-        }
+        "holster": null
       }
     ],
     "Archivist Sol": [

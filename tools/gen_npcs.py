@@ -89,9 +89,10 @@ MOVES = {
 # an NPC loads in, server_scripts/tt_npc_sites.js picks one at random; the first is the preset's own. Fighters carry
 # their roster weapon: Rhosk the Thornwatch Halberd, Pell the Cogwright Breaker, Ilsabet the Prism Ward Staff, Tamsin
 # the Rootstring Bow, Wren a Rustbite Karambit (the Ember scouts' blade), Doran the Ashfang Karambit he is forging, and
-# the Stranger a Sculkheart Dagger in the off hand (a hint before the Ch8 reveal). "Off duty" looks holster the weapon
-# on the back or belt. No Forge 1.20.1 mod draws back items on NPCs, so the script pins a vanilla item_display of the
-# weapon (its own model and texture) there and keeps it in step with the NPC.
+# the Stranger a Sculkheart Dagger in the off hand (a hint before the Ch8 reveal). "Off duty" looks holster big
+# weapons on the back; knives just go away (they looked wrong on the belt, owner 2026-10-29). No Forge 1.20.1 mod
+# draws back items on NPCs, so the script pins a vanilla item_display of the weapon (its own model and texture)
+# there and keeps it in step with the NPC.
 # WORK adds a sound and particles at their hands now and then while a player is near.
 CROSSED = {"RightArm": (-0.95, -0.55, 0.0), "LeftArm": (-0.95, 0.55, 0.0)}
 BEHIND = {"RightArm": (0.25, 0.0, 0.1), "LeftArm": (0.25, 0.0, -0.1)}
@@ -104,13 +105,11 @@ INSPECT = {"Head": (0.3, 0.0, 0.0), "RightArm": (-0.95, -0.2, 0.0)}
 HOLSTERS = {
     "back": {"translation": [0.0, 1.05, -0.2], "left_rotation": [0.0, 0.0, 0.0, 1.0], "scale": [0.8, 0.8, 0.8],
              "right_rotation": [0.0, 0.0, 0.0, 1.0]},
-    "belt": {"translation": [0.2, 0.72, -0.16], "left_rotation": [0.0, 0.3827, 0.0, 0.9239], "scale": [0.55, 0.55, 0.55],
-             "right_rotation": [0.0, 0.0, 0.7071, 0.7071]},
 }
-LOOKS = {  # (main hand, off hand, pose, holster: ("back" | "belt", item) or None)
+LOOKS = {  # (main hand, off hand, pose, holster: ("back", item) or None)
     "maera": [("minecraft:paper", None, BEHIND), (None, None, BEHIND), ("minecraft:map", None, READING)],
     "doran": [("minecraft:iron_pickaxe", "tt:ashfang_karambit", None), ("tt:ashfang_karambit", None, INSPECT),
-              (None, None, CROSSED, ("belt", "tt:ashfang_karambit"))],
+              (None, None, CROSSED)],
     "rhosk": [("tt:thornwatch_halberd", "minecraft:shield", None), ("tt:thornwatch_halberd", "minecraft:shield", AT_REST),
               (None, None, BEHIND, ("back", "tt:thornwatch_halberd"))],
     "pell": [("tt:cogwright_breaker", "create:wrench", None), ("create:cogwheel", "create:wrench", INSPECT),
@@ -122,10 +121,10 @@ LOOKS = {  # (main hand, off hand, pose, holster: ("back" | "belt", item) or Non
                 ("tt:prism_ward_staff", None, {"RightArm": (-2.6, 0.0, 0.0), "Head": (-0.25, 0.0, 0.0)}),
                 ("minecraft:enchanted_book", None, READING, ("back", "tt:prism_ward_staff"))],
     "stranger": [("minecraft:emerald", "tt:sculkheart_dagger", {"RightArm": (-0.4, -0.3, 0.0), "LeftArm": (0.2, 0.0, -0.05)}),
-                 (None, "tt:sculkheart_dagger", CROSSED), (None, None, BEHIND, ("belt", "tt:sculkheart_dagger"))],
+                 (None, "tt:sculkheart_dagger", CROSSED), (None, None, BEHIND)],
     "wren": [("minecraft:spyglass", "tt:rustbite_karambit", {"RightArm": (-1.9, -0.35, 0.0), "Head": (-0.15, 0.0, 0.0)}),
              ("tt:rustbite_karambit", "minecraft:spyglass", AT_REST),
-             ("minecraft:map", None, READING, ("belt", "tt:rustbite_karambit"))],
+             ("minecraft:map", None, READING)],
     "sol": [("minecraft:book", None, READING), ("minecraft:writable_book", None, READING), ("minecraft:book", None, BEHIND)],
 }
 WORK = {

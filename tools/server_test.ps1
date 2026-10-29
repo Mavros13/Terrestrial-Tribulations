@@ -118,7 +118,14 @@ try {
         'easy_npc preset import_new data tt:easy_npc/preset/humanoid/stranger.npc.snbt 12 100 8',
         'easy_npc preset import_new data tt:easy_npc/preset/humanoid_slim/wren.npc.snbt 14 100 8',
         'easy_npc preset import_new data tt:easy_npc/preset/humanoid/sol.npc.snbt 16 100 8',
-        'easy_npc list', 'time add 6000')) {
+        'easy_npc list',
+        # Story NPC sites (tools/gen_npc_sites.py): each structure places; the camp at spawn logs its own [TT] line
+        'forceload add 32 -16 260 16',
+        'place structure tt:npc/thornwatch_outpost 40 100 0', 'place structure tt:npc/pell_ruin 70 100 0',
+        'place structure tt:npc/tamsin_grove 100 100 0', 'place structure tt:npc/conclave_tower 130 100 0',
+        'place structure tt:npc/stranger_caravan 160 100 0', 'place structure tt:npc/wren_lookout 190 100 0',
+        'place structure tt:npc/sol_archive 220 100 0', 'place structure tt:npc/refugee_camp 250 100 0',
+        'time add 6000')) {
       $p.StandardInput.WriteLine($c); Start-Sleep 2
     }
     Start-Sleep 60
@@ -146,9 +153,12 @@ try {
   $lines.Add(''); $lines.Add('=== latest.log from "Done" on: test commands and their results ===')
   if (Test-Path $log) {
     $after = $false
+    # Only what our commands and scripts produce: command feedback (MinecraftServer), our [TT] lines, Easy NPC,
+    # KubeJS and structure placement. A whitelist, because other mods' reload errors span many line shapes.
+    $keep = 'MinecraftServer\]|\[TT\]|easy_?npc|EasyNPC|KubeJS|kubejs|tt:|Done \(|place|structure|Stopping'
     Get-Content $log | ForEach-Object {
       if (-not $after -and $_ -match 'Done \(') { $after = $true }
-      if ($after -and $_ -notmatch $noise -and $_ -notmatch $reloadNoise) { $_ }
+      if ($after -and $_ -match $keep -and $_ -notmatch $noise -and $_ -notmatch $reloadNoise) { $_ }
     } | Select-Object -First 400 | ForEach-Object { $lines.Add($_) }
   }
   $lines.Add(''); $lines.Add('=== latest.log: errors and our content ===')

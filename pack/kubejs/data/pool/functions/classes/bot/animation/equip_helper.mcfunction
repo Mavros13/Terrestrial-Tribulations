@@ -1,1 +1,0 @@
-execute as @e[tag=swPool_shooter] at @s run function pool:classes/bot/animation/equip_helper_exec

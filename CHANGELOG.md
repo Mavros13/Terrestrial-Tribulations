@@ -27,7 +27,6 @@ Minecraft 1.20.1, Forge 47.4.18, 155 mods. Recommended memory: 8 GB.
 ### Just for fun
 - **Target dummies** that show the damage of every hit and can wear armour (MmmMmmMmmMmm), good for trying out weapons.
 - **Bicycles** you can craft and ride (Real Bicycles).
-- **Pool and snooker** with real ball physics, rules and computer opponents (Pool and Billiards by YMS2001). Type `/trigger swPool__trigger set 1` to open its menu and get a cue and a table.
 
 ### Quality of life
 - The land around spawn is pre-generated in the background on a new world's first load, so exploring stutters less, and a chat line says when it is done. `/chunky pause` stops it.

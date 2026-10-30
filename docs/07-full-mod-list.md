@@ -118,7 +118,7 @@ Embeddium, Oculus (optional shaders), ModernFix, FerriteCore, EntityCulling, Imm
 ## Just for fun (owner's picks, 2026-10-30)
 - **MmmMmmMmmMmm (Target Dummy)** 2.0.12 (CF 225738 / 7963208, Modrinth mmmmmmmmmmmm): a target dummy that shows damage numbers and can wear armour; also handy for testing weapons. Needs Moonlight Lib (already in).
 - **Real Bicycles** 1.0.2 (CF 1755974 / 9280166, CurseForge only, All Rights Reserved; referenced by the manifest, never redistributed): rideable bikes. No dependencies.
-- **Pool and Billiards** v1.3.7 (data pack + resource pack by YMS2001, CF 1481772 / Modrinth mksguUIH + mdBvgTLC, MPL-2.0), in place of the Pool Table mod (1.21.1 only). Data packs can't go in a CurseForge manifest, so `tools/import_pool.py` copies it from its GitHub source into `kubejs/data/` (app, math, pool namespaces; loaded for every world) and `resourcepacks/Pool and Billiards/` (switched on by Default Options); its 1.20.5+ recipes are left out. `tt_pool.js` sets the recommended `maxCommandChainLength`. Players open the menu with `/trigger swPool__trigger set 1` (no op needed).
+- **Pool Table:** not added. It only has 1.21.1 NeoForge/Fabric files, no 1.20.1 Forge build (checked 2026-10-30).
 
 ## Other
 - **CreeperMax123:** I found no CurseForge author page. Their known work is mostly vanilla mob **resource packs** (Better Vanilla Mobs, Better Illagers and others). They're candidates for an optional visual pack. Check them alongside Epic Fight's mob models.

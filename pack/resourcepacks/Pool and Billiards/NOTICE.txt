@@ -1,3 +1,0 @@
-Pool and Billiards v1.3.7-mc1.16_1.20 by YMS2001 (Squid Workshop), MPL-2.0 (see LICENSE).
-Source: https://github.com/MingshiYangUIUC/Pool-Minecraft-Squid-Workshop-Project (commit a830e0801bc295d349b6dc95eeb9953bd261e894).
-Copied into Terrestrial Tribulations by tools/import_pool.py, unchanged except that the data pack's recipes (1.20.5+ format) are left out.

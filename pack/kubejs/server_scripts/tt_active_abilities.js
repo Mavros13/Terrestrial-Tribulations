@@ -127,7 +127,7 @@ ItemEvents.rightClicked(event => {
     targets.forEach((e, i) => server.scheduleInTicks(i * 6, () => ttSafe('shard_rend_hit', () => {
       if (!p.isAlive() || !e.isAlive()) return
       ttParticle(level, 'minecraft:reverse_portal', p.x, p.y + 1, p.z, 0.3, 15)
-      p.teleportTo(e.x - e.lookAngle.x() * 1.2, e.y, e.z - e.lookAngle.z() * 1.2)
+      ttBlinkBehind(p, e)
       e.invulnerableTime = 0
       e.attack(8)
       ttParticle(level, 'minecraft:sweep_attack', e.x, e.y + 1, e.z, 0.2, 1)

@@ -43,7 +43,7 @@ try {
 
 PlayerEvents.tick(event => {
   const p = event.player
-  if (TT_UNLOCK_HINTS.length == 0 || p.level.gameTime % 40 != 7) return
+  if (TT_UNLOCK_HINTS.length == 0 || TT_TICK % 40 != 7) return
   try {
     TT_UNLOCK_HINTS.forEach(g => {
       let flag = `tt_hint_${g.stage}`
@@ -58,7 +58,7 @@ PlayerEvents.tick(event => {
 
 PlayerEvents.tick(event => {
   const p = event.player
-  if (TT_GATES.length == 0 || p.level.gameTime % 20 != 0) return
+  if (TT_GATES.length == 0 || TT_TICK % 20 != 0) return
   try {
     for (let slot of TT_ARMOR_SLOTS) {
       let stack = p.getItemBySlot(slot)

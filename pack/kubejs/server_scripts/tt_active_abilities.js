@@ -55,7 +55,7 @@ ItemEvents.rightClicked(event => {
     p.push(0, 1.6, 0)
     p.hurtMarked = true
     p.persistentData.putBoolean('tt_vault', true)
-    p.persistentData.putLong('tt_vault_at', level.gameTime)
+    p.persistentData.putLong('tt_vault_at', ttNow())
     ttParticle(level, 'minecraft:cloud', p.x, p.y + 0.2, p.z, 0.6, 30)
     ttSound(level, 'minecraft:entity.phantom.flap', p.x, p.y, p.z, 0.8)
     ttSound(level, 'minecraft:item.trident.riptide_1', p.x, p.y, p.z, 1.2)
@@ -141,7 +141,7 @@ EntityEvents.hurt(event => {
 
   // No fall damage during Gale Vault, or just after landing from it
   if (t.isPlayer() && event.source.type == 'fall' &&
-      (t.persistentData.getBoolean('tt_vault') || t.level.gameTime <= t.persistentData.getLong('tt_nofall_until'))) {
+      (t.persistentData.getBoolean('tt_vault') || ttNow() <= t.persistentData.getLong('tt_nofall_until'))) {
     event.cancel()
     return
   }
@@ -149,7 +149,7 @@ EntityEvents.hurt(event => {
   // Prism Ward: the barrier reflects the next projectile back at whoever fired it. event.cancel() ends the handler
   // (KubeJS throws to stop it), so it is called outside ttSafe.
   let ttReflected = false
-  if (t.isPlayer() && t.level.gameTime <= t.persistentData.getLong('tt_prism_until')) ttSafe('prism_reflect', () => {
+  if (t.isPlayer() && ttNow() <= t.persistentData.getLong('tt_prism_until')) ttSafe('prism_reflect', () => {
     const direct = event.source.immediate, shooter = event.source.actual
     if (!direct || !shooter || direct == shooter || !shooter.isLiving()) return
     t.persistentData.putLong('tt_prism_until', 0)
@@ -185,7 +185,7 @@ EntityEvents.hurt(event => {
   const p = event.source.player
   if (!p) return
   const held = p.mainHandItem.id
-  const now = t.level.gameTime
+  const now = ttNow()
   const pd = p.persistentData
 
   // Gale Vault plunge: hitting while airborne drives you down
@@ -242,7 +242,7 @@ PlayerEvents.tick(event => {
   const p = event.player
   const pd = p.persistentData
   if (!pd.getBoolean('tt_vault') || !p.onGround()) return
-  const now = p.level.gameTime
+  const now = ttNow()
   if (now < pd.getLong('tt_vault_at') + 6) return  // still on the ground on the launch tick
   ttSafe('gale_landing', () => {
     pd.putBoolean('tt_vault', false)
@@ -266,7 +266,7 @@ PlayerEvents.tick(event => {
 // it are rooted for 4 s. 8 s cooldown per player. No blocks are placed, so nothing is griefed.
 function ttSeedshot(owner, x, y, z) {
   const pd = owner.persistentData
-  const now = owner.level.gameTime
+  const now = ttNow()
   if (now < pd.getLong('tt_seed_cd')) return
   pd.putLong('tt_seed_cd', now + 160)
   const level = owner.level
@@ -372,7 +372,7 @@ function ttHookEpicFight(p, server) {
     // priority -1: runs after Epic Fight's own guard and dodge handlers, even when they cancel the event
     listener.addEventListener($TT_EFEvent.DODGE_SUCCESS_EVENT, TT_EF_UUID, ev => ttSafe('reversal_cut_ready', () => {
       if (p.mainHandItem.id != 'tt:rustbite_karambit') return
-      p.persistentData.putLong('tt_reversal_until', p.level.gameTime + 20)
+      p.persistentData.putLong('tt_reversal_until', ttNow() + 20)
       ttParticle(p.level, 'minecraft:crit', p.x, p.y + 1, p.z, 0.4, 8)
     }), -1)
     listener.addEventListener($TT_EFEvent.TAKE_DAMAGE_EVENT_ATTACK, TT_EF_UUID, ev => ttSafe('iron_recoil', () => {
@@ -396,7 +396,7 @@ EntityEvents.hurt(event => {
   const p = event.source.player
   if (!p || p.mainHandItem.id != 'tt:rustbite_karambit') return
   ttSafe('reversal_cut', () => {
-    const now = p.level.gameTime
+    const now = ttNow()
     if (now > p.persistentData.getLong('tt_reversal_until')) return
     p.persistentData.putLong('tt_reversal_until', 0)
     const t = event.entity

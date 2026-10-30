@@ -1145,6 +1145,22 @@
       "fileID": 5016280,
       "file": "smoothboot(reloaded)-mc1.20.1-0.0.4.jar",
       "stage": "D"
+    },
+    {
+      "name": "MmmMmmMmmMmm (Target Dummy)",
+      "projectID": 225738,
+      "fileID": 7963208,
+      "file": "dummmmmmy-1.20-2.0.12-forge.jar",
+      "stage": "D",
+      "_note": "Owner's fun pick (2026-10-30): target dummy with damage numbers, handy for weapon testing. Needs Moonlight Lib (already in)."
+    },
+    {
+      "name": "Real Bicycles",
+      "projectID": 1755974,
+      "fileID": 9280166,
+      "file": "real-bicycles-1.0.2.jar",
+      "stage": "D",
+      "_note": "Owner's fun pick (2026-10-30). All Rights Reserved: referenced by the manifest only, never redistributed. No dependencies."
     }
   ]
 }

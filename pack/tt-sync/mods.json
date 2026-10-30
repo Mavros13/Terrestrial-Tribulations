@@ -810,6 +810,21 @@
       "modrinth": "smooth-boot-reloaded",
       "curseforge": "smooth-boot-reloaded",
       "stage": "D"
+    },
+    {
+      "name": "MmmMmmMmmMmm (Target Dummy)",
+      "match": "dummmmmmy",
+      "modrinth": "mmmmmmmmmmmm",
+      "curseforge": "mmmmmmmmmmmm",
+      "stage": "D"
+    },
+    {
+      "name": "Real Bicycles",
+      "match": "real-bicycles|realbicycles",
+      "modrinth": "",
+      "curseforge": "real-bicycles",
+      "stage": "D",
+      "_source": "curseforge-only"
     }
   ],
   "skip_dependencies": {

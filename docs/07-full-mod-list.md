@@ -115,6 +115,11 @@ Stages in `pack/tt-sync/mods.json`: **A/B/C = Test Build 1**, **D = Test Build 2
 ## Performance
 Embeddium, Oculus (optional shaders), ModernFix, FerriteCore, EntityCulling, ImmediatelyFast, Canary, Spark, Chunky (pre-generate the spawn area). Added 2026-10-29: Async Locator, Structure Layout Optimizer (+ Resourceful Config), Clumps, Let Me Despawn (+ Almanac Lib), FastSuite, AllTheLeaks, Dynamic FPS (client), Smooth Boot (Reloaded); see docs/12-remaining-work.md.
 
+## Just for fun (owner's picks, 2026-10-30)
+- **MmmMmmMmmMmm (Target Dummy)** 2.0.12 (CF 225738 / 7963208, Modrinth mmmmmmmmmmmm): a target dummy that shows damage numbers and can wear armour; also handy for testing weapons. Needs Moonlight Lib (already in).
+- **Real Bicycles** 1.0.2 (CF 1755974 / 9280166, CurseForge only, All Rights Reserved; referenced by the manifest, never redistributed): rideable bikes. No dependencies.
+- **Pool Table:** not added. It only has 1.21.1 NeoForge/Fabric files, no 1.20.1 Forge build (checked 2026-10-30).
+
 ## Other
 - **CreeperMax123:** I found no CurseForge author page. Their known work is mostly vanilla mob **resource packs** (Better Vanilla Mobs, Better Illagers and others). They're candidates for an optional visual pack. Check them alongside Epic Fight's mob models.
 

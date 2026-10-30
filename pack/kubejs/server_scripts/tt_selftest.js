@@ -110,6 +110,21 @@ function ttSelfTest(server) {
   let structures = server.registryAccess().registryOrThrow(Java.loadClass('net.minecraft.core.registries.Registries').STRUCTURE)
   section('npc_sites', cfg.npc_sites || [], id => structures.containsKey(new RL(id)))
 
+  // Timers (tt_abilities.js): cooldowns use ttNow(), periodic checks TT_TICK (the game-time bean is undefined in KubeJS)
+  section('timers', ['ttNow', 'TT_TICK'], name => {
+    let v = name == 'ttNow' ? ttNow() : TT_TICK
+    return typeof v == 'number' && !isNaN(v) && v > 0 ? true : `${name} = ${v}`
+  })
+
+  // Quest IDs: FTB Quests replaces any it can't parse, which breaks dependencies and the NPCs' quest commands
+  if (Platform.isLoaded('ftbquests')) {
+    let SQF = Java.loadClass('dev.ftb.mods.ftbquests.quest.ServerQuestFile')
+    let QOB = Java.loadClass('dev.ftb.mods.ftbquests.quest.QuestObjectBase')
+    let have = {}
+    SQF.INSTANCE.forAllQuests(q => { have[String(QOB.getCodeString(q))] = true })
+    section('quest_ids', cfg.quest_ids || [], id => have[id] ? true : false)
+  }
+
   console.info(`[TT] selftest done: ${total.pass} passed, ${total.fail} failed`)
   try {
     JsonIO.write('kubejs/exported/tt_selftest.json', { passed: total.pass, failed: total.fail, results: results })

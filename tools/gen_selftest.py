@@ -4,7 +4,8 @@ items (design/weapons/weapons.json), Epic Fight weapon capabilities (data/tt/cap
 powers (data/tt/palladium/powers/), Passive Skill Tree trees and skills (data/tt/skill_trees/, data/tt/skills/),
 story-gate namespaces, origins and layers (data/tt/origins/, data/*/origin_layers/), dimension-gate
 dimensions (kubejs/config/tt_story_gates.json). Run by build_prism.py."""
-import json, os, re
+import json
+import glob, os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KJ = os.path.join(ROOT, "pack", "kubejs")
@@ -44,6 +45,9 @@ out = {
     "npc_sites": sorted(json.load(open(os.path.join(KJ, "config", "tt_npc_sites.json")))["sites"]),
     "lore_entities": sorted(json.load(open(os.path.join(KJ, "config", "tt_boss_lore.json")))["bosses"]),
     "dimensions": sorted({d for g in gates.get("dimension_gates", {}).get("gates", []) for d in g["dimensions"]}),
+    # every quest keeps the ID we generated (FTB Quests replaces IDs it can't parse; 2026-10-30 desktop test)
+    "quest_ids": sorted({m for p in glob.glob(os.path.join(os.path.dirname(KJ), "config", "ftbquests", "quests", "chapters", "*.snbt"))
+                         for m in re.findall(r'\n\t\t\{\n\t\t\tid: "([0-9A-F]{16})"\n\t\t\ttitle:', open(p, encoding="utf-8").read())}),
 }
 with open(os.path.join(KJ, "config", "tt_selftest.json"), "w") as f:
     json.dump(out, f, indent=2)

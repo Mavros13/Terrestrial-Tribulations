@@ -9,17 +9,28 @@ try {
   ttPregenCfg = JsonIO.read('kubejs/config/tt_pregen.json')
 } catch (e) { console.error(`[TT] could not read tt_pregen.json: ${e}`) }
 
-// Tells players and the log when Chunky's run finishes. Chunky's API (ChunkyAPI.onGenerationComplete) fires on its own
-// thread, so the work is handed to the server thread. A /reload subscribes again; the done flag keeps it to one message.
+// Tells players and the log when Chunky's run finishes. Chunky's API fires on its own thread, so the work is handed to
+// the server thread. Its "generation complete" event also fires when a task is paused or the server stops (Chunky
+// GenerationTask.run, 2026-10-30 server test: "finished" at 48%), so the progress event's complete flag decides;
+// the complete event is only a fallback for a Chunky without progress events, ignored while the server is stopping.
+// A /reload subscribes again; the done flag keeps it to one message.
+function ttPregenDone(server, world) {
+  if (server.persistentData.getBoolean('tt_pregen_done') || String(world) != 'minecraft:overworld') return
+  server.persistentData.putBoolean('tt_pregen_done', true)
+  server.tell(Text.gray('[Terrestrial Tribulations] The land around spawn is ready. Exploring nearby should be smooth now.'))
+  console.info('[TT] pre-generation finished')
+}
+
 function ttPregenWatch(server) {
   try {
-    let chunky = Java.loadClass('org.popcraft.chunky.ChunkyProvider').get()
-    chunky.getApi().onGenerationComplete(ev => server.execute(() => {
-      if (server.persistentData.getBoolean('tt_pregen_done') || String(ev.world()) != 'minecraft:overworld') return
-      server.persistentData.putBoolean('tt_pregen_done', true)
-      server.tell(Text.gray('[Terrestrial Tribulations] The land around spawn is ready. Exploring nearby should be smooth now.'))
-      console.info('[TT] pre-generation finished')
-    }))
+    let api = Java.loadClass('org.popcraft.chunky.ChunkyProvider').get().getApi()
+    try {
+      api.onGenerationProgress(ev => { if (ev.complete()) server.execute(() => ttPregenDone(server, ev.world())) })
+    } catch (e) {
+      api.onGenerationComplete(ev => server.execute(() => {
+        if (server.isRunning() && !api.isRunning(String(ev.world()))) ttPregenDone(server, ev.world())
+      }))
+    }
   } catch (e) { console.warn(`[TT] can't watch Chunky for the end of pre-generation: ${e}`) }
 }
 

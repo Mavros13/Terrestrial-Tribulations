@@ -1,0 +1,50 @@
+function pool:classes/lobby/terminate_helper
+
+execute as 000c2be1-0001-414d-0000-000000000000 at @s run function pool:classes/practice/boundary
+
+execute unless entity 000c2be1-0001-414d-0000-000000000000 run tellraw @s[tag=swPool_EN] [{"text":"➇ ","color":"white"},{"text":"Please place a table first.","color":"red"}]
+execute unless entity 000c2be1-0001-414d-0000-000000000000 run tellraw @s[tag=swPool_CN] [{"text":"➇ ","color":"white"},{"text":"请先放置球桌。","color":"red"}]
+
+scoreboard players set @a swPool_Score 0
+
+execute as 000c2be1-0001-414d-0000-000000000000 at @s positioned ~ ~ ~ run function pool:classes/9ball/balls
+
+function pool:classes/9ball/randomize_number
+
+tag @a[tag=swPool_wait_9ball,limit=1,sort=random] add swPool_ballinhand
+execute unless score #bot_turn swMath_V matches 1 run execute as @a[tag=swPool_ballinhand] at @s run function app:get/pool/cueball_helper
+
+tag 000c2be1-0001-414d-0000-000000000000 add swPool_start
+
+tag @a[limit=1,sort=random,tag=swPool_wait_9ball] add swPool_poolplay
+
+execute if entity @a[tag=!swPool_poolplay] run tag @a[limit=1,tag=swPool_wait_9ball,tag=!swPool_poolplay] add swPool_poolplay
+scoreboard players set @a[tag=swPool_poolplay] swPool_Score 0
+#scoreboard objectives setdisplay sidebar swPool_Score
+
+scoreboard players set #breakshot swPool_v 1
+scoreboard players set Stroke swPool_hidScore 0
+
+scoreboard players set Pocketed_Total swPool_hidScore 0
+scoreboard players set Pocketed_Turn swPool_hidScore 0
+
+execute as @a[tag=swPool_poolplay,limit=1] at @s if entity @a[tag=swPool_poolplay,distance=0.001..] run tag 000c2be1-0001-414d-0000-000000000000 add swPool_multiplayer
+execute as @a[tag=swPool_poolplay,limit=1] at @s unless entity @a[tag=swPool_poolplay,distance=0.001..] run tag 000c2be1-0001-414d-0000-000000000000 add swPool_singleplayer
+
+tag @a[tag=swPool_poolplay] add swPool_spec
+
+execute unless score #bot_turn swMath_V matches 1 run tellraw @a[tag=swPool_spec,tag=swPool_EN] [{"text":"➇ ","color":"white"},{"selector":"@a[tag=swPool_poolplay,tag=swPool_ballinhand]"},{"text":", place the cue ball and break."}]
+execute unless score #bot_turn swMath_V matches 1 run tellraw @a[tag=swPool_spec,tag=swPool_CN] [{"text":"➇ ","color":"white"},{"selector":"@a[tag=swPool_poolplay,tag=swPool_ballinhand]"},{"text":", 请放置白球后开球。"}]
+
+execute unless score #bot_turn swMath_V matches 1 run tellraw @a[tag=swPool_spec,tag=swPool_EN] [{"text":"➇ ","color":"white"},{"text":"<Adjust the next strike.>","color":"white","underlined":true,"clickEvent":{"action":"run_command","value":"/trigger swPool__trigger set 4110806"}}]
+execute unless score #bot_turn swMath_V matches 1 run tellraw @a[tag=swPool_spec,tag=swPool_CN] [{"text":"➇ ","color":"white"},{"text":"<调整下一次击球>","color":"white","underlined":true,"clickEvent":{"action":"run_command","value":"/trigger swPool__trigger set 4110806"}}]
+
+
+tag @a remove swPool_wait
+tag @a remove swPool_wait_9ball
+tag @a remove swPool_wait_cn8ball
+tag @a remove swPool_wait_uk8ball
+tag @a remove swPool_wait_snooker
+
+scoreboard players set #9ball_init swMath_V 1
+scoreboard players set swPool_gameon swMath_V 1

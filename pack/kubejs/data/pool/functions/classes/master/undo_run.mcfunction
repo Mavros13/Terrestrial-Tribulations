@@ -1,0 +1,16 @@
+execute if data storage minecraft:swpool {version:[116]} run function pool:classes/master/undo_run_116
+execute if data storage minecraft:swpool {version:[117]} run function pool:classes/master/undo_run_117
+execute if data storage minecraft:swpool {version:[1205]} run function pool:classes/master/undo_run_1205
+
+execute as @e[tag=swPool_pool,type=armor_stand] at @s run function pool:classes/master/read_tmppos
+execute as @e[tag=swPool_fake,type=armor_stand] at @s run function pool:classes/master/read_tmppos
+
+execute unless score #muteall swPool_C matches 1 as @a[tag=swPool_poolplay,gamemode=!creative] run function app:get/pool/arrow_helper
+scoreboard players set #outoftable_scheduled swPool_var00 0
+
+# abnormality monitor
+scoreboard players reset #abnorm swMath_V
+
+# collision log
+scoreboard players set #n_collision_pktedge swMath_V 0
+scoreboard players set #n_collision_normal swMath_V 0

@@ -1,0 +1,32 @@
+tag 000c2be1-0001-414d-0000-000000000000 add swPool_pocketing
+
+
+execute if score Pocketed_Total swPool_hidScore matches 0 if entity @s[tag=swPool_red] run tag @a[tag=swPool_hitcue] add swPool_aimred
+execute if score Pocketed_Total swPool_hidScore matches 0 if entity @s[tag=swPool_red] run tag @a[tag=swPool_poolplay,tag=!swPool_hitcue] add swPool_aimylw
+execute if score Pocketed_Total swPool_hidScore matches 0 if entity @s[tag=swPool_yellow] run tag @a[tag=swPool_hitcue] add swPool_aimylw
+execute if score Pocketed_Total swPool_hidScore matches 0 if entity @s[tag=swPool_yellow] run tag @a[tag=swPool_poolplay,tag=!swPool_hitcue] add swPool_aimred
+
+#execute if score Pocketed_Total swPool_hidScore matches 0 if entity @s[tag=swPool_black] run tag 000c2be1-0001-414d-0000-000000000000 add swPool_rerack
+execute if score Stroke swPool_hidScore matches 0 if entity @s[tag=swPool_black] run tag 000c2be1-0001-414d-0000-000000000000 add swPool_rerack
+
+execute if score Pocketed_Total swPool_hidScore matches 0 if entity @s[tag=!swPool_cue] run tag 000c2be1-0001-414d-0000-000000000000 add swPool_pkt1st
+
+
+execute if entity @s[tag=swPool_cue] run tag 000c2be1-0001-414d-0000-000000000000 add swPool_pktcue
+execute if entity @s[tag=swPool_red] run tag 000c2be1-0001-414d-0000-000000000000 add swPool_pktred
+execute if entity @s[tag=swPool_yellow] run tag 000c2be1-0001-414d-0000-000000000000 add swPool_pktylw
+execute if entity @s[tag=swPool_black] run tag 000c2be1-0001-414d-0000-000000000000 add swPool_pktblk
+
+execute if score Pocketed_Total swPool_hidScore matches 0 unless entity @s[tag=swPool_cue] unless entity @s[tag=swPool_black] run tag 000c2be1-0001-414d-0000-000000000000 add swPool_foulpass
+
+execute if entity @s[tag=swPool_cue] run scoreboard players remove Pocketed_Total swPool_hidScore 1
+
+scoreboard players add Pocketed_Total swPool_hidScore 1
+scoreboard players add Pocketed_Turn swPool_hidScore 1
+
+#playsound minecraft:block.stone.break ambient @a ~ ~ ~ 1 1
+#playsound minecraft:block.barrel.close ambient @a ~ ~ ~ 1 1
+execute unless score #muteall swPool_C matches 1 run playsound minecraft:custom.pool.pocket ambient @a ~ ~ ~ 1 1
+#kill @s
+function pool:classes/pocketing/animation/main
+

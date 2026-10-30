@@ -1,0 +1,20 @@
+#execute if score #self swPool_vx matches ..-1 at @s run tp @s ~0.0005 ~ ~
+#execute if score #self swPool_vx matches 1.. at @s run tp @s ~-0.0005 ~ ~
+
+#execute if score #self swPool_vz matches ..-1 at @s run tp @s ~ ~ ~0.0005
+#execute if score #self swPool_vz matches 1.. at @s run tp @s ~ ~ ~-0.0005
+#say rr
+tp 000c2be1-0006-a619-0000-000000000004 @s
+tag @s add swPool_retreating
+execute store result entity 000c2be1-0006-a619-0000-000000000004 Rotation[0] float 0.0001 run scoreboard players get @s swPool_Rotation
+
+execute as 000c2be1-0006-a619-0000-000000000004 at @s run function pool:classes/motion/retreat
+tp @s 000c2be1-0006-a619-0000-000000000004
+data modify entity @s Rotation[0] set value 0.0f
+tag @s remove swPool_retreating
+
+function pool:classes/motion/new/_pos_refresh
+
+#execute at @s if entity @e[tag=swPool_pool,distance=0.0001..0.25] run function pool:classes/motion/new_retreat
+
+scoreboard players set #abnorm swMath_V 1

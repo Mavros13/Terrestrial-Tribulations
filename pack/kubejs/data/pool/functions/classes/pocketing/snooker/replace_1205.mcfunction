@@ -1,0 +1,214 @@
+#swPool_foul of cue ball: foulcue:
+execute unless entity @e[tag=swPool_cue,tag=swPool_pool] run tag @s add swPool_foulcue
+execute unless score #muteall swPool_C matches 1 run execute unless entity @e[tag=swPool_cue,tag=swPool_pool] unless entity @e[tag=!swPool_pooltable,tag=swPool_poolplay,tag=!swPool_hitcue] run tag @e[tag=!swPool_pooltable,tag=swPool_poolplay,tag=swPool_hitcue,limit=1] add swPool_ballinhand
+execute unless score #muteall swPool_C matches 1 run execute unless entity @e[tag=swPool_cue,tag=swPool_pool] if entity @e[tag=!swPool_pooltable,tag=swPool_poolplay,tag=!swPool_hitcue] run tag @e[tag=!swPool_pooltable,tag=swPool_poolplay,tag=!swPool_hitcue,limit=1,sort=nearest] add swPool_ballinhand
+execute unless score #muteall swPool_C matches 1 run tag @e[tag=!swPool_pooltable,tag=swPool_ballinhand] remove swPool_given
+execute unless score #muteall swPool_C matches 1 run execute as @e[tag=!swPool_pooltable,tag=swPool_ballinhand,tag=!swPool_given] at @s run function app:get/pool/cueball_helper
+execute unless score #muteall swPool_C matches 1 run tag @e[tag=!swPool_pooltable,tag=swPool_ballinhand,tag=!swPool_given] add swPool_given
+#detect foulcolor
+#swPool_count # of color and red pocketed as swPool_ncolor and swPool_nred score
+execute if entity @s[scores={swPool_ncolor=2..}] run tag @s add swPool_foulcolor
+execute if entity @s[scores={swPool_ncolor=2..}] run tag @s remove swPool_firstcolor
+execute if entity @s[scores={swPool_ncolor=1..}] run tag @s[scores={swPool_nred=1..}] add swPool_foulcolor
+#foulcolor if higher swPool_rank is potted first if no red is present
+scoreboard players operation @e[tag=swPool_yellow,tag=swPool_pool] swPool_rank = rank2 swPool_rank
+scoreboard players operation @e[tag=swPool_green,tag=swPool_pool] swPool_rank = rank3 swPool_rank
+scoreboard players operation @e[tag=swPool_brown,tag=swPool_pool] swPool_rank = rank4 swPool_rank
+scoreboard players operation @e[tag=swPool_blue,tag=swPool_pool] swPool_rank = rank5 swPool_rank
+scoreboard players operation @e[tag=swPool_pink,tag=swPool_pool] swPool_rank = rank6 swPool_rank
+scoreboard players operation @e[tag=swPool_black,tag=swPool_pool] swPool_rank = rank7 swPool_rank
+
+execute unless entity @s[tag=swPool_freeball_potted] unless entity @e[tag=swPool_red,tag=swPool_pool] unless entity @e[tag=swPool_black,tag=swPool_pool] unless entity @s[tag=swPool_firstcolor] if entity @e[scores={swPool_rank=2..6}] run tag @s add swPool_foulcolor
+execute unless entity @s[tag=swPool_freeball_potted] unless entity @e[tag=swPool_red,tag=swPool_pool] unless entity @e[tag=swPool_black,tag=swPool_pool] unless entity @s[tag=swPool_firstcolor] if entity @e[scores={swPool_rank=2..6}] run scoreboard players set @s[scores={swPool_foul=..6}] swPool_foul 7
+
+execute unless entity @s[tag=swPool_freeball_potted] unless entity @e[tag=swPool_red,tag=swPool_pool] unless entity @e[tag=swPool_pink,tag=swPool_pool] unless entity @s[tag=swPool_firstcolor] if entity @e[scores={swPool_rank=2..5}] run tag @s add swPool_foulcolor
+execute unless entity @s[tag=swPool_freeball_potted] unless entity @e[tag=swPool_red,tag=swPool_pool] unless entity @e[tag=swPool_pink,tag=swPool_pool] unless entity @s[tag=swPool_firstcolor] if entity @e[scores={swPool_rank=2..5}] run scoreboard players set @s[scores={swPool_foul=..5}] swPool_foul 6
+
+execute unless entity @s[tag=swPool_freeball_potted] unless entity @e[tag=swPool_red,tag=swPool_pool] unless entity @e[tag=swPool_blue,tag=swPool_pool] unless entity @s[tag=swPool_firstcolor] if entity @e[scores={swPool_rank=2..4}] run tag @s add swPool_foulcolor
+execute unless entity @s[tag=swPool_freeball_potted] unless entity @e[tag=swPool_red,tag=swPool_pool] unless entity @e[tag=swPool_blue,tag=swPool_pool] unless entity @s[tag=swPool_firstcolor] if entity @e[scores={swPool_rank=2..4}] run scoreboard players set @s[scores={swPool_foul=..4}] swPool_foul 5
+
+execute unless entity @s[tag=swPool_freeball_potted] unless entity @e[tag=swPool_red,tag=swPool_pool] unless entity @e[tag=swPool_brown,tag=swPool_pool] unless entity @s[tag=swPool_firstcolor] if entity @e[scores={swPool_rank=2..3}] run tag @s add swPool_foulcolor
+
+execute unless entity @s[tag=swPool_freeball_potted] unless entity @e[tag=swPool_red,tag=swPool_pool] unless entity @e[tag=swPool_green,tag=swPool_pool] unless entity @s[tag=swPool_firstcolor] if entity @e[scores={swPool_rank=2..2}] run tag @s add swPool_foulcolor
+#scoreboard players set @s[tag=swPool_foulcolor,scores={swPool_foul=..3}] swPool_foul 4
+
+
+#when red is present and foulcolor:
+#new tag foulred is used
+
+# normal turn
+execute unless entity @s[tag=swPool_freeball_turn] if entity @e[tag=swPool_pool,tag=swPool_black] if entity @e[tag=swPool_pool,tag=swPool_pink] if entity @e[tag=swPool_pool,tag=swPool_blue] if entity @e[tag=swPool_pool,tag=swPool_brown] if entity @e[tag=swPool_pool,tag=swPool_green] if entity @e[tag=swPool_pool,tag=swPool_yellow] if entity @e[tag=!swPool_pooltable,tag=swPool_hitcue,scores={swPool_firsthit=1}] run tag @s add swPool_nfred
+execute unless entity @s[tag=swPool_freeball_turn] if entity @e[tag=!swPool_pooltable,tag=swPool_hitcue,scores={swPool_firsthit=1}] run tag @s[tag=!swPool_nfred] add swPool_foulred
+
+# free-ball turn: nominated colour has already been counted as red,
+# so only a remaining swPool_ncolor means an actually wrong colour was potted
+execute if entity @s[tag=swPool_freeball_turn] if entity @e[tag=!swPool_pooltable,tag=swPool_hitcue,scores={swPool_firsthit=1}] if entity @s[scores={swPool_ncolor=1..}] run tag @s add swPool_foulred
+
+tag @s remove swPool_nfred
+
+
+#if another color ball is pocketed if aiming to hit one, test if swPool_rank = swPool_firsthit, swPool_foul if yes
+execute unless entity @e[tag=swPool_pooltable,tag=swPool_freeball_potted] as @e[tag=swPool_pool,scores={swPool_rank=2..7}] if score @s swPool_rank = @e[tag=!swPool_pooltable,tag=swPool_hitcue,limit=1] swPool_firsthit run tag 000c2be1-0001-414d-0000-000000000000 add swPool_foulred
+
+execute if entity @s[tag=swPool_foulred] unless entity @e[scores={swPool_rank=5},tag=swPool_pool] run scoreboard players set @s[scores={swPool_foul=..4}] swPool_foul 5
+execute if entity @s[tag=swPool_foulred] unless entity @e[scores={swPool_rank=6},tag=swPool_pool] run scoreboard players set @s[scores={swPool_foul=..5}] swPool_foul 6
+execute if entity @s[tag=swPool_foulred] unless entity @e[scores={swPool_rank=7},tag=swPool_pool] run scoreboard players set @s[scores={swPool_foul=..6}] swPool_foul 7
+
+#reset swPool_rank
+scoreboard players reset @e[tag=swPool_pool,tag=!swPool_red] swPool_rank
+
+
+
+#### ANOTHER discription of general swPool_foul:
+#when not hitting two types successively
+#pool:classes/master/snooker/progression
+
+
+#add fouled tag and inherit / test optput messages
+tag @s[tag=swPool_foulcolor] add swPool_fouled
+tag @s[tag=swPool_foulred] add swPool_fouled
+tag @s[tag=swPool_foulcue] add swPool_fouled
+execute if entity @s[tag=swPool_foulcue] run tellraw @a[tag=swPool_debug] [{"text":"Cue ball related foul!"}]
+
+# feedback message
+execute unless score #muteall swPool_C matches 1 run execute if data storage minecraft:swpool feedback_foul if entity @s[tag=swPool_foulcolor] run tellraw @a[tag=swPool_hitcue,limit=1,tag=swPool_CN] [{"text":"➇ ","color":"white"},{"text":"犯规原因：未正确使彩球落袋或错误的球落袋。"}]
+execute unless score #muteall swPool_C matches 1 run execute if data storage minecraft:swpool feedback_foul if entity @s[tag=swPool_foulred] run tellraw @a[tag=swPool_hitcue,limit=1,tag=swPool_CN] [{"text":"➇ ","color":"white"},{"text":"犯规原因：错误的球落袋。"}]
+execute unless score #muteall swPool_C matches 1 run execute if data storage minecraft:swpool feedback_foul if entity @s[tag=swPool_foulcue] run tellraw @a[tag=swPool_hitcue,limit=1,tag=swPool_CN] [{"text":"➇ ","color":"white"},{"text":"犯规原因：母球落袋。"}]
+
+execute unless score #muteall swPool_C matches 1 run execute if data storage minecraft:swpool feedback_foul if entity @s[tag=swPool_foulcolor] run tellraw @a[tag=swPool_hitcue,limit=1,tag=swPool_EN] [{"text":"➇ ","color":"white"},{"text":"Reason of foul: did not correctly pot coloured balls."}]
+execute unless score #muteall swPool_C matches 1 run execute if data storage minecraft:swpool feedback_foul if entity @s[tag=swPool_foulred] run tellraw @a[tag=swPool_hitcue,limit=1,tag=swPool_EN] [{"text":"➇ ","color":"white"},{"text":"Reason of foul: wrong object ball is potted."}]
+execute unless score #muteall swPool_C matches 1 run execute if data storage minecraft:swpool feedback_foul if entity @s[tag=swPool_foulcue] run tellraw @a[tag=swPool_hitcue,limit=1,tag=swPool_EN] [{"text":"➇ ","color":"white"},{"text":"Reason of foul: cue ball is potted."}]
+
+#execute if entity @s[tag=swPool_foulcolor] run say foulcolor
+#execute if entity @s[tag=swPool_foulred] run say foulred
+#execute if entity @s[tag=swPool_foulcue] run say foulcue
+
+#place balls
+
+execute unless entity @e[tag=swPool_pool,tag=swPool_black] at @e[tag=swPool_pin,tag=swPool_black] run summon armor_stand ~ ~ ~ {Marker:1b,Tags:["swPool_pool","swPool_new","swPool_black"],NoGravity:1,Small:1,Invisible:1}
+execute unless entity @e[tag=swPool_pool,tag=swPool_pink] at @e[tag=swPool_pin,tag=swPool_pink] unless entity @e[tag=swPool_new] run summon armor_stand ~ ~ ~ {Marker:1b,Tags:["swPool_pool","swPool_new","swPool_pink"],NoGravity:1,Small:1,Invisible:1}
+execute unless entity @e[tag=swPool_pool,tag=swPool_blue] at @e[tag=swPool_pin,tag=swPool_blue] unless entity @e[tag=swPool_new] run summon armor_stand ~ ~ ~ {Marker:1b,Tags:["swPool_pool","swPool_new","swPool_blue"],NoGravity:1,Small:1,Invisible:1}
+execute unless entity @e[tag=swPool_pool,tag=swPool_brown] at @e[tag=swPool_pin,tag=swPool_brown] unless entity @e[tag=swPool_new] run summon armor_stand ~ ~ ~ {Marker:1b,Tags:["swPool_pool","swPool_new","swPool_brown"],NoGravity:1,Small:1,Invisible:1}
+execute unless entity @e[tag=swPool_pool,tag=swPool_green] at @e[tag=swPool_pin,tag=swPool_green] unless entity @e[tag=swPool_new] run summon armor_stand ~ ~ ~ {Marker:1b,Tags:["swPool_pool","swPool_new","swPool_green"],NoGravity:1,Small:1,Invisible:1}
+execute unless entity @e[tag=swPool_pool,tag=swPool_yellow] at @e[tag=swPool_pin,tag=swPool_yellow] unless entity @e[tag=swPool_new] run summon armor_stand ~ ~ ~ {Marker:1b,Tags:["swPool_pool","swPool_new","swPool_yellow"],NoGravity:1,Small:1,Invisible:1}
+
+execute unless entity @s[tag=swPool_freeball_potted] unless entity @e[tag=swPool_pool,tag=swPool_red] unless entity @s[tag=swPool_foulcolor] unless entity @s[tag=swPool_firstcolor] unless entity @s[tag=swPool_foulcue] run tag @s add swPool_kill
+execute if entity @s[tag=swPool_foulcue] unless entity @e[tag=swPool_foulcolor] run tag @s[scores={swPool_ncolor=0}] add swPool_kill
+
+execute if entity @s[tag=swPool_kill] run kill @e[tag=swPool_new,limit=1]
+
+tag @s remove swPool_kill
+
+scoreboard players operation C_2r swMath_V = C_r swPool_C
+scoreboard players operation C_2r swMath_V += C_r swPool_C
+
+#execute as @e[tag=swPool_new] at @s unless entity @e[tag=swPool_pool,tag=!swPool_new,distance=..0.25] run tag @s add swPool_sit
+execute as @e[tag=swPool_new] run function pool:classes/pocketing/snooker/find_nearest_ball_notnew
+execute as @e[tag=swPool_new] unless score @s swPool_dist < C_2r swMath_V run tag @s add swPool_sit
+
+#execute unless entity @e[tag=swPool_pool,tag=swPool_yellow] at @e[tag=swPool_pin,tag=swPool_yellow] unless entity @e[tag=swPool_pool,distance=..0.25] run summon armor_stand ~ ~ ~ {Marker:1b,Tags:["swPool_pool","swPool_new","swPool_yellow"],NoGravity:1,Small:1,Invisible:1}
+
+#cue is different
+#execute unless entity @e[tag=swPool_pool,tag=swPool_cue] at @e[tag=swPool_pin,tag=swPool_cue] unless entity @e[tag=swPool_pool,distance=..0.1] run summon armor_stand ~ ~ ~ {Marker:1b,Tags:["swPool_pool","swPool_new","swPool_cue"],NoGravity:1,Small:1,Invisible:1}
+
+execute as @e[tag=swPool_pin,tag=swPool_black] run function pool:classes/pocketing/snooker/find_nearest_ball
+execute as @e[tag=swPool_pin,tag=swPool_black] unless score @s swPool_dist < C_2r swMath_V run tag @s add swPool_highest
+execute unless entity @e[tag=swPool_highest] as @e[tag=swPool_pin,tag=swPool_pink] run function pool:classes/pocketing/snooker/find_nearest_ball
+execute unless entity @e[tag=swPool_highest] as @e[tag=swPool_pin,tag=swPool_pink] unless score @s swPool_dist < C_2r swMath_V run tag @s add swPool_highest
+execute unless entity @e[tag=swPool_highest] as @e[tag=swPool_pin,tag=swPool_blue] run function pool:classes/pocketing/snooker/find_nearest_ball
+execute unless entity @e[tag=swPool_highest] as @e[tag=swPool_pin,tag=swPool_blue] unless score @s swPool_dist < C_2r swMath_V run tag @s add swPool_highest
+execute unless entity @e[tag=swPool_highest] as @e[tag=swPool_pin,tag=swPool_brown] run function pool:classes/pocketing/snooker/find_nearest_ball
+execute unless entity @e[tag=swPool_highest] as @e[tag=swPool_pin,tag=swPool_brown] unless score @s swPool_dist < C_2r swMath_V run tag @s add swPool_highest
+execute unless entity @e[tag=swPool_highest] as @e[tag=swPool_pin,tag=swPool_green] run function pool:classes/pocketing/snooker/find_nearest_ball
+execute unless entity @e[tag=swPool_highest] as @e[tag=swPool_pin,tag=swPool_green] unless score @s swPool_dist < C_2r swMath_V run tag @s add swPool_highest
+execute unless entity @e[tag=swPool_highest] as @e[tag=swPool_pin,tag=swPool_yellow] run function pool:classes/pocketing/snooker/find_nearest_ball
+execute unless entity @e[tag=swPool_highest] as @e[tag=swPool_pin,tag=swPool_yellow] unless score @s swPool_dist < C_2r swMath_V run tag @s add swPool_highest
+execute unless entity @e[tag=swPool_highest] as @e[tag=swPool_pool,tag=swPool_black] at @s run summon area_effect_cloud ~ ~ ~ {Tags:["swPool_pintemp"],Duration:1}
+#execute unless entity @e[tag=swPool_highest] as @e[tag=swPool_pool,tag=swPool_new] at @s run summon area_effect_cloud ~ ~ ~ {Tags:["swPool_pintemp"],Duration:1}
+execute as @e[tag=swPool_pintemp] at @s run tp @s @e[tag=swPool_pool,tag=swPool_new,limit=1]
+execute as @e[tag=swPool_pintemp] at @s run tp @s ~ ~ ~ facing entity @e[tag=swPool_pin,tag=swPool_brown,limit=1]
+execute if score C_r swPool_C matches ..249 as @e[tag=swPool_pintemp] at @s run tp @s ^ ^ ^-0.026
+execute if score C_r swPool_C matches 250..374 as @e[tag=swPool_pintemp] at @s run tp @s ^ ^ ^-0.052
+execute if score C_r swPool_C matches 375..499 as @e[tag=swPool_pintemp] at @s run tp @s ^ ^ ^-0.078
+execute if score C_r swPool_C matches 500..624 as @e[tag=swPool_pintemp] at @s run tp @s ^ ^ ^-0.104
+execute if score C_r swPool_C matches 625..749 as @e[tag=swPool_pintemp] at @s run tp @s ^ ^ ^-0.13
+execute if score C_r swPool_C matches 750..874 as @e[tag=swPool_pintemp] at @s run tp @s ^ ^ ^-0.156
+execute if score C_r swPool_C matches 875..999 as @e[tag=swPool_pintemp] at @s run tp @s ^ ^ ^-0.182
+execute if score C_r swPool_C matches 1000..1124 as @e[tag=swPool_pintemp] at @s run tp @s ^ ^ ^-0.208
+execute if score C_r swPool_C matches 1125..1249 as @e[tag=swPool_pintemp] at @s run tp @s ^ ^ ^-0.234
+execute if score C_r swPool_C matches 1250 as @e[tag=swPool_pintemp] at @s run tp @s ^ ^ ^-0.251
+execute if score C_r swPool_C matches 1251.. as @e[tag=swPool_pintemp] at @s run tp @s ^ ^ ^-0.26
+execute as @e[tag=swPool_pintemp] run function pool:classes/pocketing/snooker/find_nearest_ball
+execute if score C_r swPool_C matches 125..249 as @e[tag=swPool_pintemp] at @s if score @s swPool_dist < C_2r swMath_V run tp @s ^ ^ ^-0.026
+execute if score C_r swPool_C matches 250..374 as @e[tag=swPool_pintemp] at @s if score @s swPool_dist < C_2r swMath_V run tp @s ^ ^ ^-0.052
+execute if score C_r swPool_C matches 375..499 as @e[tag=swPool_pintemp] at @s if score @s swPool_dist < C_2r swMath_V run tp @s ^ ^ ^-0.078
+execute if score C_r swPool_C matches 500..624 as @e[tag=swPool_pintemp] at @s if score @s swPool_dist < C_2r swMath_V run tp @s ^ ^ ^-0.104
+execute if score C_r swPool_C matches 625..749 as @e[tag=swPool_pintemp] at @s if score @s swPool_dist < C_2r swMath_V run tp @s ^ ^ ^-0.13
+execute if score C_r swPool_C matches 750..874 as @e[tag=swPool_pintemp] at @s if score @s swPool_dist < C_2r swMath_V run tp @s ^ ^ ^-0.156
+execute if score C_r swPool_C matches 875..999 as @e[tag=swPool_pintemp] at @s if score @s swPool_dist < C_2r swMath_V run tp @s ^ ^ ^-0.182
+execute if score C_r swPool_C matches 1000..1124 as @e[tag=swPool_pintemp] at @s if score @s swPool_dist < C_2r swMath_V run tp @s ^ ^ ^-0.208
+execute if score C_r swPool_C matches 1125..1249 as @e[tag=swPool_pintemp] at @s if score @s swPool_dist < C_2r swMath_V run tp @s ^ ^ ^-0.234
+execute if score C_r swPool_C matches 1250 as @e[tag=swPool_pintemp] at @s if score @s swPool_dist < C_2r swMath_V run tp @s ^ ^ ^-0.251
+execute if score C_r swPool_C matches 1251.. as @e[tag=swPool_pintemp] at @s if score @s swPool_dist < C_2r swMath_V run tp @s ^ ^ ^-0.26
+execute as @e[tag=swPool_pintemp] run function pool:classes/pocketing/snooker/find_nearest_ball
+execute unless score #muteall swPool_C matches 1 run execute as @e[tag=swPool_pintemp] at @s if score @s swPool_dist < C_2r swMath_V run say Cannot find place to place ball
+execute as @e[tag=swPool_pintemp] run function pool:classes/pocketing/snooker/find_nearest_ball
+execute as @e[tag=swPool_pintemp] unless score @s swPool_dist < C_2r swMath_V run tag @s add swPool_highest
+
+execute as @e[tag=swPool_highest] at @s run tp @e[tag=swPool_pool,tag=swPool_new,tag=!swPool_sit,tag=!swPool_cue] @s
+tag @e[tag=swPool_pin] remove swPool_highest
+kill @e[tag=swPool_pintemp]
+
+
+
+execute unless score #muteall swPool_C matches 1 run execute if data storage minecraft:swpool cueballreddot run item replace entity @e[tag=swPool_pool,tag=swPool_new,tag=swPool_cue] armor.head with minecraft:acacia_button[minecraft:custom_model_data=1]
+execute unless score #muteall swPool_C matches 1 run execute unless data storage minecraft:swpool cueballreddot run item replace entity @e[tag=swPool_pool,tag=swPool_new,tag=swPool_cue] armor.head with minecraft:acacia_button[minecraft:custom_model_data=36]
+execute unless score #muteall swPool_C matches 1 run item replace entity @e[tag=swPool_pool,tag=swPool_new,tag=swPool_red] armor.head with minecraft:acacia_button[minecraft:custom_model_data=2]
+execute unless score #muteall swPool_C matches 1 run item replace entity @e[tag=swPool_pool,tag=swPool_new,tag=swPool_yellow] armor.head with minecraft:acacia_button[minecraft:custom_model_data=3]
+execute unless score #muteall swPool_C matches 1 run item replace entity @e[tag=swPool_pool,tag=swPool_new,tag=swPool_green] armor.head with minecraft:acacia_button[minecraft:custom_model_data=4]
+execute unless score #muteall swPool_C matches 1 run item replace entity @e[tag=swPool_pool,tag=swPool_new,tag=swPool_brown] armor.head with minecraft:acacia_button[minecraft:custom_model_data=5]
+execute unless score #muteall swPool_C matches 1 run item replace entity @e[tag=swPool_pool,tag=swPool_new,tag=swPool_blue] armor.head with minecraft:acacia_button[minecraft:custom_model_data=6]
+execute unless score #muteall swPool_C matches 1 run item replace entity @e[tag=swPool_pool,tag=swPool_new,tag=swPool_pink] armor.head with minecraft:acacia_button[minecraft:custom_model_data=7]
+execute unless score #muteall swPool_C matches 1 run item replace entity @e[tag=swPool_pool,tag=swPool_new,tag=swPool_black] armor.head with minecraft:acacia_button[minecraft:custom_model_data=8]
+
+execute unless score #muteall swPool_C matches 1 run execute if data storage minecraft:swpool {allowspin:1} as @e[tag=swPool_pool,tag=swPool_new] at @s run function pool:classes/pose/randomize_pose
+
+tag @e[tag=swPool_new] add swPool_placed
+tag @e[tag=swPool_new] remove swPool_new
+tag @e[tag=swPool_sit] remove swPool_new
+scoreboard players set @e[tag=swPool_pool] swPool_D100 100000
+scoreboard players set @e[tag=swPool_pool] swPool_DXX 99000
+
+execute if entity @e[tag=swPool_pool,tag=swPool_black] if entity @e[tag=swPool_pool,tag=swPool_pink] if entity @e[tag=swPool_pool,tag=swPool_blue] if entity @e[tag=swPool_pool,tag=swPool_brown] if entity @e[tag=swPool_pool,tag=swPool_green] if entity @e[tag=swPool_pool,tag=swPool_yellow] run tag @s remove swPool_pocketing
+
+execute unless entity @s[tag=swPool_foulcolor] unless entity @e[tag=swPool_pool,tag=swPool_red] run tag @s remove swPool_pocketing
+scoreboard players remove @s[tag=swPool_pocketing] swPool_ncolor 1
+tag @s[tag=swPool_pocketing] remove swPool_foulcue
+execute if entity @s[tag=swPool_foulcolor] unless entity @e[tag=swPool_pool,tag=swPool_red] run tag @s[scores={swPool_ncolor=0}] remove swPool_pocketing
+
+
+
+#reset stuff
+tag @s[tag=!swPool_pocketing] remove swPool_foulcolor
+tag @s[tag=!swPool_pocketing] remove swPool_foulred
+tag @s[tag=!swPool_pocketing] remove swPool_foulcue
+
+#set swPool_rank
+scoreboard players operation @e[tag=swPool_red,tag=swPool_pool] swPool_rank = rank1 swPool_rank
+scoreboard players operation @e[tag=swPool_yellow,tag=swPool_pool] swPool_rank = rank2 swPool_rank
+scoreboard players operation @e[tag=swPool_green,tag=swPool_pool] swPool_rank = rank3 swPool_rank
+scoreboard players operation @e[tag=swPool_brown,tag=swPool_pool] swPool_rank = rank4 swPool_rank
+scoreboard players operation @e[tag=swPool_blue,tag=swPool_pool] swPool_rank = rank5 swPool_rank
+scoreboard players operation @e[tag=swPool_pink,tag=swPool_pool] swPool_rank = rank6 swPool_rank
+scoreboard players operation @e[tag=swPool_black,tag=swPool_pool] swPool_rank = rank7 swPool_rank
+
+
+
+execute unless score #muteall swPool_C matches 1 run execute as @e[scores={swPool_rank=2}] run data merge entity @s {CustomName:"\"2 Pts\""}
+execute unless score #muteall swPool_C matches 1 run execute as @e[scores={swPool_rank=3}] run data merge entity @s {CustomName:"\"3 Pts\""}
+execute unless score #muteall swPool_C matches 1 run execute as @e[scores={swPool_rank=4}] run data merge entity @s {CustomName:"\"4 Pts\""}
+execute unless score #muteall swPool_C matches 1 run execute as @e[scores={swPool_rank=5}] run data merge entity @s {CustomName:"\"5 Pts\""}
+execute unless score #muteall swPool_C matches 1 run execute as @e[scores={swPool_rank=6}] run data merge entity @s {CustomName:"\"6 Pts\""}
+execute unless score #muteall swPool_C matches 1 run execute as @e[scores={swPool_rank=7}] run data merge entity @s {CustomName:"\"7 Pts\""}
+
+execute unless score #muteall swPool_C matches 1 run execute as @e[type=item_display,tag=swPool_pool,tag=!swPool_fake] at @s run function pool:classes/pose_quat/modify_r

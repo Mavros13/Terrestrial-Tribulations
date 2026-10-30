@@ -205,6 +205,9 @@ def check_scripts():
             if re.search(r"\bconst\s", body):
                 line = src.count("\n", 0, m.start()) + 1
                 err("scripts", f"{rel(p)}:{line}: const inside try (Rhino rejects it; use let)")
+        # Rhino: level.gameTime reads as undefined (2026-10-30 desktop test), so timers turn into NaN; use ttNow()/TT_TICK
+        for m in re.finditer(r"\.gameTime\b", src):
+            err("scripts", f"{rel(p)}:{src.count(chr(10), 0, m.start()) + 1}: .gameTime is undefined from KubeJS (use ttNow() or TT_TICK)")
         if os.sep + "server_scripts" + os.sep in p:
             for name in TOP_LEVEL.findall(src):
                 if not name.lstrip("$_").lower().startswith("tt"):

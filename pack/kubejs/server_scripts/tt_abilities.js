@@ -19,7 +19,7 @@ const TT_INNATE = $TT_TagKey.create($TT_Registries.DAMAGE_TYPE, new $TT_Resource
 const TT_HOLLOWED = ['minecraft:zombie', 'minecraft:husk', 'minecraft:drowned', 'minecraft:zombie_villager',
   'bosses_of_mass_destruction:lich', 'mowziesmobs:umvuthi', 'cataclysm:scylla']
 
-// Time in ticks for cooldowns and timers. Level.gameTime reads as undefined from KubeJS on 1.20.1 (2026-10-30 desktop
+// Time in ticks for cooldowns and timers. Level game time (the gameTime bean) reads as undefined from KubeJS on 1.20.1 (2026-10-30 desktop
 // test: every cooldown write threw "Cannot convert NaN to java.lang.Long"), so this counts 50 ms wall-clock ticks. It
 // keeps rising across restarts, so stored cooldowns stay valid. Shared by every server script (one global scope).
 function ttNow() {

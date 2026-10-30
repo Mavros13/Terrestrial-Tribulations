@@ -378,8 +378,13 @@ def main():
         if w["impl"] == "BRIDGE":
             lines.append("§c[Prototype] Ability arrives with the tt_bridge mod")
         elif w["impl"] == "INNATE":
+            # Epic Fight 1.20.1 binds the innate skill to the attack button; sharing a button makes it a long press
+            # (ControlEngine: weaponInnatePressCounter > longPressCounter).
             skill = SKILL_NAMES[w["innate"]["two_hand"]] if w.get("innate") else INNATE[w["ef"]]
-            lines.append("§8Triggers on Epic Fight's " + skill + " weapon skill")
+            lines.append(f"§aHow to use: §fBattle mode (R), hit enemies to fill the skill bar, then hold left-click ({skill})")
+        else:
+            assert w.get("how"), f"{w['id']}: add a 'how' line (how to use the ability) to weapons.json"
+            lines.append("§aHow to use: §f" + w["how"])
         tips.append(f"  event.add('tt:{w['id']}', {json.dumps(lines, ensure_ascii=False)})")
     lang.update({"item.tt.bone_shard": "Bone Shard", "item.tt.hollow_fang": "Hollow Fang",
                  "item.tt.crown_shard_fragment": "§6Crown Shard Fragment", "item.tt.emberhold_charter": "§eEmberhold Charter",

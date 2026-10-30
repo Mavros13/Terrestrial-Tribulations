@@ -11,7 +11,7 @@ Steps 1–6 use the **test build**. Step 7 uses the release build.
 
 ## 1. Window and settings (2 min)
 Launch the test build.
-- The loading screen is dark with an orange bar. The window title reads "Terrestrial Tribulations 0.9.0", with the broken-crown icon.
+- The window title reads "Terrestrial Tribulations 0.9.0", with the broken-crown icon. On a **new** instance the loading screen is black instead of Mojang red (Default Options turns on the vanilla dark loading screen on first run; an instance that already ran keeps its own setting).
 - Options → Resource Packs: **Karambit Vault x Punchy** and **TT Karambits** are both on, with TT Karambits above it.
 
 ## 2. Karambits and vanilla swords (8 min)

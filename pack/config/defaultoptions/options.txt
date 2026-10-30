@@ -6,3 +6,4 @@ renderClouds:"fast"
 mipmapLevels:2
 biomeBlendRadius:1
 maxFps:260
+darkMojangStudiosBackground:true

@@ -109,7 +109,8 @@ try {
         'damage @e[type=minecraft:skeleton,limit=1] 50 minecraft:out_of_world',
         'summon minecraft:wither 0 100 -4 {NoAI:1b,Invul:0}', 'damage @e[type=minecraft:wither,limit=1] 5 minecraft:generic',
         'kill @e[type=minecraft:wither]',
-        'execute if entity @e[type=minecraft:zombie] if entity @e[type=minecraft:villager] run say [TT] damage test: done, mobs took every damage type',
+        # (the zombie burns in daylight, so only the villager is checked; KubeJS errors from the hurt handlers show below)
+        'execute if entity @e[type=minecraft:villager] run say [TT] damage test: done, the hurt handlers ran without stopping the server',
         'execute unless entity @e[type=minecraft:wither] run say [TT] damage test: wither removed',
         # Story NPC presets (tools/gen_npcs.py): each should import as a new Easy NPC
         'easy_npc preset import_new data tt:easy_npc/preset/humanoid_slim/maera.npc.snbt 0 100 8',
@@ -163,6 +164,19 @@ try {
       if (-not $after -and $_ -match 'Done \(') { $after = $true }
       if ($after -and $_ -match $keep -and $_ -notmatch $noise -and $_ -notmatch $reloadNoise -and $_ -notmatch '^\s') { $_ }
     } | Select-Object -First 1200 | ForEach-Object { $lines.Add($_) }
+  }
+  # Third-party data that fails to load, by ID, so it can be switched off with a data pack override
+  $lines.Add(''); $lines.Add('=== corewithstuff: failed recipes and loot tables (distinct IDs) ===')
+  if (Test-Path $log) {
+    Select-String -Path $log -Pattern 'corewithstuff:[a-z0-9_/.\-]+' -AllMatches |
+      Where-Object { $_.Line -match 'recipe|loot|Couldn''t parse|Failed to' } |
+      ForEach-Object { $kind = if ($_.Line -match 'loot') { 'loot' } else { 'recipe' }; foreach ($m in $_.Matches) { "$kind $($m.Value)" } } |
+      Sort-Object -Unique | ForEach-Object { $lines.Add($_) }
+    $lines.Add(''); $lines.Add('--- sample lines ---')
+    Select-String -Path $log -Pattern 'corewithstuff' | Select-Object -First 3 | ForEach-Object { $lines.Add($_.Line) }
+    $lines.Add(''); $lines.Add('--- empty block id command, with context ---')
+    Select-String -Path $log -Pattern "Unknown block type 'minecraft:'" -Context 3,1 | Select-Object -First 2 | ForEach-Object {
+      $_.Context.PreContext | ForEach-Object { $lines.Add($_) }; $lines.Add($_.Line); $_.Context.PostContext | ForEach-Object { $lines.Add($_) } }
   }
   $lines.Add(''); $lines.Add('=== latest.log: errors and our content ===')
   if (Test-Path $log) {

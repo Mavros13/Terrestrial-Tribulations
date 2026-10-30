@@ -810,6 +810,72 @@
       "modrinth": "smooth-boot-reloaded",
       "curseforge": "smooth-boot-reloaded",
       "stage": "D"
+    },
+    {
+      "name": "MmmMmmMmmMmm (Target Dummy)",
+      "match": "dummmmmmy",
+      "modrinth": "mmmmmmmmmmmm",
+      "curseforge": "mmmmmmmmmmmm",
+      "stage": "D"
+    },
+    {
+      "name": "Real Bicycles",
+      "match": "real-bicycles|realbicycles",
+      "modrinth": "",
+      "curseforge": "real-bicycles",
+      "stage": "D",
+      "_source": "curseforge-only"
+    },
+    {
+      "name": "Arcade Mod Reloaded",
+      "match": "arcademod",
+      "modrinth": "arcade-mod-reloaded",
+      "curseforge": "arcade-mod-reloaded",
+      "stage": "D"
+    },
+    {
+      "name": "Table Top Craft",
+      "match": "table_top_craft",
+      "modrinth": "table-top-craft",
+      "curseforge": "table-top-craft",
+      "stage": "D"
+    },
+    {
+      "name": "Immersive Melodies",
+      "match": "immersive_melodies",
+      "modrinth": "immersive-melodies",
+      "curseforge": "immersive-melodies",
+      "stage": "D"
+    },
+    {
+      "name": "Exposure",
+      "match": "exposure-",
+      "modrinth": "exposure",
+      "curseforge": "exposure",
+      "stage": "D"
+    },
+    {
+      "name": "Joy of Painting",
+      "match": "xercapaint",
+      "modrinth": "joy-of-painting",
+      "curseforge": "joy-of-painting",
+      "stage": "D"
+    },
+    {
+      "name": "Simple Soccer",
+      "match": "simplesoccer",
+      "modrinth": "simple-soccer",
+      "curseforge": "simple-soccer",
+      "stage": "D"
+    },
+    {
+      "name": "Simple Basketball",
+      "match": "basketball-",
+      "modrinth": "simple-basketball",
+      "curseforge": "",
+      "stage": "D",
+      "_source": "modrinth-only",
+      "_note": "Owner's fun minigame pick (2026-10-30). Modrinth only (acidGymq, Apache-2.0): not in the CurseForge-format pack; add it in Prism from the Modrinth tab."
     }
   ],
   "skip_dependencies": {

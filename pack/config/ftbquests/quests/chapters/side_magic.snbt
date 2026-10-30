@@ -1,6 +1,6 @@
 {
-	id: "AA6A371CFA93D5C5"
-	group: "9DAB9DE842B66190"
+	id: "2A6A371CFA93D5C5"
+	group: "1DAB9DE842B66190"
 	order_index: 16
 	filename: "side_magic"
 	title: "Lumen Conclave Studies"
@@ -11,7 +11,7 @@
 	images: [ ]
 	quests: [
 		{
-			id: "803E75961B5A4E05"
+			id: "003E75961B5A4E05"
 			title: "The Arcane"
 			subtitle: "Arcane Essence"
 			description: ["&6Ilsabet&r: &o\"Magic isn't wishing. It's ink, essence and very careful handwriting.\"", "", "Gather &eArcane Essence&r from magical foes and loot."]
@@ -36,18 +36,18 @@
 			y: 0.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["803E75961B5A4E05"]
+			dependencies: ["003E75961B5A4E05"]
 			tasks: [
 				{ id: "333FC16B4C355C65", type: "item", item: { Count: 1b, id: "irons_spellbooks:inscription_table" } },
-				{ id: "CC7427B19C9F7244", type: "item", item: { Count: 1b, id: "irons_spellbooks:iron_spell_book" } }
+				{ id: "4C7427B19C9F7244", type: "item", item: { Count: 1b, id: "irons_spellbooks:iron_spell_book" } }
 			]
 			rewards: [
-				{ id: "A7EB9BA8F1437D24", type: "item", item: { Count: 4b, id: "irons_spellbooks:common_ink" } },
+				{ id: "27EB9BA8F1437D24", type: "item", item: { Count: 4b, id: "irons_spellbooks:common_ink" } },
 				{ id: "653C82027D469DDD", type: "xp", xp: 80 }
 			]
 		},
 		{
-			id: "86DBA72242EF8F1E"
+			id: "06DBA72242EF8F1E"
 			title: "Forging Scrolls"
 			subtitle: "Scroll Forge"
 			description: ["The &eScroll Forge&r turns ink, paper and a focus into the spell you choose."]
@@ -59,7 +59,7 @@
 				{ id: "61EAD1909F62B067", type: "item", item: { Count: 1b, id: "irons_spellbooks:scroll_forge" } }
 			]
 			rewards: [
-				{ id: "D2A33B375C343F75", type: "item", item: { Count: 2b, id: "irons_spellbooks:uncommon_ink" } },
+				{ id: "52A33B375C343F75", type: "item", item: { Count: 2b, id: "irons_spellbooks:uncommon_ink" } },
 				{ id: "3DD66115E3101042", type: "xp", xp: 100 }
 			]
 		},
@@ -71,23 +71,23 @@
 			x: 4.0d
 			y: -2.0d
 			shape: "circle"
-			dependencies: ["86DBA72242EF8F1E"]
+			dependencies: ["06DBA72242EF8F1E"]
 			tasks: [
-				{ id: "86090CF600A2DA3B", type: "item", item: { Count: 1b, id: "irons_spellbooks:arcane_anvil" } }
+				{ id: "06090CF600A2DA3B", type: "item", item: { Count: 1b, id: "irons_spellbooks:arcane_anvil" } }
 			]
 			rewards: [
 				{ id: "7FF66781CBCF80B6", type: "xp", xp: 120 }
 			]
 		},
 		{
-			id: "EDC2336AD9DC67F7"
+			id: "6DC2336AD9DC67F7"
 			title: "A Better Book"
 			subtitle: "More spell slots"
 			description: ["&6Ilsabet&r: &o\"Bigger books, bigger mistakes. Try not to set the library on fire.\"", "", "Craft a &eGold Spell Book&r."]
 			x: 6.0d
 			y: 0.0d
 			shape: "circle"
-			dependencies: ["86DBA72242EF8F1E"]
+			dependencies: ["06DBA72242EF8F1E"]
 			tasks: [
 				{ id: "40F989F901DD64E1", type: "item", item: { Count: 1b, id: "irons_spellbooks:gold_spell_book" } }
 			]
@@ -96,7 +96,7 @@
 			]
 		},
 		{
-			id: "D8346D1A659F7765"
+			id: "58346D1A659F7765"
 			title: "Another School"
 			subtitle: "Ars Nouveau"
 			description: ["The Conclave's rival scholars build spells from glyphs instead of scrolls.", "", "Read the &eWorn Notebook&r, then craft a &eNovice Spell Book&r."]
@@ -104,24 +104,24 @@
 			y: 3.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["803E75961B5A4E05"]
+			dependencies: ["003E75961B5A4E05"]
 			tasks: [
-				{ id: "D5470F53CB2FD5E4", type: "item", item: { Count: 1b, id: "ars_nouveau:worn_notebook" } },
+				{ id: "55470F53CB2FD5E4", type: "item", item: { Count: 1b, id: "ars_nouveau:worn_notebook" } },
 				{ id: "2642A907C5455A29", type: "item", item: { Count: 1b, id: "ars_nouveau:novice_spell_book" } }
 			]
 			rewards: [
-				{ id: "842C8D8065263E91", type: "xp", xp: 60 }
+				{ id: "042C8D8065263E91", type: "xp", xp: 60 }
 			]
 		},
 		{
-			id: "F0F06B8757A40321"
+			id: "70F06B8757A40321"
 			title: "Source"
 			subtitle: "Source gems and jars"
 			description: ["Source is Ars magic's fuel. An &eImbuement Chamber&r makes &eSource Gems&r; a &eSource Jar&r stores it."]
 			x: 2.0d
 			y: 3.0d
 			shape: "circle"
-			dependencies: ["D8346D1A659F7765"]
+			dependencies: ["58346D1A659F7765"]
 			tasks: [
 				{ id: "4D14F06FA62A1A7F", type: "item", item: { Count: 1b, id: "ars_nouveau:imbuement_chamber" } },
 				{ id: "78E80550AC57D7B9", type: "item", item: { Count: 1b, id: "ars_nouveau:source_gem" }, count: 8L },
@@ -132,64 +132,64 @@
 			]
 		},
 		{
-			id: "D1CD3EA4813F6695"
+			id: "51CD3EA4813F6695"
 			title: "Glyphs"
 			subtitle: "Scribe's Table"
 			description: ["Learn new glyphs at a &eScribe's Table&r and your spells grow."]
 			x: 4.0d
 			y: 3.0d
 			shape: "circle"
-			dependencies: ["F0F06B8757A40321"]
+			dependencies: ["70F06B8757A40321"]
 			tasks: [
 				{ id: "6746A8BF9E35A815", type: "item", item: { Count: 1b, id: "ars_nouveau:scribes_table" } }
 			]
 			rewards: [
-				{ id: "E22A090C800A7EA8", type: "xp", xp: 100 }
+				{ id: "622A090C800A7EA8", type: "xp", xp: 100 }
 			]
 		},
 		{
-			id: "C68D3621020F7EF2"
+			id: "468D3621020F7EF2"
 			title: "The Apparatus"
 			subtitle: "Enchanting Apparatus"
 			description: ["An &eEnchanting Apparatus&r on an &eArcane Core&r, ringed by pedestals, crafts the Conclave's best gear."]
 			x: 6.0d
 			y: 3.0d
 			shape: "circle"
-			dependencies: ["D1CD3EA4813F6695"]
+			dependencies: ["51CD3EA4813F6695"]
 			tasks: [
-				{ id: "BD7EBF712704A9E8", type: "item", item: { Count: 1b, id: "ars_nouveau:enchanting_apparatus" } },
+				{ id: "3D7EBF712704A9E8", type: "item", item: { Count: 1b, id: "ars_nouveau:enchanting_apparatus" } },
 				{ id: "1B331278E2FF2F48", type: "item", item: { Count: 1b, id: "ars_nouveau:arcane_core" } },
 				{ id: "4077A10EFF63882D", type: "item", item: { Count: 1b, id: "ars_nouveau:arcane_pedestal" }, count: 4L }
 			]
 			rewards: [
-				{ id: "E6D9B8BACBE21E26", type: "xp", xp: 200 }
+				{ id: "66D9B8BACBE21E26", type: "xp", xp: 200 }
 			]
 		},
 		{
-			id: "BB883D4A677A2C3B"
+			id: "3B883D4A677A2C3B"
 			title: "Apprentice No More"
 			subtitle: "Apprentice Spell Book"
 			description: ["Upgrade to the &eApprentice Spell Book&r for stronger glyphs."]
 			x: 8.0d
 			y: 3.0d
 			shape: "circle"
-			dependencies: ["C68D3621020F7EF2"]
+			dependencies: ["468D3621020F7EF2"]
 			tasks: [
-				{ id: "C26CBBA18116FE3E", type: "item", item: { Count: 1b, id: "ars_nouveau:apprentice_spell_book" } }
+				{ id: "426CBBA18116FE3E", type: "item", item: { Count: 1b, id: "ars_nouveau:apprentice_spell_book" } }
 			]
 			rewards: [
-				{ id: "80401BED812EB6E3", type: "xp", xp: 250 }
+				{ id: "00401BED812EB6E3", type: "xp", xp: 250 }
 			]
 		},
 		{
-			id: "A15AF27BA96F4637"
+			id: "215AF27BA96F4637"
 			title: "Deeper Enchanting"
 			subtitle: "Apotheosis"
 			description: ["Apotheosis rebuilt the enchanting table: different shelves push &eEterna&r, &eQuanta&r and &eArcana&r.", "", "Craft &e4 Hellshelves&r and look at the table's new stats."]
 			x: 0.0d
 			y: 6.0d
 			shape: "circle"
-			dependencies: ["803E75961B5A4E05"]
+			dependencies: ["003E75961B5A4E05"]
 			tasks: [
 				{ id: "7737B6E6F52E9EF7", type: "item", item: { Count: 1b, id: "apotheosis:hellshelf" }, count: 4L }
 			]

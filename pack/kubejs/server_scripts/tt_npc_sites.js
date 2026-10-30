@@ -200,7 +200,7 @@ let $TT_Hand = null
 try { $TT_Hand = Java.loadClass('net.minecraft.world.InteractionHand') } catch (e) { }
 function ttWork(server, p) {
   const box = new $TT_AABB(p.x - 20, p.y - 8, p.z - 20, p.x + 20, p.y + 8, p.z + 20)
-  const now = p.level.gameTime
+  const now = ttNow()
   p.level.getEntitiesWithin(box).forEach(e => {
     if (!String(e.type).startsWith('easy_npc:') || !e.customName) return
     const w = ttSites.work[String(e.customName.string)]
@@ -216,8 +216,8 @@ function ttWork(server, p) {
 
 PlayerEvents.tick(event => {
   const p = event.player
-  if (!ttSites || p.level.gameTime % 20 != 7 || String(p.level.dimension) != 'minecraft:overworld') return
-  if (ttSites.work && p.level.gameTime % 60 == 7) ttSafe('npc_work', () => ttWork(event.server, p))
+  if (!ttSites || TT_TICK % 20 != 7 || String(p.level.dimension) != 'minecraft:overworld') return
+  if (ttSites.work && TT_TICK % 60 == 7) ttSafe('npc_work', () => ttWork(event.server, p))
   ttSafe('npc_holsters', () => {  // holstered weapons turn with their NPC
     const box = new $TT_AABB(p.x - 24, p.y - 8, p.z - 24, p.x + 24, p.y + 8, p.z + 24)
     p.level.getEntitiesWithin(box).forEach(e => {

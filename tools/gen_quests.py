@@ -15,7 +15,10 @@ OUT = os.path.join(ROOT, "pack", "config", "ftbquests", "quests")
 
 
 def qid(key):
-    return hashlib.md5(("tt:" + key).encode()).hexdigest()[:16].upper()
+    # FTB Quests parses IDs with Long.parseLong(id, 16) (QuestObjectBase.parseCodeString, 1.20.1), so an ID above
+    # 7FFFFFFFFFFFFFFF fails, reads as 0 and gets a random replacement on load: commands and dependencies naming it
+    # break (2026-10-30 desktop test, "Invalid Object ID"). Clear the top bit so every ID is a positive long.
+    return "%016X" % (int(hashlib.md5(("tt:" + key).encode()).hexdigest()[:16], 16) & 0x7FFFFFFFFFFFFFFF)
 
 
 def s(text):

@@ -35,6 +35,7 @@ def main():
     run(sys.executable, os.path.join(ROOT, "tools", "build_site_viewer.py"))  # 3D review page for the sites
     run(sys.executable, os.path.join(ROOT, "tools", "build_holster_preview.py"))  # NPC holster review page
     run(sys.executable, os.path.join(ROOT, "tools", "gen_branding.py"))  # window title + icon, loading colours
+    run(sys.executable, os.path.join(ROOT, "tools", "gen_quiet_data.py"))  # switch off third-party data that never loads
     run(sys.executable, os.path.join(ROOT, "tools", "gen_selftest.py"))
     run(sys.executable, os.path.join(ROOT, "tools", "check_pack.py"))  # stops the build on broken pack files
     sync = os.path.join(ROOT, "pack", "tt-sync")

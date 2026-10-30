@@ -11,7 +11,7 @@ Steps 1–6 use the **test build**. Step 7 uses the release build.
 
 ## 1. Window and settings (2 min)
 Launch the test build.
-- The loading screen is dark with an orange bar. The window title reads "Terrestrial Tribulations 0.9.0", with the broken-crown icon.
+- The window title reads "Terrestrial Tribulations 0.9.0", with the broken-crown icon. On a **new** instance the loading screen is black instead of Mojang red (Default Options turns on the vanilla dark loading screen on first run; an instance that already ran keeps its own setting).
 - Options → Resource Packs: **Karambit Vault x Punchy** and **TT Karambits** are both on, with TT Karambits above it.
 
 ## 2. Karambits and vanilla swords (8 min)
@@ -45,8 +45,8 @@ Survival is easier for this (skills charge by hitting things): `/gamemode surviv
 /kubejs custom_command tt_npcs
 ```
 - First mark the two quests before them as done, so the talk quests can complete:
-  `/ftbquests change_progress @p complete BC7B140352112BF4` (Plant the Charter) and
-  `/ftbquests change_progress @p complete DE3F8A37795E0699` (A Town).
+  `/ftbquests change_progress @p complete 3C7B140352112BF4` (Plant the Charter) and
+  `/ftbquests change_progress @p complete 5E3F8A37795E0699` (A Town).
 - Open the quest book, then talk to **the Stranger** and go through "A Kind Word" to the end. The quest **"A Kind Word"** (Chapter 6) ticks itself off.
 - Talk to **Captain Rhosk** and press Goodbye. **"The Thornwatch Visits"** (Chapter 2) ticks.
 - Open **Doran's** shop (Trade): the offers are there, and buying one works.

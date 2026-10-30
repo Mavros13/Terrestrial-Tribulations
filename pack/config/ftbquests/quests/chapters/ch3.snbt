@@ -19,20 +19,20 @@
 			y: 0.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["B7EC18DD9382E61D"]
+			dependencies: ["37EC18DD9382E61D"]
 			tasks: [
 				{ id: "414878E9E36BAAF1", type: "item", item: { Count: 1b, id: "create:andesite_alloy" }, count: 8L }
 			]
 			rewards: [
-				{ id: "F56BA1AFA02BDF25", type: "item", item: { Count: 1b, id: "create:water_wheel" } },
+				{ id: "756BA1AFA02BDF25", type: "item", item: { Count: 1b, id: "create:water_wheel" } },
 				{ id: "6505C10D8F31C571", type: "item", item: { Count: 8b, id: "create:shaft" } },
-				{ id: "96AE9FC1B5CEA509", type: "xp", xp: 150 },
-				{ id: "A3B35ABFDF07D2D9", type: "command", command: "/kubejs stages add @p tt_meet_tamsin", elevate_perms: true, silent: true },
+				{ id: "16AE9FC1B5CEA509", type: "xp", xp: 150 },
+				{ id: "23B35ABFDF07D2D9", type: "command", command: "/kubejs stages add @p tt_meet_tamsin", elevate_perms: true, silent: true },
 				{ id: "64EC8E1A889347AC", type: "command", command: "/loot give @p loot tt:npc_maps/tamsin_grove", elevate_perms: true, silent: true }
 			]
 		},
 		{
-			id: "C88C630F27FB25EC"
+			id: "488C630F27FB25EC"
 			title: "Water and Wheels"
 			subtitle: "Power without ley-lines"
 			description: ["The Old Engines ran on the Convergence. Yours will run on water.", "", "Build a &eMechanical Press&r and power it with a water wheel."]
@@ -59,15 +59,15 @@
 			shape: "circle"
 			dependencies: ["14680D94DDB8FE4E"]
 			tasks: [
-				{ id: "E5E6631EDFDF0666", type: "item", item: { Count: 1b, id: "minecraft:oak_sapling" }, count: 10L }
+				{ id: "65E6631EDFDF0666", type: "item", item: { Count: 1b, id: "minecraft:oak_sapling" }, count: 10L }
 			]
 			rewards: [
 				{ id: "0F744FB300F66574", type: "item", item: { Count: 1b, id: "tt:rootstring_bow" } },
-				{ id: "F34BE2885C2437B6", type: "xp", xp: 200 }
+				{ id: "734BE2885C2437B6", type: "xp", xp: 200 }
 			]
 		},
 		{
-			id: "A7653CF0CE8A5868"
+			id: "27653CF0CE8A5868"
 			title: "The Sealed Armoury"
 			subtitle: "Thornwatch history"
 			description: ["Pell's relay maps show a sealed Thornwatch armoury. Its guardian still walks the halls.", "", "Defeat &cThe Armoury Warden&r (&8Mowzie's Mobs&r). It hides in deep, iron-walled chambers underground.", "", "&7Its weak point is its back; dodge the axe, then strike."]
@@ -75,13 +75,13 @@
 			y: 0.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["C88C630F27FB25EC"]
+			dependencies: ["488C630F27FB25EC"]
 			tasks: [
-				{ id: "9BF08D38AD0152F0", type: "kill", entity: "mowziesmobs:ferrous_wroughtnaut", value: 1L }
+				{ id: "1BF08D38AD0152F0", type: "kill", entity: "mowziesmobs:ferrous_wroughtnaut", value: 1L }
 			]
 			rewards: [
-				{ id: "A4F9F95A7AF4ECF2", type: "item", item: { Count: 2b, id: "minecraft:iron_block" } },
-				{ id: "9C2675A31DF9AC8D", type: "xp", xp: 400 }
+				{ id: "24F9F95A7AF4ECF2", type: "item", item: { Count: 2b, id: "minecraft:iron_block" } },
+				{ id: "1C2675A31DF9AC8D", type: "xp", xp: 400 }
 			]
 		},
 		{
@@ -93,13 +93,13 @@
 			y: 0.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["A7653CF0CE8A5868"]
+			dependencies: ["27653CF0CE8A5868"]
 			tasks: [
 				{ id: "75117B07AC182AC1", type: "item", item: { Count: 1b, id: "create:brass_ingot" }, count: 4L }
 			]
 			rewards: [
-				{ id: "F4876D2C935CF898", type: "item", item: { Count: 1b, id: "tt:cogwright_breaker" } },
-				{ id: "FD9A83B05F1092AD", type: "xp", xp: 300 },
+				{ id: "74876D2C935CF898", type: "item", item: { Count: 1b, id: "tt:cogwright_breaker" } },
+				{ id: "7D9A83B05F1092AD", type: "xp", xp: 300 },
 				{ id: "5AC333193D61337C", type: "command", command: "/kubejs stages add @p tt_ch3_done", elevate_perms: true, silent: true }
 			]
 		}

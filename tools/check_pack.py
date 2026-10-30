@@ -205,6 +205,9 @@ def check_scripts():
             if re.search(r"\bconst\s", body):
                 line = src.count("\n", 0, m.start()) + 1
                 err("scripts", f"{rel(p)}:{line}: const inside try (Rhino rejects it; use let)")
+        # Rhino: level.gameTime reads as undefined (2026-10-30 desktop test), so timers turn into NaN; use ttNow()/TT_TICK
+        for m in re.finditer(r"\.gameTime\b", src):
+            err("scripts", f"{rel(p)}:{src.count(chr(10), 0, m.start()) + 1}: .gameTime is undefined from KubeJS (use ttNow() or TT_TICK)")
         if os.sep + "server_scripts" + os.sep in p:
             for name in TOP_LEVEL.findall(src):
                 if not name.lstrip("$_").lower().startswith("tt"):
@@ -292,6 +295,9 @@ def check_quests():
         src = re.sub(r'"(?:\\.|[^"\\])*"', '""', open(p, encoding="utf-8").read())
         if src.count("{") != src.count("}") or src.count("[") != src.count("]"):
             err("quests", f"{rel(p)}: unbalanced braces or brackets")
+        # FTB Quests reads IDs as signed longs; 8000000000000000 and up are replaced at load (gen_quests.qid)
+        for m in re.finditer(r'"([89A-F][0-9A-F]{15})"', open(p, encoding="utf-8").read()):
+            err("quests", f"{rel(p)}: ID {m.group(1)} is above 7FFFFFFFFFFFFFFF; FTB Quests would replace it")
 
 
 def norm(n):
@@ -300,7 +306,7 @@ def norm(n):
 
 # Same mod, different name on each site; and mods that can't be in the CurseForge pack.
 MODLIST_ALIASES = {"wakesforgeport": "wakesreforged", "fsang18sheropack": "fsang18sheroes"}
-MODLIST_NOT_ON_CF = {"godsandheroes"}  # Modrinth-only, All Rights Reserved (see curseforge-mods.json _comment)
+MODLIST_NOT_ON_CF = {"godsandheroes", "simplebasketball"}  # Modrinth-only (see curseforge-mods.json _comment)
 
 
 def check_modlists():

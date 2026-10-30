@@ -1,5 +1,5 @@
 {
-	id: "CE781A073235B537"
+	id: "4E781A073235B537"
 	group: ""
 	order_index: 1
 	filename: "ch1"
@@ -24,12 +24,12 @@
 				{ id: "6E11A841236BD567", type: "item", item: { Count: 1b, id: "minecraft:crafting_table" } }
 			]
 			rewards: [
-				{ id: "9CF2EC4AFA0495A6", type: "item", item: { Count: 4b, id: "minecraft:bread" } },
+				{ id: "1CF2EC4AFA0495A6", type: "item", item: { Count: 4b, id: "minecraft:bread" } },
 				{ id: "17D8B2D75BD23C51", type: "xp", xp: 50 }
 			]
 		},
 		{
-			id: "CAE8D7AE99351556"
+			id: "4AE8D7AE99351556"
 			title: "Something Sharp"
 			subtitle: "Ugly. Effective."
 			description: ["You can't face the night with bare hands.", "", "Craft a &eFrontier Cleaver&r: 2 Flint, 1 Bone, 1 Stick (check JEI for the shape).", "Its &6Scavenger's Edge&r squeezes extra food from every hunt, and you'll need it."]
@@ -39,7 +39,7 @@
 			size: 1.5d
 			dependencies: ["34E7F4D1F8CA96A8"]
 			tasks: [
-				{ id: "D843CACB550AD0FD", type: "item", item: { Count: 1b, id: "tt:frontier_cleaver" } }
+				{ id: "5843CACB550AD0FD", type: "item", item: { Count: 1b, id: "tt:frontier_cleaver" } }
 			]
 			rewards: [
 				{ id: "3B74EBD87E52CB29", type: "item", item: { Count: 8b, id: "minecraft:torch" } },
@@ -61,11 +61,11 @@
 			]
 			rewards: [
 				{ id: "1585431288395D8B", type: "item", item: { Count: 8b, id: "minecraft:coal" } },
-				{ id: "B4A014BCF5365E75", type: "xp", xp: 40 }
+				{ id: "34A014BCF5365E75", type: "xp", xp: 40 }
 			]
 		},
 		{
-			id: "D3A94B1E94DDDA56"
+			id: "53A94B1E94DDDA56"
 			title: "Shelter Before Dark"
 			subtitle: "Walls first, questions later"
 			description: ["The Hollowed hunt at night. Build four walls, a door, and sleep through your first night.", "", "&7Sleep in a bed to complete this quest."]
@@ -73,13 +73,13 @@
 			y: 0.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["CAE8D7AE99351556"]
+			dependencies: ["4AE8D7AE99351556"]
 			tasks: [
 				{ id: "6A2CB37C865D12B1", type: "advancement", advancement: "minecraft:adventure/sleep_in_bed", criterion: "" }
 			]
 			rewards: [
-				{ id: "F9D02ABBC0E8084A", type: "item", item: { Count: 3b, id: "minecraft:white_wool" } },
-				{ id: "C94AEE607AC0C7CB", type: "xp", xp: 60 }
+				{ id: "79D02ABBC0E8084A", type: "item", item: { Count: 3b, id: "minecraft:white_wool" } },
+				{ id: "494AEE607AC0C7CB", type: "xp", xp: 60 }
 			]
 		},
 		{
@@ -91,12 +91,12 @@
 			y: 0.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["D3A94B1E94DDDA56"]
+			dependencies: ["53A94B1E94DDDA56"]
 			tasks: [
 				{ id: "0E6456B559DAC0F7", type: "kill", entity: "minecraft:zombie", value: 5L }
 			]
 			rewards: [
-				{ id: "AD208FA43E53F43B", type: "item", item: { Count: 2b, id: "minecraft:iron_ingot" } },
+				{ id: "2D208FA43E53F43B", type: "item", item: { Count: 2b, id: "minecraft:iron_ingot" } },
 				{ id: "6167CED86C585A96", type: "xp", xp: 80 }
 			]
 		},
@@ -127,8 +127,8 @@
 			shape: "circle"
 			dependencies: ["4BCFA92B4ED22E7B"]
 			tasks: [
-				{ id: "C36B18B94939ECA8", type: "kill", entity: "minecraft:skeleton", value: 3L },
-				{ id: "E171C3F3C133365F", type: "kill", entity: "minecraft:spider", value: 3L }
+				{ id: "436B18B94939ECA8", type: "kill", entity: "minecraft:skeleton", value: 3L },
+				{ id: "6171C3F3C133365F", type: "kill", entity: "minecraft:spider", value: 3L }
 			]
 			rewards: [
 				{ id: "4725DBD8B496E2B5", type: "item", item: { Count: 16b, id: "minecraft:arrow" } },
@@ -136,7 +136,7 @@
 			]
 		},
 		{
-			id: "B646621DC752CCD3"
+			id: "3646621DC752CCD3"
 			title: "Voices in the Smoke"
 			subtitle: "East, where the fires burn"
 			description: ["Following the smoke, you find a ring of tents and frightened faces: the last of the &cEmber Accord&r.", "", "An old woman with ash in her braids studies you. &o\"You walked through the Hollow fields and lived. No one lives.\"", "", "&6Elder Maera&r: &o\"Sit. Eat. Then tell me why the Hollowed turned away from you.\"", "", "&7(Elder Maera waits at the refugee camp just beside where you woke up. Finishing your talk with her ticks this.)"]
@@ -149,7 +149,7 @@
 				{ id: "56CBCC10724ECDA1", type: "checkmark" }
 			]
 			rewards: [
-				{ id: "D0F91B23803036B3", type: "item", item: { Count: 6b, id: "minecraft:cooked_porkchop" } },
+				{ id: "50F91B23803036B3", type: "item", item: { Count: 6b, id: "minecraft:cooked_porkchop" } },
 				{ id: "615ED7A4F89D6E30", type: "xp", xp: 100 }
 			]
 		},
@@ -162,17 +162,17 @@
 			y: 0.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["B646621DC752CCD3", "5B3F1C1D866E322C"]
+			dependencies: ["3646621DC752CCD3", "5B3F1C1D866E322C"]
 			tasks: [
-				{ id: "CB18C6A1D50BCAFF", type: "item", item: { Count: 1b, id: "tt:rustbite_karambit" } }
+				{ id: "4B18C6A1D50BCAFF", type: "item", item: { Count: 1b, id: "tt:rustbite_karambit" } }
 			]
 			rewards: [
-				{ id: "9E5AAE4899383245", type: "item", item: { Count: 4b, id: "minecraft:leather" } },
-				{ id: "F472D71498837628", type: "xp", xp: 120 }
+				{ id: "1E5AAE4899383245", type: "item", item: { Count: 4b, id: "minecraft:leather" } },
+				{ id: "7472D71498837628", type: "xp", xp: 120 }
 			]
 		},
 		{
-			id: "A88C6AB1B2597253"
+			id: "288C6AB1B2597253"
 			title: "The Ember Accord"
 			subtitle: "Chapter 1 complete"
 			description: ["The refugees need walls, a name and someone who doesn't die.", "", "&6Elder Maera&r presses a sealed document into your hands: the &eEmberhold Charter&r.", "&o\"Find good ground. Plant this. We'll follow.\"", "", "&eChapter 2: The First Settlement&r begins: found Emberhold with MineColonies' Town Hall."]
@@ -182,12 +182,12 @@
 			size: 1.5d
 			dependencies: ["1D57627FE471E838", "2C7F6E52E6FEF64F"]
 			tasks: [
-				{ id: "F09765EB8DD2DFA8", type: "checkmark" }
+				{ id: "709765EB8DD2DFA8", type: "checkmark" }
 			]
 			rewards: [
 				{ id: "0C5B743C3B142ABC", type: "item", item: { Count: 1b, id: "tt:emberhold_charter" } },
 				{ id: "5A7D12537055668F", type: "xp", xp: 200 },
-				{ id: "A6CC39D71E0CC03A", type: "command", command: "/kubejs stages add @p tt_ch1_done", elevate_perms: true, silent: true }
+				{ id: "26CC39D71E0CC03A", type: "command", command: "/kubejs stages add @p tt_ch1_done", elevate_perms: true, silent: true }
 			]
 		}
 	]

@@ -28,7 +28,7 @@ ForgeEvents.onEvent('net.minecraftforge.event.entity.EntityTravelToDimensionEven
       if (g.dimensions.indexOf(dim) >= 0 && !p.stages.has(g.stage)) { gate = g; break }
     }
     if (gate) {
-      let now = p.level.gameTime
+      let now = Math.floor(Date.now() / 50)
       if (now >= p.persistentData.getLong('tt_dimgate_msg')) {
         p.setStatusMessage(Text.of(gate.message).gold())
         p.persistentData.putLong('tt_dimgate_msg', now + 60)

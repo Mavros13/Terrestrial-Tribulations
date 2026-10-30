@@ -306,7 +306,7 @@ def norm(n):
 
 # Same mod, different name on each site; and mods that can't be in the CurseForge pack.
 MODLIST_ALIASES = {"wakesforgeport": "wakesreforged", "fsang18sheropack": "fsang18sheroes"}
-MODLIST_NOT_ON_CF = {"godsandheroes"}  # Modrinth-only, All Rights Reserved (see curseforge-mods.json _comment)
+MODLIST_NOT_ON_CF = {"godsandheroes", "simplebasketball"}  # Modrinth-only (see curseforge-mods.json _comment)
 
 
 def check_modlists():

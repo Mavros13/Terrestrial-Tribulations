@@ -118,6 +118,7 @@ Embeddium, Oculus (optional shaders), ModernFix, FerriteCore, EntityCulling, Imm
 ## Just for fun (owner's picks, 2026-10-30)
 - **MmmMmmMmmMmm (Target Dummy)** 2.0.12 (CF 225738 / 7963208, Modrinth mmmmmmmmmmmm): a target dummy that shows damage numbers and can wear armour; also handy for testing weapons. Needs Moonlight Lib (already in).
 - **Real Bicycles** 1.0.2 (CF 1755974 / 9280166, CurseForge only, All Rights Reserved; referenced by the manifest, never redistributed): rideable bikes. No dependencies.
+- **Minigames** (owner's picks, 2026-10-30; nothing here touches the story or combat): **Arcade Mod Reloaded** 1.0 (CF 1553725 / 8144863; Tetris, Pac-Man, Pong, Snake, Space Invaders, Donkey Kong cabinets), **Table Top Craft** 6.1.2 (CF 467136 / 5318681; chess and board games, last updated 2024), **Immersive Melodies** 0.8.2 (CF 904471 / 9364410; playable instruments, MIDI), **Exposure** 1.9.22 beta (CF 871755 / 8957244; film cameras and photos; fall back to release 1.7.16, file 6655718, if it misbehaves), **Joy of Painting** 2.0.0 (CF 350727 / 8521309; paint canvases), **Simple Soccer** 1.7.0 (CF 1470547 / 8503437; needs GeckoLib, already in), **Simple Basketball** 1.3.1 (Modrinth acidGymq only, Apache-2.0: in the ModSync list; Prism players add it from the Modrinth tab).
 - **Pool Table:** not added. It only has 1.21.1 NeoForge/Fabric files, no 1.20.1 Forge build (checked 2026-10-30). Its stand-in, the Pool and Billiards data pack, was tried and dropped the same day (owner: too much work for players, since it runs from chat commands).
 
 ## Other

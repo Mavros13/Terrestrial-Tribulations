@@ -4,7 +4,7 @@ Player-facing changes for each release of Terrestrial Tribulations. The release 
 
 ## 0.9.0 (first public beta, not released yet)
 
-Minecraft 1.20.1, Forge 47.4.18, 155 mods. Recommended memory: 8 GB.
+Minecraft 1.20.1, Forge 47.4.18, 161 mods. Recommended memory: 8 GB.
 
 ### Story
 - **The main campaign, Chapters 1–12**, in the quest book: from the Hollow fields to founding Emberhold, the Shattered Realms, the Iron Choir and the fight for the Crown. It has three endings.
@@ -27,6 +27,7 @@ Minecraft 1.20.1, Forge 47.4.18, 155 mods. Recommended memory: 8 GB.
 ### Just for fun
 - **Target dummies** that show the damage of every hit and can wear armour (MmmMmmMmmMmm), good for trying out weapons.
 - **Bicycles** you can craft and ride (Real Bicycles).
+- **Minigames to play alone or with friends:** arcade cabinets (Tetris, Pac-Man, Pong, Snake, Space Invaders, Donkey Kong), chess and board games, playable instruments and MIDI songs, film cameras whose photos you can hang up, paintable canvases, and soccer.
 
 ### Quality of life
 - The land around spawn is pre-generated in the background on a new world's first load, so exploring stutters less, and a chat line says when it is done. `/chunky pause` stops it.

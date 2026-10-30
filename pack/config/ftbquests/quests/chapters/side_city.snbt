@@ -1,6 +1,6 @@
 {
-	id: "F7AFC313D174A829"
-	group: "9DAB9DE842B66190"
+	id: "77AFC313D174A829"
+	group: "1DAB9DE842B66190"
 	order_index: 17
 	filename: "side_city"
 	title: "Emberhold Builders"
@@ -24,12 +24,12 @@
 				{ id: "0F901CA25B2CA98C", type: "item", item: { Count: 1b, id: "minecolonies:blockhutfarmer" } }
 			]
 			rewards: [
-				{ id: "950672888A070EF2", type: "item", item: { Count: 32b, id: "minecraft:wheat_seeds" } },
-				{ id: "FCBD5500586A4AB5", type: "xp", xp: 60 }
+				{ id: "150672888A070EF2", type: "item", item: { Count: 32b, id: "minecraft:wheat_seeds" } },
+				{ id: "7CBD5500586A4AB5", type: "xp", xp: 60 }
 			]
 		},
 		{
-			id: "DF53DFC49537C40C"
+			id: "5F53DFC49537C40C"
 			title: "Timber"
 			subtitle: "Forester"
 			description: ["A &eForester's Hut&r keeps the builders in planks."]
@@ -57,11 +57,11 @@
 				{ id: "74181BCC3FC184B6", type: "item", item: { Count: 1b, id: "minecolonies:blockhutminer" } }
 			]
 			rewards: [
-				{ id: "DA36EFADF253CA72", type: "xp", xp: 60 }
+				{ id: "5A36EFADF253CA72", type: "xp", xp: 60 }
 			]
 		},
 		{
-			id: "B8D25DBE75A66957"
+			id: "38D25DBE75A66957"
 			title: "Everything in Its Place"
 			subtitle: "Warehouse and Courier"
 			description: ["A &eWarehouse&r and a &eCourier's Hut&r let colonists fetch what they need without you running errands."]
@@ -69,7 +69,7 @@
 			y: 0.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["DF53DFC49537C40C", "6D3AB03733D06D3B"]
+			dependencies: ["5F53DFC49537C40C", "6D3AB03733D06D3B"]
 			tasks: [
 				{ id: "6F7D83FB71732C29", type: "item", item: { Count: 1b, id: "minecolonies:blockhutwarehouse" } },
 				{ id: "7B2DF51BA30DF1A2", type: "item", item: { Count: 1b, id: "minecolonies:blockhutdeliveryman" } }
@@ -86,32 +86,32 @@
 			x: 6.0d
 			y: -1.0d
 			shape: "circle"
-			dependencies: ["B8D25DBE75A66957"]
+			dependencies: ["38D25DBE75A66957"]
 			tasks: [
-				{ id: "BB30054148CBBBD1", type: "item", item: { Count: 1b, id: "minecolonies:blockhutcook" } }
+				{ id: "3B30054148CBBBD1", type: "item", item: { Count: 1b, id: "minecolonies:blockhutcook" } }
 			]
 			rewards: [
-				{ id: "8F456E6987877C08", type: "xp", xp: 100 }
+				{ id: "0F456E6987877C08", type: "xp", xp: 100 }
 			]
 		},
 		{
-			id: "FF1BDE60C6AF6BB6"
+			id: "7F1BDE60C6AF6BB6"
 			title: "Doran's Apprentices"
 			subtitle: "Blacksmith"
 			description: ["&6Doran&r: &o\"Give me a forge and two apprentices and I'll stop doing everything myself.\"", "", "Place a &eBlacksmith's Hut&r."]
 			x: 6.0d
 			y: 1.0d
 			shape: "circle"
-			dependencies: ["B8D25DBE75A66957"]
+			dependencies: ["38D25DBE75A66957"]
 			tasks: [
-				{ id: "CA8EFBC970C773BF", type: "item", item: { Count: 1b, id: "minecolonies:blockhutblacksmith" } }
+				{ id: "4A8EFBC970C773BF", type: "item", item: { Count: 1b, id: "minecolonies:blockhutblacksmith" } }
 			]
 			rewards: [
 				{ id: "73C25722AD48AF5A", type: "xp", xp: 100 }
 			]
 		},
 		{
-			id: "F0BF891E9975757E"
+			id: "70BF891E9975757E"
 			title: "Learning"
 			subtitle: "University"
 			description: ["A &eUniversity&r researches upgrades for the whole colony: better tools, more citizens, stronger guards."]
@@ -119,7 +119,7 @@
 			y: 0.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["6D41591A0650A521", "FF1BDE60C6AF6BB6"]
+			dependencies: ["6D41591A0650A521", "7F1BDE60C6AF6BB6"]
 			tasks: [
 				{ id: "77E16F1B99EF5695", type: "item", item: { Count: 1b, id: "minecolonies:blockhutuniversity" } }
 			]
@@ -135,9 +135,9 @@
 			x: 10.0d
 			y: 0.0d
 			shape: "circle"
-			dependencies: ["F0BF891E9975757E"]
+			dependencies: ["70BF891E9975757E"]
 			tasks: [
-				{ id: "F4FD0A1635B6F73B", type: "item", item: { Count: 1b, id: "minecolonies:blockhuttavern" } }
+				{ id: "74FD0A1635B6F73B", type: "item", item: { Count: 1b, id: "minecolonies:blockhuttavern" } }
 			]
 			rewards: [
 				{ id: "74BBD7BC637580FF", type: "xp", xp: 200 }

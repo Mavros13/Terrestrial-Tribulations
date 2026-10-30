@@ -11,7 +11,7 @@
 	images: [ ]
 	quests: [
 		{
-			id: "E10A07B6CF2C99CA"
+			id: "610A07B6CF2C99CA"
 			title: "One Blade"
 			subtitle: "The Thornecutter"
 			description: ["&6Doran&r: &o\"This one's made to kill one thing. The Regent. Don't let him talk you out of swinging it.\""]
@@ -21,7 +21,7 @@
 			size: 1.5d
 			dependencies: ["0969772A5DCC7F82"]
 			tasks: [
-				{ id: "BBB28AD1B9910EDD", type: "checkmark" }
+				{ id: "3BB28AD1B9910EDD", type: "checkmark" }
 			]
 			rewards: [
 				{ id: "56022E71AA642C0F", type: "item", item: { Count: 1b, id: "tt:thornecutter" } },
@@ -37,17 +37,17 @@
 			y: 0.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["E10A07B6CF2C99CA"]
+			dependencies: ["610A07B6CF2C99CA"]
 			tasks: [
 				{ id: "1C5E0875A5B90E1C", type: "dimension", dimension: "minecraft:the_end" },
-				{ id: "9D678A9F07D91F3E", type: "kill", entity: "minecraft:ender_dragon", value: 1L }
+				{ id: "1D678A9F07D91F3E", type: "kill", entity: "minecraft:ender_dragon", value: 1L }
 			]
 			rewards: [
-				{ id: "9F66C63FFA88EF6D", type: "xp", xp: 5000 }
+				{ id: "1F66C63FFA88EF6D", type: "xp", xp: 5000 }
 			]
 		},
 		{
-			id: "E99750B83EA6FE65"
+			id: "699750B83EA6FE65"
 			title: "The Hollow Regent"
 			subtitle: "Malric Thorne"
 			description: ["&5Malric&r: &o\"One will, one Crown, and all of it ends. Stop fighting what you are.\"", "", "Defeat &5Malric, the Hollow Regent&r.", "", "&7He waits in the drowned Acropolis. The Thornecutter was forged for this fight."]
@@ -61,7 +61,7 @@
 			]
 			rewards: [
 				{ id: "6BCF72E61DA68824", type: "xp", xp: 8000 },
-				{ id: "DC49E114913E0EFB", type: "command", command: "/kubejs stages add @p tt_ch11_done", elevate_perms: true, silent: true }
+				{ id: "5C49E114913E0EFB", type: "command", command: "/kubejs stages add @p tt_ch11_done", elevate_perms: true, silent: true }
 			]
 		}
 	]

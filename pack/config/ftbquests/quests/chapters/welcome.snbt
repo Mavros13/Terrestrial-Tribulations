@@ -21,14 +21,14 @@
 			size: 1.5d
 			dependencies: []
 			tasks: [
-				{ id: "F32986BB3CFFD890", type: "checkmark" }
+				{ id: "732986BB3CFFD890", type: "checkmark" }
 			]
 			rewards: [
-				{ id: "D630D09F2ED72A1D", type: "item", item: { Count: 4b, id: "minecraft:bread" } }
+				{ id: "5630D09F2ED72A1D", type: "item", item: { Count: 4b, id: "minecraft:bread" } }
 			]
 		},
 		{
-			id: "CD2FE48E971825B9"
+			id: "4D2FE48E971825B9"
 			title: "Heritage and Fate"
 			subtitle: "Who were you?"
 			description: ["When you first joined, you chose a &eHeritage&r (your bloodline) and a &eFate&r (your calling).", "", "&6Fates:&r Vanguard, Duelist, Warden, Ranger, Arcanist, Spellweaver, Reaper, Summoner, Artificer.", "A tenth Fate, &dAscendant&r, is said to awaken only in those who have walked far down two paths...", "", "&7Missed the screen? It appears on first join. Tick the box once you've chosen."]
@@ -40,7 +40,7 @@
 				{ id: "329726434912B3E8", type: "checkmark" }
 			]
 			rewards: [
-				{ id: "928F4202A9CFF05E", type: "xp", xp: 25 }
+				{ id: "128F4202A9CFF05E", type: "xp", xp: 25 }
 			]
 		},
 		{
@@ -60,14 +60,14 @@
 			]
 		},
 		{
-			id: "AD6D35C8E3C01ADA"
+			id: "2D6D35C8E3C01ADA"
 			title: "Battle Stance"
 			subtitle: "Epic Fight basics"
 			description: ["Press &eR&r to switch between &6Battle Mode&r and Mining Mode.", "", "In Battle Mode: &eleft click&r chains your weapon's combo, &esprint + attack&r dashes in, and your dodge key rolls you through danger.", "Every weapon type has its own moveset. Karambits are fast and cruel; greatswords are slow and devastating."]
 			x: 4.0d
 			y: 0.0d
 			shape: "circle"
-			dependencies: ["CD2FE48E971825B9", "0E85D07B89A39FDB"]
+			dependencies: ["4D2FE48E971825B9", "0E85D07B89A39FDB"]
 			tasks: [
 				{ id: "4D462BDEFD760F67", type: "checkmark" }
 			]

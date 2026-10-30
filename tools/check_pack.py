@@ -295,6 +295,9 @@ def check_quests():
         src = re.sub(r'"(?:\\.|[^"\\])*"', '""', open(p, encoding="utf-8").read())
         if src.count("{") != src.count("}") or src.count("[") != src.count("]"):
             err("quests", f"{rel(p)}: unbalanced braces or brackets")
+        # FTB Quests reads IDs as signed longs; 8000000000000000 and up are replaced at load (gen_quests.qid)
+        for m in re.finditer(r'"([89A-F][0-9A-F]{15})"', open(p, encoding="utf-8").read()):
+            err("quests", f"{rel(p)}: ID {m.group(1)} is above 7FFFFFFFFFFFFFFF; FTB Quests would replace it")
 
 
 def norm(n):

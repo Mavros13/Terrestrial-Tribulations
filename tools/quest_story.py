@@ -7,10 +7,8 @@ collects them). The optional side tabs (tech, magic, world) wait until the mod l
 
 
 def chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage, r_cmd):
-    # Gods and Heroes awakenings (design/story/heroes-integration.md): its hidden "Super Power" origin layer is set by
-    # command, Speedster -> Jumper -> Kryptonian. Without the mod the command just fails quietly.
-    def awaken(origin):
-        return r_cmd(f"/origin set @p origins:super_powers/origin super_powers:{origin}")
+    # Gods and Heroes (ghmorak) was dropped 2026-10-31: no /origin set super_powers:* rewards.
+    # Character power stays on Origins Heritage + Fate; FSang/Satsu Palladium packs stay for hero suits.
 
     def q(key, title, sub, x, y, deps, desc, tasks, rewards, main=False, any_dep=False):
         d = dict(key=key, title=title, sub=sub, x=x, y=y, deps=deps, desc=desc, tasks=tasks, rewards=rewards, main=main)
@@ -187,7 +185,7 @@ def chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage, r_cmd
             q("c7_three", "The Voice Grows Louder", "Maera", 8, 0, ["c7_tw_shard", "c7_ae_trial", "c7_ug", "c7_os"], main=True,
               desc=["&6Maera&r: &o\"He wants you to think you're the same. But he took the Crown. You were made from it.\"",
                     "", "Hold &e5 Crown Shards&r (the one from Chapter 4 and the four realm Shards)."],
-              tasks=[t_item("tt:crown_shard", 5)], rewards=[r_xp(1500), r_stage("tt_ch7_done"), awaken("speedster")]),
+              tasks=[t_item("tt:crown_shard", 5)], rewards=[r_xp(1500), r_stage("tt_ch7_done")]),
         ]},
         {"key": "ch8", "title": "Chapter 8: The Rise of Heroes", "icon": "tt:choirbreaker_gauntlets", "quests": [
             q("c8_reveal", "A Better Offer", "The Iron Choir", 0, 0, ["c7_three"], main=True,
@@ -202,7 +200,7 @@ def chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage, r_cmd
               desc=["&6Pell&r: &o\"Its engine heart is still in there. Bring it to me and I'll get a suit working. Not just one.\"",
                     "", "Hand Pell the &eOld Engine Core&r.",
                     "", "&dHero suits and powers unlock&r (FSang18's Heroes, Satsu Iron Man)."],
-              tasks=[t_item("tt:old_engine_core")], rewards=[r_xp(1000), r_stage("tt_ch8_heroes"), awaken("jumper")]),
+              tasks=[t_item("tt:old_engine_core")], rewards=[r_xp(1000), r_stage("tt_ch8_heroes")]),
             q("c8_breaker", "Choirbreaker", "Overload circuits", 6, 0, ["c8_heart"], main=True,
               desc=["&6Pell&r: &o\"Their gauntlets run on an overload circuit. I rewired them for your hands. Please don't punch me.\""],
               tasks=[t_check()], rewards=[r_item("tt:choirbreaker_gauntlets"), r_xp(600), r_stage("tt_ch8_done")]),
@@ -245,7 +243,7 @@ def chapters(t_item, t_kill, t_adv, t_check, t_dim, r_item, r_xp, r_stage, r_cmd
             q("c10_seven", "Seven", "The Crown in pieces", 6, 0, ["c10_t3"], main=True,
               desc=["&6Maera&r: &o\"Seven. All of them. Can you still hear yourself under his voice?\"",
                     "", "Hold &e7 Crown Shards&r."],
-              tasks=[t_item("tt:crown_shard", 7)], rewards=[r_xp(3000), r_stage("tt_ch10_done"), awaken("kryptonian")]),
+              tasks=[t_item("tt:crown_shard", 7)], rewards=[r_xp(3000), r_stage("tt_ch10_done")]),
         ]},
         {"key": "ch11", "title": "Chapter 11: The Final Convergence", "icon": "tt:thornecutter", "quests": [
             q("c11_blade", "One Blade", "The Thornecutter", 0, 0, ["c10_seven"], main=True,

@@ -20,7 +20,7 @@ Stages in `pack/tt-sync/mods.json`: **A/B/C = Test Build 1**, **D = Test Build 2
 | MineColonies (+ Structurize, MultiPiston, BlockUI, Domum Ornamentum) | Emberhold: Town Hall levels 1–5 = city stages | 🔎 | Snapshot builds only since 2024; cap the colony size for performance |
 | Origins (Forge) | Heritage + Fate layers | ✅ format · 🔎 1.10.0.9 | Archived; avoid Forge 47.2.0 |
 | Passive Skill Tree (+ PassiveSTJS) | Talent tree, points from XP | ✅ format · 🔎 | `tt:shardborn` tree generated |
-| Palladium + FSang18's Heropack + Satsu Iron Man Addon + Gods and Heroes (Palladium edition) | Superheroes and the Iron Choir villains | 🔎 4.5.9; FSang18 12.5.7 and Satsu 3.6.0 released after it; Gods and Heroes 1.4 needs a launch test | **Existing packs only** (no custom heroes). Story fit: `design/story/heroes-integration.md` |
+| Palladium + FSang18's Heropack + Satsu Iron Man Addon | Superheroes and the Iron Choir villains | 🔎 4.5.9; FSang18 12.5.7 and Satsu 3.6.0 released after it | **Existing packs only** (no custom heroes). Gods and Heroes dropped 2026-10-31 (Origins Heritage + Fate only). Story fit: `design/story/heroes-integration.md` |
 | L_Ender's Cataclysm | Ignis, Harbinger, Leviathan, Netherite Monstrosity, Ender Guardian… | 🔎 | Chapter 6–9 bosses |
 | Mowzie's Mobs | Frostmaw, Ferrous Wroughtnaut, Umvuthi | 🔎 | Chapter 5–6 bosses |
 | Bosses of Mass Destruction | Night Lich, Obsidilith, Gauntlet, Void Blossom | 🔎 1.1.2 | Needs CerbonsAPI |
@@ -128,4 +128,4 @@ Embeddium, Oculus (optional shaders), ModernFix, FerriteCore, EntityCulling, Imm
 1. ~~End overhaul~~: decided, Nullscape + YUNG's Better End Island (see the research note).
 2. Apotheosis + Champions overlap: decide after Test Build 2.
 3. Palladium hero packs: fill in the story-gate namespaces after the first launch (`kubejs/exported/tt_item_namespaces.json`).
-4. Gods and Heroes (Palladium) adds its powers as origins on the selection screen. Decide after the first launch whether to hide its layer and grant powers by command at each Crown Shard.
+4. ~~Gods and Heroes (Palladium)~~: **dropped 2026-10-31** — Origins Heritage + Fate only; no `super_powers:*` quest grants.

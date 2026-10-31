@@ -103,10 +103,10 @@ def main():
         "missing_name": "Unbound", "missing_description": "No Fate chosen.",
         "allow_random": False, "allow_random_unchoosable": False, "random_exclusions": [],
         "auto_choose": False, "hidden": False})
-    # Gods and Heroes (Palladium edition, mod id ghmorak) adds its own "Super Power" layer. Hide it at character
-    # creation; the story grants its origins with /origin set (tools/quest_story.py, design/story/heroes-integration.md).
-    # A partial layer (replace false) only merges "hidden" into theirs; Origins Forge PartialLayer reads it.
-    w("origins/origin_layers/super_powers/origin.json", {"replace": False, "hidden": True})
+    # Gods and Heroes (ghmorak / super_powers layer) was dropped 2026-10-31; Origins Heritage + Fate only.
+    sp = os.path.join(B, "origins", "origin_layers", "super_powers")
+    if os.path.isdir(sp):
+        shutil.rmtree(sp, ignore_errors=True)
     print(f"Generated {len(her)} heritages and {len(fates)} fates.")
 
 

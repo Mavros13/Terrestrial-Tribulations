@@ -36,5 +36,5 @@ Minecraft 1.20.1, Forge 47.4.18, 163 mods. Recommended memory: 8 GB.
 - Lighter video and sound-physics settings on first launch (render distance 10). Colonies are capped at 150 citizens and raids at 40 raiders, to keep frame rates steady. Your own settings are never overwritten.
 - Pack updates never reset your own game settings.
 
-### Install note (full pack)
-- **Play via the ModSync / Modrinth instance** so **Gods and Heroes (Palladium)** installs automatically. It is required for Chapter 7 / 8 / 10 Shard-Born awakenings, All Rights Reserved, and not in the CurseForge-format zip. See [README.md](README.md).
+### Install note
+- Prefer the **ModSync / Modrinth** instance so Modrinth jars download at launch. **Gods and Heroes was dropped** (2026-10-31): character power is **Origins Heritage + Fate** only; Palladium **FSang18** and **Satsu** remain. See [README.md](README.md).

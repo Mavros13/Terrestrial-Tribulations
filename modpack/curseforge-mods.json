@@ -1,5 +1,5 @@
 {
-  "_comment": "CurseForge project/file IDs for the CurseForge-format modpack (tools/build_curseforge.py). Looked up 2026-10-27 on curseforge.com and api.cfwidget.com: newest 1.20.1 Forge file (release where one exists). stage A/B/C = Test Build 1, D = Test Build 2. dependency: true = library pulled in for another mod (CurseForge manifests do not resolve dependencies). Gods and Heroes (Palladium) is Modrinth-only and All Rights Reserved, so it cannot be in this pack. Simple Basketball (Modrinth acidGymq) has no 1.20.1 file on CurseForge, so it is only in the ModSync list; Prism players add it from the Modrinth tab.",
+  "_comment": "CurseForge project/file IDs for the CurseForge-format modpack (tools/build_curseforge.py). Looked up 2026-10-27 on curseforge.com and api.cfwidget.com: newest 1.20.1 Forge file (release where one exists). stage A/B/C = Test Build 1, D = Test Build 2. dependency: true = library pulled in for another mod (CurseForge manifests do not resolve dependencies). Gods and Heroes was dropped 2026-10-31 — do not add it here. Simple Basketball (Modrinth acidGymq) has no 1.20.1 file on CurseForge, so it is only in the ModSync list; Prism players add it from the Modrinth tab.",
   "pack_version": "0.9.0",
   "minecraft": "1.20.1",
   "forge": "47.4.18",

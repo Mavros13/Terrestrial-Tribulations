@@ -1,13 +1,12 @@
 {
-  "_comment": "Story gates: items from these namespaces/IDs can't be worn or right-click used until the player has the KubeJS stage (granted by FTB Quests command rewards: /kubejs stages add @p <stage>). Hero-pack namespaces filled 2026-10-28 from the mod jars on the test PC (fsang = FSang18's Heroes, ~1636 item models; satsu_iron_man_addon = Satsu Iron Man Addon); confirm against kubejs/exported/tt_item_namespaces.json after the next launch. Gods and Heroes (Palladium edition) uses namespace ghmorak (mod id ghmorak; checked from its 1.4 jar 2026-10-28); it isn't in the CurseForge pack (All Rights Reserved) but is in the ModSync list.",
+  "_comment": "Story gates: items from these namespaces/IDs can't be worn or right-click used until the player has the KubeJS stage (granted by FTB Quests command rewards: /kubejs stages add @p <stage>). Hero-pack namespaces filled 2026-10-28 from the mod jars on the test PC (fsang = FSang18's Heroes, ~1636 item models; satsu_iron_man_addon = Satsu Iron Man Addon); confirm against kubejs/exported/tt_item_namespaces.json after the next launch. Gods and Heroes (ghmorak) was dropped 2026-10-31 — Origins Heritage + Fate only for that layer; FSang/Satsu remain.",
   "gates": [
     {
       "stage": "tt_ch8_heroes",
       "message": "The suit's systems stay dark. Its makers' secrets are revealed in Chapter 8: The Rise of Heroes.",
       "namespaces": [
         "fsang",
-        "satsu_iron_man_addon",
-        "ghmorak"
+        "satsu_iron_man_addon"
       ],
       "items": [],
       "unlocked": "You can now wear and use the hero suits and powers. Their makers' secrets are yours."

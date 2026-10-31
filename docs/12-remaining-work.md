@@ -17,7 +17,7 @@ The owner asked for a list of everything still to build or sort, and for a focus
 ### Not built yet
 | Item | What it is | Size |
 |---|---|---|
-| **Gods and Heroes** | **Decided 2026-10-31:** required via Modrinth/ModSync (`gods-and-heroes-palladium` in `pack/tt-sync/mods.json`, Fabric Origins skipped). Not in the CurseForge zip (ARR). Player docs point at ModSync for the full pack. | Done (docs + ModSync). No CF jar. |
+| **Gods and Heroes** | **Dropped 2026-10-31:** removed from ModSync and Ch7/8/10 `/origin set` rewards. Origins Heritage + Fate only; FSang/Satsu Palladium packs remain. Never add to `curseforge-mods.json`. | Done (dropped). |
 | **Cast system** (tt_bridge, `design/bridge/cast-system.md`) | Full-body cast animations for spells and powers. Designed, not built (needs MCreator/Java). Optional: everything works without it. | Large. Optional. |
 | **Hand-tuned models** | Only for weapons that look wrong after the desktop check. | Per weapon |
 | **CurseForge publishing** | Make the pack public: project page, icon (`docs/branding/icon.png`), description. Needs Oscar's account. | Small. Needs Oscar. |

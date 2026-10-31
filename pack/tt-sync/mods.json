@@ -733,14 +733,6 @@
       "_note": "Palladium hero pack; see design/story/heroes-integration.md"
     },
     {
-      "name": "Gods and Heroes",
-      "match": "gods-and-heroes",
-      "modrinth": "gods-and-heroes-palladium",
-      "curseforge": "gods-and-heroes-palladium",
-      "stage": "C",
-      "_note": "Required for Shard-Born awakenings (Ch7/8/10). Palladium edition by GC-Morak (HzcBKN2C / gods-and-heroes-palladium); the slug gods-and-heroes is a different Origins-only addon. ARR and Modrinth-only — not in curseforge-mods.json. skip_dependencies blocks Fabric Origins 3BeIrqZR (pack uses Origins Forge)."
-    },
-    {
       "name": "Leaves Be Gone",
       "match": "leavesbegone",
       "modrinth": "leaves-be-gone",
@@ -895,6 +887,6 @@
     }
   ],
   "skip_dependencies": {
-    "3BeIrqZR": "Origins (Fabric, runs via Sinytra Connector). Gods and Heroes lists it as required, but we use Origins (Forge) jl3m2lR9; loading both crashes."
+    "3BeIrqZR": "Origins (Fabric, via Sinytra Connector). Pack uses Origins (Forge) jl3m2lR9; loading both crashes. Kept as a safety block after Gods and Heroes was dropped 2026-10-31."
   }
 }

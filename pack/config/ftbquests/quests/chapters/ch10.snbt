@@ -98,8 +98,7 @@
 			]
 			rewards: [
 				{ id: "45C683F67BDEFDD8", type: "xp", xp: 3000 },
-				{ id: "4F3F9723DAF013C4", type: "command", command: "/kubejs stages add @p tt_ch10_done", elevate_perms: true, silent: true },
-				{ id: "757A8182D31241F7", type: "command", command: "/origin set @p origins:super_powers/origin super_powers:kryptonian", elevate_perms: true, silent: true }
+				{ id: "4F3F9723DAF013C4", type: "command", command: "/kubejs stages add @p tt_ch10_done", elevate_perms: true, silent: true }
 			]
 		}
 	]

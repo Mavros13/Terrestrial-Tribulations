@@ -550,6 +550,22 @@
       "stage": "D"
     },
     {
+      "name": "Controlling",
+      "match": "controlling",
+      "modrinth": "controlling",
+      "curseforge": "controlling",
+      "stage": "D",
+      "_note": "Keybind search in Controls (Jaredlll08). Needs Searchables. Modrinth project xv94TkTM; CF file Controlling-forge-1.20.1-12.0.2."
+    },
+    {
+      "name": "Searchables",
+      "match": "searchables",
+      "modrinth": "searchables",
+      "curseforge": "searchables",
+      "stage": "D",
+      "_note": "Library for Controlling. Modrinth fuuu3xnx; CF Searchables-forge-1.20.1-1.0.3."
+    },
+    {
       "name": "Quark",
       "match": "quark-",
       "modrinth": "quark",
@@ -722,7 +738,7 @@
       "modrinth": "gods-and-heroes-palladium",
       "curseforge": "gods-and-heroes-palladium",
       "stage": "C",
-      "_note": "Palladium edition by GC-Morak (HzcBKN2C). The slug gods-and-heroes is a different, Origins-only addon. Needs Origins: see skip_dependencies."
+      "_note": "Required for Shard-Born awakenings (Ch7/8/10). Palladium edition by GC-Morak (HzcBKN2C / gods-and-heroes-palladium); the slug gods-and-heroes is a different Origins-only addon. ARR and Modrinth-only — not in curseforge-mods.json. skip_dependencies blocks Fabric Origins 3BeIrqZR (pack uses Origins Forge)."
     },
     {
       "name": "Leaves Be Gone",

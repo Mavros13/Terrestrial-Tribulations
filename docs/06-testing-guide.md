@@ -2,19 +2,17 @@
 
 Replaces the CurseForge-app instructions in docs/05. The mod stages and checklist in docs/05 still apply.
 
-## Import (recommended: ModSync / Modrinth — full pack)
-Use this route for the **full** experience, including **Gods and Heroes (Palladium)** Shard-Born awakenings on Chapters 7, 8 and 10. That mod is All Rights Reserved and Modrinth-only, so it is required via ModSync and is **not** redistributed in the CurseForge zip.
-
+## Import (recommended: ModSync / Modrinth)
 Prism → **Add Instance** → **Import** → paste:
 `https://github.com/Mavros13/Terrestrial-Tribulations/raw/main/dist/Terrestrial-Tribulations-TestBuild1.zip`
 
-Memory is preset to 8 GB (G1GC). Test Build 2: swap `TestBuild2` for `TestBuild1`. On Launch, ModSync downloads Modrinth jars (including `gods-and-heroes-palladium`). CurseForge-only mods are added by hand (step 2 below). If anything offers Fabric **Origins**, skip it — the pack already has Origins (Forge); ModSync's `skip_dependencies` already blocks that pull for Gods and Heroes.
+Memory is preset to 8 GB (G1GC). Test Build 2: swap `TestBuild2` for `TestBuild1`. On Launch, ModSync downloads Modrinth jars. CurseForge-only mods are added by hand (step 2 below). **Gods and Heroes was dropped** (2026-10-31): character layers are **Origins Heritage + Fate**; Palladium **FSang18** and **Satsu** stay.
 
-## Import (CurseForge-format zip — incomplete awakenings)
+## Import (CurseForge-format zip)
 Prism → **Add Instance** → **Import** → paste:
 `https://github.com/Mavros13/Terrestrial-Tribulations/raw/main/dist/Terrestrial-Tribulations-TestBuild1-CurseForge.zip`
 
-Prism downloads every mod listed in the CurseForge manifest. Set memory to **8 GB** (Edit → Settings → Java). **Gods and Heroes is missing here** (cannot legally ship the jar in that zip), so Ch7/8/10 `/origin set` awakenings will no-op. Prefer the ModSync import above when testing hero story beats.
+Prism downloads every mod listed in the CurseForge manifest. Set memory to **8 GB** (Edit → Settings → Java). FSang18 and Satsu are in this zip; Origins Heritage + Fate are the character layers.
 
 ## First launch
 1. Press **Launch**. With the ModSync instance, Prism shows the pre-launch log: `[TT ModSync] Downloading …` for each mod.

@@ -2,16 +2,19 @@
 
 Replaces the CurseForge-app instructions in docs/05. The mod stages and checklist in docs/05 still apply.
 
-## Import (recommended: CurseForge-format zip, fully automatic)
+## Import (recommended: ModSync / Modrinth — full pack)
+Use this route for the **full** experience, including **Gods and Heroes (Palladium)** Shard-Born awakenings on Chapters 7, 8 and 10. That mod is All Rights Reserved and Modrinth-only, so it is required via ModSync and is **not** redistributed in the CurseForge zip.
+
+Prism → **Add Instance** → **Import** → paste:
+`https://github.com/Mavros13/Terrestrial-Tribulations/raw/main/dist/Terrestrial-Tribulations-TestBuild1.zip`
+
+Memory is preset to 8 GB (G1GC). Test Build 2: swap `TestBuild2` for `TestBuild1`. On Launch, ModSync downloads Modrinth jars (including `gods-and-heroes-palladium`). CurseForge-only mods are added by hand (step 2 below). If anything offers Fabric **Origins**, skip it — the pack already has Origins (Forge); ModSync's `skip_dependencies` already blocks that pull for Gods and Heroes.
+
+## Import (CurseForge-format zip — incomplete awakenings)
 Prism → **Add Instance** → **Import** → paste:
 `https://github.com/Mavros13/Terrestrial-Tribulations/raw/main/dist/Terrestrial-Tribulations-TestBuild1-CurseForge.zip`
 
-Prism reads the pack's mod list and downloads **every** mod itself, from CurseForge, with no manual step. If a mod's author blocks downloads in other apps, Prism shows its own "blocked mods" window with links. Then: right-click the instance → **Edit** → **Settings** → **Java** → set memory to **8 GB** (this format can't preset it). Test Build 2 is the same link with `TestBuild2` in place of `TestBuild1`.
-
-Not included: **Gods and Heroes (Palladium)**. It's only on Modrinth and its licence doesn't allow re-hosting. Add it from Prism's Modrinth tab if you want it (Edit → Mods → Download mods → Modrinth); skip the Fabric "Origins" dependency Prism may offer.
-
-## Import (fallback: ModSync instance)
-`…/dist/Terrestrial-Tribulations-TestBuild1.zip` is the older route: mods download from Modrinth when you press Launch, and the CurseForge-only ones are added by hand (step 2 below). Memory is preset to 8 GB, with G1GC flags. Use it only if the CurseForge-format import fails.
+Prism downloads every mod listed in the CurseForge manifest. Set memory to **8 GB** (Edit → Settings → Java). **Gods and Heroes is missing here** (cannot legally ship the jar in that zip), so Ch7/8/10 `/origin set` awakenings will no-op. Prefer the ModSync import above when testing hero story beats.
 
 ## First launch
 1. Press **Launch**. With the ModSync instance, Prism shows the pre-launch log: `[TT ModSync] Downloading …` for each mod.

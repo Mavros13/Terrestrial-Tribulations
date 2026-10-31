@@ -496,6 +496,24 @@
       "side": "client"
     },
     {
+      "name": "Controlling",
+      "projectID": 250398,
+      "fileID": 4646682,
+      "file": "Controlling-forge-1.20.1-12.0.2.jar",
+      "stage": "D",
+      "side": "client",
+      "_note": "Keybind search/filter in Controls. Needs Searchables. Newest 1.20.1 Forge on CurseForge/Modrinth (12.0.2, Jul 2023); author still maintains newer MC lines."
+    },
+    {
+      "name": "Searchables",
+      "projectID": 858542,
+      "fileID": 5284015,
+      "file": "Searchables-forge-1.20.1-1.0.3.jar",
+      "stage": "D",
+      "side": "client",
+      "dependency": true
+    },
+    {
       "name": "Quark",
       "projectID": 243121,
       "fileID": 6427817,

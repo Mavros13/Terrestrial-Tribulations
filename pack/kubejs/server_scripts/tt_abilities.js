@@ -19,6 +19,30 @@ const TT_INNATE = $TT_TagKey.create($TT_Registries.DAMAGE_TYPE, new $TT_Resource
 const TT_HOLLOWED = ['minecraft:zombie', 'minecraft:husk', 'minecraft:drowned', 'minecraft:zombie_villager',
   'bosses_of_mass_destruction:lich', 'mowziesmobs:umvuthi', 'cataclysm:scylla']
 
+// Time in ticks for cooldowns and timers. Level game time (the gameTime bean) reads as undefined from KubeJS on 1.20.1 (2026-10-30 desktop
+// test: every cooldown write threw "Cannot convert NaN to java.lang.Long"), so this counts 50 ms wall-clock ticks. It
+// keeps rising across restarts, so stored cooldowns stay valid. Shared by every server script (one global scope).
+// Blink behind a target and turn to face it (Ashfang Karambit's Ember Hook, Crownshard Karambits' Shard Rend). ServerPlayer's six-argument
+// teleportTo sets the view too; the three-argument one kept the old facing (2026-10-30 desktop test: facing away).
+function ttBlinkBehind(p, t) {
+  let x = t.x - t.lookAngle.x() * 1.2
+  let z = t.z - t.lookAngle.z() * 1.2
+  let dx = t.x - x, dz = t.z - z
+  let dy = (t.y + t.eyeHeight * 0.8) - (t.y + p.eyeHeight)
+  let yaw = Math.atan2(-dx, dz) * 180 / Math.PI
+  let pitch = -Math.atan2(dy, Math.max(0.1, Math.sqrt(dx * dx + dz * dz))) * 180 / Math.PI
+  p.teleportTo(p.level, x, t.y, z, yaw, pitch)
+}
+
+function ttNow() {
+  return Math.floor(Date.now() / 50)
+}
+
+// Server ticks since start, for "every N ticks" checks inside per-player tick handlers (same value for every player in
+// one tick, never skips a tick the way wall-clock time can under lag).
+let TT_TICK = 0
+ServerEvents.tick(event => { TT_TICK++ })
+
 function ttSafe(name, fn) {
   try { fn() } catch (e) { console.error(`[TT] ability ${name} failed: ${e}`) }
 }
@@ -61,6 +85,9 @@ function ttGroundLine(p, len, seconds, particle, step, onHit) {
 }
 
 // Scavenger's Edge (Frontier Cleaver)
+// Thorn displays left behind if the server stopped while a Briar Line was up
+ServerEvents.loaded(event => event.server.runCommandSilent('kill @e[type=minecraft:block_display,tag=tt_briar]'))
+
 EntityEvents.death(event => ttSafe('scavengers_edge', () => {
   const p = event.source.player
   if (!p || p.mainHandItem.id != 'tt:frontier_cleaver') return
@@ -75,7 +102,7 @@ EntityEvents.hurt(event => {
   if (!p) return
   const t = event.entity
   const held = p.mainHandItem.id
-  const now = t.level.gameTime
+  const now = ttNow()
   const d = t.persistentData
 
   // Rime Mark (Frostmaw Fang): 5 stacks -> freeze 1.5s + 6 dmg; 10s per-target cooldown
@@ -129,7 +156,7 @@ EntityEvents.hurt(event => {
       if (now > pd.getLong('tt_ember_until')) event.server.scheduleInTicks(2, () => ttSafe('ember_hook_move', () => {
         if (!p.isAlive() || !t.isAlive()) return
         ttParticle(p.level, 'minecraft:flame', p.x, p.y + 1, p.z, 0.3, 12)
-        p.teleportTo(t.x - t.lookAngle.x() * 1.2, t.y, t.z - t.lookAngle.z() * 1.2)
+        ttBlinkBehind(p, t)
         ttSound(p.level, 'minecraft:item.firecharge.use', t.x, t.y, t.z, 1.4)
       }))
       pd.putLong('tt_ember_until', now + 40)
@@ -168,6 +195,16 @@ EntityEvents.hurt(event => {
       e.potionEffects.add('minecraft:slowness', 30, 1)
     })
     ttSound(p.level, 'minecraft:block.sweet_berry_bush.place', p.x, p.y, p.z, 0.7)
+    // Visible thorns (2026-10-30 desktop test: the particles alone were too faint to notice): a berry-bush display
+    // entity on each block of the line, removed when the line ends. Display entities have no hitbox and drop nothing.
+    const yaw = p.getYRot() * Math.PI / 180, tag = `tt_briar_${now}`
+    for (let k = 1; k <= 6; k++) {
+      const bx = p.x - Math.sin(yaw) * k, bz = p.z + Math.cos(yaw) * k
+      p.level.server.runCommandSilent(`execute in ${p.level.dimension} run summon minecraft:block_display ${bx} ${Math.floor(p.y)} ${bz} `
+        + `{block_state:{Name:"minecraft:sweet_berry_bush",Properties:{age:"3"}},Tags:["tt_briar","${tag}"],`
+        + `transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[-0.5f,0f,-0.5f],scale:[1f,1f,1f]}}`)
+    }
+    p.level.server.scheduleInTicks(100, () => p.level.server.runCommandSilent(`kill @e[type=minecraft:block_display,tag=${tag}]`))
   })
 
   // Soul Severance (Hollowbane Tachi, Rushing Tempo): strip invisibility; +100% vs entities in TT_HOLLOWED.

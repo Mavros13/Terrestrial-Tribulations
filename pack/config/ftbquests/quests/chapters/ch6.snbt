@@ -11,14 +11,14 @@
 	images: [ ]
 	quests: [
 		{
-			id: "96FA23906773BCFF"
+			id: "16FA23906773BCFF"
 			title: "A Kind Word"
 			subtitle: "A trader arrives"
 			description: ["A traveller in a grey coat, too clean for the road, sets up a stall in Emberhold.", "", "&6The Stranger&r: &o\"If you ever find more of those Shards, I'd pay handsomely just to study one. Purely academic.\"", "", "&7(Talk to the Stranger: saying goodbye ticks this. Each story NPC lives at their own site; the quest that introduces them gives you a map.)"]
 			x: 0.0d
 			y: -2.0d
 			shape: "circle"
-			dependencies: ["DE3F8A37795E0699"]
+			dependencies: ["5E3F8A37795E0699"]
 			tasks: [
 				{ id: "73E90E213DCA6E6D", type: "checkmark" }
 			]
@@ -27,7 +27,7 @@
 			]
 		},
 		{
-			id: "8E2D7261B426CCA8"
+			id: "0E2D7261B426CCA8"
 			title: "Into the Fire"
 			subtitle: "The Nether arc"
 			description: ["The Regent's armies draw heat from the Nether. Something burns at its heart.", "", "Enter the &cNether&r."]
@@ -35,7 +35,7 @@
 			y: 0.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["DE3F8A37795E0699"]
+			dependencies: ["5E3F8A37795E0699"]
 			tasks: [
 				{ id: "77CF5E26617FF415", type: "dimension", dimension: "minecraft:the_nether" }
 			]
@@ -43,7 +43,7 @@
 				{ id: "1261642E71337636", type: "item", item: { Count: 8b, id: "minecraft:gold_ingot" } },
 				{ id: "7C6773647A0E18C2", type: "xp", xp: 300 },
 				{ id: "49CCEA33DA40ED2E", type: "command", command: "/kubejs stages add @p tt_meet_wren", elevate_perms: true, silent: true },
-				{ id: "B46E7F66BE45EECC", type: "command", command: "/loot give @p loot tt:npc_maps/wren_lookout", elevate_perms: true, silent: true }
+				{ id: "346E7F66BE45EECC", type: "command", command: "/loot give @p loot tt:npc_maps/wren_lookout", elevate_perms: true, silent: true }
 			]
 		},
 		{
@@ -55,12 +55,12 @@
 			y: 0.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["8E2D7261B426CCA8"]
+			dependencies: ["0E2D7261B426CCA8"]
 			tasks: [
 				{ id: "589099403CCC1DAF", type: "kill", entity: "cataclysm:ignis", value: 1L }
 			]
 			rewards: [
-				{ id: "AC26142387BC6D3D", type: "xp", xp: 1200 }
+				{ id: "2C26142387BC6D3D", type: "xp", xp: 1200 }
 			]
 		},
 		{
@@ -74,32 +74,32 @@
 			size: 1.5d
 			dependencies: ["74D0B2142ABE76A2"]
 			tasks: [
-				{ id: "EEE0775DB2B4AAA0", type: "checkmark" }
+				{ id: "6EE0775DB2B4AAA0", type: "checkmark" }
 			]
 			rewards: [
-				{ id: "D8947CFD22E627E1", type: "item", item: { Count: 1b, id: "tt:cinder_crown" } },
-				{ id: "B6537747D339F147", type: "xp", xp: 400 }
+				{ id: "58947CFD22E627E1", type: "item", item: { Count: 1b, id: "tt:cinder_crown" } },
+				{ id: "36537747D339F147", type: "xp", xp: 400 }
 			]
 		},
 		{
-			id: "E4AE1246384F7CEE"
+			id: "64AE1246384F7CEE"
 			title: "The Big White"
 			subtitle: "Wren's northern hunt"
 			description: ["&6Wren&r: &o\"There's a thing up north. Big. White. Tusks like this. If I'm wrong, run.\"", "", "Defeat &cFrostmaw&r (&8Mowzie's Mobs&r) in the frozen north."]
 			x: 2.0d
 			y: 2.0d
 			shape: "circle"
-			dependencies: ["8E2D7261B426CCA8"]
+			dependencies: ["0E2D7261B426CCA8"]
 			tasks: [
 				{ id: "6EDE3D9D11A3FBA5", type: "kill", entity: "mowziesmobs:frostmaw", value: 1L }
 			]
 			rewards: [
 				{ id: "5678F6EFC322E490", type: "item", item: { Count: 1b, id: "tt:frostmaw_fang" } },
-				{ id: "804870C49261E693", type: "xp", xp: 800 }
+				{ id: "004870C49261E693", type: "xp", xp: 800 }
 			]
 		},
 		{
-			id: "F961E754228073CC"
+			id: "7961E754228073CC"
 			title: "Doors That Remember"
 			subtitle: "The realms wake"
 			description: ["With Ignis dead, the Shard in your pack hums louder. Portals that never lit are flickering.", "", "&6Archivist Sol&r: &o\"Shard calls to Shard. The doors remember the Crown.\"", "", "&eThe realm portals are open&r: Twilight Forest, Aether, Undergarden, the Otherside."]
@@ -112,10 +112,10 @@
 				{ id: "628765B2A509F6DC", type: "checkmark" }
 			]
 			rewards: [
-				{ id: "A0738D5E3866FA46", type: "xp", xp: 500 },
+				{ id: "20738D5E3866FA46", type: "xp", xp: 500 },
 				{ id: "67F9A44B8F70863C", type: "command", command: "/kubejs stages add @p tt_ch6_done", elevate_perms: true, silent: true },
 				{ id: "2F3D7F5D3C276095", type: "command", command: "/kubejs stages add @p tt_ch7_realms", elevate_perms: true, silent: true },
-				{ id: "CFB45C6BC0825AD5", type: "command", command: "/kubejs stages add @p tt_meet_sol", elevate_perms: true, silent: true },
+				{ id: "4FB45C6BC0825AD5", type: "command", command: "/kubejs stages add @p tt_meet_sol", elevate_perms: true, silent: true },
 				{ id: "3508CE39EA6C5C72", type: "command", command: "/loot give @p loot tt:npc_maps/sol_archive", elevate_perms: true, silent: true }
 			]
 		}

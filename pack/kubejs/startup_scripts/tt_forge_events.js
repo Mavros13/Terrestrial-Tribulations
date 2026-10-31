@@ -11,7 +11,7 @@ ForgeEvents.onEvent('io.redspace.ironsspellbooks.api.events.SpellOnCastEvent', e
     if (!p || p.level.isClientSide()) return
     if (p.mainHandItem.id != 'tt:prism_ward_staff' && p.offHandItem.id != 'tt:prism_ward_staff') return
     let pd = p.persistentData
-    let now = p.level.gameTime
+    let now = Math.floor(Date.now() / 50)
     if (now < pd.getLong('tt_prism_cd')) return
     pd.putLong('tt_prism_until', now + 60)
     pd.putLong('tt_prism_cd', now + 200)

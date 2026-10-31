@@ -236,7 +236,7 @@ def s(v):
 
 def quest_task(key):
     """FTB Quests id of a quest's first task, as gen_quests.py writes it."""
-    return hashlib.md5(("tt:" + key + ":task:0").encode()).hexdigest()[:16].upper()
+    return "%016X" % (int(hashlib.md5(("tt:" + key + ":task:0").encode()).hexdigest()[:16], 16) & 0x7FFFFFFFFFFFFFFF)  # = gen_quests.qid
 
 
 def complete(keys):

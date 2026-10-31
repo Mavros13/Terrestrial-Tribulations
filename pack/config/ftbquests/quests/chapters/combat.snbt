@@ -18,16 +18,16 @@
 			x: 0.0d
 			y: 0.0d
 			shape: "circle"
-			dependencies: ["AD6D35C8E3C01ADA"]
+			dependencies: ["2D6D35C8E3C01ADA"]
 			tasks: [
-				{ id: "FD8EF88CE2F3B366", type: "checkmark" }
+				{ id: "7D8EF88CE2F3B366", type: "checkmark" }
 			]
 			rewards: [
 				{ id: "0BD5036169E9B68C", type: "xp", xp: 40 }
 			]
 		},
 		{
-			id: "95EE7B7297FA2C91"
+			id: "15EE7B7297FA2C91"
 			title: "Know Your Weapon"
 			subtitle: "Abilities and tooltips"
 			description: ["Every Terrestrial Tribulations weapon has a unique &6ability&r, a colour all its own and a story behind it. Read the tooltip.", "", "Obtain a &eFrontier Cleaver&r and hover over it."]
@@ -36,27 +36,27 @@
 			shape: "circle"
 			dependencies: ["40E3C855672474DE"]
 			tasks: [
-				{ id: "ABF56F6D4F6CECEC", type: "item", item: { Count: 1b, id: "tt:frontier_cleaver" } }
+				{ id: "2BF56F6D4F6CECEC", type: "item", item: { Count: 1b, id: "tt:frontier_cleaver" } }
 			]
 			rewards: [
 				{ id: "7F0D0F4FE97D095C", type: "xp", xp: 30 }
 			]
 		},
 		{
-			id: "96DCD7643237D16F"
+			id: "16DCD7643237D16F"
 			title: "Champions of the Dark"
 			subtitle: "Elite enemies"
 			description: ["Some monsters spawn as &cChampions&r: tougher, named and gifted with affixes (fire, frost, shielding and worse).", "", "Their name tag tells you their rank. Higher ranks drop better loot. Retreat is not cowardice."]
 			x: 4.0d
 			y: 0.0d
 			shape: "circle"
-			dependencies: ["95EE7B7297FA2C91"]
+			dependencies: ["15EE7B7297FA2C91"]
 			tasks: [
-				{ id: "B1EE1F192C0FD022", type: "checkmark" }
+				{ id: "31EE1F192C0FD022", type: "checkmark" }
 			]
 			rewards: [
 				{ id: "2D3D27ECFEA839C4", type: "item", item: { Count: 1b, id: "minecraft:golden_apple" } },
-				{ id: "D75197A710314FCA", type: "xp", xp: 60 }
+				{ id: "575197A710314FCA", type: "xp", xp: 60 }
 			]
 		}
 	]

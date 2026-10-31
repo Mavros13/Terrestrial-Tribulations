@@ -1,6 +1,6 @@
 {
-	id: "B9F0110897F319D4"
-	group: "9DAB9DE842B66190"
+	id: "39F0110897F319D4"
+	group: "1DAB9DE842B66190"
 	order_index: 15
 	filename: "side_engines"
 	title: "The Deep Engines"
@@ -21,7 +21,7 @@
 			size: 1.5d
 			dependencies: ["06156D166D38EA64"]
 			tasks: [
-				{ id: "FF70F88494C0A465", type: "item", item: { Count: 1b, id: "mekanism:ingot_osmium" }, count: 16L }
+				{ id: "7F70F88494C0A465", type: "item", item: { Count: 1b, id: "mekanism:ingot_osmium" }, count: 16L }
 			]
 			rewards: [
 				{ id: "7DD8AC3EE8A4F959", type: "xp", xp: 60 }
@@ -38,11 +38,11 @@
 			size: 1.5d
 			dependencies: ["0AC893EC2A44D582"]
 			tasks: [
-				{ id: "93086DDBE81AD7BE", type: "item", item: { Count: 1b, id: "mekanism:metallurgic_infuser" } }
+				{ id: "13086DDBE81AD7BE", type: "item", item: { Count: 1b, id: "mekanism:metallurgic_infuser" } }
 			]
 			rewards: [
-				{ id: "8BE2EFCA7F07E19B", type: "item", item: { Count: 16b, id: "mekanism:basic_universal_cable" } },
-				{ id: "93CB154F8EF0E3BB", type: "xp", xp: 80 }
+				{ id: "0BE2EFCA7F07E19B", type: "item", item: { Count: 16b, id: "mekanism:basic_universal_cable" } },
+				{ id: "13CB154F8EF0E3BB", type: "xp", xp: 80 }
 			]
 		},
 		{
@@ -55,7 +55,7 @@
 			shape: "circle"
 			dependencies: ["2D5072C8D434DA5F"]
 			tasks: [
-				{ id: "E539CCDCAA2E2F15", type: "item", item: { Count: 1b, id: "mekanismgenerators:heat_generator" } },
+				{ id: "6539CCDCAA2E2F15", type: "item", item: { Count: 1b, id: "mekanismgenerators:heat_generator" } },
 				{ id: "609A81A9A01ACE4C", type: "item", item: { Count: 1b, id: "mekanism:basic_energy_cube" } }
 			]
 			rewards: [
@@ -72,11 +72,11 @@
 			shape: "circle"
 			dependencies: ["2D5072C8D434DA5F"]
 			tasks: [
-				{ id: "BE833B247B8F89E4", type: "item", item: { Count: 1b, id: "mekanism:ingot_steel" }, count: 16L },
+				{ id: "3E833B247B8F89E4", type: "item", item: { Count: 1b, id: "mekanism:ingot_steel" }, count: 16L },
 				{ id: "279BC66B7C369CAF", type: "item", item: { Count: 1b, id: "mekanism:basic_control_circuit" }, count: 8L }
 			]
 			rewards: [
-				{ id: "EE20B6DBF3F52A70", type: "item", item: { Count: 2b, id: "mekanism:steel_casing" } },
+				{ id: "6E20B6DBF3F52A70", type: "item", item: { Count: 2b, id: "mekanism:steel_casing" } },
 				{ id: "32716CBB7E3AC3A6", type: "xp", xp: 100 }
 			]
 		},
@@ -90,14 +90,14 @@
 			shape: "circle"
 			dependencies: ["6DCA23782D2AA8FC"]
 			tasks: [
-				{ id: "84180AF13F60C308", type: "item", item: { Count: 1b, id: "mekanism:enrichment_chamber" } }
+				{ id: "04180AF13F60C308", type: "item", item: { Count: 1b, id: "mekanism:enrichment_chamber" } }
 			]
 			rewards: [
 				{ id: "57E4EE886C374024", type: "xp", xp: 100 }
 			]
 		},
 		{
-			id: "D56F5A7C5E7F0033"
+			id: "556F5A7C5E7F0033"
 			title: "Better Alloys"
 			subtitle: "Infused to atomic"
 			description: ["&eInfused&r, &eReinforced&r and &eAtomic Alloy&r upgrade machines and tier up cables and cubes."]
@@ -107,15 +107,15 @@
 			dependencies: ["6DCA23782D2AA8FC"]
 			tasks: [
 				{ id: "31D3F0AA5AC33B93", type: "item", item: { Count: 1b, id: "mekanism:alloy_infused" }, count: 8L },
-				{ id: "8D7C2857DC453F43", type: "item", item: { Count: 1b, id: "mekanism:alloy_reinforced" }, count: 4L },
+				{ id: "0D7C2857DC453F43", type: "item", item: { Count: 1b, id: "mekanism:alloy_reinforced" }, count: 4L },
 				{ id: "5B1F030245682EBE", type: "item", item: { Count: 1b, id: "mekanism:alloy_atomic" }, count: 2L }
 			]
 			rewards: [
-				{ id: "CF56A6E7160AF6AA", type: "xp", xp: 200 }
+				{ id: "4F56A6E7160AF6AA", type: "xp", xp: 200 }
 			]
 		},
 		{
-			id: "A8C902DD07B77452"
+			id: "28C902DD07B77452"
 			title: "The Digital Miner"
 			subtitle: "The Guild's crown jewel"
 			description: ["&6Pell&r: &o\"It mines a whole chunk without anyone going underground. The Regent's people would kill for one. Let's not tell them.\"", "", "Build a &eDigital Miner&r. Set its filters, give it power, stand well back."]
@@ -123,16 +123,16 @@
 			y: 2.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["D56F5A7C5E7F0033", "6B678BC8E9FA5CF2"]
+			dependencies: ["556F5A7C5E7F0033", "6B678BC8E9FA5CF2"]
 			tasks: [
-				{ id: "A097EB744730D7EA", type: "item", item: { Count: 1b, id: "mekanism:digital_miner" } }
+				{ id: "2097EB744730D7EA", type: "item", item: { Count: 1b, id: "mekanism:digital_miner" } }
 			]
 			rewards: [
-				{ id: "D4A63D814A9989EE", type: "xp", xp: 500 }
+				{ id: "54A63D814A9989EE", type: "xp", xp: 500 }
 			]
 		},
 		{
-			id: "C9D7063C11086B48"
+			id: "49D7063C11086B48"
 			title: "Thinking Crystals"
 			subtitle: "Applied Energistics 2"
 			description: ["Certus quartz grows in meteorite craters. The Old Engines used it to remember things.", "", "Find &eCertus Quartz&r and grow &eFluix Crystals&r."]
@@ -142,7 +142,7 @@
 			size: 1.5d
 			dependencies: ["6DCA23782D2AA8FC"]
 			tasks: [
-				{ id: "8CA5A5DCB21636AB", type: "item", item: { Count: 1b, id: "ae2:certus_quartz_crystal" }, count: 16L },
+				{ id: "0CA5A5DCB21636AB", type: "item", item: { Count: 1b, id: "ae2:certus_quartz_crystal" }, count: 16L },
 				{ id: "26689EDE82953CED", type: "item", item: { Count: 1b, id: "ae2:fluix_crystal" }, count: 8L }
 			]
 			rewards: [
@@ -150,14 +150,14 @@
 			]
 		},
 		{
-			id: "ED61A06889C475B6"
+			id: "6D61A06889C475B6"
 			title: "Printed Minds"
 			subtitle: "Processors"
 			description: ["An &eInscriber&r presses circuits from meteorite presses. Make all three processors."]
 			x: 2.0d
 			y: 4.0d
 			shape: "circle"
-			dependencies: ["C9D7063C11086B48"]
+			dependencies: ["49D7063C11086B48"]
 			tasks: [
 				{ id: "5E29B31ADEA896CA", type: "item", item: { Count: 1b, id: "ae2:inscriber" } },
 				{ id: "609E2F5AE22952C5", type: "item", item: { Count: 1b, id: "ae2:logic_processor" }, count: 4L },
@@ -165,7 +165,7 @@
 				{ id: "085CE8F5652FC32C", type: "item", item: { Count: 1b, id: "ae2:engineering_processor" }, count: 4L }
 			]
 			rewards: [
-				{ id: "8D60880FF92B7B13", type: "xp", xp: 150 }
+				{ id: "0D60880FF92B7B13", type: "xp", xp: 150 }
 			]
 		},
 		{
@@ -177,15 +177,15 @@
 			y: 4.0d
 			shape: "gear"
 			size: 1.5d
-			dependencies: ["ED61A06889C475B6"]
+			dependencies: ["6D61A06889C475B6"]
 			tasks: [
-				{ id: "F1C638A3BD023792", type: "item", item: { Count: 1b, id: "ae2:controller" } },
-				{ id: "AFF16EF2D27D7F92", type: "item", item: { Count: 1b, id: "ae2:drive" } },
+				{ id: "71C638A3BD023792", type: "item", item: { Count: 1b, id: "ae2:controller" } },
+				{ id: "2FF16EF2D27D7F92", type: "item", item: { Count: 1b, id: "ae2:drive" } },
 				{ id: "04571EA4FB499205", type: "item", item: { Count: 1b, id: "ae2:item_storage_cell_1k" } },
-				{ id: "BFC8DC50195EB0C8", type: "item", item: { Count: 1b, id: "ae2:terminal" } }
+				{ id: "3FC8DC50195EB0C8", type: "item", item: { Count: 1b, id: "ae2:terminal" } }
 			]
 			rewards: [
-				{ id: "A8CACF772B065560", type: "xp", xp: 300 }
+				{ id: "28CACF772B065560", type: "xp", xp: 300 }
 			]
 		},
 		{
@@ -199,7 +199,7 @@
 			dependencies: ["24824612318B2CB3"]
 			tasks: [
 				{ id: "7C63F64076B87A9A", type: "item", item: { Count: 1b, id: "ae2:pattern_provider" } },
-				{ id: "DA303565304EC0A4", type: "item", item: { Count: 1b, id: "ae2:molecular_assembler" } }
+				{ id: "5A303565304EC0A4", type: "item", item: { Count: 1b, id: "ae2:molecular_assembler" } }
 			]
 			rewards: [
 				{ id: "2AB95DEA675683EE", type: "xp", xp: 300 }

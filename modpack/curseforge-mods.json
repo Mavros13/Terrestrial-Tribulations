@@ -1,5 +1,5 @@
 {
-  "_comment": "CurseForge project/file IDs for the CurseForge-format modpack (tools/build_curseforge.py). Looked up 2026-10-27 on curseforge.com and api.cfwidget.com: newest 1.20.1 Forge file (release where one exists). stage A/B/C = Test Build 1, D = Test Build 2. dependency: true = library pulled in for another mod (CurseForge manifests do not resolve dependencies). Gods and Heroes (Palladium) is Modrinth-only and All Rights Reserved, so it cannot be in this pack.",
+  "_comment": "CurseForge project/file IDs for the CurseForge-format modpack (tools/build_curseforge.py). Looked up 2026-10-27 on curseforge.com and api.cfwidget.com: newest 1.20.1 Forge file (release where one exists). stage A/B/C = Test Build 1, D = Test Build 2. dependency: true = library pulled in for another mod (CurseForge manifests do not resolve dependencies). Gods and Heroes (Palladium) is Modrinth-only and All Rights Reserved, so it cannot be in this pack. Simple Basketball (Modrinth acidGymq) has no 1.20.1 file on CurseForge, so it is only in the ModSync list; Prism players add it from the Modrinth tab.",
   "pack_version": "0.9.0",
   "minecraft": "1.20.1",
   "forge": "47.4.18",
@@ -494,6 +494,24 @@
       "file": "MouseTweaks-forge-mc1.20.1-2.25.1.jar",
       "stage": "D",
       "side": "client"
+    },
+    {
+      "name": "Controlling",
+      "projectID": 250398,
+      "fileID": 4646682,
+      "file": "Controlling-forge-1.20.1-12.0.2.jar",
+      "stage": "D",
+      "side": "client",
+      "_note": "Keybind search/filter in Controls. Needs Searchables. Newest 1.20.1 Forge on CurseForge/Modrinth (12.0.2, Jul 2023); author still maintains newer MC lines."
+    },
+    {
+      "name": "Searchables",
+      "projectID": 858542,
+      "fileID": 5284015,
+      "file": "Searchables-forge-1.20.1-1.0.3.jar",
+      "stage": "D",
+      "side": "client",
+      "dependency": true
     },
     {
       "name": "Quark",
@@ -1145,6 +1163,70 @@
       "fileID": 5016280,
       "file": "smoothboot(reloaded)-mc1.20.1-0.0.4.jar",
       "stage": "D"
+    },
+    {
+      "name": "MmmMmmMmmMmm (Target Dummy)",
+      "projectID": 225738,
+      "fileID": 7963208,
+      "file": "dummmmmmy-1.20-2.0.12-forge.jar",
+      "stage": "D",
+      "_note": "Owner's fun pick (2026-10-30): target dummy with damage numbers, handy for weapon testing. Needs Moonlight Lib (already in)."
+    },
+    {
+      "name": "Real Bicycles",
+      "projectID": 1755974,
+      "fileID": 9280166,
+      "file": "real-bicycles-1.0.2.jar",
+      "stage": "D",
+      "_note": "Owner's fun pick (2026-10-30). All Rights Reserved: referenced by the manifest only, never redistributed. No dependencies."
+    },
+    {
+      "name": "Arcade Mod Reloaded",
+      "projectID": 1553725,
+      "fileID": 8144863,
+      "file": "arcademod-1.0-1.20.1.jar",
+      "stage": "D",
+      "_note": "Owner's fun minigame pick (2026-10-30). Arcade cabinets: Tetris, Pac-Man, Pong, Snake, Space Invaders, Donkey Kong."
+    },
+    {
+      "name": "Table Top Craft",
+      "projectID": 467136,
+      "fileID": 5318681,
+      "file": "table_top_craft-forge-1.20.1-6.1.2.jar",
+      "stage": "D",
+      "_note": "Owner's fun minigame pick (2026-10-30). Playable chess and board games. Last updated 2024."
+    },
+    {
+      "name": "Immersive Melodies",
+      "projectID": 904471,
+      "fileID": 9364410,
+      "file": "immersive_melodies-0.8.2-1.20.1-forge.jar",
+      "stage": "D",
+      "_note": "Owner's fun minigame pick (2026-10-30). Playable instruments and MIDI songs."
+    },
+    {
+      "name": "Exposure",
+      "projectID": 871755,
+      "fileID": 8957244,
+      "file": "exposure-forge-1.20.1-1.9.22.jar",
+      "stage": "D",
+      "_note": "Owner's fun minigame pick (2026-10-30). Film cameras and photos. 1.9.22 is tagged beta; the newest release is 1.7.16 (file 6655718) if it misbehaves."
+    },
+    {
+      "name": "Joy of Painting",
+      "projectID": 350727,
+      "fileID": 8521309,
+      "file": "xercapaint-1.20.1-2.0.0.jar",
+      "stage": "D",
+      "_note": "Owner's fun minigame pick (2026-10-30). Paint pictures on canvases."
+    },
+    {
+      "name": "Simple Soccer",
+      "projectID": 1470547,
+      "fileID": 8503437,
+      "file": "simplesoccer-1.7.0-forge-1.20.1.jar",
+      "stage": "D",
+      "_note": "Owner's fun minigame pick (2026-10-30). Goals and a ball. Needs GeckoLib (already in)."
     }
   ]
 }

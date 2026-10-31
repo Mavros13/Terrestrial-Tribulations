@@ -3,6 +3,7 @@
   "weapons": [
     {
       "id": "frontier_cleaver",
+      "how": "Passive: works on every kill",
       "name": "Frontier Cleaver",
       "family": "sword",
       "ef": "sword",
@@ -23,6 +24,7 @@
     },
     {
       "id": "rustbite_karambit",
+      "how": "Dodge (Left Alt in battle mode), then hit within 1 s",
       "model_parent": "minecraft:item/skins/breeze", "model_textures": {"1": "minecraft:item/karambits_default", "particle": "minecraft:item/karambits_default"},
       "name": "Rustbite Karambit",
       "family": "karambit",
@@ -86,6 +88,7 @@
     },
     {
       "id": "gnawblade",
+      "how": "Passive: hit a target and your tamed rats go for it",
       "name": "Gnawblade",
       "family": "dagger",
       "ef": "dagger",
@@ -106,6 +109,7 @@
     },
     {
       "id": "rootstring_bow",
+      "how": "Fully draw the bow before you shoot",
       "name": "Rootstring Bow",
       "family": "bow",
       "ef": "bow",
@@ -146,6 +150,7 @@
     },
     {
       "id": "cogwright_breaker",
+      "how": "Hit to build pressure, then sneak + attack to slam",
       "name": "Cogwright Breaker",
       "family": "hammer",
       "ef": "axe",
@@ -167,6 +172,7 @@
     },
     {
       "id": "prism_ward_staff",
+      "how": "Hold it while you cast any spell",
       "name": "Prism Ward Staff",
       "family": "staff",
       "ef": "staff",
@@ -227,6 +233,7 @@
     },
     {
       "id": "frostmaw_fang",
+      "how": "Passive: keep hitting the same target",
       "model_parent": "minecraft:item/skins/emerald", "model_textures": {"1": "minecraft:item/karambits_default", "particle": "minecraft:item/karambits_default"},
       "name": "Frostmaw Fang",
       "family": "karambit",
@@ -248,6 +255,7 @@
     },
     {
       "id": "wroughtnaut_bulwark",
+      "how": "Guard (right-click in battle mode) just as a hit lands",
       "name": "Wroughtnaut Bulwark",
       "family": "axe",
       "ef": "axe",
@@ -268,6 +276,7 @@
     },
     {
       "id": "skyreach_spear",
+      "how": "Sneak + right-click to launch, then attack in mid-air",
       "name": "Skyreach Spear",
       "family": "spear",
       "ef": "spear",
@@ -289,6 +298,7 @@
     },
     {
       "id": "hydras_tri_edge",
+      "how": "Passive: hit the same target 3 times in a row",
       "name": "Hydra's Tri-Edge",
       "family": "sword",
       "ef": "sword",
@@ -309,6 +319,7 @@
     },
     {
       "id": "undergloom_scythe",
+      "how": "Passive: hit 3 or more enemies with one swing",
       "name": "Undergloom Scythe",
       "family": "scythe",
       "ef": "greatsword",
@@ -329,6 +340,7 @@
     },
     {
       "id": "sculkheart_dagger",
+      "how": "Passive: works on every hit",
       "name": "Sculkheart Dagger",
       "family": "dagger",
       "ef": "dagger",
@@ -349,6 +361,7 @@
     },
     {
       "id": "choirbreaker_gauntlets",
+      "how": "Sneak + right-click",
       "name": "Choirbreaker Gauntlets",
       "family": "gauntlets",
       "ef": "fist",
@@ -370,6 +383,7 @@
     },
     {
       "id": "harbingers_railblade",
+      "how": "Sneak + right-click; the beam fires 1.5 s later",
       "name": "Harbinger's Railblade",
       "family": "longsword",
       "ef": "longsword",
@@ -391,6 +405,7 @@
     },
     {
       "id": "abyssal_longbow",
+      "how": "Fully draw the bow before you shoot",
       "name": "Abyssal Longbow",
       "family": "bow",
       "ef": "bow",
@@ -412,6 +427,7 @@
     },
     {
       "id": "crownshard_karambits",
+      "how": "Sneak + right-click near enemies",
       "model_parent": "minecraft:item/skins/gold_plated",
       "name": "Crownshard Karambits",
       "family": "karambit",
@@ -435,6 +451,7 @@
     },
     {
       "id": "thornecutter",
+      "how": "Passive: stronger the weaker a boss gets",
       "name": "Thornecutter",
       "family": "greatsword",
       "ef": "greatsword",
@@ -455,6 +472,7 @@
     },
     {
       "id": "emberhold_oathblade",
+      "how": "Passive: grows with your Emberhold Town Hall level",
       "name": "Emberhold Oathblade",
       "family": "sword",
       "ef": "sword",
